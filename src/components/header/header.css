@@ -1,0 +1,93 @@
+.header {
+  margin-top: 40px;
+  width: 100%;
+  height: 70px;
+  color: white;
+  display: flex;
+  border-top: 2px solid #3ce3e8;
+  border-bottom: 2px solid #3ce3e8;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 40px;
+}
+.header a {
+  color: white;
+  font-style: normal;
+  font-size: 22px;
+  text-decoration: none;
+}
+.header .header-cat {
+  margin-left: 90px;
+}
+.header .header-random {
+  margin-left: 40px;
+}
+
+.logo {
+  width: -moz-max-content;
+  width: max-content;
+  height: 70px;
+  display: flex;
+  margin-left: 350px;
+}
+
+.img-background {
+  background-color: #3ce3e8;
+  scale: 1.2;
+  border-radius: 6px;
+  box-shadow: 0.5px 1px 0 1px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+}
+
+.logo-img {
+  scale: 0.8;
+  align-items: center;
+  justify-self: center;
+  width: 55px;
+  height: 70px;
+  z-index: 10000;
+}
+
+.logo-title {
+  color: #333;
+  background-color: #3ce3e8;
+  align-self: center;
+  font-size: 18px;
+  border-radius: 3px;
+  padding: 5px;
+  width: 200px;
+  text-align: end;
+  position: relative;
+  right: 68px;
+  padding-right: 10px;
+  font-family: "Atomic Age", cursive;
+}
+
+.input-title {
+  background: none;
+  border: none;
+  border-bottom: 1px solid white;
+  width: 220px;
+  height: 40px;
+  color: white;
+  font-size: 23px;
+  margin-left: 30px;
+}
+
+.header-profile {
+  margin-left: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-name {
+  font-size: 22px;
+  text-align: center;
+}
+
+.profile-pic {
+  height: 50px;
+  width: 50px;
+  margin-left: 15px;
+}/*# sourceMappingURL=header.css.map */

@@ -1,38 +1,88 @@
-.App {
-  text-align: center;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background: url("./components/img/i-am-here-anime-pn-3840x2400.jpg") no-repeat fixed;
+  background-size: cover;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.okami {
+  color: white;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.season-anime {
+  width: -moz-max-content;
+  width: max-content;
+}
+.season-anime .season-anime-title {
+  margin-bottom: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.season-titles {
+  width: 1520px;
+  height: 370px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(6, 75, 140, 0.8);
+  padding: 0 0 20px 20px;
+  display: flex;
+  gap: 25px;
+  border-radius: 10px;
+  margin-bottom: 50px;
 }
+.season-titles .season-title {
+  height: 340px;
+  width: 190px;
+}
+.season-titles .season-title span {
+  font-size: 10px;
+}
+.season-titles .season-title .title-poster {
+  height: 295px;
+}
+.season-titles .season-title .title-name {
+  display: inline-block;
+  font-size: 16px;
+  max-width: 170px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.season-titles .season-title .title-status,
+.season-titles .season-title .title-age-rest {
+  background-color: #3ce3e8;
+}
+.season-titles .season-title .title-status {
+  padding: 6px;
+  font-size: 12px;
+  color: black;
+  position: relative;
+  top: 23px;
+  left: 1px;
+}
+.season-titles .season-title .title-age-rest {
+  padding: 5px;
+  position: relative;
+  top: 293px;
+  left: 100px;
+  color: black;
+}
+
+.devider {
+  height: 2px;
+  width: 280px;
+  background-color: #3ce3e8;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+}/*# sourceMappingURL=app.css.map */
