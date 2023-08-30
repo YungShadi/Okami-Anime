@@ -29,7 +29,8 @@ body {
     margin-bottom: 25px;
   }
 }
-.season-titles {
+.season-titles,
+.recently-added-titles {
   width: 1520px;
   height: 370px;
   margin-left: auto;
@@ -40,16 +41,17 @@ body {
   gap: 25px;
   border-radius: 10px;
   margin-bottom: 50px;
-  .season-title {
+  flex-wrap: wrap;
+  .title-main {
     height: 340px;
     width: 190px;
     span {
       font-size: 10px;
     }
-    .title-poster {
+    .poster {
       height: 295px;
     }
-    .title-name {
+    .name {
       display: inline-block;
       font-size: 16px;
       max-width: 170px;
@@ -57,11 +59,11 @@ body {
       white-space: nowrap;
       overflow: hidden;
     }
-    .title-status,
-    .title-age-rest {
+    .status,
+    .age-rest {
       background-color: #3ce3e8;
     }
-    .title-status {
+    .status {
       padding: 6px;
       font-size: 12px;
       color: black;
@@ -69,7 +71,7 @@ body {
       top: 23px;
       left: 1px;
     }
-    .title-age-rest {
+    .age-rest {
       padding: 5px;
       position: relative;
       top: 293px;
@@ -77,6 +79,25 @@ body {
       color: black;
     }
   }
+}
+.recently-added-anime {
+  .recetly-added-title {
+    margin-left: 130px;
+  }
+  .recetly-added-title::before {
+    content: url("./components/img/ph_newspaper-fill.svg");
+    position: relative;
+    top: 13px;
+    right: 10px;
+  }
+}
+.recently-added-titles {
+  width: 1370px;
+  height: fit-content;
+  background: none;
+  gap: 30px;
+  display: flex;
+  align-content: flex-start;
 }
 .devider {
   height: 2px;

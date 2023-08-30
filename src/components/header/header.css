@@ -22,6 +22,9 @@
 .header .header-random {
   margin-left: 40px;
 }
+.header .active {
+  color: #0e1df3;
+}
 
 .logo {
   width: -moz-max-content;

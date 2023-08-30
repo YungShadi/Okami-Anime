@@ -28,7 +28,8 @@ body {
   margin-bottom: 25px;
 }
 
-.season-titles {
+.season-titles,
+.recently-added-titles {
   width: 1520px;
   height: 370px;
   margin-left: auto;
@@ -39,18 +40,23 @@ body {
   gap: 25px;
   border-radius: 10px;
   margin-bottom: 50px;
+  flex-wrap: wrap;
 }
-.season-titles .season-title {
+.season-titles .title-main,
+.recently-added-titles .title-main {
   height: 340px;
   width: 190px;
 }
-.season-titles .season-title span {
+.season-titles .title-main span,
+.recently-added-titles .title-main span {
   font-size: 10px;
 }
-.season-titles .season-title .title-poster {
+.season-titles .title-main .poster,
+.recently-added-titles .title-main .poster {
   height: 295px;
 }
-.season-titles .season-title .title-name {
+.season-titles .title-main .name,
+.recently-added-titles .title-main .name {
   display: inline-block;
   font-size: 16px;
   max-width: 170px;
@@ -58,11 +64,14 @@ body {
   white-space: nowrap;
   overflow: hidden;
 }
-.season-titles .season-title .title-status,
-.season-titles .season-title .title-age-rest {
+.season-titles .title-main .status,
+.season-titles .title-main .age-rest,
+.recently-added-titles .title-main .status,
+.recently-added-titles .title-main .age-rest {
   background-color: #3ce3e8;
 }
-.season-titles .season-title .title-status {
+.season-titles .title-main .status,
+.recently-added-titles .title-main .status {
   padding: 6px;
   font-size: 12px;
   color: black;
@@ -70,12 +79,33 @@ body {
   top: 23px;
   left: 1px;
 }
-.season-titles .season-title .title-age-rest {
+.season-titles .title-main .age-rest,
+.recently-added-titles .title-main .age-rest {
   padding: 5px;
   position: relative;
   top: 293px;
   left: 100px;
   color: black;
+}
+
+.recently-added-anime .recetly-added-title {
+  margin-left: 130px;
+}
+.recently-added-anime .recetly-added-title::before {
+  content: url("./components/img/ph_newspaper-fill.svg");
+  position: relative;
+  top: 13px;
+  right: 10px;
+}
+
+.recently-added-titles {
+  width: 1370px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: none;
+  gap: 30px;
+  display: flex;
+  align-content: flex-start;
 }
 
 .devider {

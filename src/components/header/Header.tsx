@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./header.css";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
@@ -7,19 +7,19 @@ import DefaultIcon from "../img/user.svg";
 function Header() {
   return (
     <header className="header">
-      <Link className="logo" to="/">
+      <NavLink className="logo" to="/">
         <div className="img-background">
           <img className="logo-img" alt="log" src={Logo} />
         </div>
         <span className="logo-title">ŌkamiAnime</span>
-      </Link>
+      </NavLink>
       <input type="text" placeholder="Поиск" className="input-title" />
-      <Link className="header-cat" to="catalogue">
+      <NavLink className="header-cat" to="title">
         Каталог
-      </Link>
-      <Link className="header-random" to="/">
+      </NavLink>
+      <NavLink className="header-random" to="/">
         Случайное
-      </Link>
+      </NavLink>
       <div className="header-profile">
         <span className="profile-name">AnalDestroyer</span>
         <img className="profile-pic" alt="profile" src={DefaultIcon} />
