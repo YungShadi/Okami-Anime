@@ -14,22 +14,89 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
+  height: min-content;
   .poster-wraper {
     height: fit-content;
     display: flex;
     flex-direction: column;
   }
-  .title-chose-condition {
-    height: 50px;
+  .select-wrapper {
     width: 300px;
+    height: 50px;
+    .select-trigger,
+    .option {
+      width: 300px;
+      height: 50px;
+      background-color: #05315a;
+      border: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      padding-left: 30px;
+      border-bottom: 1px solid #3ce3e8;
+      padding-right: 5px;
+      z-index: 1;
+      position: relative;
+
+      .trigger-content,
+      .option-content {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+        width: 200px;
+        font-weight: 400;
+        height: 30px;
+        font-family:
+          Century Gothic,
+          CenturyGothic,
+          AppleGothic,
+          sans-serif;
+        justify-content: flex-start;
+      }
+      .option-line {
+        width: 2px;
+        height: 30px;
+        background-color: #42acfa;
+      }
+      .option-img {
+        width: 40px;
+        height: 30px;
+        align-self: flex-end;
+        margin-left: auto;
+        fill: white;
+      }
+    }
+    .option {
+      background-color: #064b8cf2;
+    }
+  }
+  .select-options {
+    overflow: hidden;
+    transition: 1s;
+  }
+  .title-chose-option__indicator {
+    display: none;
+  }
+  .title-chose-condition:focus {
+    outline: none;
+  }
+  .title-chose-option__menu {
+    background-color: #05315a;
+  }
+  .title-chose-option__option {
+    width: 300px;
+    height: 50px;
+    color: white;
+    background-color: #05315a;
   }
   .title-text-info {
     display: flex;
     flex-direction: column;
     gap: 25px;
     height: 100%;
-    font-size: 20px;
-    height: 50px;
+    font-size: 19px;
+    height: fit-content;
     .title-name {
       font-size: 35px;
     }
@@ -41,7 +108,7 @@
 }
 .title-desc {
   display: inline-block;
-  max-width: 1270px;
+  max-width: 970px;
   width: fit-content;
   white-space: pre-line;
   margin-bottom: 15px;
@@ -49,13 +116,14 @@
 .title-view-order {
   width: 300px;
   height: 50px;
-  margin-bottom: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .player-wraper {
   .player,
   .player-placeholder {
     width: 1205px;
-    height: auto;
+    height: 720px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
@@ -116,6 +184,10 @@
     height: 40px;
     align-items: center;
     justify-content: center;
+    transition: 0.3s;
+  }
+  .episode:hover {
+    background-color: #3c87e8;
   }
   .episode.active {
     background: #3ce3e8;
@@ -142,10 +214,17 @@
 .comment-input {
   width: 1270px;
   height: 150px;
+  resize: none;
   background: #064b8c;
   color: white;
   border: none;
   margin-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 15px;
+}
+.comment-input:focus {
+  outline: none;
 }
 .comment-send {
   border: none;
@@ -156,6 +235,11 @@
   margin-left: 80%;
   font-size: 20px;
   margin-bottom: 60px;
+  border-radius: 3px;
+  transition: 0.5s;
+}
+.comment-send:hover {
+  background-color: #3c87e8;
 }
 .devider-line-long {
   width: 1250px;

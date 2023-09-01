@@ -1,22 +1,102 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Poster from "../img/Постер.png";
 import "./title-page.css";
 import Arrow from "../img/mdi_menu-down.svg";
-import PlayerPlaceholder from "../img/Плеер.png";
 import Bold from "../img/ant-design_bold-outlined.svg";
 import Italic from "../img/ant-design_italic-outlined.svg";
 import Underline from "../img/ant-design_underline-outlined.svg";
 import LineThrough from "../img/ant-design_strikethrough-outlined.svg";
 import OrderedList from "../img/ant-design_ordered-list-outlined.svg";
 import UnorderedList from "../img/ant-design_unordered-list-outlined.svg";
+import Book from "../img/willWatch.svg";
+import CloseEye from "../img/wathced.svg";
+import OpenEye from "../img/wahtching.svg";
+import TrashCan from "../img/drop.svg";
+import Heart from "../img/like.svg";
 
 function TitlePage() {
+  const [triggerToggle, setTriggerToggle] = useState(false);
+  const [selectState, setSelectState] = useState("Добавить в список");
+  const [triggerContent, setTriggerContent] = useState(
+    <div className="trigger-content">Добавить в список</div>
+  );
+  useEffect(() => {
+    if (selectState === "willWatch") {
+      setTriggerContent(
+        <div className="trigger-content">
+          <div className="option-content">Буду смотерть</div>
+          <div className="option-line" />
+          <img src={Book} alt="book" className="option-img" />
+        </div>
+      );
+    }
+  }, [selectState]);
+
+  function showOptions() {
+    setTriggerToggle(!triggerToggle);
+  }
+
   return (
     <div className="title">
       <div className="title-info">
         <div className="poster-wraper">
           <img className="title-poster" alt="poster" src={Poster} />
-          <input type="chose" className="title-chose-condition" />
+          <div className="select-wrapper">
+            <button
+              className="select-trigger"
+              onClick={showOptions}
+              type="button"
+            >
+              {triggerContent}
+            </button>
+            <div
+              className="select-options"
+              style={{
+                height: triggerToggle ? "300px" : "0px",
+                display: "block",
+              }}
+            >
+              {selectState !== "willWatch" && (
+                <button
+                  className="option"
+                  type="button"
+                  onClick={() => setSelectState("willWatch")}
+                >
+                  <div className="option-content">Буду смотерть</div>
+                  <div className="option-line" />
+                  <img src={Book} alt="book" className="option-img" />
+                </button>
+              )}
+              <div className="option">
+                <div className="option-content">Просмотренно</div>
+                <div className="option-line" />
+                <img src={CloseEye} alt="close eye" className="option-img" />
+              </div>
+              <div className="option">
+                <div className="option-content">Смотрю</div>
+                <div className="option-line" />
+                <img src={OpenEye} alt="open eye" className="option-img" />
+              </div>
+              <div className="option">
+                <div className="option-content">Брошено</div>
+                <div className="option-line" />
+                <img src={TrashCan} alt="trash can" className="option-img" />
+              </div>
+              <div className="option">
+                <div className="option-content">Любимое</div>
+                <div className="option-line" />
+                <img src={Heart} alt="heart" className="option-img" />
+              </div>
+              <div className="option">
+                <div className="option-content" style={{ color: "#FF0900" }}>
+                  Удалить
+                </div>
+                <div className="option-line" />
+                <img src="" alt="" className="option-img" />
+              </div>
+            </div>
+          </div>
+          <input type="chose" className="title-view-order" />
         </div>
         <div className="title-text-info">
           <span className="title-name">Залупа дьявола</span>
@@ -31,21 +111,20 @@ function TitlePage() {
           <span className="title-dub">
             Озвучки: МояМама, твояMatre, Jam, StudioBand
           </span>
+          <span className="title-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
+            quis quae accusamus numquam labore ea deleniti cumque. Delectus,
+            dolorum officia? Nisi voluptates magni inventore iure labore quidem
+            debitis, ab placeat. Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. Hic sapiente eos ducimus quo reiciendis inventore
+            a? Eum ratione sit, repellat odio sunt esse fugit quaerat saepe
+            deserunt facere itaque atque. Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Hic sapiente eos ducimus quo
+            reiciendis inventore a? Eum ratione sit, repellat odio sunt esse
+            fugit quaerat saepe deserunt facere itaque atque.
+          </span>
         </div>
       </div>
-      <span className="title-desc">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
-        quis quae accusamus numquam labore ea deleniti cumque. Delectus, dolorum
-        officia? Nisi voluptates magni inventore iure labore quidem debitis, ab
-        placeat. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic
-        sapiente eos ducimus quo reiciendis inventore a? Eum ratione sit,
-        repellat odio sunt esse fugit quaerat saepe deserunt facere itaque
-        atque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic
-        sapiente eos ducimus quo reiciendis inventore a? Eum ratione sit,
-        repellat odio sunt esse fugit quaerat saepe deserunt facere itaque
-        atque.
-      </span>
-      <input type="chose" className="title-view-order" />
       <div className="player-wraper">
         <div className="title-header">
           <span className="header-tab just-player">Плеер</span>
@@ -61,10 +140,12 @@ function TitlePage() {
           </span>
         </div>
         <div className="player">
-          <img
-            src={PlayerPlaceholder}
-            alt="player-placeholder"
-            className="player-placeholder"
+          <iframe
+            title="asdsad"
+            src="//kodik.biz/seria/1194775/4dc182c777a94d28c0029339196640e2/720p"
+            allow="autoplay *; fullscreen *"
+            key="asdasd"
+            className="player"
           />
         </div>
         <div className="episode-wraper">
@@ -95,8 +176,7 @@ function TitlePage() {
             <img src={OrderedList} alt="ordered list" className="style" />
             <img src={UnorderedList} alt="unordered list" className="style" />
           </div>
-          <input
-            type="text"
+          <textarea
             className="comment-input"
             placeholder="Напишите ваш коммнтарий"
           />
