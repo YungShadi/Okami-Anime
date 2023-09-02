@@ -5,6 +5,9 @@ import "./app.css";
 import MainPage from "./components/main-page/main-page";
 import TitlePage from "./components/title-page/title-page";
 import Layout from "./components/layout/layout";
+import CataloguePage from "./components/catalogue-page/cataloguePage";
+import NdaPage from "./components/nda-page/ndaPage";
+import SignupPage from "./components/signup-page";
 
 function App() {
   return (
@@ -12,6 +15,11 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<MainPage />} />
         <Route path="title" element={<TitlePage />} />
+        <Route path="catalogue" element={<CataloguePage />} />
+        <Route path="article/:random" element={<TitlePage />} />
+        <Route path="article" element={<TitlePage />} />
+        <Route path="nda" element={<NdaPage />} />
+        <Route path="sign-up" element={<SignupPage />} />
       </Route>
     </Routes>
   );

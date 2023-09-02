@@ -12,6 +12,18 @@ body {
     fixed;
   background-size: cover;
 }
+body::-webkit-scrollbar {
+  width: 10px; /* ширина scrollbar */
+  padding-right: 10px;
+}
+body::-webkit-scrollbar-track {
+  width: 100px;
+  background: steelblue;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #2179df; /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
+}
 .okami {
   color: white;
   font-family:
@@ -45,12 +57,15 @@ body {
   .title-main {
     height: 340px;
     width: 190px;
-    transition: 0.3s;
+    transition: 0.5s;
     span {
       font-size: 10px;
     }
     .poster {
       height: 295px;
+      z-index: 1;
+      position: relative;
+      transition: 0.3s;
     }
     .name {
       display: inline-block;
@@ -59,10 +74,14 @@ body {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      position: relative;
+      z-index: 2;
     }
     .status,
     .age-rest {
       background-color: #3ce3e8;
+      position: relative;
+      z-index: 2;
     }
     .status {
       padding: 6px;
@@ -83,6 +102,20 @@ body {
 }
 .title-main:hover {
   scale: 1.03;
+  .poster {
+    filter: brightness(70%);
+  }
+}
+.title-main:hover::after {
+  content: url("./components/img/play-button-svgrepo-com.svg");
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  bottom: 220px;
+  left: 65px;
+  filter: brightness(130%);
+  z-index: 2;
 }
 .recently-added-anime {
   .recetly-added-title {

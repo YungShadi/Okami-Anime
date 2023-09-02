@@ -8,6 +8,7 @@ import Underline from "../img/ant-design_underline-outlined.svg";
 import LineThrough from "../img/ant-design_strikethrough-outlined.svg";
 import OrderedList from "../img/ant-design_ordered-list-outlined.svg";
 import UnorderedList from "../img/ant-design_unordered-list-outlined.svg";
+import DefaultProfPicture from "../img/Аватар.png";
 
 interface OptionTitle {
   title: string;
@@ -23,7 +24,10 @@ function TitlePage() {
   );
   const [triggerOrder, setTriggerOrder] = useState(false);
   const [triggerPlayer, setTriggerPlayer] = useState(false);
-  // const [triggerDub, setTriggerDub] = useState(false);
+  const [triggerDub, setTriggerDub] = useState(false);
+  const [currentDub, setCurretnDub] = useState("Anilibria");
+  // const elementCount = document.querySelectorAll(".view-oreder-element").length;
+  // document.documentElement.style.setProperty("--element-count", elementCount);
 
   const selsectOptions: Array<OptionTitle> = [
     {
@@ -142,6 +146,37 @@ function TitlePage() {
       ),
     },
   ];
+  const playerOptions = [
+    {
+      title: "Kodik",
+    },
+    {
+      title: "Sibnet",
+    },
+    {
+      title: "Pidoraski",
+    },
+  ];
+
+  const dubOptions = [
+    {
+      dub: "Anilibria",
+    },
+    {
+      dub: "Aniudub",
+    },
+    {
+      dub: "SHIZA-project",
+    },
+  ];
+
+  function maxPlayerChoiceHeight() {
+    return playerOptions.length * 50;
+  }
+  function maxDubChoiceHeight() {
+    return dubOptions.length * 50;
+  }
+
   useEffect(() => {
     selsectOptions.find((option) => {
       if (selectState === option.state) {
@@ -268,8 +303,29 @@ function TitlePage() {
               <li className="view-oreder-element">Ангел кала 3</li>
               <li className="view-oreder-element">Ангел кала 1232</li>
               <li className="view-oreder-element">
-                Ангел кала: Невообразимый кал
-              </li>
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
+              <li className="view-oreder-element">
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
+              <li className="view-oreder-element">
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
+              <li className="view-oreder-element">
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
+              <li className="view-oreder-element">
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
+              <li className="view-oreder-element">
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
+              <li className="view-oreder-element">
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
+              <li className="view-oreder-element">
+                Ангел кала: Невообразимый калфывфывфывфвфвфы
+              </li>{" "}
             </ol>
           </div>
         </div>
@@ -322,17 +378,51 @@ function TitlePage() {
             </button>
             <div
               className="player-options"
-              style={{ height: triggerPlayer ? "100px" : "0" }}
+              style={{
+                height: triggerPlayer ? `${maxPlayerChoiceHeight()}px` : "0",
+              }}
             >
-              <div className="player-option">Kodik</div>
-              <div className="player-option">ААААААА</div>
+              {playerOptions.map((option) => (
+                <button className="player-option" type="button">
+                  {option.title}
+                </button>
+              ))}
             </div>
           </div>
-          <button className="header-tab dub-chose" type="button">
-            <div className="dub-name">Anilibria</div>
-            <div className="little-dievider" />
-            <img src={Arrow} alt="menu-arrow" />
-          </button>
+          <div className="dub-chose-wraper">
+            <button
+              className="header-tab dub-chose"
+              type="button"
+              onClick={() => setTriggerDub(!triggerDub)}
+            >
+              <div className="dub-name">{currentDub}</div>
+              <div className="little-dievider" />
+              <img
+                src={Arrow}
+                alt="menu-arrow"
+                style={{
+                  transform: triggerDub ? "rotate(-90deg)" : "none",
+                  transition: "0.5s",
+                }}
+              />
+            </button>
+            <div
+              className="dub-options"
+              style={{
+                height: triggerDub ? `${maxDubChoiceHeight()}px` : "0",
+              }}
+            >
+              {dubOptions.map((option) => (
+                <button
+                  className="dub-option"
+                  type="button"
+                  onClick={() => setCurretnDub(option.dub)}
+                >
+                  {option.dub}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="player">
           <iframe
@@ -382,15 +472,17 @@ function TitlePage() {
         <div className="devider-line-long" />
         <div className="comments">
           <div className="comment">
-            <img src="" alt="" />
-            <h3 className="comment-name">Hitler</h3>
-            <span className="comment-date">03.09.1422</span>
-            <span className="comment-body">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-              rerum maiores amet tempora error magni sequi dolores asperiores,
-              labore dignissimos, eligendi magnam delectus perferendis tempore
-              voluptates quaerat reiciendis esse voluptate?
-            </span>
+            <img src={DefaultProfPicture} alt="" className="comment-picture" />
+            <div className="comment-content">
+              <h3 className="comment-name">Hitler</h3>
+              <span className="comment-date">03.09.1422</span>
+              <span className="comment-body">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
+                rerum maiores amet tempora error magni sequi dolores asperiores,
+                labore dignissimos, eligendi magnam delectus perferendis tempore
+                voluptates quaerat reiciendis esse voluptate?
+              </span>
+            </div>
             <div className="devider-vertical-long" />
             <div className="comment-rating-wraper">
               <img src="" alt="" className="arrow arrow-up" />
@@ -399,15 +491,17 @@ function TitlePage() {
             </div>
           </div>
           <div className="comment">
-            <img src="" alt="" />
-            <h3 className="comment-name">Hitler</h3>
-            <span className="comment-date">03.09.1422</span>
-            <span className="comment-body">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-              rerum maiores amet tempora error magni sequi dolores asperiores,
-              labore dignissimos, eligendi magnam delectus perferendis tempore
-              voluptates quaerat reiciendis esse voluptate?
-            </span>
+            <img src={DefaultProfPicture} alt="" className="comment-picture" />
+            <div className="comment-content">
+              <h3 className="comment-name">Hitler</h3>
+              <span className="comment-date">03.09.1422</span>
+              <span className="comment-body">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
+                rerum maiores amet tempora error magni sequi dolores asperiores,
+                labore dignissimos, eligendi magnam delectus perferendis tempore
+                voluptates quaerat reiciendis esse voluptate?
+              </span>
+            </div>
             <div className="devider-vertical-long" />
             <div className="comment-rating-wraper">
               <img src="" alt="" className="arrow arrow-up" />

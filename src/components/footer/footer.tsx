@@ -1,5 +1,6 @@
 import React from "react";
 import "./footer.css";
+import { Link } from "react-router-dom";
 
 import Vk from "../img/basil_vk-solid.svg";
 import Telegram from "../img/mingcute_telegram-fill.svg";
@@ -26,7 +27,9 @@ function Footer() {
       </span>
       <div className="copyrigth">
         <span className="copyrigth-year">©️ 2023</span>
-        <span className="copyrigth-info">Информация для правообладателей</span>
+        <Link className="copyrigth-info" to="nda">
+          Информация для правообладателей
+        </Link>
       </div>
     </footer>
   );

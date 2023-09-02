@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import DefaultPoster from "../img/poster.png";
 
 function MainPage() {
@@ -18,7 +19,16 @@ function MainPage() {
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
-          {title}
+          <Link
+            to="/article"
+            style={{
+              fontStyle: "none",
+              textDecoration: "none",
+              color: "white",
+            }}
+          >
+            {title}
+          </Link>
           {title}
           {title}
           {title}

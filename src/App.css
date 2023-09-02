@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0px;
   padding: 0px;
@@ -10,6 +11,21 @@ body {
   align-items: center;
   background: url("./components/img/i-am-here-anime-pn-3840x2400.jpg") no-repeat fixed;
   background-size: cover;
+}
+
+body::-webkit-scrollbar {
+  width: 10px; /* ширина scrollbar */
+  padding-right: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  width: 100px;
+  background: steelblue;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #2179df; /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
 }
 
 .okami {
@@ -46,7 +62,7 @@ body {
 .recently-added-titles .title-main {
   height: 340px;
   width: 190px;
-  transition: 0.3s;
+  transition: 0.5s;
 }
 .season-titles .title-main span,
 .recently-added-titles .title-main span {
@@ -55,6 +71,9 @@ body {
 .season-titles .title-main .poster,
 .recently-added-titles .title-main .poster {
   height: 295px;
+  z-index: 1;
+  position: relative;
+  transition: 0.3s;
 }
 .season-titles .title-main .name,
 .recently-added-titles .title-main .name {
@@ -64,12 +83,16 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 .season-titles .title-main .status,
 .season-titles .title-main .age-rest,
 .recently-added-titles .title-main .status,
 .recently-added-titles .title-main .age-rest {
   background-color: #3ce3e8;
+  position: relative;
+  z-index: 2;
 }
 .season-titles .title-main .status,
 .recently-added-titles .title-main .status {
@@ -91,6 +114,21 @@ body {
 
 .title-main:hover {
   scale: 1.03;
+}
+.title-main:hover .poster {
+  filter: brightness(70%);
+}
+
+.title-main:hover::after {
+  content: url("./components/img/play-button-svgrepo-com.svg");
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  bottom: 220px;
+  left: 65px;
+  filter: brightness(130%);
+  z-index: 2;
 }
 
 .recently-added-anime .recetly-added-title {

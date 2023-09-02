@@ -1,10 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import "./header.css";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
 
 function Header() {
+  const [user, setUser] = useState(false);
   return (
     <header className="header">
       <NavLink className="logo" to="/">
@@ -14,16 +15,24 @@ function Header() {
         <span className="logo-title">ŌkamiAnime</span>
       </NavLink>
       <input type="text" placeholder="Поиск" className="input-title" />
-      <NavLink className="header-cat" to="title">
+      <NavLink className="header-cat" to="catalogue">
         Каталог
       </NavLink>
-      <NavLink className="header-random" to="/">
+      <NavLink className="header-random" to="article/:random">
         Случайное
       </NavLink>
-      <div className="header-profile">
-        <span className="profile-name">AnalDestroyer</span>
-        <img className="profile-pic" alt="profile" src={DefaultIcon} />
-      </div>
+      {user && (
+        <Link className="header-profile" to="profile">
+          <span className="profile-name">AnalDestroyer</span>
+          <img className="profile-pic" alt="profile" src={DefaultIcon} />
+        </Link>
+      )}
+      {!user && (
+        <div className="aunth-buttons">
+          <NavLink to="sign-up">Зарагестрироваться</NavLink>
+          <NavLink to="sign-in">Войти</NavLink>
+        </div>
+      )}
     </header>
   );
 }
