@@ -46,6 +46,7 @@ body {
 .recently-added-titles .title-main {
   height: 340px;
   width: 190px;
+  transition: 0.3s;
 }
 .season-titles .title-main span,
 .recently-added-titles .title-main span {
@@ -86,6 +87,10 @@ body {
   top: 293px;
   left: 100px;
   color: black;
+}
+
+.title-main:hover {
+  scale: 1.03;
 }
 
 .recently-added-anime .recetly-added-title {
