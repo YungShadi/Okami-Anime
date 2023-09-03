@@ -7,6 +7,8 @@ import Telegram from "../img/mingcute_telegram-fill.svg";
 import Discord from "../img/ic_baseline-discord.svg";
 
 function Footer() {
+  // mb somehow i can display it always on bottom, but with position abolute
+  // its only at bottom if page dont have scroll
   return (
     <footer className="footer">
       <div className="footer-links">
@@ -27,7 +29,7 @@ function Footer() {
       </span>
       <div className="copyrigth">
         <span className="copyrigth-year">©️ 2023</span>
-        <Link className="copyrigth-info" to="nda">
+        <Link className="copyrigth-info" to="Copyright">
           Информация для правообладателей
         </Link>
       </div>

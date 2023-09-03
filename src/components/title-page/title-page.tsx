@@ -16,6 +16,9 @@ interface OptionTitle {
   img: React.JSX.Element;
 }
 
+// unfortunaly there is a lot of svg`s and its elements
+// that makes code look very big, imma will fiind out if i can change it
+// but for now its ok
 function TitlePage() {
   const [triggerToggle, setTriggerToggle] = useState(false);
   const [selectState, setSelectState] = useState("Добавить в список");
@@ -29,6 +32,7 @@ function TitlePage() {
   // const elementCount = document.querySelectorAll(".view-oreder-element").length;
   // document.documentElement.style.setProperty("--element-count", elementCount);
 
+  // options for condition of title chose
   const selsectOptions: Array<OptionTitle> = [
     {
       title: "Буду смотреть",
@@ -146,6 +150,8 @@ function TitlePage() {
       ),
     },
   ];
+
+  // options for player chose
   const playerOptions = [
     {
       title: "Kodik",
@@ -158,6 +164,7 @@ function TitlePage() {
     },
   ];
 
+  // options for dub chose
   const dubOptions = [
     {
       dub: "Anilibria",
@@ -170,6 +177,7 @@ function TitlePage() {
     },
   ];
 
+  // calculating max height of player and dub chose options wraper
   function maxPlayerChoiceHeight() {
     return playerOptions.length * 50;
   }
@@ -177,10 +185,13 @@ function TitlePage() {
     return dubOptions.length * 50;
   }
 
+  // useEffect chenging current displayable conditionn and svg to color #3CE3E8
   useEffect(() => {
     selsectOptions.find((option) => {
+      // using info from state display elements
       if (selectState === option.state) {
         const { xmlns, width, heigth, viewBox } = option.img.props;
+        // destruct props because its better this way
         setTriggerContent(
           <>
             <div className="option-content">{option.title}</div>
@@ -233,6 +244,7 @@ function TitlePage() {
       }
       return 0;
     });
+    // close options menu on change
     if (triggerToggle) setTriggerToggle(!triggerToggle);
   }, [selectState]);
 
@@ -245,6 +257,7 @@ function TitlePage() {
       <div className="title-info">
         <div className="poster-wraper">
           <img className="title-poster" alt="poster" src={Poster} />
+          {/* title condition */}
           <div className="select-wrapper">
             <button
               className="select-trigger"
@@ -283,6 +296,7 @@ function TitlePage() {
               </div>
             </div>
           </div>
+          {/* view order */}
           <div className="view-order-wraper">
             <button
               className="view-order-trigger"
@@ -299,6 +313,7 @@ function TitlePage() {
               }}
               type="1"
             >
+              {/* view order elements */}
               <li className="view-oreder-element current">Ангел кала 1</li>
               <li className="view-oreder-element">Ангел кала 3</li>
               <li className="view-oreder-element">Ангел кала 1232</li>
@@ -329,6 +344,7 @@ function TitlePage() {
             </ol>
           </div>
         </div>
+        {/* title info */}
         <div className="title-text-info">
           <span className="title-name">Залупа дьявола</span>
           <div className="title-alt-names">
@@ -356,9 +372,12 @@ function TitlePage() {
           </span>
         </div>
       </div>
+      {/* player and player header */}
       <div className="player-wraper">
         <div className="title-header">
+          {/* player header */}
           <span className="header-tab just-player">Плеер</span>
+          {/* chose player */}
           <div className="player-chose-wraper">
             <button
               className="header-tab player-chose"
@@ -376,6 +395,7 @@ function TitlePage() {
                 }}
               />
             </button>
+            {/* options for player */}
             <div
               className="player-options"
               style={{
@@ -389,6 +409,7 @@ function TitlePage() {
               ))}
             </div>
           </div>
+          {/* chsoe dub */}
           <div className="dub-chose-wraper">
             <button
               className="header-tab dub-chose"
@@ -406,6 +427,7 @@ function TitlePage() {
                 }}
               />
             </button>
+            {/* options for dub here */}
             <div
               className="dub-options"
               style={{
@@ -425,14 +447,16 @@ function TitlePage() {
           </div>
         </div>
         <div className="player">
+          {/* iframe includes player link */}
           <iframe
-            title="asdsad"
+            title="player"
             src="//kodik.biz/seria/1194775/4dc182c777a94d28c0029339196640e2/720p"
             allow="autoplay *; fullscreen *"
-            key="asdasd"
+            key="player"
             className="player"
           />
         </div>
+        {/* episodes here */}
         <div className="episode-wraper">
           <span className="episode">1</span>
           <span className="episode">2</span>
@@ -448,11 +472,13 @@ function TitlePage() {
           <span className="episode">12</span>
         </div>
       </div>
+      {/* comments wraper, here post comments and comments */}
       <div className="comments-wraper">
         <div className="title-header">
           <span className="header-tab just-player">Комментарии</span>
         </div>
         <div className="comments-input">
+          {/* styles for comment */}
           <div className="comments-styles">
             <img src={Bold} alt="bold" className="style" />
             <img src={Italic} alt="italic" className="style" />
@@ -470,44 +496,81 @@ function TitlePage() {
           Отправить комментарий
         </button>
         <div className="devider-line-long" />
+        {/* comments */}
         <div className="comments">
+          {/* comment map here */}
           <div className="comment">
-            <img src={DefaultProfPicture} alt="" className="comment-picture" />
+            <img
+              src={DefaultProfPicture}
+              alt="profile pic"
+              className="prof-pic"
+            />
             <div className="comment-content">
-              <h3 className="comment-name">Hitler</h3>
-              <span className="comment-date">03.09.1422</span>
-              <span className="comment-body">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-                rerum maiores amet tempora error magni sequi dolores asperiores,
-                labore dignissimos, eligendi magnam delectus perferendis tempore
-                voluptates quaerat reiciendis esse voluptate?
-              </span>
+              <div className="comment-name-date">
+                <div className="user-name">Zalupkin</div>
+                <div className="date"> 14.14.1321</div>
+              </div>
+              <div className="comment-text">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Tenetur nam quod iste aliquam nostrum facere repellat tempore,
+                corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
+                Harum officiis cupiditate ipsum architecto. Lorem, ipsum dolor
+                sit amet consectetur adipisicing elit. Tenetur nam quod iste
+                aliquam nostrum facere repellat tempore, corrupti deserunt.
+                Iusto at quisquam doloribus incidunt ipsam! Harum officiis
+                cupiditate ipsum architecto. Lorem, ipsum dolor sit amet
+                consectetur adipisicing elit. Tenetur nam quod iste aliquam
+                nostrum facere repellat tempore, corrupti deserunt. Iusto at
+                quisquam doloribus incidunt ipsam! Harum officiis cupiditate
+                ipsum architecto. Lorem, ipsum dolor sit amet consectetur
+                adipisicing elit. Tenetur nam quod iste aliquam nostrum facere
+                repellat tempore, corrupti deserunt. Iusto at quisquam doloribus
+                incidunt ipsam! Harum officiis cupiditate ipsum architecto.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Tenetur nam quod iste aliquam nostrum facere repellat tempore,
+                corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
+                Harum officiis cupiditate ipsum architecto.
+              </div>
+              <a className="comment-answer" href="-">
+                Ответить
+              </a>
             </div>
-            <div className="devider-vertical-long" />
-            <div className="comment-rating-wraper">
-              <img src="" alt="" className="arrow arrow-up" />
-              <span className="comment-rating up">12</span>
-              <img src="" alt="" className="arrow arrow-down" />
+            <div className="comment-devider" />
+            {/* once agian i hate how its done with svg */}
+            <div className="comment-rating">
+              <svg
+                width="55"
+                height="55"
+                viewBox="0 15 55 55"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M43.6306 50C44.5151 50 44.9641 48.9361 44.3471 48.3024L28.2165 31.7358C27.8239 31.3327 27.1761 31.3327 26.7835 31.7358L10.6529 48.3024C10.0359 48.9361 10.4849 50 11.3694 50L43.6306 50Z"
+                    fill="#3CE3E8"
+                  />
+                </g>
+              </svg>
+              <div className="curr-rating">12</div>
+              <svg
+                width="55"
+                height="55"
+                viewBox="0 -20 55 55"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M11.3694 0C10.4849 0 10.0359 1.0639 10.6529 1.69762L26.7835 18.2642C27.1761 18.6673 27.8239 18.6673 28.2165 18.2642L44.3471 1.69762C44.9641 1.0639 44.5151 0 43.6306 0L11.3694 0Z"
+                    fill="#E83C46"
+                  />
+                </g>
+              </svg>
             </div>
           </div>
-          <div className="comment">
-            <img src={DefaultProfPicture} alt="" className="comment-picture" />
-            <div className="comment-content">
-              <h3 className="comment-name">Hitler</h3>
-              <span className="comment-date">03.09.1422</span>
-              <span className="comment-body">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero
-                rerum maiores amet tempora error magni sequi dolores asperiores,
-                labore dignissimos, eligendi magnam delectus perferendis tempore
-                voluptates quaerat reiciendis esse voluptate?
-              </span>
-            </div>
-            <div className="devider-vertical-long" />
-            <div className="comment-rating-wraper">
-              <img src="" alt="" className="arrow arrow-up" />
-              <span className="comment-rating up">12</span>
-              <img src="" alt="" className="arrow arrow-down" />
-            </div>
+          <div className="comment" style={{ display: "none" }}>
+            comment here
           </div>
         </div>
       </div>

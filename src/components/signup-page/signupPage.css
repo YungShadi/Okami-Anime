@@ -1,1 +1,13 @@
-/*# sourceMappingURL=signupPage.css.map */
+.signup {
+  display: flex;
+  height: 665px;
+}
+
+.signup-form {
+  width: 500px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(5, 49, 90, 0.6);
+  align-items: center;
+}/*# sourceMappingURL=signupPage.css.map */

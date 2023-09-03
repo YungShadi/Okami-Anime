@@ -1,6 +1,19 @@
-@charset "UTF-8";
 :root {
   --element-count: var(--element-count);
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(5, 49, 90, 0.6);
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #2179df;
+  border-radius: 20px;
 }
 
 .title {
@@ -147,16 +160,6 @@
   background-color: #05315a;
   position: relative;
 }
-.view-order-wraper .view-order-list::-webkit-scrollbar {
-  width: 5px;
-}
-.view-order-wraper .view-order-list::-webkit-scrollbar-track {
-  background: rgba(5, 49, 90, 0.6); /* цвет дорожки */
-}
-.view-order-wraper .view-order-list::-webkit-scrollbar-thumb {
-  background-color: #2179df; /* цвет плашки */
-  border-radius: 20px; /* закругления плашки */
-}
 
 .view-oreder-element {
   position: relative;
@@ -280,10 +283,13 @@
 }
 
 .episode-wraper {
-  width: 1200px;
+  max-width: 1260px;
+  flex-wrap: wrap;
   height: -moz-fit-content;
   height: fit-content;
-  margin-left: auto;
+  max-height: 190px;
+  overflow-y: scroll;
+  margin-left: 15px;
   margin-right: auto;
   display: flex;
   gap: 10px;
@@ -387,19 +393,48 @@
   padding: 5px;
 }
 .comments .comment {
-  width: 1190px;
+  width: 1160px;
   height: 150px;
+  padding: 10px;
   background-color: #064b8c;
   display: flex;
+  gap: 20px;
+}
+.comments .comment .prof-pic {
+  height: 100px;
+  width: 75px;
 }
 
-.comment .comment-picture,
-.comment .comment-content,
-.comment .comment-rating-wraper {
-  flex: 1; /* Распределение пространства между элементами */
+.comment-content {
+  width: 950px;
+  height: 100%;
 }
-.comment .comment-picture {
-  width: 75px;
+.comment-content .comment-name-date {
+  font-size: 20px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.comment-content .comment-text {
+  font-size: 16px;
+  max-height: 80px;
+  overflow-y: scroll;
+}
+
+.comment-devider {
+  width: 2px;
+  height: 130px;
+  background-color: #4a4a4a;
+}
+
+.comment-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55px;
+}
+.comment-rating .curr-rating {
+  font-size: 20px;
 }
 
 .comments .comment:nth-child(2n) {
