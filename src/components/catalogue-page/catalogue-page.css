@@ -107,6 +107,10 @@
   font-size: 16px;
   align-items: center;
   padding-left: 5px;
+  background-color: inherit;
+  border: none;
+  color: white;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
 .filter-option .option-checkbox {
   display: inline-flex;

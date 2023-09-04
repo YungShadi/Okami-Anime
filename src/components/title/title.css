@@ -34,13 +34,13 @@
   color: black;
   position: relative;
   top: 23px;
-  left: 1px;
+  left: 0.5px;
 }
 .title-main .age-rest {
   padding: 5px;
   position: relative;
   top: 293px;
-  left: 100px;
+  left: 112.5px;
   color: black;
 }
 

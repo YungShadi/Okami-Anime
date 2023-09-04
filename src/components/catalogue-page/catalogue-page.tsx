@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React, { useState } from "react";
 import DropDown from "../img/dropDown.svg";
 
@@ -14,6 +15,37 @@ type TitleType = {
 function CataloguePage() {
   const [tagFilterExpand, setTagFilterExpand] = useState(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState(false);
+  const [tagArray, setTagArray] = useState([
+    {
+      tagTitle: "ебалай",
+      tagStatus: "inactive",
+    },
+    {
+      tagTitle: "ебалай",
+      tagStatus: "add-option",
+    },
+    {
+      tagTitle: "ебалай",
+      tagStatus: "remove-option",
+    },
+    {
+      tagTitle: "ебалай",
+      tagStatus: "inactive",
+    },
+    {
+      tagTitle: "ебалай",
+      tagStatus: "inactive",
+    },
+    {
+      tagTitle: "ебалай",
+      tagStatus: "inactive",
+    },
+    {
+      tagTitle: "ебалай",
+      tagStatus: "inactive",
+    },
+  ]);
+  // const [activeTags, setActiveTags] = useState([]);
 
   const titlesArray: TitleType[] = [
     {
@@ -53,7 +85,6 @@ function CataloguePage() {
       titleTags: ["gay", "porn", "suck"],
     },
   ];
-  
   function expandFilter(value: string) {
     switch (value) {
       case "genre":
@@ -67,9 +98,36 @@ function CataloguePage() {
     }
   }
 
+  function toggleOptionCheckbox(status: string, index: number) {
+    const newTagArray: { tagTitle: string; tagStatus: string }[] = [
+      ...tagArray,
+    ];
+    if (status === "inactive") {
+      newTagArray[index].tagStatus = "add-option";
+    }
+    if (status === "add-option") {
+      newTagArray[index].tagStatus = "remove-option";
+    }
+    if (status === "remove-option") {
+      newTagArray[index].tagStatus = "inactive";
+    }
+    updateTagArray(newTagArray);
+    // const filteredTags = newTagArray.filter(
+    //   (tag) => tag.tagStatus === "add-option"
+    // );
+    // setActiveTags(filteredTags.map((tag) => tag.tagTitle));
+  }
+
+  function updateTagArray(newArray: { tagTitle: string; tagStatus: string }[]) {
+    setTagArray(newArray);
+  }
+
   function createFilter(
     filterName: string,
-    // filterOptions,
+    filterArray: {
+      tagTitle: string;
+      tagStatus: string;
+    }[],
     filterValue: string,
     filterDesc: string,
     filterState: boolean,
@@ -111,14 +169,16 @@ function CataloguePage() {
               <input className="filter-search" placeholder="Поиск жанров" />
             )}
             <div className="filter-list">
-              <span className="filter-option">
-                <span className="option-checkbox inactive" />
-                <span className="filter-desc">Сёнен</span>
-              </span>
-              <span className="filter-option">
-                <span className="option-checkbox inactive" />
-                <span className="filter-desc">Сёнен</span>
-              </span>
+              {filterArray.map((tag, index) => (
+                <button
+                  className="filter-option"
+                  type="button"
+                  onClick={() => toggleOptionCheckbox(tag.tagStatus, index)}
+                >
+                  <span className={`option-checkbox ${tag.tagStatus}`} />
+                  <span className="filter-desc">{tag.tagTitle}</span>
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -136,20 +196,21 @@ function CataloguePage() {
         <div className="filters">
           {createFilter(
             "Жанры",
+            tagArray,
             "genre",
             "Выберите жанры",
             tagFilterExpand,
             100,
             true
           )}
-          {createFilter(
+          {/* {createFilter(
             "Типы",
             "type",
             "Выберите типы",
             typeFilterExpand,
             10,
             false
-          )}
+          )} */}
         </div>
       </div>
       <div className="titles-wraper">
