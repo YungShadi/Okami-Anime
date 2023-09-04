@@ -1,0 +1,64 @@
+.title-main {
+  height: 340px;
+  width: 190px;
+  transition: 0.5s;
+}
+.title-main span {
+  font-size: 10px;
+}
+.title-main .poster {
+  height: 295px;
+  z-index: 1;
+  position: relative;
+  transition: 0.3s;
+}
+.title-main .name {
+  display: inline-block;
+  font-size: 16px;
+  max-width: 170px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+.title-main .status,
+.title-main .age-rest {
+  background-color: #3ce3e8;
+  position: relative;
+  z-index: 2;
+}
+.title-main .status {
+  padding: 6px;
+  font-size: 12px;
+  color: black;
+  position: relative;
+  top: 23px;
+  left: 1px;
+}
+.title-main .age-rest {
+  padding: 5px;
+  position: relative;
+  top: 293px;
+  left: 100px;
+  color: black;
+}
+
+.title-main:hover {
+  scale: 1.03;
+}
+.title-main:hover .poster {
+  filter: brightness(70%);
+}
+
+.title-main:hover::after {
+  content: url("../img/play-button-svgrepo-com.svg");
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  bottom: 220px;
+  left: 65px;
+  filter: brightness(130%);
+  z-index: 2;
+}/*# sourceMappingURL=title.css.map */

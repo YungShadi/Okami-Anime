@@ -51,7 +51,11 @@
       padding-right: 5px;
       z-index: 10000;
       position: relative;
-
+      cursor: pointer;
+      transition: 0.3s;
+      .option:hover {
+        background-color: #0864b9ab;
+      }
       .trigger-content,
       .option-content {
         display: flex;
@@ -91,7 +95,7 @@
   }
   .select-options {
     overflow: hidden;
-    transition: 1s;
+    transition: 0.6s;
   }
   .title-text-info {
     display: flex;
@@ -142,9 +146,10 @@
       CenturyGothic,
       AppleGothic,
       sans-serif;
+    cursor: pointer;
   }
   .view-order-list {
-    transition: 1s;
+    transition: 0.6s;
     overflow-y: scroll;
     padding: 0 15px 0 10px;
     width: 300px;
@@ -214,6 +219,7 @@
   padding-right: 5px;
   z-index: 100;
   position: relative;
+  cursor: pointer;
   .little-dievider {
     width: 2px;
     height: 29px;
@@ -242,6 +248,7 @@
   border: none;
   border-bottom: 1px solid #3ce3e8;
   font-size: 18px;
+  cursor: pointer;
 }
 .player-option:hover,
 .dub-option:hover {
@@ -281,6 +288,7 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s;
+    cursor: pointer;
   }
   .episode:hover {
     background-color: #3c87e8;
@@ -310,6 +318,7 @@
   .style {
     width: 40px;
     height: 40px;
+    cursor: pointer;
   }
 }
 .comment-input {

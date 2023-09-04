@@ -1,1 +1,77 @@
-/*# sourceMappingURL=main-page.css.map */
+.season-anime {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.season-anime .season-anime-title {
+  margin-bottom: 25px;
+}
+.season-anime .season-anime-title::before {
+  content: url(../img/season.svg);
+  position: relative;
+  right: 10px;
+}
+
+.season-titles,
+.recently-added-titles {
+  min-width: 300px;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  height: 380px;
+  background-color: rgba(6, 75, 140, 0.8);
+  padding: 0 20px 20px 20px;
+  display: flex;
+  gap: 25px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.recently-added-anime .recetly-added-title {
+  margin-left: 130px;
+}
+.recently-added-anime .recetly-added-title::before {
+  content: url("../img/ph_newspaper-fill.svg");
+  position: relative;
+  top: 13px;
+  right: 10px;
+}
+
+.recently-added-titles {
+  height: -moz-fit-content;
+  height: fit-content;
+  background: none;
+  display: flex;
+  align-content: flex-start;
+  max-width: 1370px;
+  justify-content: space-between;
+}
+
+.devider {
+  height: 2px;
+  width: 280px;
+  background-color: #3ce3e8;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+}
+
+@media (max-width: 1100px) {
+  .season-titles {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .season-titles {
+    height: 720px;
+    overflow: hidden;
+  }
+  .season-titles .title-main {
+    width: 340px;
+    height: 125px;
+  }
+  .season-titles .title-main .poster {
+    width: 100px;
+    height: 125px;
+  }
+}/*# sourceMappingURL=main-page.css.map */
