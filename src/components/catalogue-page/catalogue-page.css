@@ -18,6 +18,7 @@
   height: 50px;
   border-bottom: 2px solid #3ce3e8;
   padding-top: 10px;
+  margin-bottom: 50px;
 }
 .filter-header h3 {
   font-size: 22px;
@@ -26,6 +27,7 @@
 
 .filter-wraper {
   height: 75px;
+  margin-bottom: 20px;
 }
 
 .filter {
@@ -86,7 +88,7 @@
   padding-left: 5px;
   color: white;
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-  height: 70px;
+  height: 40px;
   margin-bottom: 10px;
 }
 
@@ -149,4 +151,81 @@
   display: flex;
   gap: 20px;
   padding: 0 20px 0 20px;
+}
+
+.filter-span {
+  margin-bottom: 30px;
+  height: 42px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.filter-slider-wraper {
+  display: flex;
+  flex-direction: column;
+  width: 275px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.filter-slider {
+  margin-bottom: 10px;
+}
+
+.slider-line {
+  width: 95%;
+  height: 4px;
+  border-radius: 6px;
+  background-color: #3ce3e8;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slider-pips {
+  display: flex;
+  width: 92%;
+  gap: 9px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.slider-pips .pip-horisontal {
+  background-color: #fff;
+  width: 5px;
+  height: 10px;
+}
+.slider-pips .pip-horisontal.big {
+  width: 5px;
+  height: 20px;
+  background-color: #fff;
+}
+
+.slider-track-0 {
+  top: -5px;
+  width: 100%;
+  height: 5px;
+}
+
+.slider-thumb {
+  background-color: #05315a;
+  color: #05315a;
+  width: 20px;
+  height: 30px;
+  text-align: center;
+  top: -35px;
+  padding-top: 5px;
+  border-radius: 2px;
+  top: -18px;
+  border: 1px solid #3ce3e8;
+}
+
+.thumb-content {
+  display: inline-flex;
+  position: relative;
+  bottom: 35px;
+  right: 10px;
+  background: #3ce3e8;
+  background-size: 40px;
+  border-radius: 3px;
+  padding: 2px;
 }/*# sourceMappingURL=catalogue-page.css.map */

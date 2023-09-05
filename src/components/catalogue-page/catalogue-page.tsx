@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
 import React, { useState } from "react";
+import ReactSlider from "react-slider";
 import DropDown from "../img/dropDown.svg";
 
 import "./catalogue-page.css";
@@ -18,34 +20,47 @@ function CataloguePage() {
   const [tagArray, setTagArray] = useState([
     {
       tagTitle: "ебалай",
+      tagValue: "ebalai",
       tagStatus: "inactive",
     },
     {
       tagTitle: "ебалай",
-      tagStatus: "add-option",
-    },
-    {
-      tagTitle: "ебалай",
-      tagStatus: "remove-option",
-    },
-    {
-      tagTitle: "ебалай",
+      tagValue: "ebalai",
       tagStatus: "inactive",
     },
     {
       tagTitle: "ебалай",
+      tagValue: "ebalai",
       tagStatus: "inactive",
     },
     {
       tagTitle: "ебалай",
+      tagValue: "ebalai",
       tagStatus: "inactive",
     },
     {
       tagTitle: "ебалай",
+      tagValue: "ebalai",
+      tagStatus: "inactive",
+    },
+    {
+      tagTitle: "ебалай",
+      tagValue: "ebalai",
+      tagStatus: "inactive",
+    },
+    {
+      tagTitle: "ебалай",
+      tagValue: "ebalai",
+      tagStatus: "inactive",
+    },
+    {
+      tagTitle: "ебалай",
+      tagValue: "ebalai",
       tagStatus: "inactive",
     },
   ]);
-  // const [activeTags, setActiveTags] = useState([]);
+  const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
+  const [activeTags, setActiveTags] = useState([]);
 
   const titlesArray: TitleType[] = [
     {
@@ -85,6 +100,7 @@ function CataloguePage() {
       titleTags: ["gay", "porn", "suck"],
     },
   ];
+
   function expandFilter(value: string) {
     switch (value) {
       case "genre":
@@ -98,12 +114,15 @@ function CataloguePage() {
     }
   }
 
-  function toggleOptionCheckbox(status: string, index: number) {
-    const newTagArray: { tagTitle: string; tagStatus: string }[] = [
-      ...tagArray,
-    ];
+  function toggleOptionCheckbox(value: string, status: string, index: number) {
+    const newTagArray: {
+      tagTitle: string;
+      tagValue: string;
+      tagStatus: string;
+    }[] = [...tagArray];
     if (status === "inactive") {
       newTagArray[index].tagStatus = "add-option";
+      setActiveTags([...activeTags, value]);
     }
     if (status === "add-option") {
       newTagArray[index].tagStatus = "remove-option";
@@ -118,7 +137,9 @@ function CataloguePage() {
     // setActiveTags(filteredTags.map((tag) => tag.tagTitle));
   }
 
-  function updateTagArray(newArray: { tagTitle: string; tagStatus: string }[]) {
+  function updateTagArray(
+    newArray: { tagTitle: string; tagValue: string; tagStatus: string }[]
+  ) {
     setTagArray(newArray);
   }
 
@@ -126,17 +147,21 @@ function CataloguePage() {
     filterName: string,
     filterArray: {
       tagTitle: string;
+      tagValue: string;
       tagStatus: string;
     }[],
     filterValue: string,
     filterDesc: string,
     filterState: boolean,
     filterZIndex: number,
-    filterSearch: boolean
+    filterSearch: boolean,
+    filterStateSet: React.Dispatch<React.SetStateAction<boolean>>
   ) {
     return (
       <div className="filter-wraper">
-        <div className="filter-label">{filterName}</div>
+        <h3 className="filter-label" style={{ marginBottom: "10px" }}>
+          {filterName}
+        </h3>
         <div className="filter">
           <button
             className="filter-toggle"
@@ -145,6 +170,11 @@ function CataloguePage() {
             onClick={() => {
               expandFilter(filterValue);
               return !filterState;
+            }}
+            onBlur={(e) => {
+              if (!(e && e.relatedTarget)) {
+                filterStateSet(false);
+              }
             }}
           >
             <span className="filter-values text-left">{filterDesc}</span>
@@ -173,7 +203,15 @@ function CataloguePage() {
                 <button
                   className="filter-option"
                   type="button"
-                  onClick={() => toggleOptionCheckbox(tag.tagStatus, index)}
+                  onClick={() =>
+                    toggleOptionCheckbox(tag.tagValue, tag.tagStatus, index)
+                  }
+                  tabIndex={0}
+                  onBlur={(e) => {
+                    if (!(e && e.relatedTarget)) {
+                      setTagFilterExpand(false);
+                    }
+                  }}
                 >
                   <span className={`option-checkbox ${tag.tagStatus}`} />
                   <span className="filter-desc">{tag.tagTitle}</span>
@@ -189,9 +227,59 @@ function CataloguePage() {
   return (
     <div className="catalogue-page">
       <h2>Каталог</h2>
-      <div className="filters-wraper">
+      <aside className="filters-wraper">
         <div className="filter-header">
           <h3>Фильтр аниме</h3>
+        </div>
+        <div className="filter-slider-wraper">
+          {/* <span className="filter-span">
+            {yearsFilter[0] !== yearsFilter[1]
+              ? `Аниме, вышедшие в диапазоне от ${yearsFilter[0]} г. до ${yearsFilter[1]}г. `
+              : `Аниме, вышедшие только в ${yearsFilter[1]} году`}
+          </span> */}
+          <div className="slider-line" />
+          <ReactSlider
+            className="filter-slider"
+            thumbClassName="slider-thumb"
+            trackClassName="slider-track"
+            defaultValue={[1977, 2023]}
+            renderThumb={(props, state) => (
+              <div {...props}>
+                <span className="thumb-content">{state.valueNow}</span>
+              </div>
+            )}
+            min={1977}
+            max={2023}
+            ariaValuetext=""
+            onChange={(years) => setYearsFilter(years)}
+          />
+          <div className="slider-pips">
+            <div className="pip-horisontal big" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal big" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal big" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal big" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal" />
+            <div className="pip-horisontal big" />
+          </div>
         </div>
         <div className="filters">
           {createFilter(
@@ -201,7 +289,8 @@ function CataloguePage() {
             "Выберите жанры",
             tagFilterExpand,
             100,
-            true
+            true,
+            setTagFilterExpand
           )}
           {/* {createFilter(
             "Типы",
@@ -212,7 +301,7 @@ function CataloguePage() {
             false
           )} */}
         </div>
-      </div>
+      </aside>
       <div className="titles-wraper">
         {titlesArray.map((title) => (
           <Title
