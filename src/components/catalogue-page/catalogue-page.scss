@@ -4,12 +4,18 @@
   grid-template-columns: 300px 1fr;
   gap: 20px;
 }
+.search-and-titles {
+  height: fit-content;
+}
 .filters-wraper {
-  height: 680px;
+  height: 750px;
   background-color: rgba(6, 75, 140, 0.8);
   width: 300px;
   border-radius: 6px;
   grid-column: 1/2;
+  position: sticky;
+  left: 0;
+  top: 75px;
 }
 .filter-header {
   width: inherit;
@@ -150,6 +156,7 @@
   display: flex;
   gap: 20px;
   padding: 0 20px 0 20px;
+  min-height: 700px;
 }
 .filter-span {
   margin-bottom: 30px;
@@ -168,14 +175,6 @@
 .filter-slider {
   margin-bottom: 10px;
 }
-.slider-line {
-  width: 95%;
-  height: 4px;
-  border-radius: 6px;
-  background-color: #3ce3e8;
-  margin-left: auto;
-  margin-right: auto;
-}
 .slider-pips {
   display: flex;
   width: 92%;
@@ -193,10 +192,25 @@
     background-color: #fff;
   }
 }
-.slider-track-0 {
+.slider-line {
   top: -5px;
   width: 100%;
   height: 5px;
+  width: 95%;
+  height: 4px;
+  border-radius: 6px;
+  background-color: #3ce3e8;
+  margin-left: auto;
+  margin-right: auto;
+}
+.slider-track-0,
+.slider-track-2 {
+  position: relative;
+  bottom: 0;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  height: 4px;
 }
 .slider-thumb {
   background-color: #05315a;
@@ -219,4 +233,19 @@
   background-size: 40px;
   border-radius: 3px;
   padding: 2px;
+}
+
+.catalogue-search {
+  width: 1280px;
+  background-color: rgba(6, 75, 140, 0.8);
+  margin-bottom: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .input-title {
+    width: 1200px;
+    border-bottom: none;
+    outline: none;
+  }
 }

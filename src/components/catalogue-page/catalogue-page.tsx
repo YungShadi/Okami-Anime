@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import ReactSlider from "react-slider";
 import DropDown from "../img/dropDown.svg";
 
+import Search from "../img/search.svg";
 import "./catalogue-page.css";
 import Title from "../title";
 
@@ -302,16 +303,27 @@ function CataloguePage() {
           )} */}
         </div>
       </aside>
-      <div className="titles-wraper">
-        {titlesArray.map((title) => (
-          <Title
-            titleName={title.titleName}
-            titleAgeRest={title.titleAgeRest}
-            titleStatus={title.titleStatus}
-            titleTags={title.titleTags}
+      <section className="search-and-titles">
+        <div className="catalogue-search">
+          <img src={Search} alt="s-lupa" />
+          <input
+            type="text"
+            placeholder="Поиск"
+            className="input-title"
+            style={{ marginLeft: "20px" }}
           />
-        ))}
-      </div>
+        </div>
+        <div className="titles-wraper">
+          {titlesArray.map((title) => (
+            <Title
+              titleName={title.titleName}
+              titleAgeRest={title.titleAgeRest}
+              titleStatus={title.titleStatus}
+              titleTags={title.titleTags}
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
