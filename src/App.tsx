@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import "./app.css";
+import "./App.css";
 
 import MainPage from "./components/main-page/main-page";
 import TitlePage from "./components/title-page/title-page";
