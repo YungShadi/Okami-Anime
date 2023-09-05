@@ -59,7 +59,7 @@ function CataloguePage() {
       tagStatus: "inactive",
     },
   ]);
-  const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
+  // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
   const [activeTags, setActiveTags] = useState([]);
 
   const titlesArray: TitleType[] = [
@@ -251,7 +251,7 @@ function CataloguePage() {
             min={1977}
             max={2023}
             ariaValuetext=""
-            onChange={(years) => setYearsFilter(years)}
+            // onChange={(years) => setYearsFilter(years)}
           />
           <div className="slider-pips">
             <div className="pip-horisontal big" />
