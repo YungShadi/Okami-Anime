@@ -47,13 +47,13 @@ function Header() {
         </NavLink>
       </div>
       {/* user display depending on localStorage(maybe there is another way) */}
-      {false && (
+      {true && (
         <Link className="header-profile" to="profile">
           <span className="profile-name">AnalDestroyer</span>
           <img className="profile-pic" alt="profile" src={DefaultIcon} />
         </Link>
       )}
-      {!false && (
+      {!true && (
         <div className="aunth-buttons">
           <NavLink to="sign-up">Зарагестрироваться</NavLink>
           <NavLink to="sign-in">Войти</NavLink>

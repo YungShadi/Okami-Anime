@@ -22,7 +22,7 @@ function App() {
         <Route path="article" element={<TitlePage />} />
         <Route path="Copyright" element={<Copyright />} />
         <Route path="sign-up" element={<SignupPage />} />
-        <Route path="profile" element={<ProfilePage />} />
+        <Route path="profile/*" element={<ProfilePage />} />
       </Route>
     </Routes>
   );
