@@ -12,7 +12,7 @@ type TitleType = {
 
 function Title({ titleName, titleAgeRest, titleStatus, titleTags }: TitleType) {
   return (
-    <div className="season-title title-main">
+    <div className="season-title title-main" >
       <span className="title-status status">{titleStatus}</span>
       <span className="title-age-rest age-rest">{titleAgeRest}</span>
       <img className="title-poster poster" src={DefaultPoster} alt="poster" />

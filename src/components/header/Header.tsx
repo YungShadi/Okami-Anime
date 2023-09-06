@@ -28,14 +28,12 @@ function Header() {
       <button className="header-mobile-menu" type="button">
         menu
       </button>
-      <NavLink className="logo" to="/">
+      <Link className="logo" to="/">
         <div className="img-background">
           <img className="logo-img" alt="log" src={Logo} />
         </div>
-        {!(scrollIsEnough > 125) && (
-          <span className="logo-title">ŌkamiAnime</span>
-        )}
-      </NavLink>
+        <span className="logo-title">ŌkamiAnime</span>
+      </Link>
       {location.pathname !== "/catalogue" && (
         <input type="text" placeholder="Поиск" className="input-title" />
       )}

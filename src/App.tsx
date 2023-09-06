@@ -9,6 +9,7 @@ import Layout from "./components/layout/layout";
 import CataloguePage from "./components/catalogue-page";
 import Copyright from "./components/copyright/copyright";
 import SignupPage from "./components/signup-page";
+import ProfilePage from "./components/profile-page";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="article" element={<TitlePage />} />
         <Route path="Copyright" element={<Copyright />} />
         <Route path="sign-up" element={<SignupPage />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );

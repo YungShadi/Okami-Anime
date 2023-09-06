@@ -8,7 +8,7 @@
   height: fit-content;
 }
 .filters-wraper {
-  height: 750px;
+  height: 550px;
   background-color: rgba(6, 75, 140, 0.8);
   width: 300px;
   border-radius: 6px;
@@ -30,7 +30,13 @@
 }
 .filter-wraper {
   height: 75px;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
+}
+.filter-label {
+  font-size: 20xp;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 .filter {
   width: 100%;
@@ -94,7 +100,7 @@
     CenturyGothic,
     AppleGothic,
     sans-serif;
-  height: 40px;
+  height: 120px;
   margin-bottom: 10px;
 }
 .filter-list {
@@ -116,6 +122,7 @@
   background-color: inherit;
   border: none;
   color: white;
+  cursor: pointer;
   font-family:
     Century Gothic,
     CenturyGothic,
@@ -145,6 +152,9 @@
     bottom: 2px;
     left: 2px;
   }
+  .filter-desc {
+    display: inline-block;
+  }
 }
 .filter-option:hover {
   background-color: #021e38;
@@ -156,7 +166,7 @@
   display: flex;
   gap: 20px;
   padding: 0 20px 0 20px;
-  min-height: 700px;
+  min-height: 1500px;
 }
 .filter-span {
   margin-bottom: 30px;
@@ -174,6 +184,35 @@
 }
 .filter-slider {
   margin-bottom: 10px;
+}
+.filter-button-wraper {
+  width: 100%;
+  height: 75px;
+  border-top: 2px solid #3ce3e8;
+  margin-top: auto;
+  margin-top: 35px;
+  padding-top: 11px;
+  padding-left: 50px;
+  .filter-button {
+    font-family:
+      Century Gothic,
+      CenturyGothic,
+      AppleGothic,
+      sans-serif;
+    font-weight: 400;
+    width: 200px;
+    height: 50px;
+    background-color: #3ce3e8;
+    color: black;
+    font-size: 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .filter-button:hover {
+    background-color: #39f3fa;
+  }
 }
 .slider-pips {
   display: flex;
@@ -223,6 +262,10 @@
   border-radius: 2px;
   top: -18px;
   border: 1px solid #3ce3e8;
+  cursor: grab;
+}
+.slider-thumb:focus {
+  cursor: grabbing;
 }
 .thumb-content {
   display: inline-flex;

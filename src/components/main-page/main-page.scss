@@ -25,9 +25,6 @@
   flex-wrap: wrap;
 }
 .recently-added-anime {
-  .recetly-added-title {
-    margin-left: 130px;
-  }
   .recetly-added-title::before {
     content: url("../img/ph_newspaper-fill.svg");
     position: relative;

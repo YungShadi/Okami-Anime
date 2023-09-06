@@ -23,7 +23,8 @@
   margin-left: 20px;
 }
 .header .active {
-  color: #0e1df3;
+  background-color: #3ce3e8;
+  color: #000000;
 }
 
 .nav-buttons {
@@ -54,10 +55,14 @@
   border-top: none;
   height: 50px;
 }
+.off-screen-fixed .img-background {
+  scale: 1.1;
+}
 .off-screen-fixed .logo {
   height: 45px;
 }
 .off-screen-fixed .logo .logo-img {
+  scale: 0.9;
   height: 45px;
   width: 45px;
 }
@@ -148,9 +153,25 @@
 
 .aunth-buttons {
   margin-left: 10px;
+  height: 100%;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
 }
 .aunth-buttons a {
+  display: inline-flex;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: 0.3s;
   margin-left: 20px;
+}
+.aunth-buttons a:hover {
+  background-color: #3ce3e8;
+  color: #000000;
 }
 
 @media (max-width: 1100px) {
