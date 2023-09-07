@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./profile-page.css";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 function ProfilePage() {
   const [active, setActive] = useState(false);
@@ -9,8 +9,8 @@ function ProfilePage() {
       <div className="profile-header">
         <div className="header-tabs">
           <NavLink
-            to="/profile"
-            className={`tab-profile ${active ? "active" : ""} `}
+            to="profile"
+            className="tab-profile"
             onClick={() => {
               setActive(!active);
             }}
@@ -20,12 +20,12 @@ function ProfilePage() {
           <NavLink to="list" className="tab-profile">
             Списки
           </NavLink>
+          <NavLink to="settings" className="tab-profile">
+            Настройки
+          </NavLink>
         </div>
       </div>
-      <div className="profile-main"></div>
-      <Routes>
-        <Route path="list" element={<p>im in listaaaaaaaa</p>} />
-      </Routes>
+      <Outlet />
     </div>
   );
 }

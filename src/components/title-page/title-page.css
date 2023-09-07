@@ -27,10 +27,6 @@
   padding: 15px;
 }
 
-.footer {
-  margin-top: 30px;
-}
-
 .title-info {
   display: grid;
   grid-template-columns: auto 1fr;

@@ -175,12 +175,22 @@
 }
 
 @media (max-width: 1100px) {
-  .header-mobile-menu {
+  .header {
+    justify-content: space-evenly;
+  }
+  .header-mobile-button {
     display: inline-flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    background: rgba(86, 86, 86, 0.6);
+    border: none;
+    outline: none;
   }
   .input-title,
   .nav-buttons,
-  .aunth-buttons {
+  .aunth-buttons,
+  .header-profile {
     display: none;
   }
 }/*# sourceMappingURL=header.css.map */

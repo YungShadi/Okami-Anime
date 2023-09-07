@@ -25,7 +25,7 @@ function Header() {
       className={`header ${scrollIsEnough > 125 ? "off-screen-fixed" : ""}`}
       ref={headerRef}
     >
-      <button className="header-mobile-menu" type="button">
+      <button className="header-mobile-button mobile-menu" type="button">
         menu
       </button>
       <Link className="logo" to="/">
@@ -34,6 +34,9 @@ function Header() {
         </div>
         <span className="logo-title">ŌkamiAnime</span>
       </Link>
+      <button type="button" className="header-mobile-button mobile-search">
+        Поиск
+      </button>
       {location.pathname !== "/catalogue" && (
         <input type="text" placeholder="Поиск" className="input-title" />
       )}
@@ -48,8 +51,8 @@ function Header() {
       </div>
       {/* user display depending on localStorage(maybe there is another way) */}
       {true && (
-        <Link className="header-profile" to="profile">
-          <span className="profile-name">AnalDestroyer</span>
+        <Link className="header-profile" to="AnalaDestroyer/profile">
+          <span className="profile-name">AnalaDestroyer</span>
           <img className="profile-pic" alt="profile" src={DefaultIcon} />
         </Link>
       )}

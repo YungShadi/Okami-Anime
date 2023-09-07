@@ -54,7 +54,7 @@ function MainPage() {
   ];
 
   return (
-    <section className="main">
+    <section className="main" style={{ flexGrow: "1" }}>
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
@@ -64,6 +64,7 @@ function MainPage() {
               titleAgeRest={title.titleAgeRest}
               titleStatus={title.titleStatus}
               titleTags={title.titleTags}
+              titleClass="season-title"
             />
           ))}
         </div>
@@ -78,6 +79,7 @@ function MainPage() {
               titleAgeRest={title.titleAgeRest}
               titleStatus={title.titleStatus}
               titleTags={title.titleTags}
+              titleClass="recently-added"
             />
           ))}
         </div>

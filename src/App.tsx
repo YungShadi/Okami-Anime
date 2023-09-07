@@ -10,6 +10,9 @@ import CataloguePage from "./components/catalogue-page";
 import Copyright from "./components/copyright/copyright";
 import SignupPage from "./components/signup-page";
 import ProfilePage from "./components/profile-page";
+import ProfileMain from "./components/profile-page/profile-main";
+import ProfileList from "./components/profile-page/profile-list";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
@@ -22,7 +25,13 @@ function App() {
         <Route path="article" element={<TitlePage />} />
         <Route path="Copyright" element={<Copyright />} />
         <Route path="sign-up" element={<SignupPage />} />
-        <Route path="profile/*" element={<ProfilePage />} />
+        <Route path="AnalaDestroyer/*" element={<ProfilePage />}>
+          <Route path="profile" element={<ProfileMain />} />
+          <Route path="list" element={<ProfileList />} />
+          <Route path="settings" element={<p>settings</p>} />
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
   );

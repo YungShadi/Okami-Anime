@@ -2,7 +2,7 @@
   width: 65vw;
   height: -moz-fit-content;
   height: fit-content;
-  min-height: 680px;
+  min-height: 694px;
 }
 
 .profile-header {
@@ -13,7 +13,7 @@
 .profile-header .tab-profile {
   display: inline-flex;
   width: 150px;
-  height: 48px;
+  height: 50px;
   padding-top: 15px;
   background-color: rgba(6, 75, 140, 0.95);
   margin-left: 20px;
@@ -28,14 +28,27 @@
   transform: translateY(3px);
   border-radius: 2px;
   transition: 0.4s;
-  animation-direction: alternate;
 }
 
-.profile-main {
+.profile-main,
+.profile-lsit {
   background-color: rgba(5, 49, 90, 0.6);
-  height: 300px;
+  height: 640px;
   border-bottom: 1px solid #3ce3e8;
   border-left: 1px solid #3ce3e8;
   border-right: 1px solid #3ce3e8;
   border-top: 3px solid #3ce3e8;
+}
+
+.profile-main {
+  padding: 10px;
+  display: flex;
+}
+.profile-main .profile-picture {
+  width: 90px;
+  max-height: 125px;
+}
+.profile-main .profile-info {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=profile-page.css.map */
