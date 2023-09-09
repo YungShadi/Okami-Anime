@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -13,8 +13,14 @@ import ProfilePage from "./components/profile-page";
 import ProfileMain from "./components/profile-page/profile-main";
 import ProfileList from "./components/profile-page/profile-list";
 import ErrorPage from "./components/ErrorPage";
+import SigniinPage from "./components/signin-page/signinPage";
+import { useCurrentUserQuery } from "./redux/service/okamiApi";
 
 function App() {
+  const { data } = useCurrentUserQuery();
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -25,6 +31,7 @@ function App() {
         <Route path="article" element={<TitlePage />} />
         <Route path="Copyright" element={<Copyright />} />
         <Route path="sign-up" element={<SignupPage />} />
+        <Route path="sign-in" element={<SigniinPage />} />
         <Route path="AnalaDestroyer/*" element={<ProfilePage />}>
           <Route path="profile" element={<ProfileMain />} />
           <Route path="list" element={<ProfileList />} />

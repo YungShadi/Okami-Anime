@@ -1,20 +1,23 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRegisterUserMutation } from "../../redux/service/okamiApi";
-import "./signupPage.css";
+import { useCookies } from "react-cookie";
+import { useLoginUserMutation } from "../../redux/service/okamiApi";
 
-function SignupPage() {
-  const [regUser] = useRegisterUserMutation();
+function SigniinPage() {
+  const [login] = useLoginUserMutation();
   const { register, handleSubmit } = useForm();
-  const onSubmit: SubmitHandler = (data) => regUser(data);
+  const [cookies, setCookie] = useCookies();
+  const onSubmit: SubmitHandler = (data) => {
+    login(data).then((result) => console.log(result));
+    setCookie("loh", 23);
+  };
 
   return (
     <div className="signup">
       <form className="signup-form form" onSubmit={handleSubmit(onSubmit)}>
         <h2>Зарегесрируйтесь</h2>
         <input type="username" placeholder="text" {...register("username")} />
-        <input type="email" placeholder="text" {...register("email")} />
         <input type="password" placeholder="text" {...register("password")} />
 
         <button type="submit">Зарагестрироваться</button>
@@ -23,4 +26,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default SigniinPage;

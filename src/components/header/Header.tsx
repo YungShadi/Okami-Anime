@@ -10,6 +10,7 @@ function Header() {
   const location = useLocation();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
+  // const [isLogined, setIsLogined] = useState(false);
 
   useEffect(() => {
     const onScrollHandle = () => {
@@ -50,13 +51,13 @@ function Header() {
         </NavLink>
       </div>
       {/* user display depending on localStorage(maybe there is another way) */}
-      {true && (
+      {false && (
         <Link className="header-profile" to="AnalaDestroyer/profile">
           <span className="profile-name">AnalaDestroyer</span>
           <img className="profile-pic" alt="profile" src={DefaultIcon} />
         </Link>
       )}
-      {!true && (
+      {!false && (
         <div className="aunth-buttons">
           <NavLink to="sign-up">Зарагестрироваться</NavLink>
           <NavLink to="sign-in">Войти</NavLink>
