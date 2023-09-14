@@ -1,6 +1,9 @@
 .signup {
   display: flex;
   height: 665px;
+  flex-grow: 1;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .signup-form {
@@ -10,4 +13,30 @@
   flex-direction: column;
   background: rgba(5, 49, 90, 0.6);
   align-items: center;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 500px;
+}
+.signup-form input {
+  background-color: #05315a;
+  border: 1px solid #3ce3e8;
+  width: 330px;
+  height: 50px;
+  display: inline-block;
+  color: white;
+  padding: 5px;
+  outline: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.signup-form .from-submit {
+  background-color: #3ce3e8;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  width: 200px;
+  height: 40px;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+  cursor: pointer;
 }/*# sourceMappingURL=signupPage.css.map */

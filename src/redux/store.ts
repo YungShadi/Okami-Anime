@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { okamiApi } from "./service/okamiApi";
+import { userApi } from "./service/user/user.api";
+import loginReducer from "./loginSlice";
 
 export const store = configureStore({
   reducer: {
-    [okamiApi.reducerPath]: okamiApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    login: loginReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(okamiApi.middleware),
+    getDefaultMiddleware().concat(userApi.middleware),
 });
 
 export default store;

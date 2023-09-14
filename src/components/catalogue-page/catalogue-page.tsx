@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
 import React, { useState } from "react";
@@ -141,7 +142,7 @@ function CataloguePage() {
       status: "inactive",
     },
   ]);
-  const [typeArray, setTypeArray] = useState([
+  const [typeArray /* setTypeArray */] = useState([
     {
       title: "Сериал",
       value: "serial",
@@ -173,7 +174,7 @@ function CataloguePage() {
       status: "inactive",
     },
   ]);
-  const [statusArray, setStatusArray] = useState([
+  const [statusArray /* setStatusArray */] = useState([
     {
       title: "Вышел",
       value: "out",
@@ -193,6 +194,7 @@ function CataloguePage() {
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
   const [activeTags, setActiveTags] = useState([]);
   const [activeType, setActiveType] = useState([]);
+  const [activeStatus, setActiveStatus] = useState([]);
 
   const titlesArray: TitleType[] = [
     {
@@ -247,27 +249,76 @@ function CataloguePage() {
     }
   }
 
-  function toggleOptionCheckbox(value: string, status: string, index: number) {
+  function toggleOptionCheckbox(
+    value: string,
+    status: string,
+    index: number,
+    filterValue: string
+  ) {
     const newTagArray: {
       title: string;
       value: string;
       status: string;
     }[] = [...tagArray];
-    if (status === "inactive") {
-      newTagArray[index].status = "add-option";
-      setActiveTags([...activeTags, value]);
+    const newStatusArray: {
+      title: string;
+      value: string;
+      status: string;
+    }[] = [...statusArray];
+    const newTypeArray: {
+      title: string;
+      value: string;
+      status: string;
+    }[] = [...typeArray];
+    switch (filterValue) {
+      case "genre":
+        if (status === "inactive") {
+          newTagArray[index].status = "add-option";
+          setActiveTags([...activeTags, value]);
+        }
+        if (status === "add-option") {
+          newTagArray[index].status = "remove-option";
+        }
+        if (status === "remove-option") {
+          newTagArray[index].status = "inactive";
+        }
+        updateTagArray(newTagArray);
+        const filteredTags = newTagArray.filter(
+          (tag) => tag.status === "add-option"
+        );
+        setActiveTags(filteredTags.map((tag) => tag.title));
+        break;
+      case "type":
+        if (status === "inactive") {
+          newTypeArray[index].status = "add-option";
+          setActiveType([...activeType, value]);
+        }
+        if (status === "add-option") {
+          newTypeArray[index].status = "inactive";
+        }
+        updateTagArray(newTypeArray);
+        const filteredTypes = newTypeArray.filter(
+          (type) => type.status === "add-option"
+        );
+        setActiveType(filteredTypes.map((tag) => tag.title));
+        break;
+      case "status":
+        if (status === "inactive") {
+          newStatusArray[index].status = "add-option";
+          setActiveStatus([...activeStatus, value]);
+        }
+        if (status === "add-option") {
+          newStatusArray[index].status = "inactive";
+        }
+        updateTagArray(newTypeArray);
+        const filteredStatus = newStatusArray.filter(
+          (statuss) => statuss.status === "add-option"
+        );
+        setActiveStatus(filteredStatus.map((tag) => tag.title));
+        break;
+      default:
+        break;
     }
-    if (status === "add-option") {
-      newTagArray[index].status = "remove-option";
-    }
-    if (status === "remove-option") {
-      newTagArray[index].status = "inactive";
-    }
-    updateTagArray(newTagArray);
-    // const filteredTags = newTagArray.filter(
-    //   (tag) => tag.status === "add-option"
-    // );
-    // setActiveTags(filteredTags.map((tag) => tag.title));
   }
 
   function updateTagArray(
@@ -291,7 +342,6 @@ function CataloguePage() {
     filterStateSet: React.Dispatch<React.SetStateAction<boolean>>,
     filterHeigth: number
   ) {
-    console.log(typeFilterExpand);
     return (
       <div className="filter-wraper">
         <h2 className="filter-label" style={{ marginBottom: "10px" }}>
@@ -374,7 +424,12 @@ function CataloguePage() {
                   className="filter-option"
                   type="button"
                   onClick={() =>
-                    toggleOptionCheckbox(tag.title, tag.status, index)
+                    toggleOptionCheckbox(
+                      tag.title,
+                      tag.status,
+                      index,
+                      filterValue
+                    )
                   }
                   tabIndex={0}
                   onBlur={(e) => {

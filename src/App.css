@@ -33,5 +33,6 @@ body::-webkit-scrollbar-thumb {
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   display: flex;
   flex-direction: column;
+  min-height: 975px;
   align-items: center;
 }/*# sourceMappingURL=App.css.map */

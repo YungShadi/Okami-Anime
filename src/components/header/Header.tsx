@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./header.css";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
@@ -11,6 +12,7 @@ function Header() {
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   // const [isLogined, setIsLogined] = useState(false);
+  const username = useSelector((state) => state.login.username);
 
   useEffect(() => {
     const onScrollHandle = () => {
@@ -53,7 +55,7 @@ function Header() {
       {/* user display depending on localStorage(maybe there is another way) */}
       {false && (
         <Link className="header-profile" to="AnalaDestroyer/profile">
-          <span className="profile-name">AnalaDestroyer</span>
+          <span className="profile-name">{username}</span>
           <img className="profile-pic" alt="profile" src={DefaultIcon} />
         </Link>
       )}

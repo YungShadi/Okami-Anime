@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import { useCurrentUserQuery } from "./redux/service/user/user.api";
 
 import MainPage from "./components/main-page/main-page";
 import TitlePage from "./components/title-page/title-page";
@@ -14,13 +15,14 @@ import ProfileMain from "./components/profile-page/profile-main";
 import ProfileList from "./components/profile-page/profile-list";
 import ErrorPage from "./components/ErrorPage";
 import SigniinPage from "./components/signin-page/signinPage";
-import { useCurrentUserQuery } from "./redux/service/okamiApi";
 
 function App() {
-  const { data } = useCurrentUserQuery();
+  const { data: userData } = useCurrentUserQuery([]);
+
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(userData);
+  }, [userData]);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

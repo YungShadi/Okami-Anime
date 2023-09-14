@@ -10,7 +10,7 @@ const root = createRoot(document.getElementById("root") as HTMLBodyElement);
 
 root.render(
   <React.StrictMode>
-    <CookiesProvider defaultSetOptions>
+    <CookiesProvider>
       <Provider store={store}>
         <BrowserRouter>
           <App />
