@@ -1,12 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
-import { loginAction } from "../../redux/loginSlice";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { logoutAction } from "../../redux/aunthSlice";
 import { UserDto } from "../../types/userDto";
 import {
   useLoginUserMutation,
   useLogoutMutation,
+  useCurrentUserQuery,
 } from "../../redux/service/user/user.api";
 
 function SigniinPage() {
@@ -14,12 +16,23 @@ function SigniinPage() {
   const [logout] = useLogoutMutation();
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const username = useSelector((state) => state?.login.username);
+  const { refetch: currendSend } = useCurrentUserQuery(["User"]);
+  // const username = useSelector((state) => state?.login.username);
 
   const onSubmit: SubmitHandler<UserDto> = (data) => {
-    login(data);
-    dispatch(loginAction(data));
-    console.log(username);
+    login(data).then((result) => {
+      Cookies.set("acess_token", `${result.data.access_jwt_token}`, {
+        expires: 31,
+        secure: true,
+        sameSite: "None",
+      });
+      Cookies.set("refresh_token", `${result.data.refresh_jwt_token}`, {
+        expires: 31,
+        secure: true,
+        sameSite: "None",
+      });
+      currendSend();
+    });
   };
 
   return (
@@ -47,6 +60,9 @@ function SigniinPage() {
         type="button"
         onClick={() => {
           logout([]);
+          dispatch(logoutAction());
+          Cookies.remove("refresh_token");
+          Cookies.remove("acess_token");
         }}
       >
         Logout

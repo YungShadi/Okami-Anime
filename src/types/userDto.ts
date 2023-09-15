@@ -4,4 +4,5 @@ export interface UserDto {
   email?: string;
   profilePic?: string;
   description?: string;
+  logined: boolean;
 }

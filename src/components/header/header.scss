@@ -29,6 +29,9 @@
     color: #000000;
   }
 }
+.header-mobile-button {
+  display: none;
+}
 .nav-buttons {
   height: 100%;
   width: fit-content;
@@ -178,5 +181,10 @@
   .aunth-buttons,
   .header-profile {
     display: none;
+  }
+  .mobile-menu {
+    position: relative;
+    width: 100px;
+    height: 100px;
   }
 }

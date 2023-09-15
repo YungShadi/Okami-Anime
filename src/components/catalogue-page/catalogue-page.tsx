@@ -296,7 +296,7 @@ function CataloguePage() {
         if (status === "add-option") {
           newTypeArray[index].status = "inactive";
         }
-        updateTagArray(newTypeArray);
+        // updateTagArray(newTypeArray);
         const filteredTypes = newTypeArray.filter(
           (type) => type.status === "add-option"
         );
@@ -310,7 +310,7 @@ function CataloguePage() {
         if (status === "add-option") {
           newStatusArray[index].status = "inactive";
         }
-        updateTagArray(newTypeArray);
+        // updateTagArray(newTypeArray);
         const filteredStatus = newStatusArray.filter(
           (statuss) => statuss.status === "add-option"
         );

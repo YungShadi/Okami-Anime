@@ -31,6 +31,6 @@
     "allowImportingTsExtensions": false,
     "jsx": "preserve"
   },
-  "include": ["./**/*.ts"],
+  "include": ["./**/*.ts", "src/components/header/mobile-meu/mobileMenu.tsx"],
   "exclude": ["node_modules/**/*"]
 }

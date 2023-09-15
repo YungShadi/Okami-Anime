@@ -1,17 +1,23 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import Cookies from "js-cookie";
 
 export const userApi = createApi({
   reducerPath: "okamiApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://d9a3-95-25-231-9.ngrok-free.app/`,
+    baseUrl: `https://6195-95-25-231-9.ngrok-free.app/`,
   }),
+  tagTypes: ["User"],
   endpoints: (builder) => ({
     currentUser: builder.query({
       query: () => ({
         url: "auth/current",
         method: "GET",
         credentials: "include",
+        headers: {
+          authorization: `${Cookies.get("acess_token")}`,
+        },
       }),
+      providesTags: (result, arg) => [{ type: "User", username: arg }],
     }),
     loginUser: builder.mutation({
       query: (userData) => ({
@@ -26,6 +32,7 @@ export const userApi = createApi({
           password: userData.password,
         }),
       }),
+      invalidatesTags: ["User"],
     }),
     registerUser: builder.mutation({
       query: (userData) => ({
@@ -40,12 +47,23 @@ export const userApi = createApi({
           mail: `${userData.email}`,
         }),
       }),
+      invalidatesTags: ["User"],
     }),
     logout: builder.mutation({
       query: () => ({
         url: "auth/logout",
-        method: "POST",
+        method: "GET",
+      }),
+      invalidatesTags: ["User"],
+    }),
+    refreshJWT: builder.mutation({
+      query: () => ({
+        url: "/auth/token/refresh",
+        method: "GET",
         credentials: "include",
+        headers: {
+          authorization: `${Cookies.get("refresh_token")}`,
+        },
       }),
     }),
   }),
@@ -56,4 +74,5 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useLogoutMutation,
+  useRefreshJWTMutation,
 } = userApi;

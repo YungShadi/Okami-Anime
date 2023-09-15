@@ -29,7 +29,7 @@ function Footer() {
       </span>
       <div className="copyrigth">
         <span className="copyrigth-year">©️ 2023</span>
-        <Link className="copyrigth-info" to="Copyright">
+        <Link className="copyrigth-info" to="copyright">
           Информация для правообладателей
         </Link>
       </div>

@@ -2,17 +2,22 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./header.css";
+import { UserDto } from "../../types/userDto";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
+// import MobileMenu from "./mobile-meu/mobileMenu";
 
 // header, navigation, user
 function Header() {
-  // const [user, setUser] = useState(false);
   const location = useLocation();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
-  // const [isLogined, setIsLogined] = useState(false);
-  const username = useSelector((state) => state.login.username);
+  const username = useSelector(
+    (state: { auth: UserDto }) => state?.auth.username
+  );
+  const isLogined = useSelector(
+    (state: { auth: UserDto }) => state?.auth.logined
+  );
 
   useEffect(() => {
     const onScrollHandle = () => {
@@ -53,13 +58,13 @@ function Header() {
         </NavLink>
       </div>
       {/* user display depending on localStorage(maybe there is another way) */}
-      {false && (
-        <Link className="header-profile" to="AnalaDestroyer/profile">
+      {isLogined && (
+        <Link className="header-profile" to={`${username}/profile`}>
           <span className="profile-name">{username}</span>
           <img className="profile-pic" alt="profile" src={DefaultIcon} />
         </Link>
       )}
-      {!false && (
+      {!isLogined && (
         <div className="aunth-buttons">
           <NavLink to="sign-up">Зарагестрироваться</NavLink>
           <NavLink to="sign-in">Войти</NavLink>
