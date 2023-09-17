@@ -2,19 +2,19 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 
 export const userApi = createApi({
-  reducerPath: "okamiApi",
+  reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `https://6195-95-25-231-9.ngrok-free.app/`,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
     currentUser: builder.query({
-      query: () => ({
+      query: (token) => ({
         url: "auth/current",
         method: "GET",
         credentials: "include",
         headers: {
-          authorization: `${Cookies.get("acess_token")}`,
+          authorization: `${token}`,
         },
       }),
       providesTags: (result, arg) => [{ type: "User", username: arg }],
@@ -71,6 +71,7 @@ export const userApi = createApi({
 
 export const {
   useCurrentUserQuery,
+  useLazyCurrentUserQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
   useLogoutMutation,

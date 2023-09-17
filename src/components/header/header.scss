@@ -53,10 +53,10 @@
 }
 .off-screen-fixed {
   position: sticky;
-  top: 0;
+  top: -1px;
   background-color: rgba(6, 75, 140, 0.9);
   border-top: none;
-  height: 50px;
+  height: 55px;
   .img-background {
     scale: 1.1;
   }

@@ -5,18 +5,17 @@ import "./header.css";
 import { UserDto } from "../../types/userDto";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
+import { useAuth } from "../../hooks/useAuth";
 // import MobileMenu from "./mobile-meu/mobileMenu";
 
 // header, navigation, user
 function Header() {
+  const { isAuthenticated } = useAuth();
   const location = useLocation();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username
-  );
-  const isLogined = useSelector(
-    (state: { auth: UserDto }) => state?.auth.logined
   );
 
   useEffect(() => {
@@ -58,13 +57,13 @@ function Header() {
         </NavLink>
       </div>
       {/* user display depending on localStorage(maybe there is another way) */}
-      {isLogined && (
+      {isAuthenticated && (
         <Link className="header-profile" to={`${username}/profile`}>
           <span className="profile-name">{username}</span>
           <img className="profile-pic" alt="profile" src={DefaultIcon} />
         </Link>
       )}
-      {!isLogined && (
+      {!isAuthenticated && (
         <div className="aunth-buttons">
           <NavLink to="sign-up">Зарагестрироваться</NavLink>
           <NavLink to="sign-in">Войти</NavLink>

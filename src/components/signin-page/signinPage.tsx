@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
@@ -8,31 +8,40 @@ import { UserDto } from "../../types/userDto";
 import {
   useLoginUserMutation,
   useLogoutMutation,
-  useCurrentUserQuery,
+  useLazyCurrentUserQuery,
 } from "../../redux/service/user/user.api";
 
 function SigniinPage() {
   const [login] = useLoginUserMutation();
-  const [logout] = useLogoutMutation();
+  const [logout, { isSuccess }] = useLogoutMutation();
+  const [currentUser] = useLazyCurrentUserQuery();
   const { register, handleSubmit } = useForm();
+  const [acessToken, setAcessToken] = useState("");
   const dispatch = useDispatch();
-  const { refetch: currendSend } = useCurrentUserQuery(["User"]);
-  // const username = useSelector((state) => state?.login.username);
 
   const onSubmit: SubmitHandler<UserDto> = (data) => {
-    login(data).then((result) => {
-      Cookies.set("acess_token", `${result.data.access_jwt_token}`, {
-        expires: 31,
-        secure: true,
-        sameSite: "None",
+    login(data)
+      .unwrap()
+      .then((result) => {
+        console.log(isSuccess);
+        Cookies.set("acess_token", `${result.data.access_jwt_token}`, {
+          expires: 31,
+          secure: true,
+          sameSite: "None",
+        });
+        setAcessToken(result.data.access_jwt_token);
+        Cookies.set("refresh_token", `${result.data.refresh_jwt_token}`, {
+          expires: 31,
+          secure: true,
+          sameSite: "None",
+        });
+      })
+      .then(() => {
+        currentUser(acessToken);
+      })
+      .catch((error) => {
+        throw new Error(error);
       });
-      Cookies.set("refresh_token", `${result.data.refresh_jwt_token}`, {
-        expires: 31,
-        secure: true,
-        sameSite: "None",
-      });
-      currendSend();
-    });
   };
 
   return (

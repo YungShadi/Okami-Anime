@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { useAuth } from "./hooks/useAuth";
 
 import "./App.css";
-import { useDispatch } from "react-redux";
-import {
-  useCurrentUserQuery,
-  // useRefreshJWTMutation,
-} from "./redux/service/user/user.api";
-import { currentUserAction } from "./redux/aunthSlice";
+
 // import { UserDto } from "./types/userDto";
 
 import MainPage from "./components/main-page/main-page";
@@ -23,36 +19,6 @@ import ErrorPage from "./components/ErrorPage";
 import SigniinPage from "./components/signin-page/signinPage";
 
 function App() {
-  // const [refresh] = useRefreshJWTMutation();
-  const { data: userData, isSuccess: currentSeccess } = useCurrentUserQuery([
-    "User",
-  ]);
-  const dispathc = useDispatch();
-
-  useEffect(() => {
-    if (currentSeccess) {
-      dispathc(currentUserAction({ ...userData, logined: true }));
-    }
-    // return () => {
-    //   refresh([])
-    //     .then((result): void => {
-    //       Cookies.set("acess_token", `${result.data.access_jwt_token}`, {
-    //         expires: 31,
-    //         secure: true,
-    //         sameSite: "None",
-    //       });
-    //       Cookies.set("refresh_token", `${result.data.refresh_jwt_token}`, {
-    //         expires: 31,
-    //         secure: true,
-    //         sameSite: "None",
-    //       });
-    //     })
-    //     .catch((error) => {
-    //       throw new Error(error);
-    //     });
-    // };
-  }, [currentSeccess]);
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
