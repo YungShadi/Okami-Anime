@@ -4,17 +4,17 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://6195-95-25-231-9.ngrok-free.app/`,
+    baseUrl: `https://d4de-95-25-239-176.ngrok-free.app/`,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
     currentUser: builder.query({
-      query: (token) => ({
+      query: () => ({
         url: "auth/current",
         method: "GET",
         credentials: "include",
         headers: {
-          authorization: `${token}`,
+          authorization: `${Cookies.get("access_jwt_token")}`,
         },
       }),
       providesTags: (result, arg) => [{ type: "User", username: arg }],

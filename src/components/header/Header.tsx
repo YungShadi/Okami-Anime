@@ -57,13 +57,12 @@ function Header() {
         </NavLink>
       </div>
       {/* user display depending on localStorage(maybe there is another way) */}
-      {isAuthenticated && (
+      {isAuthenticated ? (
         <Link className="header-profile" to={`${username}/profile`}>
           <span className="profile-name">{username}</span>
           <img className="profile-pic" alt="profile" src={DefaultIcon} />
         </Link>
-      )}
-      {!isAuthenticated && (
+      ) : (
         <div className="aunth-buttons">
           <NavLink to="sign-up">Зарагестрироваться</NavLink>
           <NavLink to="sign-in">Войти</NavLink>
