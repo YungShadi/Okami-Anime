@@ -1,66 +1,61 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from "react";
+import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { logoutAction } from "../../redux/aunthSlice";
 import { UserDto } from "../../types/userDto";
-import {
-  useLogoutMutation,
-  useLazyCurrentUserQuery,
-} from "../../redux/service/user/user.api";
+import { useLogoutMutation } from "../../redux/service/user/user.api";
 
 function SigniinPage() {
   // const [login] = useLoginUserMutation();
-  const [logout, { isSuccess }] = useLogoutMutation();
-  const [currentUser] = useLazyCurrentUserQuery();
-  const { register, handleSubmit } = useForm();
-  const [acessToken, setAcessToken] = useState("");
+  const { isAuthenticated } = useAuth();
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const { login } = useAuth();
 
   const onSubmit: SubmitHandler<UserDto> = (data) => {
-    // login(data)
-    //   .then((result) => {
-    //     console.log(isSuccess);
-    //     Cookies.set("access_jwt_token", `${result.data.access_jwt_token}`, {
-    //       expires: 31,
-    //       secure: true,
-    //       sameSite: "None",
-    //     });
-    //     setAcessToken(result.data.access_jwt_token);
-    //     Cookies.set("refresh_jwt_token", `${result.data.refresh_jwt_token}`, {
-    //       expires: 31,
-    //       secure: true,
-    //       sameSite: "None",
-    //     });
-    //   })
-    //   .then(() => {
-    //     currentUser();
-    //   })
-    //   .catch((error) => {
-    //     throw new Error(error);
-    //   });
     login(data);
   };
-
+  if (isAuthenticated) {
+    navigate("/");
+  }
   return (
     <div className="signup">
       <form className="signup-form form" onSubmit={handleSubmit(onSubmit)}>
-        <h2>Войдите в аккаунт</h2>
-        <input
-          type="username"
-          placeholder="text"
-          {...register("username")}
-          className="form-input login-input"
-        />
-        <input
-          type="password"
-          placeholder="text"
-          {...register("password")}
-          className="form-input login-input"
-        />
+        <h2 className="form-title">Войдите в аккаунт</h2>
+        <div className="input-wrapper">
+          <h3 className="form-input-title">Имя пользователя</h3>
+          <input
+            type="username"
+            placeholder="Имя пользовтаеля"
+            {...register("username", { required: true, minLength: 0 })}
+            className="form-input login-input"
+          />
+          {errors.username?.type === "required" && (
+            <p className="error-message-input">Имя пользователя обязательно</p>
+          )}
+        </div>
+        <div className="input-wrapper">
+          <h3 className="form-input-title">Пароль</h3>
+          <input
+            type="password"
+            placeholder="Пароль"
+            {...register("password", { required: true })}
+            className="form-input login-input"
+          />
+          {errors.password?.type === "required" && (
+            <p className="error-message-input">Пароль обязателен</p>
+          )}
+        </div>
         <button type="submit" className="from-submit">
           Войти
         </button>

@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://d4de-95-25-239-176.ngrok-free.app/`,
+    baseUrl: `https://7747-95-25-239-176.ngrok-free.app/`,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
@@ -17,7 +17,7 @@ export const userApi = createApi({
           authorization: `${Cookies.get("access_jwt_token")}`,
         },
       }),
-      providesTags: (result, arg) => [{ type: "User", username: arg }],
+      providesTags: (arg) => [{ type: "User", username: arg }],
     }),
     loginUser: builder.mutation({
       query: (userData) => ({
@@ -52,7 +52,7 @@ export const userApi = createApi({
     logout: builder.mutation({
       query: () => ({
         url: "auth/logout",
-        method: "GET",
+        method: "POST",
       }),
       invalidatesTags: ["User"],
     }),

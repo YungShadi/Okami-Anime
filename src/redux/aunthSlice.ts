@@ -5,35 +5,28 @@ import { UserDto } from "../types/userDto";
 const initialState: UserDto = {
   username: "",
   password: "",
-  logined: false,
+  authorities: ["UNDEFINED"],
 };
 
 export const aunthSlice = createSlice({
   name: "aunth",
   initialState,
   reducers: {
-    loginAction: (state, action) => {
-      state.username = action.payload.username;
-      state.profilePic = action.payload.profilePic;
-      state.email = action.payload.email;
-      state.logined = true;
-    },
     currentUserAction: (state, action) => {
       state.username = action.payload.username;
       state.profilePic = action.payload.profilePic;
       state.email = action.payload.email;
-      state.logined = action.payload.logined;
+      state.authorities = action.payload.authorities;
     },
     logoutAction: (state) => {
       state.username = "";
       state.profilePic = "";
       state.email = "";
-      state.logined = false;
+      state.authorities = ["UNDEFINED"];
     },
   },
 });
 
-export const { loginAction, currentUserAction, logoutAction } =
-  aunthSlice.actions;
+export const { currentUserAction, logoutAction } = aunthSlice.actions;
 
 export default aunthSlice.reducer;

@@ -1,21 +1,68 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRegisterUserMutation } from "../../redux/service/user/user.api";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { UserDto } from "../../types/userDto";
 import "./signupPage.css";
 
 function SignupPage() {
-  const [regUser] = useRegisterUserMutation();
-  const { register, handleSubmit } = useForm();
-  const onSubmit: SubmitHandler = (data) => regUser(data);
+  const navigate = useNavigate();
+  const { isAuthenticated, regestration } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit: SubmitHandler<UserDto> = (data) => regestration(data);
+
+  if (isAuthenticated) {
+    navigate("/");
+  }
 
   return (
     <div className="signup">
       <form className="signup-form form" onSubmit={handleSubmit(onSubmit)}>
-        <h2>Зарегесртируйтесь</h2>
-        <input type="username" placeholder="text" {...register("username")} />
-        <input type="email" placeholder="text" {...register("email")} />
-        <input type="password" placeholder="text" {...register("password")} />
+        <h2 className="form-title">Зарегесртируйтесь</h2>
+        <div className="input-wrapper">
+          <h3 className="form-input-title">Имя пользователя</h3>
+          <input
+            type="username"
+            placeholder="Имя пользовтаеля"
+            {...register("username", {
+              required: true,
+              minLength: 3,
+              pattern: /^[a-zA-Z0-9]{4,10}$/,
+            })}
+            className="form-input login-input"
+          />
+          {errors.username?.type === "required" && (
+            <p className="error-message-input">Имя пользователя обязательно</p>
+          )}
+        </div>
+        <div className="input-wrapper">
+          <h3 className="form-input-title">Электронная почта</h3>
+          <input
+            type="email"
+            placeholder="email"
+            {...register("email", {
+              required: true,
+              pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+            })}
+          />
+        </div>
+        <div className="input-wrapper">
+          <h3 className="form-input-title">Пароль</h3>
+          <input
+            type="password"
+            placeholder="Пароль"
+            {...register("password", { required: true })}
+            className="form-input login-input"
+          />
+          {errors.password?.type === "required" && (
+            <p className="error-message-input">Пароль обязателен</p>
+          )}
+        </div>
 
         <button type="submit" className="from-submit">
           Зарегестрироваться

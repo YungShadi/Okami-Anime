@@ -39,4 +39,18 @@
   height: 40px;
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   cursor: pointer;
+}
+
+.form-title {
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.input-wrapper {
+  margin-bottom: 15px;
+}
+
+.error-message-input {
+  color: rgb(243, 38, 38);
+  margin-top: 10px;
 }/*# sourceMappingURL=signupPage.css.map */
