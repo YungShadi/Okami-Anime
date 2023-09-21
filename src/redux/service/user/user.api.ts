@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://7747-95-25-239-176.ngrok-free.app/`,
+    baseUrl: `https://c357-95-25-239-176.ngrok-free.app/`,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({

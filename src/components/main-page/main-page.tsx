@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "../title";
 
 import "./main-page.css";
+import { useSelector } from "react-redux";
 
 // ! В будущем, при получении данных о тайтлах и переходе в конкертный если о нем есть данные в state
 // ! то лучше брать их. если нет - посылаем запрос по id в ссылке

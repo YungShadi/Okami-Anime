@@ -44,10 +44,11 @@ export const useAuth = () => {
       setIsAuthenticated(true);
       dispatch(currentUserAction(currentUser));
     } else {
-      setIsAuthenticated(false);
+      setIsAuthenticated(jwtToken);
       dispatch(logoutAction());
     }
   }, [currentUser, isCurrentUserLoading, jwtToken]);
+
   const handleReg = async (userData: UserDto) => {
     // eslint-disable-next-line camelcase
     const { access_jwt_token, refresh_jwt_token } =
@@ -67,6 +68,7 @@ export const useAuth = () => {
       secure: true,
     });
     Cookies.set("refresh_jwt_token", refresh_jwt_token);
+    setIsAuthenticated(true);
 
     if (authorities && authorities === "UNDEFINED") {
       navigate("/");
