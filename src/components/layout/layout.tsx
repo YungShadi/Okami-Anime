@@ -9,9 +9,9 @@ function Layout() {
   return (
     <div className="okami">
       <Header />
-      <MobileMenu />
       <Outlet />
       <Footer />
+      <MobileMenu />
     </div>
   );
 }

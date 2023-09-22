@@ -32,14 +32,6 @@ function Header() {
     window.addEventListener("scroll", onScrollHandle);
   }, []);
 
-  useEffect(() => {
-    if (menuState) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "scroll";
-    }
-  }, [menuState]);
-
   return (
     <>
       {/* // here we have nav links to change visible page */}

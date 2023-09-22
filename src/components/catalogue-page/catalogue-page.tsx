@@ -1,8 +1,11 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ReactSlider from "react-slider";
+import { MobileDto } from "../../types/mobileDto";
+import { toggleMenuAction } from "../../redux/mobileSlcie";
 import DropDown from "../img/dropDown.svg";
 
 import Search from "../img/search.svg";
@@ -17,6 +20,10 @@ type TitleType = {
 };
 
 function CataloguePage() {
+  const menuState = useSelector(
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+  );
+  const dispatch = useDispatch();
   const [tagFilterExpand, setTagFilterExpand] = useState(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState(false);
   const [statusFilterExpand, setStatusFilterExpand] = useState(false);
@@ -457,7 +464,15 @@ function CataloguePage() {
       </div>
     );
   }
-
+  // eslint-disable-next-line arrow-body-style
+  useEffect(() => {
+    return () => {
+      if (menuState) {
+        dispatch(toggleMenuAction(!menuState));
+        console.log(menuState);
+      }
+    };
+  });
   return (
     <div className="catalogue-page">
       <aside className="filters-wraper">

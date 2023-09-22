@@ -16,6 +16,7 @@ body {
   background-position: center;
   background-size: cover;
   background-color: #2179df;
+  transition: 1s;
 }
 body::-webkit-scrollbar {
   width: 10px; /* ширина scrollbar */
@@ -38,6 +39,10 @@ body::-webkit-scrollbar-thumb {
     sans-serif;
   display: flex;
   flex-direction: column;
-  min-height: 975px;
   align-items: center;
+}
+@media (min-width: 1100px){
+  .okami{
+    min-height: 975px;
+  }
 }

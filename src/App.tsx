@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import { useSelector } from "react-redux";
 
 // import { UserDto } from "./types/userDto";
 
@@ -16,8 +17,22 @@ import ProfileMain from "./components/profile-page/profile-main";
 import ProfileList from "./components/profile-page/profile-list";
 import ErrorPage from "./components/ErrorPage";
 import SigniinPage from "./components/signin-page/signinPage";
+import { MobileDto } from "./types/mobileDto";
 
 function App() {
+  const menuState = useSelector(
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+  );
+  useEffect(() => {
+    if (menuState) {
+      document.body.style.overflow = "hidden";
+      // document.body.style.opacity = "0.8";
+    } else {
+      document.body.style.overflow = "";
+      // document.body.style.opacity = "";
+    }
+  }, [menuState]);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

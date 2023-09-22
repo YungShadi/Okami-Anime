@@ -51,7 +51,7 @@
   }
 }
 .mobile-menu-wrapper.hide {
-  position: absolute;
+  position: fixed;
   transform: translateX(-2000px);
   transition: 2s;
 }
@@ -77,7 +77,7 @@
   flex-direction: column;
   gap: 5px;
   align-items: center;
-  button {
+  .menu-navigation-button {
     border: 1px solid #3ce3e8;
     background-color: #05315a;
     height: 50px;
@@ -91,6 +91,10 @@
     width: 80%;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 18px;
+    font-size: 24px;
+    text-align: center;
+    padding-top: 8px;
+    font-style: normal;
+    text-decoration: none;
   }
 }

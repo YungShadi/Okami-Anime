@@ -1,11 +1,12 @@
 import React from "react";
 import "./mobileMenu.css";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { UserDto } from "../../../types/userDto";
 import { useAuth } from "../../../hooks/useAuth";
 import { toggleMenuAction } from "../../../redux/mobileSlcie";
 import { MobileDto } from "../../../types/mobileDto";
 import defaultPic from "../../img/Аватар.png";
-import { UserDto } from "src/types/userDto";
 
 function MobileMenu() {
   const dispatch = useDispatch();
@@ -40,9 +41,15 @@ function MobileMenu() {
         </div>
       )}
       <div className="menu-navigation">
-        <button type="button">Каталог</button>
-        <button type="button">Случайное</button>
-        <button type="button">sad</button>
+        <Link to="catalogue" className="menu-navigation-button">
+          Каталог
+        </Link>
+        <Link to="article/:random" className="menu-navigation-button">
+          Случайное
+        </Link>
+        <Link to="about-us" className="menu-navigation-button">
+          О нас
+        </Link>
       </div>
     </nav>
   );

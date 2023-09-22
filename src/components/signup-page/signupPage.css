@@ -4,10 +4,10 @@
   flex-grow: 1;
   justify-content: center;
   flex-direction: column;
+  width: 24vw;
 }
 
 .signup-form {
-  width: 500px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -53,4 +53,10 @@
 .error-message-input {
   color: rgb(243, 38, 38);
   margin-top: 10px;
+}
+
+@media (max-width: 1100px) {
+  .signup {
+    width: 95vw;
+  }
 }/*# sourceMappingURL=signupPage.css.map */
