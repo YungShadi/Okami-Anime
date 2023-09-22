@@ -7,7 +7,6 @@ import { MobileDto } from "../../types/mobileDto";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
 import { useAuth } from "../../hooks/useAuth";
-import MobileMenu from "./mobile-meu/mobileMenu";
 import { toggleMenuAction } from "../../redux/mobileSlcie";
 import search from "../img/search-frame.svg";
 
@@ -33,22 +32,29 @@ function Header() {
     window.addEventListener("scroll", onScrollHandle);
   }, []);
 
+  useEffect(() => {
+    if (menuState) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [menuState]);
+
   return (
     <>
-      {menuState && <MobileMenu />}
       {/* // here we have nav links to change visible page */}
       <header
         className={`header ${scrollIsEnough > 125 ? "off-screen-fixed" : ""}`}
         ref={headerRef}
       >
         <button
-          className="header-mobile-button mobile-menu"
+          className="header-mobile-button mobile-menu-close"
           type="button"
           onClick={() => dispatch(toggleMenuAction(!menuState))}
         >
-          <div className="line-burger" />
-          <div className="line-burger" />
-          <div className="line-burger" />
+          <div className="line-burger line-burger1" />
+          <div className="line-burger line-burger2" />
+          <div className="line-burger line-burger3" />
         </button>
         <Link className="logo" to="/">
           <div className="img-background">
@@ -73,7 +79,7 @@ function Header() {
         </div>
         {/* user display depending on localStorage(maybe there is another way) */}
         {isAuthenticated ? (
-          <Link className="header-profile" to={`${username}/profile`}>
+          <Link className="header-profile" to={`profile/${username}`}>
             <span className="profile-name">{username}</span>
             <img className="profile-pic" alt="profile" src={DefaultIcon} />
           </Link>

@@ -1,24 +1,18 @@
-.mobile-menu-wrapper.hide {
-  position: absolute;
-  transform: translateY(-1000px);
-}
-
 .mobile-menu-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translateY(0px);
-  background-color: rgb(6, 75, 140);
-  height: 110vh;
-  width: 105vw;
+  width: 100%;
+  height: 100%;
   z-index: 1000000;
+  background-color: rgb(6, 75, 140);
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: 0.6s;
+  background-image: url("../../img/background-phone.webp");
+  background-position: center;
+  background-size: cover;
 }
-.mobile-menu-wrapper .close-menu-button {
+.mobile-menu-wrapper .mobile-menu-open {
   align-self: flex-start;
   margin-bottom: 20px;
   height: 40px;
@@ -29,23 +23,52 @@
   color: white;
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   border-radius: 5px;
-  transition: 0.3s;
-}
-.mobile-menu-wrapper .close-menu-button .line-burger1 {
-  width: 35px;
-  transform: rotate(-45deg) translateY(2px);
-}
-.mobile-menu-wrapper .close-menu-button .line-burger2 {
-  width: 35px;
-  transform: rotate(45deg) translateY(-3px);
+  transition: 100s;
 }
 .mobile-menu-wrapper .menu-user {
   width: 90%;
-  border-radius: 5px;
-  background: #3ce3e8;
-  height: 90px;
+  height: 200px;
   margin-bottom: 20px;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mobile-menu-wrapper .menu-user .menu-user-picture {
+  width: 150px;
+  height: 150px;
+  display: block;
+  border-radius: 50%;
+}
+.mobile-menu-wrapper .menu-user .menu-user-name {
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-wrap: nowrap;
+  font-size: 26px;
+}
+
+.mobile-menu-wrapper.hide {
+  position: absolute;
+  transform: translateX(-2000px);
+  transition: 2s;
+}
+
+.mobile-menu-wrapper.show {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.mobile-menu-wrapper.show .line-burger1 {
+  width: 40px;
+  transform: rotate(-45deg) translateY(8px) translateX(-7px);
+}
+.mobile-menu-wrapper.show .line-burger2 {
+  width: 40px;
+  transform: rotate(45deg) translateY(-8px) translateX(-7px);
+}
+.mobile-menu-wrapper.show .line-burger3 {
+  display: none;
 }
 
 .menu-navigation {

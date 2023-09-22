@@ -29,11 +29,10 @@ function App() {
         <Route path="copyright" element={<Copyright />} />
         <Route path="sign-up" element={<SignupPage />} />
         <Route path="sign-in" element={<SigniinPage />} />
-        <Route path=":username/*" element={<ProfilePage />}>
-          <Route path="profile" element={<ProfileMain />} />
+        <Route path="profile/*" element={<ProfilePage />}>
+          <Route path=":username" element={<ProfileMain />} />
           <Route path="list" element={<ProfileList />} />
           <Route path="settings" element={<p>settings</p>} />
-          <Route path="*" element={<ErrorPage />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Route>

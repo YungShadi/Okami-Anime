@@ -18,6 +18,8 @@
   margin-right: auto;
   background: rgba(5, 49, 90, 0.6);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   padding: 15px;
 }
@@ -25,8 +27,12 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
+  height: -webkit-min-content;
+  height: -moz-min-content;
   height: min-content;
   .poster-wraper {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -100,6 +106,8 @@
     gap: 25px;
     height: 100%;
     font-size: 19px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     .title-name {
       font-size: 35px;
@@ -113,6 +121,8 @@
 .title-desc {
   display: inline-block;
   max-width: 970px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   white-space: pre-line;
   margin-bottom: 15px;
@@ -268,6 +278,8 @@
 .episode-wraper {
   max-width: 1260px;
   flex-wrap: wrap;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   max-height: 190px;
   overflow-y: scroll;
@@ -298,6 +310,8 @@
 
 .comments-wraper {
   width: 1205px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -359,6 +373,8 @@
   display: flex;
   flex-direction: column;
   width: 1205px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   margin-left: auto;
   margin-right: auto;

@@ -12,6 +12,7 @@
   gap: 25px;
   top: 0;
   z-index: 100000;
+  opacity: 1;
   transition: border 0s, all 0.5s ease-in-out;
   margin-bottom: 40px;
 }
@@ -184,9 +185,6 @@
   }
   .header-mobile-button {
     display: inline-flex;
-    width: 40px;
-    height: 40px;
-    border-radius: 3px;
     background: rgba(86, 86, 86, 0.6);
     border: none;
     outline: none;
@@ -194,11 +192,29 @@
     align-items: center;
     justify-content: space-between;
     padding: 7px;
+    transition: 1s;
+    height: 40px;
+    width: 40px;
+    border-radius: 3px;
+    border: 1px solid #3ce3e8;
+    background-color: #05315a;
+    color: white;
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    border-radius: 5px;
   }
   .header-mobile-button img {
     position: relative;
-    bottom: 6px;
-    left: 5px;
+    bottom: 13px;
+    left: -5px;
+  }
+  .header-mobile-button.mobile-menu-open {
+    align-self: flex-start;
+    transition: 1s;
+    transform: translateX(700%);
+  }
+  .header-mobile-button.mobile-menu-open .line-burger2 {
+    width: 35px;
+    transform: rotate(45deg) translateY(-3px);
   }
   .input-title,
   .nav-buttons,

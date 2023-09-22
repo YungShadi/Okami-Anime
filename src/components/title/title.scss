@@ -44,6 +44,7 @@
 .title-main:hover {
   scale: 1.03;
   .poster {
+    -webkit-filter: brightness(70%);
     filter: brightness(70%);
   }
 }
@@ -55,6 +56,7 @@
   position: relative;
   bottom: 220px;
   left: 65px;
+  -webkit-filter: brightness(130%);
   filter: brightness(130%);
   z-index: 2;
 }
@@ -85,6 +87,8 @@
       width: 100px;
       height: 125px;
       position: absolute;
+      width: -webkit-min-content;
+      width: -moz-min-content;
       width: min-content;
     }
     .status {
@@ -132,6 +136,8 @@
     }
     .title-name-tags {
       padding-top: 0;
+      height: -webkit-fit-content;
+      height: -moz-fit-content;
       height: fit-content;
       .tags {
         display: none;

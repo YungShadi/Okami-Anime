@@ -5,6 +5,8 @@
   gap: 20px;
 }
 .search-and-titles {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
 }
 .filters-wraper {
@@ -13,6 +15,7 @@
   width: 300px;
   border-radius: 6px;
   grid-column: 1/2;
+  position: -webkit-sticky;
   position: sticky;
   left: 0;
   top: 75px;
@@ -36,6 +39,8 @@
   font-size: 20xp;
   margin-left: auto;
   margin-right: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .filter {
@@ -159,6 +164,8 @@
   background-color: #021e38;
 }
 .titles-wraper {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 6px;
   background-color: rgba(6, 75, 140, 0.8);
@@ -261,9 +268,11 @@
   border-radius: 2px;
   top: -18px;
   border: 1px solid #3ce3e8;
+  cursor: -webkit-grab;
   cursor: grab;
 }
 .slider-thumb:focus {
+  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 .thumb-content {

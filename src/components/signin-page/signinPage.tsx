@@ -3,7 +3,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { logoutAction } from "../../redux/aunthSlice";
 import { UserDto } from "../../types/userDto";
@@ -72,6 +72,9 @@ function SigniinPage() {
       >
         Logout
       </button>
+      <span>
+        Вы еще не зарегстрированны? <Link to="/sign-up"> Регестрация </Link>
+      </span>
     </div>
   );
 }

@@ -12,6 +12,8 @@
   flex-direction: column;
   background: rgba(5, 49, 90, 0.6);
   align-items: center;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   min-height: 500px;
   input {
