@@ -8,7 +8,7 @@ body {
   width: 100%;
   height: 100%;
   align-items: center;
-  background: url("./components/img/i-am-here-anime-pn-3840x2400.jpg") fixed;
+  background: url("./components/img/bacground19201080.webp") fixed;
   background-size: cover;
   top: 0px;
   left: 0px;
@@ -41,8 +41,8 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
 }
-@media (min-width: 1100px){
-  .okami{
+@media (min-width: 1100px) {
+  .okami {
     min-height: 975px;
   }
 }

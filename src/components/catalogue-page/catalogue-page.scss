@@ -300,3 +300,32 @@
     outline: none;
   }
 }
+@media (max-width: 1100px) {
+  .catalogue-page {
+    display: block;
+    .catalogue-search {
+      width: 90vw;
+    }
+    .title-main {
+      width: 90%;
+      height: fit-content;
+    }
+    .search-and-titles {
+      width: 90vw;
+    }
+    .filters-wraper {
+      display: none;
+      position: absolute;
+    }
+    .titles-wraper {
+      width: 90vw;
+      flex-direction: column;
+      height: fit-content;
+      min-height: fit-content;
+      padding: 5px;
+    }
+    .input-title {
+      display: block;
+    }
+  }
+}

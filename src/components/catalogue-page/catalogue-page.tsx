@@ -205,40 +205,40 @@ function CataloguePage() {
 
   const titlesArray: TitleType[] = [
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
   ];
 
@@ -469,7 +469,6 @@ function CataloguePage() {
     return () => {
       if (menuState) {
         dispatch(toggleMenuAction(!menuState));
-        console.log(menuState);
       }
     };
   });

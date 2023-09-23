@@ -16,40 +16,40 @@ type TitleType = {
 function MainPage() {
   const titlesArray: TitleType[] = [
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
     {
-      titleStatus: "Еблан",
+      titleStatus: "вышел",
       titleAgeRest: "21+",
-      titleName: "Обьебос",
-      titleTags: ["gay", "porn", "suck"],
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
     },
   ];
 

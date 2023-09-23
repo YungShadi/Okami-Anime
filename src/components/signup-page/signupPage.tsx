@@ -1,12 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMenuAction } from "../../redux/mobileSlcie";
+import { MobileDto } from "../../types/mobileDto";
 import { useAuth } from "../../hooks/useAuth";
 import { UserDto } from "../../types/userDto";
 import "./signupPage.css";
 
 function SignupPage() {
+  const dispatch = useDispatch();
+  const menuState = useSelector(
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+  );
   const navigate = useNavigate();
   const { isAuthenticated, regestration } = useAuth();
   const {
@@ -19,6 +26,15 @@ function SignupPage() {
   if (isAuthenticated) {
     navigate("/");
   }
+
+  // eslint-disable-next-line arrow-body-style
+  useEffect(() => {
+    return () => {
+      if (menuState) {
+        dispatch(toggleMenuAction(!menuState));
+      }
+    };
+  });
 
   return (
     <div className="signup">

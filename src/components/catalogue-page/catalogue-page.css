@@ -301,4 +301,37 @@
   width: 1200px;
   border-bottom: none;
   outline: none;
+}
+
+@media (max-width: 1100px) {
+  .catalogue-page {
+    display: block;
+  }
+  .catalogue-page .catalogue-search {
+    width: 90vw;
+  }
+  .catalogue-page .title-main {
+    width: 90%;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .catalogue-page .search-and-titles {
+    width: 90vw;
+  }
+  .catalogue-page .filters-wraper {
+    display: none;
+    position: absolute;
+  }
+  .catalogue-page .titles-wraper {
+    width: 90vw;
+    flex-direction: column;
+    height: -moz-fit-content;
+    height: fit-content;
+    min-height: -moz-fit-content;
+    min-height: fit-content;
+    padding: 5px;
+  }
+  .catalogue-page .input-title {
+    display: block;
+  }
 }/*# sourceMappingURL=catalogue-page.css.map */

@@ -1,7 +1,7 @@
 import React from "react";
 import "./mobileMenu.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { UserDto } from "../../../types/userDto";
 import { useAuth } from "../../../hooks/useAuth";
 import { toggleMenuAction } from "../../../redux/mobileSlcie";
@@ -37,19 +37,22 @@ function MobileMenu() {
       ) : (
         <div className="menu-user">
           <img src={defaultPic} alt="profile" className="menu-user-picture" />
-          <span className="menu-user-name">Войти / Зарегестрироваться</span>
+          <span className="menu-user-name">
+            <Link to="sign-in" className="menu-auth-link">Войти</Link> /
+            <Link to="sign-up" className="menu-auth-link">  Зарегестрироваться</Link>
+          </span>
         </div>
       )}
       <div className="menu-navigation">
-        <Link to="catalogue" className="menu-navigation-button">
+        <NavLink to="catalogue" className="menu-navigation-button">
           Каталог
-        </Link>
-        <Link to="article/:random" className="menu-navigation-button">
+        </NavLink>
+        <NavLink to="article/:random" className="menu-navigation-button">
           Случайное
-        </Link>
-        <Link to="about-us" className="menu-navigation-button">
+        </NavLink>
+        <NavLink to="about-us" className="menu-navigation-button">
           О нас
-        </Link>
+        </NavLink>
       </div>
     </nav>
   );

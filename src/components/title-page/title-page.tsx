@@ -314,43 +314,21 @@ function TitlePage() {
               type="1"
             >
               {/* view order elements */}
-              <li className="view-oreder-element current">Ангел кала 1</li>
-              <li className="view-oreder-element">Ангел кала 3</li>
-              <li className="view-oreder-element">Ангел кала 1232</li>
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
-              <li className="view-oreder-element">
-                Ангел кала: Невообразимый калфывфывфывфвфвфы
-              </li>{" "}
+              <li className="view-oreder-element current">Ангел 1</li>
+              <li className="view-oreder-element">Ангел 3</li>
+              <li className="view-oreder-element">Ангел 1232</li>
+              <li className="view-oreder-element">Ангелы какие-то3</li>{" "}
+              <li className="view-oreder-element">Ангелы какие-то4</li>{" "}
             </ol>
           </div>
         </div>
         {/* title info */}
         <div className="title-text-info">
-          <span className="title-name">Залупа дьявола</span>
+          <span className="title-name">Поступь дьявола</span>
           <div className="title-alt-names">
-            <span className="title-alt-name">Diablo de zaluppo</span>
+            <span className="title-alt-name">Diablo stepue</span>
           </div>
-          <span className="title-genre">Жанры: яой, гей, фурри</span>
+          <span className="title-genre">Жанры: боевик, драмма</span>
           <span className="title-year">Год: 1337</span>
           <span className="title-status">Статус: В разработке</span>
           <span className="title-type">Тип: Блицкриг</span>
@@ -507,7 +485,7 @@ function TitlePage() {
             />
             <div className="comment-content">
               <div className="comment-name-date">
-                <div className="user-name">Zalupkin</div>
+                <div className="user-name">Chel</div>
                 <div className="date"> 14.14.1321</div>
               </div>
               <div className="comment-text">
