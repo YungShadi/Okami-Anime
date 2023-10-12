@@ -17,6 +17,7 @@ import ProfileMain from "./components/profile-page/profile-main";
 import ProfileList from "./components/profile-page/profile-list";
 import ErrorPage from "./components/ErrorPage";
 import SigniinPage from "./components/signin-page/signinPage";
+import AboutUs from "./components/aboutus-page";
 import { MobileDto } from "./types/mobileDto";
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path="list" element={<ProfileList />} />
           <Route path="settings" element={<p>settings</p>} />
         </Route>
+        <Route path="about-us" element={<AboutUs />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>

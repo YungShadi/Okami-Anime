@@ -300,6 +300,9 @@
     outline: none;
   }
 }
+.mobile-button-filter {
+  display: none;
+}
 @media (max-width: 1100px) {
   .catalogue-page {
     display: block;
@@ -327,5 +330,15 @@
     .input-title {
       display: block;
     }
+  }
+  .mobile-button-filter {
+    display: block;
+    width: 90vw;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    background-color: #05315a;
+    height: 50px;
+    margin-bottom: 10px;
   }
 }

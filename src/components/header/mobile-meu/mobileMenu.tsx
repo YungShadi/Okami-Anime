@@ -38,12 +38,21 @@ function MobileMenu() {
         <div className="menu-user">
           <img src={defaultPic} alt="profile" className="menu-user-picture" />
           <span className="menu-user-name">
-            <Link to="sign-in" className="menu-auth-link">Войти</Link> /
-            <Link to="sign-up" className="menu-auth-link">  Зарегестрироваться</Link>
+            <Link to="sign-in" className="menu-auth-link">
+              Войти
+            </Link>{" "}
+            /
+            <Link to="sign-up" className="menu-auth-link">
+              {" "}
+              Зарегестрироваться
+            </Link>
           </span>
         </div>
       )}
       <div className="menu-navigation">
+        <NavLink to="/" className="menu-navigation-button">
+          Главная
+        </NavLink>
         <NavLink to="catalogue" className="menu-navigation-button">
           Каталог
         </NavLink>

@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
+import { MobileDto } from "../types/mobileDto";
 
-const initialState: { isMenuOpened: boolean; isSearchOpened: boolean } = {
+const initialState: MobileDto = {
   isMenuOpened: false,
   isSearchOpened: false,
+  isFilterOpened: false,
 };
 
 export const aunthSlice = createSlice({
@@ -16,8 +18,12 @@ export const aunthSlice = createSlice({
     toggleSearchAction: (state, action) => {
       state.isSearchOpened = action.payload;
     },
+    toggleFilterAction: (state, action) => {
+      state.isFilterOpened = action.payload;
+    },
   },
 });
-export const { toggleMenuAction, toggleSearchAction } = aunthSlice.actions;
+export const { toggleMenuAction, toggleSearchAction, toggleFilterAction } =
+  aunthSlice.actions;
 
 export default aunthSlice.reducer;

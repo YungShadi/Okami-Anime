@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactSlider from "react-slider";
 import { MobileDto } from "../../types/mobileDto";
-import { toggleMenuAction } from "../../redux/mobileSlcie";
+import { toggleMenuAction, toggleFilterAction } from "../../redux/mobileSlcie";
 import DropDown from "../img/dropDown.svg";
 
 import Search from "../img/search.svg";
@@ -22,6 +22,9 @@ type TitleType = {
 function CataloguePage() {
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+  );
+  const filterStateMobile = useSelector(
+    (state: { mobile: MobileDto }) => state.mobile.isFilterOpened
   );
   const dispatch = useDispatch();
   const [tagFilterExpand, setTagFilterExpand] = useState(false);
@@ -474,7 +477,9 @@ function CataloguePage() {
   });
   return (
     <div className="catalogue-page">
-      <aside className="filters-wraper">
+      <aside
+        className={`filters-wraper  ${filterStateMobile ? "open" : "closed"}`}
+      >
         <div className="filter-header">
           <h3>Фильтр аниме</h3>
         </div>
@@ -569,6 +574,13 @@ function CataloguePage() {
           </button>
         </div>
       </aside>
+      <button
+        type="button"
+        className="mobile-button-filter"
+        onClick={() => dispatch(toggleFilterAction(!filterStateMobile))}
+      >
+        Открыть фильтр
+      </button>
       <section className="search-and-titles">
         <div className="catalogue-search">
           <img src={Search} alt="s-lupa" />
