@@ -316,9 +316,12 @@
     .search-and-titles {
       width: 90vw;
     }
-    .filters-wraper {
+    .filters-wraper.closed {
       display: none;
       position: absolute;
+    }
+    .filters-wraper.open {
+      display: block;
     }
     .titles-wraper {
       width: 90vw;

@@ -322,9 +322,12 @@
   .catalogue-page .search-and-titles {
     width: 90vw;
   }
-  .catalogue-page .filters-wraper {
+  .catalogue-page .filters-wraper.closed {
     display: none;
     position: absolute;
+  }
+  .catalogue-page .filters-wraper.open {
+    display: block;
   }
   .catalogue-page .titles-wraper {
     width: 90vw;

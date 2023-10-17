@@ -2,11 +2,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReactSlider from "react-slider";
 import { MobileDto } from "../../types/mobileDto";
+import Filter from "./Filter";
 import { toggleMenuAction, toggleFilterAction } from "../../redux/mobileSlcie";
-import DropDown from "../img/dropDown.svg";
 
 import Search from "../img/search.svg";
 import "./catalogue-page.css";
@@ -30,7 +31,7 @@ function CataloguePage() {
   const [tagFilterExpand, setTagFilterExpand] = useState(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState(false);
   const [statusFilterExpand, setStatusFilterExpand] = useState(false);
-  const [tagArray, setTagArray] = useState([
+  const [tagArray /* setTagArray */] = useState([
     {
       title: "Сёнэн",
       value: "senen",
@@ -201,10 +202,8 @@ function CataloguePage() {
       status: "inactive",
     },
   ]);
+
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
-  const [activeTags, setActiveTags] = useState([]);
-  const [activeType, setActiveType] = useState([]);
-  const [activeStatus, setActiveStatus] = useState([]);
 
   const titlesArray: TitleType[] = [
     {
@@ -245,228 +244,6 @@ function CataloguePage() {
     },
   ];
 
-  function expandFilter(value: string) {
-    switch (value) {
-      case "genre":
-        return setTagFilterExpand(!tagFilterExpand);
-      case "type":
-        return setTypeFilterExpand(!typeFilterExpand);
-      case "status":
-        return setStatusFilterExpand(!statusFilterExpand);
-
-      default:
-        return 0;
-    }
-  }
-
-  function toggleOptionCheckbox(
-    value: string,
-    status: string,
-    index: number,
-    filterValue: string
-  ) {
-    const newTagArray: {
-      title: string;
-      value: string;
-      status: string;
-    }[] = [...tagArray];
-    const newStatusArray: {
-      title: string;
-      value: string;
-      status: string;
-    }[] = [...statusArray];
-    const newTypeArray: {
-      title: string;
-      value: string;
-      status: string;
-    }[] = [...typeArray];
-    switch (filterValue) {
-      case "genre":
-        if (status === "inactive") {
-          newTagArray[index].status = "add-option";
-          setActiveTags([...activeTags, value]);
-        }
-        if (status === "add-option") {
-          newTagArray[index].status = "remove-option";
-        }
-        if (status === "remove-option") {
-          newTagArray[index].status = "inactive";
-        }
-        updateTagArray(newTagArray);
-        const filteredTags = newTagArray.filter(
-          (tag) => tag.status === "add-option"
-        );
-        setActiveTags(filteredTags.map((tag) => tag.title));
-        break;
-      case "type":
-        if (status === "inactive") {
-          newTypeArray[index].status = "add-option";
-          setActiveType([...activeType, value]);
-        }
-        if (status === "add-option") {
-          newTypeArray[index].status = "inactive";
-        }
-        // updateTagArray(newTypeArray);
-        const filteredTypes = newTypeArray.filter(
-          (type) => type.status === "add-option"
-        );
-        setActiveType(filteredTypes.map((tag) => tag.title));
-        break;
-      case "status":
-        if (status === "inactive") {
-          newStatusArray[index].status = "add-option";
-          setActiveStatus([...activeStatus, value]);
-        }
-        if (status === "add-option") {
-          newStatusArray[index].status = "inactive";
-        }
-        // updateTagArray(newTypeArray);
-        const filteredStatus = newStatusArray.filter(
-          (statuss) => statuss.status === "add-option"
-        );
-        setActiveStatus(filteredStatus.map((tag) => tag.title));
-        break;
-      default:
-        break;
-    }
-  }
-
-  function updateTagArray(
-    newArray: { title: string; value: string; status: string }[]
-  ) {
-    setTagArray(newArray);
-  }
-
-  function createFilter(
-    filterName: string,
-    filterArray: {
-      title: string;
-      value: string;
-      status: string;
-    }[],
-    filterValue: string,
-    filterDesc: string,
-    filterState: boolean,
-    filterZIndex: number,
-    filterSearch: boolean,
-    filterStateSet: React.Dispatch<React.SetStateAction<boolean>>,
-    filterHeigth: number
-  ) {
-    return (
-      <div className="filter-wraper">
-        <h2 className="filter-label" style={{ marginBottom: "10px" }}>
-          {filterName}
-        </h2>
-        <div className="filter">
-          <button
-            className="filter-toggle"
-            type="button"
-            style={{ borderRadius: "5px 5px 0px 0px" }}
-            onClick={() => {
-              if (tagFilterExpand === true) {
-                setTagFilterExpand(false);
-              }
-              if (typeFilterExpand === true) {
-                setTypeFilterExpand(false);
-              }
-              if (statusFilterExpand === true) {
-                setStatusFilterExpand(false);
-              }
-              expandFilter(filterValue);
-              return !filterState;
-            }}
-            onBlur={(e) => {
-              if (!(e && e.relatedTarget)) {
-                filterStateSet(false);
-                if (tagFilterExpand === true) {
-                  setTagFilterExpand(false);
-                }
-                if (typeFilterExpand === true) {
-                  setTypeFilterExpand(false);
-                }
-                if (statusFilterExpand === true) {
-                  setStatusFilterExpand(false);
-                }
-              }
-            }}
-          >
-            <span className="filter-values text-left">{filterDesc}</span>
-            <img
-              src={DropDown}
-              alt="arrow"
-              style={{
-                transform: filterState ? "rotate(0)" : "rotate(90deg)",
-                transition: "0.3s",
-              }}
-            />
-          </button>
-          <div
-            className="filter-content"
-            style={{
-              height: filterState ? `${filterHeigth}px` : "0",
-              zIndex: `${filterZIndex}`,
-              borderBottom: filterState ? "1px solid #3ce3e8" : "none",
-            }}
-          >
-            {filterSearch && (
-              <input
-                className="filter-search"
-                placeholder="Поиск жанров"
-                onBlur={(e) => {
-                  if (!(e && e.relatedTarget)) {
-                    filterStateSet(false);
-                    if (tagFilterExpand === true) {
-                      setTagFilterExpand(false);
-                    }
-                    if (typeFilterExpand === true) {
-                      setTypeFilterExpand(false);
-                    }
-                    if (statusFilterExpand === true) {
-                      setStatusFilterExpand(false);
-                    }
-                  }
-                }}
-              />
-            )}
-            <div className="filter-list">
-              {filterArray.map((tag, index) => (
-                <button
-                  className="filter-option"
-                  type="button"
-                  onClick={() =>
-                    toggleOptionCheckbox(
-                      tag.title,
-                      tag.status,
-                      index,
-                      filterValue
-                    )
-                  }
-                  tabIndex={0}
-                  onBlur={(e) => {
-                    if (!(e && e.relatedTarget)) {
-                      filterStateSet(false);
-                      if (tagFilterExpand === true) {
-                        setTagFilterExpand(false);
-                      }
-                      if (typeFilterExpand === true) {
-                        setTypeFilterExpand(false);
-                      }
-                      if (statusFilterExpand === true) {
-                        setStatusFilterExpand(false);
-                      }
-                    }
-                  }}
-                >
-                  <span className={`option-checkbox ${tag.status}`} />
-                  <span className="filter-desc">{tag.title}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
     return () => {
@@ -484,11 +261,6 @@ function CataloguePage() {
           <h3>Фильтр аниме</h3>
         </div>
         <div className="filter-slider-wraper">
-          {/* <span className="filter-span">
-            {yearsFilter[0] !== yearsFilter[1]
-              ? `Аниме, вышедшие в диапазоне от ${yearsFilter[0]} г. до ${yearsFilter[1]}г. `
-              : `Аниме, вышедшие только в ${yearsFilter[1]} году`}
-          </span> */}
           <div className="slider-line" />
           <ReactSlider
             className="filter-slider"
@@ -534,18 +306,18 @@ function CataloguePage() {
           </div>
         </div>
         <div className="filters">
-          {createFilter(
-            "Жанры",
-            tagArray,
-            "genre",
-            "Выберите жанры",
-            tagFilterExpand,
-            500,
-            true,
-            setTagFilterExpand,
-            300
-          )}
-          {createFilter(
+          <Filter
+            filterName="Жанры"
+            filterArray={tagArray}
+            filterValue="genre"
+            filterDesc="Выберите жанры"
+            filterState={tagFilterExpand}
+            filterZIndex={500}
+            filterSearch={true}
+            filterStateSet={setTagFilterExpand}
+            filterHeight={300}
+          />
+          {/* {createFilter(
             "Типы",
             typeArray,
             "type",
@@ -566,7 +338,7 @@ function CataloguePage() {
             false,
             setStatusFilterExpand,
             100
-          )}
+          )} */}
         </div>
         <div className="filter-button-wraper">
           <button className="filter-button" type="button">
