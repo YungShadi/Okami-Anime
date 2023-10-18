@@ -304,6 +304,21 @@
   display: none;
 }
 @media (max-width: 1100px) {
+  body {
+    .filters-wraper {
+      position: absolute;
+    }
+    .filters-wraper.closed {
+      display: none;
+    }
+    .filters-wraper.open {
+      display: block;
+      position: fixed;
+      z-index: 1000000;
+      left: 60px;
+      top: 130px;
+    }
+  }
   .catalogue-page {
     display: block;
     .catalogue-search {
@@ -315,13 +330,6 @@
     }
     .search-and-titles {
       width: 90vw;
-    }
-    .filters-wraper.closed {
-      display: none;
-      position: absolute;
-    }
-    .filters-wraper.open {
-      display: block;
     }
     .titles-wraper {
       width: 90vw;
@@ -343,5 +351,14 @@
     background-color: #05315a;
     height: 50px;
     margin-bottom: 10px;
+  }
+  .background {
+    width: 1000px;
+    height: 1000px;
+    background-color: #05315a;
+    position: fixed;
+    top: 0;
+    z-index: 100000;
+    opacity: 0.7;
   }
 }

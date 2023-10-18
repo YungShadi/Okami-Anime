@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // import { UserDto } from "./types/userDto";
 
@@ -19,8 +19,10 @@ import ErrorPage from "./components/ErrorPage";
 import SigniinPage from "./components/signin-page/signinPage";
 import AboutUs from "./components/aboutus-page";
 import { MobileDto } from "./types/mobileDto";
+import { isMobileViewAction } from "./redux/mobileSlcie";
 
 function App() {
+  const dispatch = useDispatch();
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
   );
@@ -33,6 +35,10 @@ function App() {
       // document.body.style.opacity = "";
     }
   }, [menuState]);
+
+  if (window.screen.width <= 600) {
+    dispatch(isMobileViewAction(true));
+  }
 
   return (
     <Routes>

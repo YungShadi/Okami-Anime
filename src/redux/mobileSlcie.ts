@@ -6,6 +6,7 @@ const initialState: MobileDto = {
   isMenuOpened: false,
   isSearchOpened: false,
   isFilterOpened: false,
+  isMobileView: false,
 };
 
 export const aunthSlice = createSlice({
@@ -21,9 +22,16 @@ export const aunthSlice = createSlice({
     toggleFilterAction: (state, action) => {
       state.isFilterOpened = action.payload;
     },
+    isMobileViewAction: (state, action) => {
+      state.isMobileView = action.payload;
+    },
   },
 });
-export const { toggleMenuAction, toggleSearchAction, toggleFilterAction } =
-  aunthSlice.actions;
+export const {
+  toggleMenuAction,
+  toggleSearchAction,
+  toggleFilterAction,
+  isMobileViewAction,
+} = aunthSlice.actions;
 
 export default aunthSlice.reducer;
