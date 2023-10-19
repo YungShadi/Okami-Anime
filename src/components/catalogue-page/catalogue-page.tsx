@@ -2,7 +2,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { MobileDto } from "../../types/mobileDto";

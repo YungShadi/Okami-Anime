@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import { toggleFilterAction } from "../../redux/mobileSlcie";
 import Filter from "./Filter";
 import { MobileDto } from "../../types/mobileDto";
+import CloseCross from "../img/close-cross.svg";
 import "./catalogue-page.css";
 
 function FilterWrapper() {
@@ -200,6 +201,15 @@ function FilterWrapper() {
         >
           <div className="filter-header">
             <h3>Фильтр аниме</h3>
+            <button
+              type="button"
+              className="close-mobile-filter"
+              onClick={() => {
+                dispatch(toggleFilterAction(false));
+              }}
+            >
+              <img src={CloseCross} alt="close" />
+            </button>
           </div>
           <div className="filter-slider-wraper">
             <div className="slider-line" />
@@ -289,7 +299,7 @@ function FilterWrapper() {
         </aside>
         <div
           className="background"
-          onClick={() => dispatch(toggleFilterAction(!filterStateMobile))}
+          onClick={() => dispatch(toggleFilterAction(false))}
         />
       </>,
       document.body

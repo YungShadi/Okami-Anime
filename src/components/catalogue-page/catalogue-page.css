@@ -25,8 +25,18 @@
   width: inherit;
   height: 50px;
   border-bottom: 2px solid #3ce3e8;
-  padding-top: 10px;
   margin-bottom: 50px;
+  padding-left: 15px;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+}
+.filter-header .close-mobile-filter {
+  background-color: #05315a;
+  border-radius: 3px;
+  border: 1px solid #3ce3e8;
+  width: 30px;
+  height: 30px;
 }
 .filter-header h3 {
   font-size: 22px;
@@ -318,8 +328,12 @@
     display: block;
     position: fixed;
     z-index: 1000000;
-    left: 60px;
-    top: 130px;
+    left: 4ex;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(6, 75, 140);
+    color: white;
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   }
   .catalogue-page {
     display: block;
