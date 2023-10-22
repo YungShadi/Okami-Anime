@@ -193,6 +193,8 @@ function FilterWrapper() {
     },
   ]);
   const dispatch = useDispatch();
+  console.log(tagFilterExpand);
+
   if (mobileView) {
     return createPortal(
       <>
@@ -264,7 +266,7 @@ function FilterWrapper() {
               filterDesc="Выберите жанры"
               filterState={tagFilterExpand}
               filterZIndex={500}
-              filterSearch={true}
+              filterSearch
               filterStateSet={setTagFilterExpand}
               filterHeight={300}
             />

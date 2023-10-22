@@ -105,6 +105,7 @@ function Filter({
     setTagArray(newArray);
   }
   function expandFilter(value: string) {
+    filterStateSet(!filterState);
     switch (value) {
       case "genre":
         return setTagFilterExpand(!tagFilterExpand);
@@ -116,6 +117,7 @@ function Filter({
       default:
         return 0;
     }
+    
   }
 
   return (
