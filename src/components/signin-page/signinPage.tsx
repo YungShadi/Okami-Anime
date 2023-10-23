@@ -2,21 +2,17 @@
 import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { MobileDto } from "../../types/mobileDto";
 import { toggleMenuAction } from "../../redux/mobileSlcie";
 import { useAuth } from "../../hooks/useAuth";
-import { logoutAction } from "../../redux/aunthSlice";
 import { UserDto } from "../../types/userDto";
-import { useLogoutMutation } from "../../redux/service/user/user.api";
 
 function SigniinPage() {
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
   );
   const { isAuthenticated } = useAuth();
-  const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const {
     register,
