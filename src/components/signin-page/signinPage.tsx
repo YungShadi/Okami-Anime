@@ -72,22 +72,10 @@ function SigniinPage() {
         <button type="submit" className="from-submit">
           Войти
         </button>
+        <span>
+          Вы еще не зарегстрированны? <Link to="/sign-up"> Регестрация </Link>
+        </span>
       </form>
-      <button
-        className="from-submit"
-        type="button"
-        onClick={() => {
-          logout([]);
-          dispatch(logoutAction());
-          Cookies.remove("refresh_token");
-          Cookies.remove("acess_token");
-        }}
-      >
-        Logout
-      </button>
-      <span>
-        Вы еще не зарегстрированны? <Link to="/sign-up"> Регестрация </Link>
-      </span>
     </div>
   );
 }

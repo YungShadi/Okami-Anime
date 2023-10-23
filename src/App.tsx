@@ -20,6 +20,7 @@ import SigniinPage from "./components/signin-page/signinPage";
 import AboutUs from "./components/aboutus-page";
 import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
+import PersonalAgreementPage from "./components/PersonalAgreementPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ function App() {
         <Route path="copyright" element={<Copyright />} />
         <Route path="sign-up" element={<SignupPage />} />
         <Route path="sign-in" element={<SigniinPage />} />
+        <Route path="personal-agreement" element={<PersonalAgreementPage />} />
         <Route path="profile/*" element={<ProfilePage />}>
           <Route path=":username" element={<ProfileMain />} />
           <Route path="list" element={<ProfileList />} />

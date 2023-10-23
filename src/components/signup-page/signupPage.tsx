@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenuAction } from "../../redux/mobileSlcie";
 import { MobileDto } from "../../types/mobileDto";
@@ -59,6 +59,7 @@ function SignupPage() {
         <div className="input-wrapper">
           <h3 className="form-input-title">Электронная почта</h3>
           <input
+            className="form-input"
             type="email"
             placeholder="email"
             {...register("email", {
@@ -79,10 +80,22 @@ function SignupPage() {
             <p className="error-message-input">Пароль обязателен</p>
           )}
         </div>
+        <label htmlFor="personalInfoCb">
+          <input
+            type="checkbox"
+            className="personalInfoCb"
+            id="personalInfoCb"
+          />
+          Даю согласие на{" "}
+          <Link to="/personal-agreement">обработку персональных данных</Link>
+        </label>
 
         <button type="submit" className="from-submit">
           Зарегестрироваться
         </button>
+        <span>
+          У вас уже есть аккаунт? <Link to="/sign-in"> Войдите </Link>
+        </span>
       </form>
     </div>
   );

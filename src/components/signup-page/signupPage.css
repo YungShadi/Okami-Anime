@@ -17,7 +17,7 @@
   height: fit-content;
   min-height: 500px;
 }
-.signup-form input {
+.signup-form .form-input {
   background-color: #05315a;
   border: 1px solid #3ce3e8;
   width: 330px;
