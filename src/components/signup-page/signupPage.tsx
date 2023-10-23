@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,8 @@ function SignupPage() {
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
   );
+  const [checkboxStatus, setCheckboxStatus] = useState(false);
+  const [cbError, setCbError] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, regestration } = useAuth();
   const {
@@ -21,7 +23,14 @@ function SignupPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit: SubmitHandler<UserDto> = (data) => regestration(data);
+  const onSubmit: SubmitHandler<UserDto> = (data) => {
+    if (checkboxStatus) {
+      regestration(data);
+      setCbError(false);
+    } else {
+      setCbError(true);
+    }
+  };
 
   if (isAuthenticated) {
     navigate("/");
@@ -35,6 +44,10 @@ function SignupPage() {
       }
     };
   });
+
+  const LinkStyle = {
+    color: "white",
+  };
 
   return (
     <div className="signup">
@@ -85,16 +98,28 @@ function SignupPage() {
             type="checkbox"
             className="personalInfoCb"
             id="personalInfoCb"
+            checked={checkboxStatus}
+            onClick={() => setCheckboxStatus(!checkboxStatus)}
           />
           Даю согласие на{" "}
-          <Link to="/personal-agreement">обработку персональных данных</Link>
+          <Link to="/personal-agreement" style={LinkStyle}>
+            обработку персональных данных
+          </Link>
+          {cbError && (
+            <span style={{ display: "inline-block", color: "red" }}>
+              Подвердите согласие на обработку данных
+            </span>
+          )}
         </label>
-
         <button type="submit" className="from-submit">
           Зарегестрироваться
         </button>
-        <span>
-          У вас уже есть аккаунт? <Link to="/sign-in"> Войдите </Link>
+        <span style={{ marginTop: "20px" }}>
+          У вас уже есть аккаунт?{" "}
+          <Link to="/sign-in" style={LinkStyle}>
+            {" "}
+            Войдите{" "}
+          </Link>
         </span>
       </form>
     </div>

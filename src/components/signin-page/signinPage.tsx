@@ -68,8 +68,12 @@ function SigniinPage() {
         <button type="submit" className="from-submit">
           Войти
         </button>
-        <span>
-          Вы еще не зарегстрированны? <Link to="/sign-up"> Регестрация </Link>
+        <span style={{marginTop: "20px"}}>
+          Вы еще не зарегстрированны?{" "}
+          <Link to="/sign-up" style={{ color: "white" }}>
+            {" "}
+            Регестрация{" "}
+          </Link>
         </span>
       </form>
     </div>

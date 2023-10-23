@@ -193,7 +193,6 @@ function FilterWrapper() {
     },
   ]);
   const dispatch = useDispatch();
-  console.log(tagFilterExpand);
 
   if (mobileView) {
     return createPortal(
