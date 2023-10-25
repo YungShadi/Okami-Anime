@@ -15,6 +15,7 @@ function Header() {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
   const headerRef = useRef(null);
+  const [searchOpen, SetSearchOpen] = useState(false);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username
@@ -54,7 +55,11 @@ function Header() {
           </div>
           <span className="logo-title">ŌkamiAnime</span>
         </Link>
-        <button type="button" className="header-mobile-button mobile-search">
+        <button
+          type="button"
+          className="header-mobile-button mobile-search"
+          onClick={() => SetSearchOpen(!searchOpen)}
+        >
           <img src={search} alt="search" />
         </button>
         {location.pathname !== "/catalogue" && (
@@ -82,6 +87,7 @@ function Header() {
           </div>
         )}
       </header>
+      {searchOpen && <input className="mobile-header-search"/>}
     </>
   );
 }

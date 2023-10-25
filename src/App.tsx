@@ -1,26 +1,42 @@
-import React, { useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { UserDto } from "./types/userDto";
-
-import MainPage from "./components/main-page/main-page";
-import TitlePage from "./components/title-page/title-page";
-import Layout from "./components/layout/layout";
-import CataloguePage from "./components/catalogue-page";
-import Copyright from "./components/copyright/copyright";
-import SignupPage from "./components/signup-page";
-import ProfilePage from "./components/profile-page";
-import ProfileMain from "./components/profile-page/profile-main";
-import ProfileList from "./components/profile-page/profile-list";
 import ErrorPage from "./components/ErrorPage";
-import SigniinPage from "./components/signin-page/signinPage";
-import AboutUs from "./components/aboutus-page";
+import Layout from "./components/layout/layout";
+// import MainPage from "./components/main-page/main-page";
+// import CataloguePage from "./components/catalogue-page";
+// import TitlePage from "./components/title-page/title-page";
+// import Copyright from './components/copyright/copyright';
+// import SignupPage from "./components/signup-page";
+// import ProfilePage from "./components/profile-page";
+// import ProfileMain from "./components/profile-page/profile-main";
+// import ProfileList from "./components/profile-page/profile-list";
+// import SigniinPage from "./components/signin-page/signinPage";
+// import AboutUs from "./components/aboutus-page";
+// import PersonalAgreementPage from "./components/PersonalAgreementPage";
 import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
-import PersonalAgreementPage from "./components/PersonalAgreementPage";
+
+const MainPage = lazy(() => import("./components/main-page/main-page"));
+const TitlePage = lazy(() => import("./components/title-page/title-page"));
+const CataloguePage = lazy(() => import("./components/catalogue-page"));
+const Copyright = lazy(() => import("./components/copyright/copyright"));
+const SignupPage = lazy(() => import("./components/signup-page"));
+const SigniinPage = lazy(() => import("./components/signin-page/signinPage"));
+const ProfilePage = lazy(() => import("./components/profile-page"));
+const ProfileMain = lazy(
+  () => import("./components/profile-page/profile-main")
+);
+const ProfileList = lazy(
+  () => import("./components/profile-page/profile-list")
+);
+const AboutUs = lazy(() => import("./components/aboutus-page"));
+const PersonalAgreementPage = lazy(
+  () => import("./components/PersonalAgreementPage")
+);
 
 function App() {
   const dispatch = useDispatch();

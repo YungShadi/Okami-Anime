@@ -231,4 +231,9 @@
     background-color: #3ce3e8;
     border-radius: 2px;
   }
+  .mobile-header-search {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    width: 80vw;
+  }
 }/*# sourceMappingURL=header.css.map */

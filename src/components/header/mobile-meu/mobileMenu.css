@@ -11,6 +11,7 @@
   background-image: url("../../img/background-phone.webp");
   background-position: center;
   background-size: cover;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
 .mobile-menu-wrapper .mobile-menu-open {
   align-self: flex-start;
@@ -83,7 +84,6 @@
   background-color: #05315a;
   height: 50px;
   color: white;
-  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   border-radius: 5px;
   width: 80%;
   cursor: pointer;
@@ -94,6 +94,7 @@
   font-style: normal;
   text-decoration: none;
 }
+
 .menu-auth-link {
   color: white;
 }/*# sourceMappingURL=mobileMenu.css.map */
