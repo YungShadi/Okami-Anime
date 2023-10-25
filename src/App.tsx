@@ -6,17 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ErrorPage from "./components/ErrorPage";
 import Layout from "./components/layout/layout";
-// import MainPage from "./components/main-page/main-page";
-// import CataloguePage from "./components/catalogue-page";
-// import TitlePage from "./components/title-page/title-page";
-// import Copyright from './components/copyright/copyright';
-// import SignupPage from "./components/signup-page";
-// import ProfilePage from "./components/profile-page";
-// import ProfileMain from "./components/profile-page/profile-main";
-// import ProfileList from "./components/profile-page/profile-list";
-// import SigniinPage from "./components/signin-page/signinPage";
-// import AboutUs from "./components/aboutus-page";
-// import PersonalAgreementPage from "./components/PersonalAgreementPage";
 import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
 

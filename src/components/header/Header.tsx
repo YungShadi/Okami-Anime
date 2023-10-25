@@ -87,7 +87,7 @@ function Header() {
           </div>
         )}
       </header>
-      {searchOpen && <input className="mobile-header-search"/>}
+      {searchOpen && <input className="mobile-header-search" />}
     </>
   );
 }
