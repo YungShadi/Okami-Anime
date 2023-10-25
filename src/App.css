@@ -42,7 +42,6 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
 }
-
 @keyframes spinner {
   0% {
     transform: rotate(0deg);

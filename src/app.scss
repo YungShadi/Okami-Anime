@@ -42,6 +42,15 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
 }
 
+@-webkit-keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -56,6 +65,7 @@ body::-webkit-scrollbar-thumb {
   border: 10px solid #f3f3f3; /* Light grey */
   border-top: 10px solid #2179df; /* Black */
   border-radius: 50%;
+  -webkit-animation: spinner 1.5s linear infinite;
   animation: spinner 1.5s linear infinite;
   position: absolute;
   top: 50%;
