@@ -7,6 +7,7 @@ import { MobileDto } from "../../types/mobileDto";
 import { toggleMenuAction } from "../../redux/mobileSlcie";
 import { useAuth } from "../../hooks/useAuth";
 import { UserDto } from "../../types/userDto";
+import "../signup-page/signupPage.css";
 
 function SigniinPage() {
   const menuState = useSelector(
@@ -68,7 +69,7 @@ function SigniinPage() {
         <button type="submit" className="from-submit">
           Войти
         </button>
-        <span style={{marginTop: "20px"}}>
+        <span style={{ marginTop: "20px" }}>
           Вы еще не зарегстрированны?{" "}
           <Link to="/sign-up" style={{ color: "white" }}>
             {" "}
