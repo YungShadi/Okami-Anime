@@ -23,7 +23,7 @@ function Title({
       <div className="title-poster-wraper">
         <span className="title-status status">{titleStatus}</span>
         <img className="title-poster poster" src={DefaultPoster} alt="poster" />
-        <span className="title-age-rest age-rest">{titleAgeRest}</span>
+        <span className="age-rest">{titleAgeRest}</span>
       </div>
       <div className="title-name-tags">
         <span className="title-name name">{titleName}</span>
@@ -35,7 +35,7 @@ function Title({
           </span>
         </div>
         <span className="title-episodes">12 эпизодов</span>
-        <span className="title-type">ТВ Сериал /</span>
+        <span className="title-type">TB Сериал /</span>
         <span className="title-year"> 2023</span>
       </div>
     </div>

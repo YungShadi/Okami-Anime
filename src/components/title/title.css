@@ -2,6 +2,8 @@
   height: 340px;
   width: 190px;
   transition: 0.5s;
+  height: 350px;
+  margin-top: 20px;
 }
 .title-main span {
   font-size: 10px;
@@ -11,6 +13,7 @@
   z-index: 1;
   position: relative;
   transition: 0.3s;
+  width: 190px;
 }
 .title-main .name {
   display: inline-block;
@@ -25,21 +28,14 @@
 .title-main .status,
 .title-main .age-rest {
   background-color: #3ce3e8;
-  position: relative;
-  z-index: 2;
-}
-.title-main .status {
-  padding: 6px;
-  font-size: 12px;
+  position: absolute;
+  z-index: 1000;
   color: black;
-  top: 25px;
-  left: -1px;
+  padding: 4px;
+  font-size: 14px;
 }
 .title-main .age-rest {
-  padding: 5px;
-  color: black;
-  left: 162px;
-  bottom: 28px;
+  align-self: flex-end;
 }
 
 .title-main:hover {
@@ -62,7 +58,10 @@
 }
 
 .title-poster-wraper {
-  height: 325px;
+  height: 290px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title-type,
@@ -96,14 +95,8 @@
     width: min-content;
   }
   .title-main .status {
-    top: 0;
-    bottom: 0;
-    width: 30px;
-    height: 15px;
-    font-size: 8px;
-    padding: 0;
-    padding-top: 3px;
-    padding-left: 3px;
+    font-size: 12px;
+    padding: 3px;
   }
   .title-main .age-rest {
     display: none;
