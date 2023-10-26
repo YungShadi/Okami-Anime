@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Poster from "../img/Постер.png";
 import "./title-page.css";
 import Arrow from "../img/mdi_menu-down.svg";
@@ -9,7 +10,6 @@ import LineThrough from "../img/ant-design_strikethrough-outlined.svg";
 import OrderedList from "../img/ant-design_ordered-list-outlined.svg";
 import UnorderedList from "../img/ant-design_unordered-list-outlined.svg";
 import DefaultProfPicture from "../img/Аватар.png";
-import { useSelector } from "react-redux";
 import { MobileDto } from "../../types/mobileDto";
 
 interface OptionTitle {
