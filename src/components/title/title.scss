@@ -69,8 +69,8 @@
 .title-episodes {
   position: relative;
   font-size: 14px !important;
-  bottom: 47px;
-  left: 102px;
+  bottom: 4px;
+  left: 75px;
 }
 @media (max-width: 1100px) {
   .title-main {
@@ -106,9 +106,13 @@
   }
   .title-name-tags {
     padding-top: 15px;
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   .title-episodes {
-    top: 20px;
+    position: static;
   }
   .recently-added {
     width: 155px;
@@ -120,7 +124,6 @@
       height: 100%;
       .poster {
         position: relative;
-        right: 26px;
         width: 100%;
         max-width: 155px;
         height: 100%;
@@ -141,6 +144,16 @@
       .title-episodes {
         display: none;
       }
+    }
+  }
+  .title-main:hover::after {
+    display: none;
+  }
+  .title-main:hover {
+    scale: 1.03;
+    .poster {
+      -webkit-filter: brightness(100%);
+      filter: brightness(100%);
     }
   }
 }

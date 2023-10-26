@@ -7,7 +7,7 @@ import { MobileDto } from "../../types/mobileDto";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
 import { useAuth } from "../../hooks/useAuth";
-import { toggleMenuAction } from "../../redux/mobileSlcie";
+import { toggleMenuAction, toggleSearchAction } from "../../redux/mobileSlcie";
 import search from "../img/search-frame.svg";
 
 // header, navigation, user
@@ -15,10 +15,12 @@ function Header() {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
   const headerRef = useRef(null);
-  const [searchOpen, SetSearchOpen] = useState(false);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username
+  );
+  const searchState = useSelector(
+    (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened
   );
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isMenuOpened
@@ -55,13 +57,24 @@ function Header() {
           </div>
           <span className="logo-title">ŌkamiAnime</span>
         </Link>
-        <button
-          type="button"
-          className="header-mobile-button mobile-search"
-          onClick={() => SetSearchOpen(!searchOpen)}
-        >
-          <img src={search} alt="search" />
-        </button>
+        {location.pathname === "/catalogue" ? (
+          <button
+            type="button"
+            className="header-mobile-button mobile-search"
+            disabled
+            style={{ filter: "grayscale(1)" }}
+          >
+            <img src={search} alt="search" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="header-mobile-button mobile-search"
+            onClick={() => dispatch(toggleSearchAction(!searchState))}
+          >
+            <img src={search} alt="search" />
+          </button>
+        )}
         {location.pathname !== "/catalogue" && (
           <input type="text" placeholder="Поиск" className="input-title" />
         )}
@@ -87,7 +100,9 @@ function Header() {
           </div>
         )}
       </header>
-      {searchOpen && <input className="mobile-header-search" />}
+      {searchState && (
+        <input className="mobile-header-search" placeholder="Поиск" />
+      )}
     </>
   );
 }

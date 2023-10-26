@@ -337,10 +337,9 @@
     .filters-wraper.open {
       display: block;
       position: fixed;
+      top: 10vh;
+      left: 20vw;
       z-index: 1000000;
-      left: 4ex;
-      margin-left: auto;
-      margin-right: auto;
       background-color: rgba(6, 75, 140, 1);
       color: white;
       font-family:
@@ -368,6 +367,7 @@
       height: fit-content;
       min-height: fit-content;
       padding: 5px;
+      align-items: center;
     }
     .input-title {
       display: block;
@@ -382,6 +382,11 @@
     background-color: #05315a;
     height: 50px;
     margin-bottom: 10px;
+    border: 1px solid #39f3fa;
+    font-size: 20px;
+  }
+  .mobile-button-filter:active {
+    scale: 1.05;
   }
   .background {
     width: 1000px;

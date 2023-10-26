@@ -20,6 +20,7 @@
     align-self: flex-start;
     margin-bottom: 20px;
     height: 40px;
+    min-height: 40px;
     width: 40px;
     border-radius: 3px;
     border: 1px solid #3ce3e8;
@@ -30,8 +31,6 @@
       CenturyGothic,
       AppleGothic,
       sans-serif;
-    border-radius: 5px;
-    transition: 100s;
   }
   .menu-user {
     width: 90%;

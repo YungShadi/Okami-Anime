@@ -27,6 +27,7 @@ function Title({
       </div>
       <div className="title-name-tags">
         <span className="title-name name">{titleName}</span>
+        <span className="title-episodes">12 эпизодов</span>
         <div className="title-tags tags">
           <span className="tag">
             {titleTags.map((tag) => (
@@ -34,7 +35,6 @@ function Title({
             ))}
           </span>
         </div>
-        <span className="title-episodes">12 эпизодов</span>
         <span className="title-type">TB Сериал /</span>
         <span className="title-year"> 2023</span>
       </div>

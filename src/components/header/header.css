@@ -216,6 +216,10 @@
     width: 35px;
     transform: rotate(45deg) translateY(-3px);
   }
+  .header-mobile-button:active,
+  .mobile-menu-open:active {
+    scale: 1.5;
+  }
   .input-title,
   .nav-buttons,
   .aunth-buttons,
@@ -235,5 +239,14 @@
     margin-top: -20px;
     margin-bottom: 20px;
     width: 80vw;
+    background-color: rgba(6, 75, 140, 0.8);
+    margin-bottom: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 30px;
+    color: white;
   }
 }/*# sourceMappingURL=header.css.map */

@@ -9,6 +9,8 @@ import LineThrough from "../img/ant-design_strikethrough-outlined.svg";
 import OrderedList from "../img/ant-design_ordered-list-outlined.svg";
 import UnorderedList from "../img/ant-design_unordered-list-outlined.svg";
 import DefaultProfPicture from "../img/Аватар.png";
+import { useSelector } from "react-redux";
+import { MobileDto } from "../../types/mobileDto";
 
 interface OptionTitle {
   title: string;
@@ -29,6 +31,9 @@ function TitlePage() {
   const [triggerPlayer, setTriggerPlayer] = useState(false);
   const [triggerDub, setTriggerDub] = useState(false);
   const [currentDub, setCurretnDub] = useState("Anilibria");
+  const mobileView = useSelector(
+    (state: { mobile: MobileDto }) => state?.mobile.isMobileView
+  );
   // const elementCount = document.querySelectorAll(".view-oreder-element").length;
   // document.documentElement.style.setProperty("--element-count", elementCount);
 
@@ -363,15 +368,19 @@ function TitlePage() {
               onClick={() => setTriggerPlayer(!triggerPlayer)}
             >
               <div className="player-name">Sibnet</div>
-              <div className="little-dievider" />
-              <img
-                src={Arrow}
-                alt="menu-arrow"
-                style={{
-                  transform: triggerPlayer ? "rotate(-90deg)" : "none",
-                  transition: "0.5s",
-                }}
-              />
+              {!mobileView && (
+                <>
+                  <div className="little-dievider" />
+                  <img
+                    src={Arrow}
+                    alt="menu-arrow"
+                    style={{
+                      transform: triggerPlayer ? "rotate(-90deg)" : "none",
+                      transition: "0.5s",
+                    }}
+                  />
+                </>
+              )}
             </button>
             {/* options for player */}
             <div
@@ -395,15 +404,19 @@ function TitlePage() {
               onClick={() => setTriggerDub(!triggerDub)}
             >
               <div className="dub-name">{currentDub}</div>
-              <div className="little-dievider" />
-              <img
-                src={Arrow}
-                alt="menu-arrow"
-                style={{
-                  transform: triggerDub ? "rotate(-90deg)" : "none",
-                  transition: "0.5s",
-                }}
-              />
+              {!mobileView && (
+                <>
+                  <div className="little-dievider" />
+                  <img
+                    src={Arrow}
+                    alt="menu-arrow"
+                    style={{
+                      transform: triggerDub ? "rotate(-90deg)" : "none",
+                      transition: "0.5s",
+                    }}
+                  />
+                </>
+              )}
             </button>
             {/* options for dub here */}
             <div

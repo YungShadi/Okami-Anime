@@ -56,7 +56,8 @@
 
 @media (max-width: 1100px) {
   .season-anime {
-    height: 900px;
+    height: -moz-fit-content;
+    height: fit-content;
     width: 100%;
   }
   .season-anime .season-anime-title {
@@ -67,7 +68,8 @@
     flex-wrap: nowrap;
   }
   .season-titles {
-    height: 780px;
+    height: -moz-fit-content;
+    height: fit-content;
     overflow: hidden;
     align-items: center;
     width: 100%;
@@ -78,12 +80,12 @@
     gap: 5px;
   }
   .season-titles .title-main {
-    width: 75vw;
-    height: 125px;
+    width: 85vw;
+    height: 150px;
   }
   .season-titles .title-main .poster {
     width: 100px;
-    height: 125px;
+    height: 150px;
   }
   .recently-added-anime {
     width: 100%;
@@ -93,5 +95,8 @@
   .recently-added-titles {
     row-gap: 60px;
     margin-top: 30px;
+  }
+  .recetly-added-title {
+    margin-left: 15px;
   }
 }/*# sourceMappingURL=main-page.css.map */

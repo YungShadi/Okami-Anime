@@ -454,8 +454,8 @@
     display: block;
   }
   .title-info .title-poster {
-    width: 90vw;
-    height: 90vw;
+    width: 300px;
+    height: 400px;
   }
   .title-info .title-text-info {
     width: 90vw;
@@ -498,5 +498,11 @@
   }
   .comment-send {
     margin-left: 30%;
+  }
+  .player-options,
+  .dub-options,
+  .player-option,
+  .dub-option {
+    width: 30vw;
   }
 }/*# sourceMappingURL=title-page.css.map */

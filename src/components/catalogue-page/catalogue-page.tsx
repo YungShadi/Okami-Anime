@@ -6,7 +6,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { MobileDto } from "../../types/mobileDto";
-import { toggleMenuAction, toggleFilterAction } from "../../redux/mobileSlcie";
+import {
+  toggleMenuAction,
+  toggleFilterAction,
+  toggleSearchAction,
+} from "../../redux/mobileSlcie";
 
 import Search from "../img/search.svg";
 import FiltersWrapper from "./FiltersWrapper";
@@ -30,6 +34,9 @@ function CataloguePage() {
   );
   const mobileView = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMobileView
+  );
+  const searchState = useSelector(
+    (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened
   );
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
@@ -81,6 +88,9 @@ function CataloguePage() {
       }
     };
   });
+  if (searchState) {
+    dispatch(toggleSearchAction(false));
+  }
   return (
     <div className="catalogue-page">
       {mobileView ? (

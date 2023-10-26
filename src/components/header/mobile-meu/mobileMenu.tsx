@@ -27,7 +27,6 @@ function MobileMenu() {
       >
         <div className="line-burger line-burger1" />
         <div className="line-burger line-burger2" />
-        <div className="line-burger line-burger3" />
       </button>
       {isAuthenticated ? (
         <div className="menu-user">

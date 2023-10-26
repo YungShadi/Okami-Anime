@@ -344,10 +344,9 @@
   body .filters-wraper.open {
     display: block;
     position: fixed;
+    top: 10vh;
+    left: 20vw;
     z-index: 1000000;
-    left: 4ex;
-    margin-left: auto;
-    margin-right: auto;
     background-color: rgb(6, 75, 140);
     color: white;
     font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
@@ -374,6 +373,7 @@
     min-height: -moz-fit-content;
     min-height: fit-content;
     padding: 5px;
+    align-items: center;
   }
   .catalogue-page .input-title {
     display: block;
@@ -387,6 +387,11 @@
     background-color: #05315a;
     height: 50px;
     margin-bottom: 10px;
+    border: 1px solid #39f3fa;
+    font-size: 20px;
+  }
+  .mobile-button-filter:active {
+    scale: 1.05;
   }
   .background {
     width: 1000px;
