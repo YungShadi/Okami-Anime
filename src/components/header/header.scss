@@ -217,6 +217,10 @@
   .mobile-menu-open:active {
     scale: 1.5;
   }
+  .incative:disabled {
+    filter: grayscale(1);
+    scale: 1;
+  }
   .input-title,
   .nav-buttons,
   .aunth-buttons,

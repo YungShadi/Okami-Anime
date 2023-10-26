@@ -43,14 +43,19 @@ function App() {
   }, [menuState]);
 
   useEffect(() => {
+    if (window.screen.width <= 600) {
+      dispatch(isMobileViewAction(true));
+    } else {
+      dispatch(isMobileViewAction(false));
+    }
     window.addEventListener("resize", () => {
       if (window.screen.width <= 600) {
         dispatch(isMobileViewAction(true));
       } else {
         dispatch(isMobileViewAction(false));
       }
-      console.log("resize");
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

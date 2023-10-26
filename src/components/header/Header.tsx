@@ -63,9 +63,8 @@ function Header() {
         {location.pathname === "/catalogue" ? (
           <button
             type="button"
-            className="header-mobile-button mobile-search"
+            className="header-mobile-button mobile-search incative"
             disabled
-            style={{ filter: "grayscale(1)" }}
           >
             <img src={search} alt="search" />
           </button>
