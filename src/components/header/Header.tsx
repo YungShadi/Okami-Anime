@@ -25,6 +25,9 @@ function Header() {
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isMenuOpened
   );
+  const mobileView = useSelector(
+    (state: { mobile: MobileDto }) => state?.mobile.isMobileView
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -100,7 +103,7 @@ function Header() {
           </div>
         )}
       </header>
-      {searchState && (
+      {searchState && mobileView && (
         <input className="mobile-header-search" placeholder="Поиск" />
       )}
     </>

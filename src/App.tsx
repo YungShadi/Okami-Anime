@@ -42,9 +42,16 @@ function App() {
     }
   }, [menuState]);
 
-  if (window.screen.width <= 600) {
-    dispatch(isMobileViewAction(true));
-  }
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.screen.width <= 600) {
+        dispatch(isMobileViewAction(true));
+      } else {
+        dispatch(isMobileViewAction(false));
+      }
+      console.log("resize");
+    });
+  }, []);
 
   return (
     <Routes>
