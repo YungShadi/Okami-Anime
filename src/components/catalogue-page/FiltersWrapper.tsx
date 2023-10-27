@@ -155,7 +155,7 @@ function FilterWrapper() {
       status: "inactive",
     },
     {
-      title: "Короткометражный фильм",
+      title: "Короткометражка",
       value: "short-film",
       status: "inactive",
     },
