@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable no-case-declarations */
+import React, { useEffect, useState } from "react";
 import DropDown from "../img/dropDown.svg";
 
 function Filter({
@@ -32,7 +33,12 @@ function Filter({
   const [tagFilterExpand, setTagFilterExpand] = useState(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState(false);
   const [statusFilterExpand, setStatusFilterExpand] = useState(false);
-  function toggleOptionCheckbox(index: number) {
+  function handleFilterOptionClick(
+    status: string,
+    index: number,
+    optionValue: string,
+    value: string
+  ) {
     const newTagArray: {
       title: string;
       value: string;
@@ -48,7 +54,7 @@ function Filter({
       value: string;
       status: string;
     }[] = [...filterArray];
-    switch (filterValue) {
+    switch (optionValue) {
       case "genre":
         if (status === "inactive") {
           newTagArray[index].status = "add-option";
@@ -56,30 +62,36 @@ function Filter({
         }
         if (status === "add-option") {
           newTagArray[index].status = "remove-option";
+          setActiveTags([...activeTags, value]);
         }
         if (status === "remove-option") {
           newTagArray[index].status = "inactive";
+          setActiveTags([...activeTags, value]);
         }
-        updateTagArray(newTagArray);
         const filteredTags = newTagArray.filter(
           (tag) => tag.status === "add-option"
         );
-        setActiveTags(filteredTags.map((tag) => tag.title));
-        break;
+        setActiveTags(filteredTags.map((tag) => tag.value));
+        return activeTags;
+
       case "type":
         if (status === "inactive") {
           newTypeArray[index].status = "add-option";
           setActiveType([...activeType, value]);
         }
         if (status === "add-option") {
-          newTypeArray[index].status = "inactive";
+          newTypeArray[index].status = "remove-option";
+          setActiveType([...activeType, value]);
         }
-        // updateTagArray(newTypeArray);
-        const filteredTypes = newTypeArray.filter(
-          (type) => type.status === "add-option"
+        if (status === "remove-option") {
+          newTypeArray[index].status = "inactive";
+          setActiveType([...activeType, value]);
+        }
+        const filteredType = newTypeArray.filter(
+          (tag) => tag.status === "add-option"
         );
-        setActiveType(filteredTypes.map((tag) => tag.title));
-        break;
+        setActiveType(filteredType.map((tag) => tag.value));
+        return setActiveType;
       case "status":
         if (status === "inactive") {
           newStatusArray[index].status = "add-option";
@@ -87,22 +99,16 @@ function Filter({
         }
         if (status === "add-option") {
           newStatusArray[index].status = "inactive";
+          setActiveStatus([...activeStatus, value]);
         }
-        // updateTagArray(newTypeArray);
         const filteredStatus = newStatusArray.filter(
-          (statuss) => statuss.status === "add-option"
+          (tag) => tag.status === "add-option"
         );
-        setActiveStatus(filteredStatus.map((tag) => tag.title));
-        break;
+        setActiveStatus(filteredStatus.map((tag) => tag.value));
+        return setActiveStatus;
       default:
-        break;
+        return 0;
     }
-  }
-
-  function updateTagArray(
-    newArray: { title: string; value: string; status: string }[]
-  ) {
-    setTagArray(newArray);
   }
   function expandFilter(value: string) {
     filterStateSet(!filterState);
@@ -117,7 +123,6 @@ function Filter({
       default:
         return 0;
     }
-    
   }
 
   return (
@@ -197,13 +202,19 @@ function Filter({
             />
           )}
           <div className="filter-list">
-            {filterArray.map(({ title, status }, index) => (
+            {filterArray.map(({ title, status, value }, index) => (
               <button
                 className="filter-option"
                 type="button"
-                onClick={() =>
-                  toggleOptionCheckbox(title, status, index, filterValue)
-                }
+                onClick={() => {
+                  handleFilterOptionClick(
+                    title,
+                    status,
+                    index,
+                    filterValue,
+                    value
+                  );
+                }}
                 tabIndex={0}
                 onBlur={(e) => {
                   if (!(e && e.relatedTarget)) {

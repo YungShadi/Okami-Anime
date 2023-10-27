@@ -4,6 +4,7 @@
   transition: 0.5s;
   height: 350px;
   margin-top: 20px;
+  overflow: hidden;
 }
 .title-main span {
   font-size: 10px;
@@ -38,11 +39,9 @@
   align-self: flex-end;
 }
 
-.title-main:hover {
-  scale: 1.03;
-}
 .title-main:hover .poster {
   filter: brightness(70%);
+  scale: 1.03;
 }
 
 .title-main:hover::after {
