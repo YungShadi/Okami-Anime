@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-case-declarations */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DropDown from "../img/dropDown.svg";
 
 function Filter({
@@ -27,13 +28,14 @@ function Filter({
   filterStateSet: React.Dispatch<React.SetStateAction<boolean>>;
   filterHeight: number;
 }) {
-  const [activeTags, setActiveTags] = useState([]);
-  const [activeType, setActiveType] = useState([]);
-  const [activeStatus, setActiveStatus] = useState([]);
-  const [tagFilterExpand, setTagFilterExpand] = useState(false);
-  const [typeFilterExpand, setTypeFilterExpand] = useState(false);
-  const [statusFilterExpand, setStatusFilterExpand] = useState(false);
+  const [activeTags, setActiveTags] = useState<Array<string>>([]);
+  const [activeType, setActiveType] = useState<Array<string>>([]);
+  const [activeStatus, setActiveStatus] = useState<Array<string>>([]);
+  const [tagFilterExpand, setTagFilterExpand] = useState<boolean>(false);
+  const [typeFilterExpand, setTypeFilterExpand] = useState<boolean>(false);
+  const [statusFilterExpand, setStatusFilterExpand] = useState<boolean>(false);
   function handleFilterOptionClick(
+    title: string,
     status: string,
     index: number,
     optionValue: string,
@@ -57,15 +59,15 @@ function Filter({
     switch (optionValue) {
       case "genre":
         if (status === "inactive") {
-          newTagArray[index].status = "add-option";
+          newTagArray[index]!.status = "add-option";
           setActiveTags([...activeTags, value]);
         }
         if (status === "add-option") {
-          newTagArray[index].status = "remove-option";
+          newTagArray[index]!.status = "remove-option";
           setActiveTags([...activeTags, value]);
         }
         if (status === "remove-option") {
-          newTagArray[index].status = "inactive";
+          newTagArray[index]!.status = "inactive";
           setActiveTags([...activeTags, value]);
         }
         const filteredTags = newTagArray.filter(
@@ -76,15 +78,15 @@ function Filter({
 
       case "type":
         if (status === "inactive") {
-          newTypeArray[index].status = "add-option";
+          newTypeArray[index]!.status = "add-option";
           setActiveType([...activeType, value]);
         }
         if (status === "add-option") {
-          newTypeArray[index].status = "remove-option";
+          newTypeArray[index]!.status = "remove-option";
           setActiveType([...activeType, value]);
         }
         if (status === "remove-option") {
-          newTypeArray[index].status = "inactive";
+          newTypeArray[index]!.status = "inactive";
           setActiveType([...activeType, value]);
         }
         const filteredType = newTypeArray.filter(
@@ -94,11 +96,11 @@ function Filter({
         return setActiveType;
       case "status":
         if (status === "inactive") {
-          newStatusArray[index].status = "add-option";
+          newStatusArray[index]!.status = "add-option";
           setActiveStatus([...activeStatus, value]);
         }
         if (status === "add-option") {
-          newStatusArray[index].status = "inactive";
+          newStatusArray[index]!.status = "inactive";
           setActiveStatus([...activeStatus, value]);
         }
         const filteredStatus = newStatusArray.filter(
@@ -110,6 +112,7 @@ function Filter({
         return 0;
     }
   }
+
   function expandFilter(value: string) {
     filterStateSet(!filterState);
     switch (value) {

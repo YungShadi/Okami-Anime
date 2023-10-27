@@ -366,7 +366,7 @@ function FilterWrapper() {
           filterDesc="Выберите жанры"
           filterState={tagFilterExpand}
           filterZIndex={500}
-          filterSearch={true}
+          filterSearch
           filterStateSet={setTagFilterExpand}
           filterHeight={300}
         />
