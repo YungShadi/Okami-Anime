@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-case-declarations */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DropDown from "../img/dropDown.svg";
 
 function Filter({
@@ -34,6 +34,8 @@ function Filter({
   const [tagFilterExpand, setTagFilterExpand] = useState<boolean>(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState<boolean>(false);
   const [statusFilterExpand, setStatusFilterExpand] = useState<boolean>(false);
+  const [tagsSearch, setTagsSearch] = useState<string>("");
+  const [tagsSearchArray, setTagsSearchArray] = useState<Array<string>>([]);
   function handleFilterOptionClick(
     title: string,
     status: string,
@@ -128,6 +130,13 @@ function Filter({
     }
   }
 
+  useEffect(() => {
+    const arrayAfterSearch = filterArray.filter((tag) =>
+      tag.title.toLowerCase().includes(tagsSearch.toLowerCase())
+    );
+    setTagsSearchArray(arrayAfterSearch);
+  }, [filterArray, tagsSearch]);
+
   return (
     <div className="filter-wraper">
       <h2 className="filter-label" style={{ marginBottom: "10px" }}>
@@ -202,43 +211,86 @@ function Filter({
                   }
                 }
               }}
+              value={tagsSearch}
+              onChange={(e) => {
+                setTagsSearch(e.target.value);
+              }}
             />
           )}
           <div className="filter-list">
-            {filterArray.map(({ title, status, value }, index) => (
-              <button
-                className="filter-option"
-                type="button"
-                onClick={() => {
-                  handleFilterOptionClick(
-                    title,
-                    status,
-                    index,
-                    filterValue,
-                    value
-                  );
-                }}
-                tabIndex={0}
-                onBlur={(e) => {
-                  if (!(e && e.relatedTarget)) {
-                    filterStateSet(false);
-                    if (tagFilterExpand === true) {
-                      setTagFilterExpand(false);
-                    }
-                    if (typeFilterExpand === true) {
-                      setTypeFilterExpand(false);
-                    }
-                    if (statusFilterExpand === true) {
-                      setStatusFilterExpand(false);
-                    }
-                  }
-                }}
-              >
-                <span className={`option-checkbox ${status}`} />
-                <span className="filter-desc">{title}</span>
-              </button>
-            ))}
+            {tagsSearchArray.length === 0 && !tagsSearch
+              ? filterArray.map(({ title, status, value }, index) => (
+                  <button
+                    className="filter-option"
+                    type="button"
+                    onClick={() => {
+                      handleFilterOptionClick(
+                        title,
+                        status,
+                        index,
+                        filterValue,
+                        value
+                      );
+                    }}
+                    tabIndex={0}
+                    onBlur={(e) => {
+                      if (!(e && e.relatedTarget)) {
+                        filterStateSet(false);
+                        if (tagFilterExpand === true) {
+                          setTagFilterExpand(false);
+                        }
+                        if (typeFilterExpand === true) {
+                          setTypeFilterExpand(false);
+                        }
+                        if (statusFilterExpand === true) {
+                          setStatusFilterExpand(false);
+                        }
+                      }
+                    }}
+                  >
+                    <span className={`option-checkbox ${status}`} />
+                    <span className="filter-desc">{title}</span>
+                  </button>
+                ))
+              : tagsSearchArray.map(({ title, status, value }, index) => (
+                  <button
+                    className="filter-option"
+                    type="button"
+                    onClick={() => {
+                      handleFilterOptionClick(
+                        title,
+                        status,
+                        index,
+                        filterValue,
+                        value
+                      );
+                    }}
+                    tabIndex={0}
+                    onBlur={(e) => {
+                      if (!(e && e.relatedTarget)) {
+                        filterStateSet(false);
+                        if (tagFilterExpand === true) {
+                          setTagFilterExpand(false);
+                        }
+                        if (typeFilterExpand === true) {
+                          setTypeFilterExpand(false);
+                        }
+                        if (statusFilterExpand === true) {
+                          setStatusFilterExpand(false);
+                        }
+                      }
+                    }}
+                  >
+                    <span className={`option-checkbox ${status}`} />
+                    <span className="filter-desc">{title}</span>
+                  </button>
+                ))}
           </div>
+          {tagsSearchArray.length === 0 && tagsSearch.length > 0 && (
+            <span className="not-found-error">
+              Жанры по вашему запросу не найдены
+            </span>
+          )}
         </div>
       </div>
     </div>
