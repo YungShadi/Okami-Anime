@@ -41,7 +41,21 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
 }
-
+.captcha-window {
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  z-index: 1000000;
+}
+.background {
+  width: 10000px;
+  height: 10000px;
+  background-color: #05315a;
+  position: fixed;
+  top: 0;
+  z-index: 100000;
+  opacity: 0.7;
+}
 @-webkit-keyframes spinner {
   0% {
     transform: rotate(0deg);

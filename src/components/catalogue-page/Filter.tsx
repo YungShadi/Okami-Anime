@@ -132,7 +132,7 @@ function Filter({
 
   useEffect(() => {
     const arrayAfterSearch = filterArray.filter((tag) =>
-      tag.title.toLowerCase().includes(tagsSearch.toLowerCase())
+      tag.title.toLowerCase().includes(tagsSearch.trim().toLowerCase())
     );
     setTagsSearchArray(arrayAfterSearch);
   }, [filterArray, tagsSearch]);

@@ -3,16 +3,25 @@ import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+// import { CapthcaDto } from "../../types/captchaDto";
 import { MobileDto } from "../../types/mobileDto";
 import { toggleMenuAction } from "../../redux/mobileSlcie";
 import { useAuth } from "../../hooks/useAuth";
 import { UserDto } from "../../types/userDto";
 import "../signup-page/signupPage.css";
+// import { toggleCaptchaAction } from "../../redux/capthcaSlice";
+// import Captcha from "../signup-page/Captcha";
 
 function SigniinPage() {
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
   );
+  // const showCaptcha = useSelector(
+  //   (state: { captcha: CapthcaDto }) => state.captcha.showCaptcha
+  // );
+  // const isCaptchaDone = useSelector(
+  //   (state: { captcha: CapthcaDto }) => state.captcha.isCaptchaDone
+  // );
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const {
@@ -77,6 +86,7 @@ function SigniinPage() {
           </Link>
         </span>
       </form>
+      {/* {showCaptcha && <Captcha />} */}
     </div>
   );
 }

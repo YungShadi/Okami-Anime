@@ -1,0 +1,12 @@
+{
+  "name": "Okami-Anime",
+  "short_name": "Okami",
+  "lang": "ru",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#2179df",
+  "description": "Сайт для просмотра аниме",
+  "manifest_version": 3,
+  "app_version": "1.0.0",
+  "version": "1.0.0"
+}

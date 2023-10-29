@@ -22,6 +22,7 @@ type TitleType = {
   titleAgeRest: string;
   titleName: string;
   titleTags: string[];
+  titleClass: string;
 };
 
 function CataloguePage() {
