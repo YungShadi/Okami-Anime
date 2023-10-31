@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import ErrorPage from "./components/ErrorPage";
+import ErrorPage from "./components/error/ErrorPage";
 import Layout from "./components/layout/layout";
 import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";

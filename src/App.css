@@ -75,7 +75,9 @@ body::-webkit-scrollbar-thumb {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
   position: absolute;
-  top: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15%;
 }
 
 @media (min-width: 1100px) {

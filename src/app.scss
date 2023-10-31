@@ -82,7 +82,9 @@ body::-webkit-scrollbar-thumb {
   -webkit-animation: spinner 1.5s linear infinite;
   animation: spinner 1.5s linear infinite;
   position: absolute;
-  top: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15%;
 }
 @media (min-width: 1100px) {
   .okami {
