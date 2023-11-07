@@ -9,6 +9,7 @@ import Layout from "./components/layout/layout";
 import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
 
+
 const MainPage = lazy(() => import("./components/main-page/main-page"));
 const TitlePage = lazy(() => import("./components/title-page/title-page"));
 const CataloguePage = lazy(() => import("./components/catalogue-page"));
@@ -32,6 +33,7 @@ function App() {
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
   );
+
   useEffect(() => {
     if (menuState) {
       document.body.style.overflow = "hidden";
@@ -55,7 +57,7 @@ function App() {
         dispatch(isMobileViewAction(false));
       }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

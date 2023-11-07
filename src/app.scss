@@ -17,6 +17,12 @@ body {
   background-size: cover;
   background-color: #2179df;
   transition: 1s;
+  font-family:
+    Century Gothic,
+    CenturyGothic,
+    AppleGothic,
+    sans-serif;
+  color: white;
 }
 body::-webkit-scrollbar {
   width: 10px; /* ширина scrollbar */
@@ -40,6 +46,8 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .captcha-window {
   position: absolute;

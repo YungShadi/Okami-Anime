@@ -61,6 +61,9 @@ function MobileMenu() {
         <NavLink to="about-us" className="menu-navigation-button">
           О нас
         </NavLink>
+        <NavLink to="about-us" className="menu-navigation-button">
+          Сообщить об ошибке
+        </NavLink>
       </div>
     </nav>
   );

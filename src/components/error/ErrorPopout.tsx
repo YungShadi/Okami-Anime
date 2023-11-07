@@ -7,7 +7,7 @@ import "./ErrorPopout.css";
 import { removeErrorAction } from "../../redux/errorSlice";
 
 function ErrorPopout({
-  errorM,
+  errorM: errorMessage,
   errorCode,
   index,
 }: {
@@ -30,20 +30,27 @@ function ErrorPopout({
     };
   }, [index, dispatch]);
 
-  const height = `${10 + index * 60}px`;
-
+  const height = `${10 + index * 80}px`;
+  let errorTitle;
+  if (errorCode >= 400 || errorCode < 500) {
+    errorTitle = <p>Ошибка на стороне клиента</p>;
+  }
+  if (errorCode > 500) {
+    errorTitle = <p>Ошибка на стороне сервера</p>;
+  }
   return createPortal(
     <div
       className={`error-popout ${isVisible ? "" : "disappear"}`}
-      onClick={() => {
-        setIsVisible(false);
-        setTimeout(() => {
-          dispatch(removeErrorAction(index));
-        }, 500);
-      }}
+      // onClick={() => {
+      //   setIsVisible(false);
+      //   setTimeout(() => {
+      //     dispatch(removeErrorAction(index));
+      //   }, 500);
+      // }}
       style={{ bottom: height }}
     >
-      <p>{errorM}</p>
+      <p>{errorTitle}</p>
+      <p>{errorMessage}</p>
       <p>{errorCode}</p>
     </div>,
     document.body
