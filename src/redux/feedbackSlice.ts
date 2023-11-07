@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { FeedbackDto } from "../types/feedbackDto";
 
 const initialState: FeedbackDto = {
-  isFeedbackOpen: true,
+  isFeedbackOpen: false,
 };
 
 export const feedbackSlice = createSlice({

@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import "./ErrorPopout.css";
 import { removeErrorAction } from "../../redux/errorSlice";
-
+// ! индексы
 function ErrorPopout({
   errorM: errorMessage,
   errorCode,
