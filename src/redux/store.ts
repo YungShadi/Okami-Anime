@@ -3,6 +3,7 @@ import { userApi } from "./service/user/user.api";
 import authReducer from "./aunthSlice";
 import mobileReducer from "./mobileSlcie";
 import captchaSlice from "./capthcaSlice";
+import errorSlice from "./errorSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authReducer,
     mobile: mobileReducer,
     captcha: captchaSlice,
+    error: errorSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(userApi.middleware),

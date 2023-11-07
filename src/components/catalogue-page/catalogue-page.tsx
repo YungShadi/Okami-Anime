@@ -22,7 +22,6 @@ type TitleType = {
   titleAgeRest: string;
   titleName: string;
   titleTags: string[];
-  titleClass: string;
 };
 
 function CataloguePage() {
@@ -127,6 +126,7 @@ function CataloguePage() {
               titleAgeRest={title.titleAgeRest}
               titleStatus={title.titleStatus}
               titleTags={title.titleTags}
+              titleClass=""
             />
           ))}
         </div>

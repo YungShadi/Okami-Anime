@@ -1,0 +1,37 @@
+.error-popout {
+  width: 300px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: rgba(255, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+  gap: 2px;
+  padding: 5px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  animation-name: slide-left;
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.45, 0.44, 0.33, 0.96);
+  opacity: 1;
+  scale: 1;
+}
+
+.error-popout.disappear {
+  transition: 0.5s;
+  opacity: 0;
+  scale: 0.5;
+}
+
+@keyframes slide-left {
+  0% {
+    right: -300px;
+  }
+  100% {
+    right: 10px;
+  }
+}/*# sourceMappingURL=ErrorPopout.css.map */
