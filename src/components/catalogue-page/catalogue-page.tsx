@@ -13,9 +13,10 @@ import {
 } from "../../redux/mobileSlcie";
 
 import Search from "../img/search.svg";
-import FiltersWrapper from "./FiltersWrapper";
-import "./catalogue-page.css";
+import FiltersWrapper from "./Filter/FiltersWrapper";
+import Pagination from "./Pagination/Pagination";
 import Title from "../title";
+import "./catalogue-page.css";
 
 type TitleType = {
   titleStatus: string;
@@ -78,6 +79,7 @@ function CataloguePage() {
       titleName: "чел",
       titleTags: ["боевик", "драмма", "терентий"],
     },
+    
   ];
 
   // eslint-disable-next-line arrow-body-style
@@ -130,27 +132,7 @@ function CataloguePage() {
             />
           ))}
         </div>
-        <button type="button">Загрузить еще...</button>
-        <div className="catalogue-pagination">
-          <button className="pagination-prev" type="button">
-            {"<"}
-          </button>
-          <button className="pagination-prev" type="button">
-            1
-          </button>
-          <button className="pagination-prev" type="button">
-            2
-          </button>
-          <button className="pagination-prev" type="button">
-            3
-          </button>
-          <button className="pagination-prev" type="button">
-            500
-          </button>
-          <button className="pagination-nxt" type="button">
-            {">"}
-          </button>
-        </div>
+        <Pagination />
       </section>
     </div>
   );

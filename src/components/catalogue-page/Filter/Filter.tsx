@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from "react";
-import DropDown from "../img/dropDown.svg";
+import DropDown from "../../img/dropDown.svg";
 
 function Filter({
   filterName,

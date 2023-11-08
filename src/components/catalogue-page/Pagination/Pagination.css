@@ -1,0 +1,34 @@
+.pagination-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.pagination-load-more {
+  width: 80%;
+  height: 30px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.catalogue-pagination {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.pagination-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #3ce3e8;
+  background-color: #05315a;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination-button.active {
+  background-color: #3ce3e8;
+  color: black;
+}/*# sourceMappingURL=Pagination.css.map */

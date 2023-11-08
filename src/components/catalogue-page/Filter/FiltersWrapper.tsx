@@ -5,11 +5,11 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactSlider from "react-slider";
 import { createPortal } from "react-dom";
-import { toggleFilterAction } from "../../redux/mobileSlcie";
+import { toggleFilterAction } from "../../../redux/mobileSlcie";
 import Filter from "./Filter";
-import { MobileDto } from "../../types/mobileDto";
-import CloseCross from "../img/close-cross.svg";
-import "./catalogue-page.css";
+import { MobileDto } from "../../../types/mobileDto";
+import CloseCross from "../../img/close-cross.svg";
+import "../catalogue-page.css";
 
 function FilterWrapper() {
   const filterStateMobile = useSelector(
