@@ -130,6 +130,27 @@ function CataloguePage() {
             />
           ))}
         </div>
+        <button type="button">Загрузить еще...</button>
+        <div className="catalogue-pagination">
+          <button className="pagination-prev" type="button">
+            {"<"}
+          </button>
+          <button className="pagination-prev" type="button">
+            1
+          </button>
+          <button className="pagination-prev" type="button">
+            2
+          </button>
+          <button className="pagination-prev" type="button">
+            3
+          </button>
+          <button className="pagination-prev" type="button">
+            500
+          </button>
+          <button className="pagination-nxt" type="button">
+            {">"}
+          </button>
+        </div>
       </section>
     </div>
   );

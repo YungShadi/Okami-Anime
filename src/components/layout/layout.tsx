@@ -15,7 +15,6 @@ import { FeedbackDto } from "../../types/feedbackDto";
 
 const MobileMenu = lazy(() => import("../header/mobile-meu/mobileMenu"));
 // by default its displaying header and footer
-// ! Loading component
 function Layout() {
   const mobielView = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isMobileView
@@ -30,7 +29,7 @@ function Layout() {
     <>
       <Header />
       <div className="okami">
-        <FeedbackButton />
+        {!mobielView && <FeedbackButton />}
         <main style={{ minHeight: "70vh" }}>
           <Suspense fallback={<Loading />}>
             <Outlet />
@@ -48,7 +47,7 @@ function Layout() {
             index={error.index}
           />
         ))}
-        <Suspense>{feedbackState && <Feedback />}</Suspense>
+        <Suspense>{feedbackState && !mobielView && <Feedback />}</Suspense>
       </div>
       <Footer />
     </>

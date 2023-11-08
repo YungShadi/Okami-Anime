@@ -32,6 +32,10 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
+    .title-poster {
+      width: 300px;
+      height: 450px;
+    }
   }
   .select-wrapper {
     width: 300px;
@@ -390,6 +394,9 @@
       width: 75px;
     }
   }
+  .comment.show-full {
+    height: fit-content;
+  }
 }
 .comment-content {
   width: 950px;
@@ -403,12 +410,26 @@
   .comment-text {
     font-size: 16px;
     max-height: 80px;
-    overflow-y: scroll;
+    overflow: hidden;
+  }
+  .comment-text.show-full {
+    max-height: fit-content;
+  }
+  .comment-under-buttons {
+    display: flex;
+    justify-content: space-between;
+    .comment-full {
+      border: none;
+      color: #3ce3e8;
+      background: none;
+      font-size: 15px;
+      cursor: pointer;
+    }
   }
 }
 .comment-devider {
   width: 2px;
-  height: 130px;
+  height: auto;
   background-color: #4a4a4a;
 }
 .comment-rating {

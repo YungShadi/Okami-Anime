@@ -25,8 +25,8 @@ export default function FeedbackButton() {
           className="feedback-button"
           type="button"
           onClick={() => {
-            window.scroll({ top: 0, left: 0, behavior: "smooth" });
             dispatch(toggleFeedbeackAction(true));
+            window.scrollTo({ behavior: "smooth", top: 0 });
           }}
         >
           Открыть окно обратной связи

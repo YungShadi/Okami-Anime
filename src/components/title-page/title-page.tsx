@@ -31,9 +31,29 @@ function TitlePage() {
   const [triggerPlayer, setTriggerPlayer] = useState(false);
   const [triggerDub, setTriggerDub] = useState(false);
   const [currentDub, setCurretnDub] = useState("Anilibria");
+  const [showFullComment, setShowFullComment] = useState(false);
   const mobileView = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isMobileView
   );
+  const commentText = `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+  Tenetur nam quod iste aliquam nostrum facere repellat tempore,
+  corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
+  Harum officiis cupiditate ipsum architecto. Lorem, ipsum dolor
+  sit amet consectetur adipisicing elit. Tenetur nam quod iste
+  aliquam nostrum facere repellat tempore, corrupti deserunt.
+  Iusto at quisquam doloribus incidunt ipsam! Harum officiis
+  cupiditate ipsum architecto. Lorem, ipsum dolor sit amet
+  consectetur adipisicing elit. Tenetur nam quod iste aliquam
+  nostrum facere repellat tempore, corrupti deserunt. Iusto at
+  quisquam doloribus incidunt ipsam! Harum officiis cupiditate
+  ipsum architecto. Lorem, ipsum dolor sit amet consectetur
+  adipisicing elit. Tenetur nam quod iste aliquam nostrum facere
+  repellat tempore, corrupti deserunt. Iusto at quisquam doloribus
+  incidunt ipsam! Harum officiis cupiditate ipsum architecto.
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+  Tenetur nam quod iste aliquam nostrum facere repellat tempore,
+  corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
+  Harum officiis cupiditate ipsum architecto.`;
   // const elementCount = document.querySelectorAll(".view-oreder-element").length;
   // document.documentElement.style.setProperty("--element-count", elementCount);
 
@@ -490,7 +510,7 @@ function TitlePage() {
         {/* comments */}
         <div className="comments">
           {/* comment map here */}
-          <div className="comment">
+          <div className={`comment ${showFullComment ? "show-full" : ""}`}>
             <img
               src={DefaultProfPicture}
               alt="profile pic"
@@ -501,30 +521,27 @@ function TitlePage() {
                 <div className="user-name">Chel</div>
                 <div className="date"> 14.14.1321</div>
               </div>
-              <div className="comment-text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Tenetur nam quod iste aliquam nostrum facere repellat tempore,
-                corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
-                Harum officiis cupiditate ipsum architecto. Lorem, ipsum dolor
-                sit amet consectetur adipisicing elit. Tenetur nam quod iste
-                aliquam nostrum facere repellat tempore, corrupti deserunt.
-                Iusto at quisquam doloribus incidunt ipsam! Harum officiis
-                cupiditate ipsum architecto. Lorem, ipsum dolor sit amet
-                consectetur adipisicing elit. Tenetur nam quod iste aliquam
-                nostrum facere repellat tempore, corrupti deserunt. Iusto at
-                quisquam doloribus incidunt ipsam! Harum officiis cupiditate
-                ipsum architecto. Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. Tenetur nam quod iste aliquam nostrum facere
-                repellat tempore, corrupti deserunt. Iusto at quisquam doloribus
-                incidunt ipsam! Harum officiis cupiditate ipsum architecto.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Tenetur nam quod iste aliquam nostrum facere repellat tempore,
-                corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
-                Harum officiis cupiditate ipsum architecto.
+              <div
+                className={`comment-text ${showFullComment ? "show-full" : ""}`}
+              >
+                {commentText}
               </div>
-              <a className="comment-answer" href="-">
-                Ответить
-              </a>
+              <div className="comment-under-buttons">
+                <a className="comment-answer" href="-">
+                  Ответить
+                </a>
+                {commentText.length > 480 && (
+                  <button
+                    type="button"
+                    className="comment-full"
+                    onClick={() => setShowFullComment(!showFullComment)}
+                  >
+                    {showFullComment
+                      ? "Скрыть комментарий"
+                      : "Показать комментарий полностью"}
+                  </button>
+                )}
+              </div>
             </div>
             <div className="comment-devider" />
             {/* once agian i hate how its done with svg */}

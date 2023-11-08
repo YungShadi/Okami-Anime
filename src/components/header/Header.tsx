@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { createPortal } from "react-dom";
 import "./header.css";
 import { UserDto } from "../../types/userDto";
 import { MobileDto } from "../../types/mobileDto";
@@ -9,6 +10,7 @@ import DefaultIcon from "../img/user.svg";
 import { useAuth } from "../../hooks/useAuth";
 import { toggleMenuAction, toggleSearchAction } from "../../redux/mobileSlcie";
 import search from "../img/search-frame.svg";
+import ArrowUp from "../img/up-arrow-svgrepo-com.svg";
 
 // header, navigation, user
 function Header() {
@@ -37,12 +39,11 @@ function Header() {
     };
     window.addEventListener("scroll", onScrollHandle);
   }, []);
-
   return (
     <>
       {/* // here we have nav links to change visible page */}
       <header
-        className={`header ${scrollIsEnough > 125 ? "off-screen-fixed" : ""}`}
+        className={`header ${scrollIsEnough > 90 ? "off-screen-fixed" : ""}`}
         ref={headerRef}
       >
         <button
@@ -105,6 +106,20 @@ function Header() {
       {searchState && mobileView && (
         <input className="mobile-header-search" placeholder="Поиск" />
       )}
+      {scrollIsEnough > 90 &&
+        !mobileView &&
+        createPortal(
+          <div className="up-button-wrap">
+            <button
+              className="up-button"
+              type="button"
+              onClick={() => window.scrollTo({ behavior: "smooth", top: 0 })}
+            >
+              <img src={ArrowUp} alt="arrow-up" className="up-button-arrow" />
+            </button>
+          </div>,
+          document.body
+        )}
     </>
   );
 }

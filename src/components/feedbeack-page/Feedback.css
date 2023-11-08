@@ -72,6 +72,7 @@
 .feedback-button:active .feedback-button-img {
   opacity: 0;
   visibility: hidden;
+  transform: translateY(-40px) rotate(90deg);
 }
 
 .feedback-button-img {

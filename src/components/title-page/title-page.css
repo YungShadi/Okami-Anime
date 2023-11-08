@@ -35,6 +35,10 @@
   display: flex;
   flex-direction: column;
 }
+.title-info .poster-wraper .title-poster {
+  width: 300px;
+  height: 450px;
+}
 .title-info .select-wrapper {
   width: 300px;
   height: 50px;
@@ -406,6 +410,10 @@
   height: 100px;
   width: 75px;
 }
+.comments .comment.show-full {
+  height: -moz-fit-content;
+  height: fit-content;
+}
 
 .comment-content {
   width: 950px;
@@ -420,12 +428,27 @@
 .comment-content .comment-text {
   font-size: 16px;
   max-height: 80px;
-  overflow-y: scroll;
+  overflow: hidden;
+}
+.comment-content .comment-text.show-full {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+.comment-content .comment-under-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.comment-content .comment-under-buttons .comment-full {
+  border: none;
+  color: #3ce3e8;
+  background: none;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 .comment-devider {
   width: 2px;
-  height: 130px;
+  height: auto;
   background-color: #4a4a4a;
 }
 
