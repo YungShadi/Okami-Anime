@@ -79,7 +79,6 @@ function CataloguePage() {
       titleName: "чел",
       titleTags: ["боевик", "драмма", "терентий"],
     },
-    
   ];
 
   // eslint-disable-next-line arrow-body-style
@@ -132,7 +131,7 @@ function CataloguePage() {
             />
           ))}
         </div>
-        <Pagination />
+        <Pagination totalCount={30} pageSize={1} siblingCount={1}/>
       </section>
     </div>
   );

@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { PaginationDto } from "../types/paginationDto";
 
 // eslint-disable-next-line import/prefer-default-export
-export const usePagination = () => {
+export const usePagination = ({ totalCount, pageSize }: PaginationDto) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pages = 32;
+  const pages = Math.ceil(totalCount / pageSize);
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);

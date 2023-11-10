@@ -1,8 +1,9 @@
 import React from "react";
 import { usePagination } from "../../../hooks/usePagination";
 import "./Pagination.css";
+import { PaginationDto } from "../../../types/paginationDto";
 
-export default function Pagination() {
+export default function Pagination({ totalCount, pageSize }: PaginationDto) {
   const {
     pages,
     handleNextPageLoadMore,
@@ -10,14 +11,18 @@ export default function Pagination() {
     handlePreviousPage,
     currentPage,
     handlePageChange,
-  } = usePagination();
+  } = usePagination({ totalCount, pageSize });
   const pageArray = [];
   for (let i = 0; i < pages; i++) {
     pageArray.push(i + 1);
   }
   return (
     <div className="pagination-wrapper">
-      <button type="button" onClick={handleNextPageLoadMore} className="pagination-load-more">
+      <button
+        type="button"
+        onClick={handleNextPageLoadMore}
+        className="pagination-load-more"
+      >
         Загрузить еще...
       </button>
       <div className="catalogue-pagination">
