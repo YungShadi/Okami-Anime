@@ -198,13 +198,17 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 1280px;
   border-radius: 6px;
   background-color: rgba(6, 75, 140, 0.8);
   display: flex;
   gap: 20px;
-  padding: 0 20px 0 20px;
-  min-height: 1500px;
+  padding: 10px 20px;
+  min-height: 760px;
+  max-height: 1500px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 .filter-span {
   margin-bottom: 30px;

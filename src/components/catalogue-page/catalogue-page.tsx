@@ -1,7 +1,4 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable no-case-declarations */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-use-before-define */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
@@ -43,6 +40,42 @@ function CataloguePage() {
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
 
   const titlesArray: TitleType[] = [
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
     {
       titleStatus: "вышел",
       titleAgeRest: "21+",
@@ -131,7 +164,7 @@ function CataloguePage() {
             />
           ))}
         </div>
-        <Pagination totalCount={30} pageSize={1} siblingCount={1}/>
+        <Pagination totalCount={30} pageSize={1} siblingCount={1} />
       </section>
     </div>
   );

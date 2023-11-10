@@ -1,5 +1,5 @@
 export interface PaginationDto {
-  siblingCount?: number;
+  siblingCount: number;
   pageSize: number;
   totalCount: number;
 }

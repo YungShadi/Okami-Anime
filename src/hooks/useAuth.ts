@@ -47,6 +47,7 @@ export const useAuth = () => {
       setIsAuthenticated(jwtToken);
       dispatch(logoutAction());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, isCurrentUserLoading, jwtToken]);
 
   const handleReg = async (userData: UserDto) => {

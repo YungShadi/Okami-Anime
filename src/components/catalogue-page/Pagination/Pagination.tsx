@@ -3,7 +3,11 @@ import { usePagination } from "../../../hooks/usePagination";
 import "./Pagination.css";
 import { PaginationDto } from "../../../types/paginationDto";
 
-export default function Pagination({ totalCount, pageSize }: PaginationDto) {
+export default function Pagination({
+  totalCount,
+  pageSize,
+  siblingCount,
+}: PaginationDto) {
   const {
     pages,
     handleNextPageLoadMore,
@@ -11,7 +15,7 @@ export default function Pagination({ totalCount, pageSize }: PaginationDto) {
     handlePreviousPage,
     currentPage,
     handlePageChange,
-  } = usePagination({ totalCount, pageSize });
+  } = usePagination({ totalCount, pageSize, siblingCount });
   const pageArray = [];
   for (let i = 0; i < pages; i++) {
     pageArray.push(i + 1);
