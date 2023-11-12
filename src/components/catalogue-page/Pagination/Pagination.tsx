@@ -2,6 +2,7 @@ import React from "react";
 import { usePagination } from "../../../hooks/usePagination";
 import "./Pagination.css";
 import { PaginationDto } from "../../../types/paginationDto";
+import { usePaginationRange } from "../../../hooks/usePaginationRange";
 
 export default function Pagination({
   totalCount,
@@ -20,6 +21,13 @@ export default function Pagination({
   for (let i = 0; i < pages; i++) {
     pageArray.push(i + 1);
   }
+  const paginationRange = usePaginationRange({
+    pages,
+    pageSize,
+    currentPage,
+    siblingCount,
+  });
+
   return (
     <div className="pagination-wrapper">
       <button
@@ -37,7 +45,7 @@ export default function Pagination({
         >
           {"<"}
         </button>
-        {pageArray.map((page) => {
+        {paginationRange!.map((page) => {
           if (currentPage === page) {
             return (
               <button type="button" className="pagination-button active">
