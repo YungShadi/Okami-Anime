@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { MobileDto } from "../../types/mobileDto";
@@ -14,6 +14,7 @@ import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
 import Title from "../title";
 import "./catalogue-page.css";
+import { usePagination } from "../../hooks/usePagination";
 
 type TitleType = {
   titleStatus: string;
@@ -25,21 +26,95 @@ type TitleType = {
 function CataloguePage() {
   const dispatch = useDispatch();
   const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
   const filterStateMobile = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isFilterOpened
+    (state: { mobile: MobileDto }) => state.mobile.isFilterOpened,
   );
   const mobileView = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMobileView
+    (state: { mobile: MobileDto }) => state.mobile.isMobileView,
   );
   const searchState = useSelector(
-    (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened
+    (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened,
   );
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
 
   const titlesArray: TitleType[] = [
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+  ];
+  const titlesArraySecond: TitleType[] = [
     {
       titleStatus: "вышел",
       titleAgeRest: "21+",

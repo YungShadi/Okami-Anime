@@ -1,28 +1,33 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { PaginationDto } from "../types/paginationDto";
+import {
+  nextPageAction,
+  changePageAction,
+  previousPageAction,
+} from "../redux/paginationSlice";
 
 // eslint-disable-next-line import/prefer-default-export
-export const usePagination = ({
-  totalCount,
-  pageSize, // siblingCount,
-}: PaginationDto) => {
-  const [currentPage, setCurrentPage] = useState(1);
+export const usePagination = ({ totalCount, pageSize }: PaginationDto) => {
   const pages = Math.ceil(totalCount / pageSize);
-  // const totalPageNumbers = siblingCount + 5;
+  const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.pagination.currentPage);
 
   const handleNextPage = () => {
-    if (currentPage < pages) setCurrentPage(currentPage + 1);
+    if (currentPage < pages) {
+      dispatch(nextPageAction());
+    }
   };
   const handleNextPageLoadMore = () => {
-    if (currentPage < pages) setCurrentPage(currentPage + 1);
+    if (currentPage < pages) dispatch(nextPageAction());
   };
 
   const handlePreviousPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+    if (currentPage > 1) dispatch(previousPageAction());
   };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    dispatch(changePageAction(page));
   };
 
   return {

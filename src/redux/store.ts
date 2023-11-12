@@ -5,6 +5,7 @@ import mobileReducer from "./mobileSlcie";
 import captchaSlice from "./capthcaSlice";
 import errorSlice from "./errorSlice";
 import feedbackSlice from "./feedbackSlice";
+import paginationSlice from "./paginationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     captcha: captchaSlice,
     error: errorSlice,
     feedback: feedbackSlice,
+    pagination: paginationSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(userApi.middleware),
