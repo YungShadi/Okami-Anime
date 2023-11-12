@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from "react";
 import { usePagination } from "../../../hooks/usePagination";
 import "./Pagination.css";
@@ -27,6 +28,7 @@ export default function Pagination({
     currentPage,
     siblingCount,
   });
+  console.log(paginationRange);
 
   return (
     <div className="pagination-wrapper">
@@ -52,6 +54,31 @@ export default function Pagination({
                 {page}
               </button>
             );
+          }
+          if (page === "..." && paginationRange[1] === page) {
+            return (paginationRange[1] = (
+              <button
+                type="button"
+                className="pagination-button"
+                onClick={() => handlePageChange(1)}
+              >
+                {page}
+              </button>
+            ));
+          }
+          if (
+            page === "..." &&
+            paginationRange[paginationRange.length - 2] === page
+          ) {
+            return (paginationRange[paginationRange.length - 2] = (
+              <button
+                type="button"
+                className="pagination-button"
+                onClick={() => handlePageChange(pages)}
+              >
+                {page}
+              </button>
+            ));
           }
           return (
             <button
