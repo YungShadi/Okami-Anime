@@ -1,3 +1,5 @@
+@import "../../stylsheet.scss";
+
 .signup {
   display: flex;
   height: 665px;
@@ -17,8 +19,8 @@
   height: fit-content;
   min-height: 500px;
   .form-input {
-    background-color: #05315a;
-    border: 1px solid #3ce3e8;
+    background-color: $base-dark-blue;
+    border: 1px solid $base-light-blue;
     width: 330px;
     height: 50px;
     display: inline-block;
@@ -29,13 +31,15 @@
     margin-top: 10px;
   }
   .from-submit {
-    background-color: #3ce3e8;
+    background-color: $base-light-blue;
     color: black;
     border: none;
     border-radius: 6px;
     font-size: 18px;
-    width: 200px;
-    height: 40px;
+    width: 250px;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-family:
       Century Gothic,
       CenturyGothic,
@@ -54,6 +58,17 @@
 .error-message-input {
   color: rgb(243, 38, 38);
   margin-top: 10px;
+}
+.personal-info {
+  display: flex;
+  width: 450px;
+  margin: 0 auto;
+  font-size: 16px;
+}
+.personal-info-cb {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
 }
 @media (max-width: 1100px) {
   .signup {

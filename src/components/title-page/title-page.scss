@@ -1,3 +1,5 @@
+@import "../../stylsheet.scss";
+
 *::-webkit-scrollbar {
   width: 5px;
 }
@@ -44,13 +46,13 @@
     .option {
       width: 300px;
       height: 50px;
-      background-color: #05315a;
+      background-color: $base-dark-blue;
       border: none;
       display: flex;
       flex-wrap: wrap;
       align-content: center;
       padding-left: 30px;
-      border-bottom: 1px solid #3ce3e8;
+      border-bottom: 1px solid $base-light-blue;
       padding-right: 5px;
       z-index: 10000;
       position: relative;
@@ -93,7 +95,7 @@
       transition: 0.3s;
     }
     .option:hover {
-      background-color: #05315a;
+      background-color: $base-dark-blue;
     }
   }
   .select-options {
@@ -136,13 +138,13 @@
   .view-order-trigger {
     width: 300px;
     height: 50px;
-    background-color: #05315a;
+    background-color: $base-dark-blue;
     border: none;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     padding-left: 30px;
-    border-bottom: 1px solid #3ce3e8;
+    border-bottom: 1px solid $base-light-blue;
     padding-right: 5px;
     z-index: 1000;
     position: relative;
@@ -160,7 +162,7 @@
     overflow-y: scroll;
     padding: 0 15px 0 10px;
     width: 300px;
-    background-color: #05315a;
+    background-color: $base-dark-blue;
     position: relative;
   }
 }
@@ -174,12 +176,14 @@
   font-size: 16px;
 }
 .view-oreder-element.current {
-  color: #3ce3e8;
+  color: $base-light-blue;
 }
 .player-wraper {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: fit-content;
+  margin: 0 auto;
   .player,
   .player-placeholder {
     width: 1204px;
@@ -188,9 +192,9 @@
     margin-right: auto;
     margin-bottom: 10px;
     border: none;
-    border-bottom: 2px solid #3ce3e8;
-    border-right: 2px solid #3ce3e8;
-    border-left: 1px solid #3ce3e8;
+    border-bottom: 2px solid $base-light-blue;
+    border-right: 2px solid $base-light-blue;
+    border-left: 1px solid $base-light-blue;
   }
 }
 
@@ -205,7 +209,7 @@
   align-items: center;
 }
 .just-player {
-  background-color: #3ce3e8;
+  background-color: $base-light-blue;
   color: black;
   padding-top: 13px;
 }
@@ -222,7 +226,7 @@
   align-content: center;
   background: rgba(6, 75, 140, 0.95);
   padding-left: 30px;
-  border-bottom: 1px solid #3ce3e8;
+  border-bottom: 1px solid $base-light-blue;
   padding-right: 5px;
   z-index: 100;
   position: relative;
@@ -230,7 +234,7 @@
   .little-dievider {
     width: 2px;
     height: 29px;
-    background-color: #05315a;
+    background-color: $base-dark-blue;
     margin-left: 40px;
   }
 }
@@ -253,21 +257,21 @@
   color: white;
   font-family: inherit;
   border: none;
-  border-bottom: 1px solid #3ce3e8;
+  border-bottom: 1px solid $base-light-blue;
   font-size: 18px;
   cursor: pointer;
 }
 .player-option:hover,
 .dub-option:hover {
-  background-color: #05315a;
+  background-color: $base-dark-blue;
 }
 .dub-name {
   max-width: 75px;
   font-size: 16px;
 }
 .title-header {
-  background: rgba(6, 75, 140, 0.8);
-  border-bottom: 2px solid var(--cyan-accent, #3ce3e8);
+  background: $background-trans;
+  border-bottom: 2px solid var(--cyan-accent, $base-light-blue);
   border-radius: 3px 3px 0px 0px;
   display: inline-flex;
   gap: 15px;
@@ -303,7 +307,7 @@
     background-color: #3c87e8;
   }
   .episode.active {
-    background: #3ce3e8;
+    background: $base-light-blue;
     color: black;
   }
 }
@@ -323,7 +327,7 @@
   display: flex;
   height: 50px;
   gap: 5px;
-  background-color: #05315a;
+  background-color: $base-dark-blue;
   padding-top: 5px;
   width: 1205px;
   .style {
@@ -349,7 +353,7 @@
 }
 .comment-send {
   border: none;
-  background-color: #3ce3e8;
+  background-color: $base-light-blue;
   color: black;
   width: 250px;
   height: 50px;
@@ -365,11 +369,11 @@
 .devider-line-long {
   width: 1250px;
   height: 2px;
-  background-color: #05315a;
+  background-color: $base-dark-blue;
   margin-bottom: 50px;
 }
 .comments {
-  background-color: #05315a;
+  background-color: $base-dark-blue;
   display: flex;
   flex-direction: column;
   width: 1205px;
@@ -420,7 +424,7 @@
     justify-content: space-between;
     .comment-full {
       border: none;
-      color: #3ce3e8;
+      color: $base-light-blue;
       background: none;
       font-size: 15px;
       cursor: pointer;
@@ -442,7 +446,7 @@
   }
 }
 .comments .comment:nth-child(2n) {
-  background-color: #05315a;
+  background-color: $base-dark-blue;
 }
 @media (max-width: 1100px) {
   .poster-wraper {

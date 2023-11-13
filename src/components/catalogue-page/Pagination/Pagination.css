@@ -40,4 +40,9 @@
 .pagination-button.active {
   background-color: #3ce3e8;
   color: black;
+  cursor: auto;
+}
+
+.pagination-button:disabled {
+  cursor: auto;
 }/*# sourceMappingURL=Pagination.css.map */

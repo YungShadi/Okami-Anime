@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import StopRigthThereImg from "../img/stoprigththere.png";
 
 function ErrorPage() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function ErrorPage() {
         Назад
       </button>
       <h2>Такой страницы не существует D:</h2>
+      <img src={StopRigthThereImg} alt="" />
     </div>
   );
 }

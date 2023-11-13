@@ -1,3 +1,5 @@
+@import "../../stylsheet.scss";
+
 .season-anime {
   width: fit-content;
   .season-anime-title {
@@ -16,7 +18,7 @@
   margin-left: auto;
   margin-right: auto;
   height: 380px;
-  background-color: rgba(6, 75, 140, 0.8);
+  background-color: $background-trans;
   padding: 0 20px 20px 20px;
   display: flex;
   gap: 25px;
@@ -43,7 +45,7 @@
 .devider {
   height: 2px;
   width: 280px;
-  background-color: #3ce3e8;
+  background-color: $base-light-blue;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 100px;

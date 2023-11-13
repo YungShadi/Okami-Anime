@@ -1,3 +1,4 @@
+@import "stylsheet";
 * {
   margin: 0px;
   padding: 0px;
@@ -48,6 +49,7 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   max-width: 1350px;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 .captcha-window {
   position: absolute;
@@ -58,7 +60,7 @@ body::-webkit-scrollbar-thumb {
 .background {
   width: 10000px;
   height: 10000px;
-  background-color: #05315a;
+  background-color: $base-dark-blue;
   position: fixed;
   top: 0;
   z-index: 100000;
@@ -96,6 +98,6 @@ body::-webkit-scrollbar-thumb {
 }
 @media (min-width: 1100px) {
   .okami {
-    min-height: 975px;
+    min-height: 730px;
   }
 }

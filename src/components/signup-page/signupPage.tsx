@@ -12,7 +12,7 @@ import "./signupPage.css";
 function SignupPage() {
   const dispatch = useDispatch();
   const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
   const [checkboxStatus, setCheckboxStatus] = useState(false);
   const [cbError, setCbError] = useState(false);
@@ -93,11 +93,11 @@ function SignupPage() {
             <p className="error-message-input">Пароль обязателен</p>
           )}
         </div>
-        <label htmlFor="personalInfoCb">
+        <label htmlFor="personal-info-cb" className="personal-info">
           <input
             type="checkbox"
-            className="personalInfoCb"
-            id="personalInfoCb"
+            className="personal-info-cb"
+            id="personal-info-cb"
             checked={checkboxStatus}
             onClick={() => setCheckboxStatus(!checkboxStatus)}
           />
@@ -114,7 +114,7 @@ function SignupPage() {
         <button type="submit" className="from-submit">
           Зарегестрироваться
         </button>
-        <span style={{ marginTop: "20px" }}>
+        <span>
           У вас уже есть аккаунт?{" "}
           <Link to="/sign-in" style={LinkStyle}>
             {" "}

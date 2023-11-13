@@ -14,7 +14,7 @@ import "../signup-page/signupPage.css";
 
 function SigniinPage() {
   const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
   // const showCaptcha = useSelector(
   //   (state: { captcha: CapthcaDto }) => state.captcha.showCaptcha
@@ -78,7 +78,7 @@ function SigniinPage() {
         <button type="submit" className="from-submit">
           Войти
         </button>
-        <span style={{ marginTop: "20px" }}>
+        <span>
           Вы еще не зарегстрированны?{" "}
           <Link to="/sign-up" style={{ color: "white" }}>
             {" "}

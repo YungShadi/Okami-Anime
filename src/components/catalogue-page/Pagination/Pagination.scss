@@ -1,3 +1,5 @@
+@import "../../../stylsheet.scss";
+
 .pagination-wrapper {
   width: 100%;
   display: flex;
@@ -9,8 +11,8 @@
   height: 30px;
   margin: 0 auto;
   margin-bottom: 10px;
-  border: 1px solid #3ce3e8;
-  background-color: #05315a;
+  border: 1px solid $base-light-blue;
+  background-color: $base-dark-blue;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -26,13 +28,17 @@
 .pagination-button {
   width: 30px;
   height: 30px;
-  border: 1px solid #3ce3e8;
-  background-color: #05315a;
+  border: 1px solid $base-light-blue;
+  background-color: $base-dark-blue;
   color: white;
   border-radius: 5px;
   cursor: pointer;
 }
 .pagination-button.active {
-  background-color: #3ce3e8;
+  background-color: $base-light-blue;
   color: black;
+  cursor: auto;
+}
+.pagination-button:disabled {
+  cursor: auto;
 }

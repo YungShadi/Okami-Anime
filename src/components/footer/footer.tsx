@@ -31,8 +31,11 @@ function Footer() {
         </a>
       </div>
       <span className="email">
-        <a className="email-link" href="email">
-          kakashki@anime.ru
+        <a
+          className="email-link"
+          href="mailto:animeokamidev@gmail.com&body=привет"
+        >
+          animeokamidev@gmail.com
         </a>
       </span>
       <div className="copyrigth">

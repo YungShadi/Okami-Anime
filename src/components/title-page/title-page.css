@@ -181,6 +181,9 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
 }
 .player-wraper .player,
 .player-wraper .player-placeholder {
