@@ -19,16 +19,16 @@ function Header() {
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const username = useSelector(
-    (state: { auth: UserDto }) => state?.auth.username
+    (state: { auth: UserDto }) => state?.auth.username,
   );
   const searchState = useSelector(
-    (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened
+    (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened,
   );
   const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state?.mobile.isMenuOpened
+    (state: { mobile: MobileDto }) => state?.mobile.isMenuOpened,
   );
   const mobileView = useSelector(
-    (state: { mobile: MobileDto }) => state?.mobile.isMobileView
+    (state: { mobile: MobileDto }) => state?.mobile.isMobileView,
   );
   const dispatch = useDispatch();
 
@@ -38,12 +38,13 @@ function Header() {
       setScrollIsEnough(scrollYPos);
     };
     window.addEventListener("scroll", onScrollHandle);
+    return () => window.removeEventListener("scroll", onScrollHandle);
   }, []);
   return (
     <>
       {/* // here we have nav links to change visible page */}
       <header
-        className={`header ${scrollIsEnough > 90 ? "off-screen-fixed" : ""}`}
+        className={`header ${scrollIsEnough > 75 ? "off-screen-fixed" : ""}`}
         ref={headerRef}
       >
         <button
@@ -118,7 +119,7 @@ function Header() {
               <img src={ArrowUp} alt="arrow-up" className="up-button-arrow" />
             </button>
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );

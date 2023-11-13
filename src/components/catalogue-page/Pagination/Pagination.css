@@ -6,10 +6,16 @@
 }
 
 .pagination-load-more {
-  width: 80%;
+  width: 20vw;
   height: 30px;
   margin: 0 auto;
   margin-bottom: 10px;
+  border: 1px solid #3ce3e8;
+  background-color: #05315a;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .catalogue-pagination {
@@ -28,6 +34,7 @@
   background-color: #05315a;
   color: white;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .pagination-button.active {
