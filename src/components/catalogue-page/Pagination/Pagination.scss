@@ -11,10 +11,11 @@
   margin-bottom: 10px;
 }
 .catalogue-pagination {
-  width: 70%;
+  width: fit-content;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
+  gap: 10px;
 }
 .pagination-button {
   width: 30px;

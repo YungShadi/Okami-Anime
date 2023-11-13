@@ -26,7 +26,7 @@ export default function Pagination({
   }
 
   const paginationRange = usePaginationRange({
-    pages,
+    totalCount,
     pageSize,
     currentPage,
     siblingCount,
@@ -43,13 +43,13 @@ export default function Pagination({
       </button>
       <div className="catalogue-pagination">
         <button
-          className="pagination-prev"
+          className="pagination-button"
           type="button"
           onClick={handlePreviousPage}
         >
           {"<"}
         </button>
-        {paginationRange?.map((page: number | string) => {
+        {paginationRange?.map((page: number | string | Element) => {
           if (currentPage === page) {
             return (
               <button type="button" className="pagination-button active">
@@ -59,11 +59,7 @@ export default function Pagination({
           }
           if (page === "..." && paginationRange?.[1] === page) {
             return (paginationRange[1] = (
-              <button
-                type="button"
-                className="pagination-button"
-                onClick={() => handlePageChange(1)}
-              >
+              <button type="button" className="pagination-button" disabled>
                 {page}
               </button>
             ));
@@ -74,11 +70,7 @@ export default function Pagination({
             paginationRange?.[paginationRange?.length - 2] === page
           ) {
             return (paginationRange[paginationRange.length - 2] = (
-              <button
-                type="button"
-                className="pagination-button"
-                onClick={() => handlePageChange(pages)}
-              >
+              <button type="button" className="pagination-button" disabled>
                 {page}
               </button>
             ));
@@ -94,7 +86,7 @@ export default function Pagination({
           );
         })}
         <button
-          className="pagination-nxt"
+          className="pagination-button"
           type="button"
           onClick={handleNextPage}
         >

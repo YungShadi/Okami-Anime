@@ -1,9 +1,91 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export interface paginationState {
+  currentPage: number;
+  titlesArray: {
+    titleStatus: string;
+    titleAgeRest: string;
+    titleName: string;
+    titleTags: string[];
+  }[];
+}
+const initialState: paginationState = {
   currentPage: 1,
-  
+  titlesArray: [
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+    {
+      titleStatus: "вышел",
+      titleAgeRest: "21+",
+      titleName: "чел",
+      titleTags: ["боевик", "драмма", "терентий"],
+    },
+  ],
 };
 export const paginationSlice = createSlice({
   name: "pagination",
@@ -11,6 +93,10 @@ export const paginationSlice = createSlice({
   reducers: {
     nextPageAction: (state) => {
       state.currentPage++;
+    },
+    nextPageLoadMoreAction: (state) => {
+      state.currentPage++;
+      state.titlesArray = [...state.titlesArray, ...state.titlesArray];
     },
     previousPageAction: (state) => {
       state.currentPage--;
@@ -21,7 +107,11 @@ export const paginationSlice = createSlice({
   },
 });
 
-export const { changePageAction, nextPageAction, previousPageAction } =
-  paginationSlice.actions;
+export const {
+  changePageAction,
+  nextPageAction,
+  previousPageAction,
+  nextPageLoadMoreAction,
+} = paginationSlice.actions;
 
 export default paginationSlice.reducer;

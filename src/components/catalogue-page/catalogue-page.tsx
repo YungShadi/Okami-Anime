@@ -1,7 +1,8 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
+import { paginationState } from "../../redux/paginationSlice";
 import { MobileDto } from "../../types/mobileDto";
 import {
   toggleMenuAction,
@@ -14,14 +15,6 @@ import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
 import Title from "../title";
 import "./catalogue-page.css";
-import { usePagination } from "../../hooks/usePagination";
-
-type TitleType = {
-  titleStatus: string;
-  titleAgeRest: string;
-  titleName: string;
-  titleTags: string[];
-};
 
 function CataloguePage() {
   const dispatch = useDispatch();
@@ -37,157 +30,11 @@ function CataloguePage() {
   const searchState = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened,
   );
+  const titlesArray = useSelector(
+    (state: { pagination: paginationState }) => state.pagination.titlesArray,
+  );
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
-
-  const titlesArray: TitleType[] = [
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-  ];
-  const titlesArraySecond: TitleType[] = [
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-  ];
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {

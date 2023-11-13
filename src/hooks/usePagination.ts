@@ -1,17 +1,20 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PaginationDto } from "../types/paginationDto";
 import {
   nextPageAction,
   changePageAction,
   previousPageAction,
+  nextPageLoadMoreAction,
+  paginationState,
 } from "../redux/paginationSlice";
 
 // eslint-disable-next-line import/prefer-default-export
 export const usePagination = ({ totalCount, pageSize }: PaginationDto) => {
   const pages = Math.ceil(totalCount / pageSize);
   const dispatch = useDispatch();
-  const currentPage = useSelector((state) => state.pagination.currentPage);
+  const currentPage = useSelector(
+    (state: { pagination: paginationState }) => state.pagination.currentPage,
+  );
 
   const handleNextPage = () => {
     if (currentPage < pages) {
@@ -19,7 +22,7 @@ export const usePagination = ({ totalCount, pageSize }: PaginationDto) => {
     }
   };
   const handleNextPageLoadMore = () => {
-    if (currentPage < pages) dispatch(nextPageAction());
+    if (currentPage < pages) dispatch(nextPageLoadMoreAction());
   };
 
   const handlePreviousPage = () => {

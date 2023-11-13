@@ -9,19 +9,19 @@ const range = (start: number, end: number) => {
 };
 
 export const usePaginationRange = ({
-  pages,
+  totalCount,
   pageSize,
   siblingCount = 1,
   currentPage,
 }: {
-  pages: number;
+  totalCount: number;
   pageSize: number;
   siblingCount: number;
   currentPage: number;
 }) => {
   // eslint-disable-next-line consistent-return
   const paginationRange = useMemo(() => {
-    const totalPageCount = Math.ceil(pages / pageSize);
+    const totalPageCount = Math.ceil(totalCount / pageSize);
 
     const totalPageNumbers = siblingCount + 5;
 
@@ -61,7 +61,7 @@ export const usePaginationRange = ({
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [firstPageIndex, "...", ...middleRange, "...", lastPageIndex];
     }
-  }, [pages, pageSize, siblingCount, currentPage]);
+  }, [totalCount, pageSize, siblingCount, currentPage]);
 
   return paginationRange;
 };
