@@ -1,11 +1,15 @@
 @import "../../stylsheet.scss";
 
 .profile {
-  width: 65vw;
+  width: 40vw;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  min-height: 694px;
+  background-color: $background-trans;
+  height: 60vh;
+  margin-top: 20px;
+  border: 1px solid $base-light-blue;
+  border-radius: 10px;
 }
 .profile-header {
   width: 100%;

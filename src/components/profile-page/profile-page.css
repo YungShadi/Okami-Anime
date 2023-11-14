@@ -1,8 +1,12 @@
 .profile {
-  width: 65vw;
+  width: 40vw;
   height: -moz-fit-content;
   height: fit-content;
-  min-height: 694px;
+  background-color: rgba(6, 75, 140, 0.8);
+  height: 60vh;
+  margin-top: 20px;
+  border: 1px solid #3ce3e8;
+  border-radius: 10px;
 }
 
 .profile-header {

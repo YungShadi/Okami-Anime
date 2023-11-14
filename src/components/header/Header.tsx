@@ -92,7 +92,7 @@ function Header() {
           </NavLink>
         </div>
         {/* user display depending on localStorage(maybe there is another way) */}
-        {isAuthenticated ? (
+        {!isAuthenticated ? (
           <Link className="header-profile" to={`profile/${username}`}>
             <span className="profile-name">{username}</span>
             <img className="profile-pic" alt="profile" src={DefaultIcon} />

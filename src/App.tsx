@@ -9,7 +9,6 @@ import Layout from "./components/layout/layout";
 import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
 
-
 const MainPage = lazy(() => import("./components/main-page/main-page"));
 const TitlePage = lazy(() => import("./components/title-page/title-page"));
 const CataloguePage = lazy(() => import("./components/catalogue-page"));
@@ -17,21 +16,16 @@ const Copyright = lazy(() => import("./components/copyright/copyright"));
 const SignupPage = lazy(() => import("./components/signup-page"));
 const SigniinPage = lazy(() => import("./components/signin-page/signinPage"));
 const ProfilePage = lazy(() => import("./components/profile-page"));
-const ProfileMain = lazy(
-  () => import("./components/profile-page/profile-main")
-);
-const ProfileList = lazy(
-  () => import("./components/profile-page/profile-list")
-);
+
 const AboutUs = lazy(() => import("./components/aboutus-page"));
 const PersonalAgreementPage = lazy(
-  () => import("./components/PersonalAgreementPage")
+  () => import("./components/PersonalAgreementPage"),
 );
 
 function App() {
   const dispatch = useDispatch();
   const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
 
   useEffect(() => {
@@ -72,11 +66,7 @@ function App() {
         <Route path="sign-up" element={<SignupPage />} />
         <Route path="sign-in" element={<SigniinPage />} />
         <Route path="personal-agreement" element={<PersonalAgreementPage />} />
-        <Route path="profile/*" element={<ProfilePage />}>
-          <Route path=":username" element={<ProfileMain />} />
-          <Route path="list" element={<ProfileList />} />
-          <Route path="settings" element={<p>settings</p>} />
-        </Route>
+        <Route path="profile/*" element={<ProfilePage />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
