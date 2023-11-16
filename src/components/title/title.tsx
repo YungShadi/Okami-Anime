@@ -117,7 +117,7 @@ function Title({
         <span className="title-episodes">{episodes}</span>
         <div className="title-tags tags">
           <span className="tag">
-            {titleTags.slice(0, 3).map((tag, i, arr) => {
+            {titleTags?.slice(0, 3).map((tag, i, arr) => {
               if (i + 1 === arr.length) {
                 return <span>{tag}</span>;
               }

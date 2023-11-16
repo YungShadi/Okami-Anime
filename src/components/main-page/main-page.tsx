@@ -9,6 +9,7 @@ import "./main-page.css";
 
 function MainPage() {
   const titles = useSelector((state) => state.titles.titlesArray);
+  // eslint-disable-next-line no-unused-vars
   const { isLoadingTitles } = useTitles();
   console.log(titles);
 
@@ -38,12 +39,14 @@ function MainPage() {
         <div className="recently-added-titles">
           {titles.map((title) => (
             <Title
-              titleName={title.title}
+              titleFullName={title.title}
+              titleName={title.material_data.title}
               titleAgeRest={title.material_data.rating_mpaa}
               titleStatus={title.material_data.anime_status}
               titleTags={title.material_data.anime_genres}
               titlePoster={title.material_data.poster_url}
               titleEpisodes={title.episodes_count}
+              titleId={title.id}
               titleClass="recently-added"
             />
           ))}
