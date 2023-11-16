@@ -1,69 +1,32 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Title from "../title";
-
+import { useTitles } from "../../hooks/useTitles";
 import "./main-page.css";
 
 // ! В будущем, при получении данных о тайтлах и переходе в конкертный если о нем есть данные в state
 // ! то лучше брать их. если нет - посылаем запрос по id в ссылке
 
-type TitleType = {
-  titleStatus: string;
-  titleAgeRest: string;
-  titleName: string;
-  titleTags: string[];
-};
-
 function MainPage() {
-  const titlesArray: TitleType[] = [
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-    {
-      titleStatus: "вышел",
-      titleAgeRest: "21+",
-      titleName: "чел",
-      titleTags: ["боевик", "драмма", "терентий"],
-    },
-  ];
+  const titles = useSelector((state) => state.titles.titlesArray);
+  const { isLoadingTitles } = useTitles();
+  console.log(titles);
 
   return (
     <section className="main" style={{ flexGrow: "1" }}>
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
-          {titlesArray.slice(0, 6).map((title) => (
+          {titles.slice(0, 6).map((title) => (
             <Title
-              titleName={title.titleName}
-              titleAgeRest={title.titleAgeRest}
-              titleStatus={title.titleStatus}
-              titleTags={title.titleTags}
+              titleFullName={title.title}
+              titleName={title.material_data.title}
+              titleAgeRest={title.material_data.rating_mpaa}
+              titleStatus={title.material_data.anime_status}
+              titleTags={title.material_data.anime_genres}
+              titlePoster={title.material_data.poster_url}
+              titleEpisodes={title.episodes_count}
+              titleId={title.id}
               titleClass="season-title"
             />
           ))}
@@ -73,12 +36,14 @@ function MainPage() {
       <div className="recently-added-anime">
         <h2 className="recetly-added-title">Недавно добавленные</h2>
         <div className="recently-added-titles">
-          {titlesArray.map((title) => (
+          {titles.map((title) => (
             <Title
-              titleName={title.titleName}
-              titleAgeRest={title.titleAgeRest}
-              titleStatus={title.titleStatus}
-              titleTags={title.titleTags}
+              titleName={title.title}
+              titleAgeRest={title.material_data.rating_mpaa}
+              titleStatus={title.material_data.anime_status}
+              titleTags={title.material_data.anime_genres}
+              titlePoster={title.material_data.poster_url}
+              titleEpisodes={title.episodes_count}
               titleClass="recently-added"
             />
           ))}

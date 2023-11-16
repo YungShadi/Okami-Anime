@@ -1,14 +1,13 @@
-@import "stylsheet";
+@import "../../stylsheet.scss";
 
 .title-main {
-  height: 340px;
   width: 190px;
   transition: 0.5s;
-  height: 350px;
+  height: 400px;
   margin-top: 20px;
   overflow: hidden;
   span {
-    font-size: 10px;
+    font-size: 14px;
   }
   .poster {
     height: 295px;
@@ -26,7 +25,9 @@
     overflow: hidden;
     position: relative;
     z-index: 2;
+    cursor: help;
   }
+
   .status,
   .age-rest {
     background-color: $base-light-blue;
@@ -40,24 +41,30 @@
     align-self: flex-end;
   }
 }
-.title-main:hover {
+.title-poster-wraper:hover {
   .poster {
     -webkit-filter: brightness(70%);
     filter: brightness(70%);
     scale: 1.03;
   }
 }
-.title-main:hover::after {
-  content: url("../img/play-button-svgrepo-com.svg");
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  position: relative;
-  bottom: 220px;
-  left: 65px;
-  -webkit-filter: brightness(130%);
-  filter: brightness(130%);
-  z-index: 2;
+.title-poster-wraper:hover {
+  .play-button-wraper {
+    position: absolute;
+    z-index: 2;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+  }
+  .play-button-wraper::after {
+    content: url("../img/play-button-svgrepo-com.svg");
+    display: inline-block;
+    -webkit-filter: brightness(130%);
+    filter: brightness(130%);
+    position: relative;
+    top: 120px;
+    left: 65px;
+  }
 }
 .title-poster-wraper {
   height: 290px;
@@ -69,11 +76,16 @@
 .title-year {
   display: none;
 }
+.title-name-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+  height: 100px;
+}
 .title-episodes {
   position: relative;
-  font-size: 14px !important;
-  bottom: 4px;
-  left: 75px;
+  font-size: 14px;
 }
 @media (max-width: 1100px) {
   .title-main {
@@ -108,6 +120,7 @@
     }
   }
   .title-name-tags {
+    display: flex;
     padding-top: 15px;
     width: 65%;
     height: 100%;

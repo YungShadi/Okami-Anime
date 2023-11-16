@@ -195,6 +195,16 @@
     border-bottom: 2px solid $base-light-blue;
     border-right: 2px solid $base-light-blue;
     border-left: 1px solid $base-light-blue;
+    body {
+      background-color: white;
+    }
+  }
+}
+iframe {
+  html {
+    body {
+      background-color: white;
+    }
   }
 }
 

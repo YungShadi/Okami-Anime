@@ -3,7 +3,7 @@ import "./profile-page.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserDto } from "../../types/userDto";
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 import DeafaultPic from "../img/Аватар.png";
 
 function ProfilePage() {
@@ -13,7 +13,7 @@ function ProfilePage() {
   const location = useLocation();
 
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
 
   const role = useSelector(
     (state: { auth: UserDto }) => state?.auth.authorities,

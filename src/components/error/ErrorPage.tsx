@@ -12,7 +12,7 @@ function ErrorPage() {
         Назад
       </button>
       <h2>Такой страницы не существует D:</h2>
-      <img src={StopRigthThereImg} alt="" />
+      <img src={StopRigthThereImg} alt="stop rigth there" />
     </div>
   );
 }

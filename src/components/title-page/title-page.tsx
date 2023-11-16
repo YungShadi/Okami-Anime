@@ -25,16 +25,16 @@ function TitlePage() {
   const [triggerToggle, setTriggerToggle] = useState(false);
   const [selectState, setSelectState] = useState("Добавить в список");
   const [triggerContent, setTriggerContent] = useState(
-    <div className="trigger-content">Добавить в список</div>
+    <div className="trigger-content">Добавить в список</div>,
   );
   const [triggerOrder, setTriggerOrder] = useState(false);
-  const [triggerPlayer, setTriggerPlayer] = useState(false);
-  const [triggerDub, setTriggerDub] = useState(false);
-  const [currentDub, setCurretnDub] = useState("Anilibria");
+  // const [triggerPlayer, setTriggerPlayer] = useState(false);
+  // const [triggerDub, setTriggerDub] = useState(false);
+  // const [currentDub, setCurretnDub] = useState("Anilibria");
   const [showFullComment, setShowFullComment] = useState(false);
-  const mobileView = useSelector(
-    (state: { mobile: MobileDto }) => state?.mobile.isMobileView
-  );
+  // const mobileView = useSelector(
+  //   (state: { mobile: MobileDto }) => state?.mobile.isMobileView,
+  // );
   const commentText = `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
   Tenetur nam quod iste aliquam nostrum facere repellat tempore,
   corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
@@ -177,38 +177,38 @@ function TitlePage() {
   ];
 
   // options for player chose
-  const playerOptions = [
-    {
-      title: "Kodik",
-    },
-    {
-      title: "Sibnet",
-    },
-    {
-      title: "Pidoraski",
-    },
-  ];
+  // const playerOptions = [
+  //   {
+  //     title: "Kodik",
+  //   },
+  //   {
+  //     title: "Sibnet",
+  //   },
+  //   {
+  //     title: "Pidoraski",
+  //   },
+  // ];
 
   // options for dub chose
-  const dubOptions = [
-    {
-      dub: "Anilibria",
-    },
-    {
-      dub: "Aniudub",
-    },
-    {
-      dub: "SHIZA-project",
-    },
-  ];
+  // const dubOptions = [
+  //   {
+  //     dub: "Anilibria",
+  //   },
+  //   {
+  //     dub: "Aniudub",
+  //   },
+  //   {
+  //     dub: "SHIZA-project",
+  //   },
+  // ];
 
   // calculating max height of player and dub chose options wraper
-  function maxPlayerChoiceHeight() {
-    return playerOptions.length * 50;
-  }
-  function maxDubChoiceHeight() {
-    return dubOptions.length * 50;
-  }
+  // function maxPlayerChoiceHeight() {
+  //   return playerOptions.length * 50;
+  // }
+  // function maxDubChoiceHeight() {
+  //   return dubOptions.length * 50;
+  // }
 
   // useEffect chenging current displayable conditionn and svg to color #3CE3E8
   useEffect(() => {
@@ -264,7 +264,7 @@ function TitlePage() {
                 </>
               )}
             </svg>
-          </>
+          </>,
         );
       }
       return 0;
@@ -276,7 +276,13 @@ function TitlePage() {
   function showOptions() {
     setTriggerToggle(!triggerToggle);
   }
-
+  const playerInfo = fetch(
+    "https://kodikapi.com/search?token=9369488b540d3a88695d0407421b3197&title=атака%20титанов&id=movie-59682",
+  );
+  function fetchInfo() {
+    playerInfo.then((result) => console.log(result));
+  }
+  fetchInfo();
   return (
     <div className="title">
       <div className="title-info">
@@ -310,7 +316,7 @@ function TitlePage() {
                       <div className="option-line" />
                       {option.img}
                     </button>
-                  )
+                  ),
               )}
               <div className="option">
                 <div className="option-content" style={{ color: "#FF0900" }}>
@@ -380,8 +386,7 @@ function TitlePage() {
         <div className="title-header">
           {/* player header */}
           <span className="header-tab just-player">Плеер</span>
-          {/* chose player */}
-          <div className="player-chose-wraper">
+          {/* <div className="player-chose-wraper">
             <button
               className="header-tab player-chose"
               type="button"
@@ -402,7 +407,7 @@ function TitlePage() {
                 </>
               )}
             </button>
-            {/* options for player */}
+  
             <div
               className="player-options"
               style={{
@@ -415,9 +420,9 @@ function TitlePage() {
                 </button>
               ))}
             </div>
-          </div>
-          {/* chsoe dub */}
-          <div className="dub-chose-wraper">
+          </div> */}
+
+          {/* <div className="dub-chose-wraper">
             <button
               className="header-tab dub-chose"
               type="button"
@@ -438,7 +443,7 @@ function TitlePage() {
                 </>
               )}
             </button>
-            {/* options for dub here */}
+      
             <div
               className="dub-options"
               style={{
@@ -455,13 +460,13 @@ function TitlePage() {
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="player">
           {/* iframe includes player link */}
           <iframe
             title="player"
-            src="//kodik.biz/seria/1194775/4dc182c777a94d28c0029339196640e2/720p"
+            src="//aniqit.com/serial/495/2ba6d264a85e940d04d71f78a2f27a7a/720p"
             allow="autoplay *; fullscreen *"
             key="player"
             className="player"
