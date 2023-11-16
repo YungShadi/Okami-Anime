@@ -13,9 +13,9 @@ export const titlesApi = createApi({
       query: () =>
         `list?${token}&limit=12&types=anime-serial%2Canime&with_material_data=true&has_field=rating_mpaa`,
     }),
-    getTitileById: builder.query({
+    getTitileById: builder.mutation({
       query: (titleId) => ({
-        url: `search?${token}&id=${titleId}`,
+        url: `search?${token}&id=${titleId}&with_material_data=true`,
         method: "GET",
       }),
     }),
@@ -23,4 +23,4 @@ export const titlesApi = createApi({
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export const { useGetTitlesQuery, useGetTitileByIdQuery } = titlesApi;
+export const { useGetTitlesQuery, useGetTitileByIdMutation } = titlesApi;

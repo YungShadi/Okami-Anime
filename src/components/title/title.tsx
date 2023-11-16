@@ -93,7 +93,7 @@ function Title({
     <Link
       className={`${titleClass} title-main`}
       style={{ color: "white", textDecoration: "none" }}
-      to={`article/${transliterate(titleName)}-${titleId}`}
+      to={`article/${transliterate(titleName)}?${titleId}`}
     >
       <div className="title-poster-wraper">
         <span className="title-status status">{titleStatus}</span>

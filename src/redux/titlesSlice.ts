@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   titlesArray: [],
+  title: [],
 };
 
 export const titlesSlice = createSlice({
@@ -12,9 +13,12 @@ export const titlesSlice = createSlice({
     setTitlesAction: (state, action) => {
       state.titlesArray = action.payload;
     },
+    setCurrentTitle: (state, action) => {
+      state.title = action.payload;
+    },
   },
 });
 
-export const { setTitlesAction } = titlesSlice.actions;
+export const { setTitlesAction, setCurrentTitle } = titlesSlice.actions;
 
 export default titlesSlice.reducer;

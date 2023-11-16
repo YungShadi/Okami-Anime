@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Poster from "../img/Постер.png";
 import "./title-page.css";
-import Arrow from "../img/mdi_menu-down.svg";
 import Bold from "../img/ant-design_bold-outlined.svg";
 import Italic from "../img/ant-design_italic-outlined.svg";
 import Underline from "../img/ant-design_underline-outlined.svg";
@@ -10,7 +10,7 @@ import LineThrough from "../img/ant-design_strikethrough-outlined.svg";
 import OrderedList from "../img/ant-design_ordered-list-outlined.svg";
 import UnorderedList from "../img/ant-design_unordered-list-outlined.svg";
 import DefaultProfPicture from "../img/Аватар.png";
-import { MobileDto } from "../../types/mobileDto";
+import { useTitles } from "../../hooks/useTitles";
 
 interface OptionTitle {
   title: string;
@@ -18,9 +18,6 @@ interface OptionTitle {
   img: React.JSX.Element;
 }
 
-// unfortunaly there is a lot of svg`s and its elements
-// that makes code look very big, imma will fiind out if i can change it
-// but for now its ok
 function TitlePage() {
   const [triggerToggle, setTriggerToggle] = useState(false);
   const [selectState, setSelectState] = useState("Добавить в список");
@@ -28,35 +25,21 @@ function TitlePage() {
     <div className="trigger-content">Добавить в список</div>,
   );
   const [triggerOrder, setTriggerOrder] = useState(false);
-  // const [triggerPlayer, setTriggerPlayer] = useState(false);
-  // const [triggerDub, setTriggerDub] = useState(false);
-  // const [currentDub, setCurretnDub] = useState("Anilibria");
-  const [showFullComment, setShowFullComment] = useState(false);
-  // const mobileView = useSelector(
-  //   (state: { mobile: MobileDto }) => state?.mobile.isMobileView,
-  // );
-  const commentText = `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-  Tenetur nam quod iste aliquam nostrum facere repellat tempore,
-  corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
-  Harum officiis cupiditate ipsum architecto. Lorem, ipsum dolor
-  sit amet consectetur adipisicing elit. Tenetur nam quod iste
-  aliquam nostrum facere repellat tempore, corrupti deserunt.
-  Iusto at quisquam doloribus incidunt ipsam! Harum officiis
-  cupiditate ipsum architecto. Lorem, ipsum dolor sit amet
-  consectetur adipisicing elit. Tenetur nam quod iste aliquam
-  nostrum facere repellat tempore, corrupti deserunt. Iusto at
-  quisquam doloribus incidunt ipsam! Harum officiis cupiditate
-  ipsum architecto. Lorem, ipsum dolor sit amet consectetur
-  adipisicing elit. Tenetur nam quod iste aliquam nostrum facere
-  repellat tempore, corrupti deserunt. Iusto at quisquam doloribus
-  incidunt ipsam! Harum officiis cupiditate ipsum architecto.
-  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-  Tenetur nam quod iste aliquam nostrum facere repellat tempore,
-  corrupti deserunt. Iusto at quisquam doloribus incidunt ipsam!
-  Harum officiis cupiditate ipsum architecto.`;
-  // const elementCount = document.querySelectorAll(".view-oreder-element").length;
-  // document.documentElement.style.setProperty("--element-count", elementCount);
 
+  const [showFullComment, setShowFullComment] = useState(false);
+  const [titleArray, setTitleArray] = useState({});
+
+  const location = useLocation();
+
+  const { handleGetCurrentTitle } = useTitles();
+
+  const titleId = location.search.replace("?", "");
+
+  useEffect(() => {
+    handleGetCurrentTitle(titleId).then((result) => {
+      setTitleArray(result.data.results[0]);
+    });
+  }, []);
   // options for condition of title chose
   const selsectOptions: Array<OptionTitle> = [
     {
@@ -176,40 +159,6 @@ function TitlePage() {
     },
   ];
 
-  // options for player chose
-  // const playerOptions = [
-  //   {
-  //     title: "Kodik",
-  //   },
-  //   {
-  //     title: "Sibnet",
-  //   },
-  //   {
-  //     title: "Pidoraski",
-  //   },
-  // ];
-
-  // options for dub chose
-  // const dubOptions = [
-  //   {
-  //     dub: "Anilibria",
-  //   },
-  //   {
-  //     dub: "Aniudub",
-  //   },
-  //   {
-  //     dub: "SHIZA-project",
-  //   },
-  // ];
-
-  // calculating max height of player and dub chose options wraper
-  // function maxPlayerChoiceHeight() {
-  //   return playerOptions.length * 50;
-  // }
-  // function maxDubChoiceHeight() {
-  //   return dubOptions.length * 50;
-  // }
-
   // useEffect chenging current displayable conditionn and svg to color #3CE3E8
   useEffect(() => {
     selsectOptions.find((option) => {
@@ -276,217 +225,128 @@ function TitlePage() {
   function showOptions() {
     setTriggerToggle(!triggerToggle);
   }
-  const playerInfo = fetch(
-    "https://kodikapi.com/search?token=9369488b540d3a88695d0407421b3197&title=атака%20титанов&id=movie-59682",
-  );
-  function fetchInfo() {
-    playerInfo.then((result) => console.log(result));
-  }
-  fetchInfo();
+
   return (
     <div className="title">
-      <div className="title-info">
-        <div className="poster-wraper">
-          <img className="title-poster" alt="poster" src={Poster} />
-          {/* title condition */}
-          <div className="select-wrapper">
-            <button
-              className="select-trigger"
-              type="button"
-              onClick={showOptions}
-            >
-              {triggerContent}
-            </button>
-            <div
-              className="select-options"
-              style={{
-                height: triggerToggle ? "300px" : "0px",
-                display: "block",
-              }}
-            >
-              {selsectOptions.map(
-                (option) =>
-                  selectState !== option.state && (
-                    <button
-                      className="option"
-                      type="button"
-                      onClick={() => setSelectState(option.state)}
-                    >
-                      <div className="option-content">{option.title}</div>
-                      <div className="option-line" />
-                      {option.img}
-                    </button>
-                  ),
-              )}
-              <div className="option">
-                <div className="option-content" style={{ color: "#FF0900" }}>
-                  Удалить
+      {titleArray.title && (
+        <div className="title-info">
+          <div className="poster-wraper">
+            <img
+              className="title-poster"
+              alt="poster"
+              src={titleArray.material_data.poster_url}
+            />
+            {/* title condition */}
+            <div className="select-wrapper">
+              <button
+                className="select-trigger"
+                type="button"
+                onClick={showOptions}
+              >
+                {triggerContent}
+              </button>
+              <div
+                className="select-options"
+                style={{
+                  height: triggerToggle ? "300px" : "0px",
+                  display: "block",
+                }}
+              >
+                {selsectOptions.map(
+                  (option) =>
+                    selectState !== option.state && (
+                      <button
+                        className="option"
+                        type="button"
+                        onClick={() => setSelectState(option.state)}
+                      >
+                        <div className="option-content">{option.title}</div>
+                        <div className="option-line" />
+                        {option.img}
+                      </button>
+                    ),
+                )}
+                <div className="option">
+                  <div className="option-content" style={{ color: "#FF0900" }}>
+                    Удалить
+                  </div>
+                  <div className="option-line" />
+                  <img src="" alt="" className="option-img" />
                 </div>
-                <div className="option-line" />
-                <img src="" alt="" className="option-img" />
               </div>
             </div>
+            {/* view order */}
+            <div className="view-order-wraper">
+              <button
+                className="view-order-trigger"
+                type="button"
+                onClick={() => setTriggerOrder(!triggerOrder)}
+              >
+                Порядок просмотра
+              </button>
+              <ol
+                className="view-order-list"
+                style={{
+                  height: triggerOrder ? "150px" : "0",
+                  display: "block",
+                }}
+                type="1"
+              >
+                {/* view order elements */}
+                <li className="view-oreder-element current">Ангел 1</li>
+                <li className="view-oreder-element">Ангел 3</li>
+                <li className="view-oreder-element">Ангел 1232</li>
+                <li className="view-oreder-element">Ангелы какие-то3</li>{" "}
+                <li className="view-oreder-element">Ангелы какие-то4</li>{" "}
+              </ol>
+            </div>
           </div>
-          {/* view order */}
-          <div className="view-order-wraper">
-            <button
-              className="view-order-trigger"
-              type="button"
-              onClick={() => setTriggerOrder(!triggerOrder)}
-            >
-              Порядок просмотра
-            </button>
-            <ol
-              className="view-order-list"
-              style={{
-                height: triggerOrder ? "150px" : "0",
-                display: "block",
-              }}
-              type="1"
-            >
-              {/* view order elements */}
-              <li className="view-oreder-element current">Ангел 1</li>
-              <li className="view-oreder-element">Ангел 3</li>
-              <li className="view-oreder-element">Ангел 1232</li>
-              <li className="view-oreder-element">Ангелы какие-то3</li>{" "}
-              <li className="view-oreder-element">Ангелы какие-то4</li>{" "}
-            </ol>
+          {/* title info */}
+          <div className="title-text-info">
+            <span className="title-name">{titleArray.title}</span>
+            <div className="title-alt-names">
+              <span className="title-alt-name">{titleArray.title_orig}</span>
+            </div>
+            <span className="title-genre">Жанры: боевик, драмма</span>
+            <span className="title-year">Год: 1337</span>
+            <span className="title-status">Статус: В разработке</span>
+            <span className="title-type">Тип: Блицкриг</span>
+            <span className="title-ep">Количество серий: 13/37</span>
+            <span className="title-dub">
+              Озвучки: МояМама, твояMatre, Jam, StudioBand
+            </span>
+            <span className="title-desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Doloremque, quis quae accusamus numquam labore ea deleniti cumque.
+              Delectus, dolorum officia? Nisi voluptates magni inventore iure
+              labore quidem debitis, ab placeat. Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Hic sapiente eos ducimus quo
+              reiciendis inventore a? Eum ratione sit, repellat odio sunt esse
+              fugit quaerat saepe deserunt facere itaque atque. Lorem ipsum
+              dolor sit amet, consectetur adipisicing elit. Hic sapiente eos
+              ducimus quo reiciendis inventore a? Eum ratione sit, repellat odio
+              sunt esse fugit quaerat saepe deserunt facere itaque atque.
+            </span>
           </div>
         </div>
-        {/* title info */}
-        <div className="title-text-info">
-          <span className="title-name">Поступь дьявола</span>
-          <div className="title-alt-names">
-            <span className="title-alt-name">Diablo stepue</span>
-          </div>
-          <span className="title-genre">Жанры: боевик, драмма</span>
-          <span className="title-year">Год: 1337</span>
-          <span className="title-status">Статус: В разработке</span>
-          <span className="title-type">Тип: Блицкриг</span>
-          <span className="title-ep">Количество серий: 13/37</span>
-          <span className="title-dub">
-            Озвучки: МояМама, твояMatre, Jam, StudioBand
-          </span>
-          <span className="title-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
-            quis quae accusamus numquam labore ea deleniti cumque. Delectus,
-            dolorum officia? Nisi voluptates magni inventore iure labore quidem
-            debitis, ab placeat. Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Hic sapiente eos ducimus quo reiciendis inventore
-            a? Eum ratione sit, repellat odio sunt esse fugit quaerat saepe
-            deserunt facere itaque atque. Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Hic sapiente eos ducimus quo
-            reiciendis inventore a? Eum ratione sit, repellat odio sunt esse
-            fugit quaerat saepe deserunt facere itaque atque.
-          </span>
-        </div>
-      </div>
+      )}
       {/* player and player header */}
       <div className="player-wraper">
         <div className="title-header">
           {/* player header */}
           <span className="header-tab just-player">Плеер</span>
-          {/* <div className="player-chose-wraper">
-            <button
-              className="header-tab player-chose"
-              type="button"
-              onClick={() => setTriggerPlayer(!triggerPlayer)}
-            >
-              <div className="player-name">Sibnet</div>
-              {!mobileView && (
-                <>
-                  <div className="little-dievider" />
-                  <img
-                    src={Arrow}
-                    alt="menu-arrow"
-                    style={{
-                      transform: triggerPlayer ? "rotate(-90deg)" : "none",
-                      transition: "0.5s",
-                    }}
-                  />
-                </>
-              )}
-            </button>
-  
-            <div
-              className="player-options"
-              style={{
-                height: triggerPlayer ? `${maxPlayerChoiceHeight()}px` : "0",
-              }}
-            >
-              {playerOptions.map((option) => (
-                <button className="player-option" type="button">
-                  {option.title}
-                </button>
-              ))}
-            </div>
-          </div> */}
-
-          {/* <div className="dub-chose-wraper">
-            <button
-              className="header-tab dub-chose"
-              type="button"
-              onClick={() => setTriggerDub(!triggerDub)}
-            >
-              <div className="dub-name">{currentDub}</div>
-              {!mobileView && (
-                <>
-                  <div className="little-dievider" />
-                  <img
-                    src={Arrow}
-                    alt="menu-arrow"
-                    style={{
-                      transform: triggerDub ? "rotate(-90deg)" : "none",
-                      transition: "0.5s",
-                    }}
-                  />
-                </>
-              )}
-            </button>
-      
-            <div
-              className="dub-options"
-              style={{
-                height: triggerDub ? `${maxDubChoiceHeight()}px` : "0",
-              }}
-            >
-              {dubOptions.map((option) => (
-                <button
-                  className="dub-option"
-                  type="button"
-                  onClick={() => setCurretnDub(option.dub)}
-                >
-                  {option.dub}
-                </button>
-              ))}
-            </div>
-          </div> */}
         </div>
         <div className="player">
           {/* iframe includes player link */}
           <iframe
             title="player"
-            src="//aniqit.com/serial/495/2ba6d264a85e940d04d71f78a2f27a7a/720p"
+            src={`${titleArray.link}`}
             allow="autoplay *; fullscreen *"
             key="player"
             className="player"
           />
         </div>
         {/* episodes here */}
-        <div className="episode-wraper">
-          <span className="episode">1</span>
-          <span className="episode">2</span>
-          <span className="episode">3</span>
-          <span className="episode">4</span>
-          <span className="episode active">5</span>
-          <span className="episode">6</span>
-          <span className="episode">7</span>
-          <span className="episode">8</span>
-          <span className="episode">9</span>
-          <span className="episode">10</span>
-          <span className="episode">11</span>
-          <span className="episode">12</span>
-        </div>
       </div>
       {/* comments wraper, here post comments and comments */}
       <div className="comments-wraper">
@@ -529,13 +389,13 @@ function TitlePage() {
               <div
                 className={`comment-text ${showFullComment ? "show-full" : ""}`}
               >
-                {commentText}
+                абоба
               </div>
               <div className="comment-under-buttons">
                 <a className="comment-answer" href="-">
                   Ответить
                 </a>
-                {commentText.length > 480 && (
+                {1 > 480 && (
                   <button
                     type="button"
                     className="comment-full"
