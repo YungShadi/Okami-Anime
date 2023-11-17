@@ -14,6 +14,7 @@ type TitleType = {
   titleEpisodes: number;
   titleFullName: string;
   titleId: string;
+  titleType: string;
 };
 
 function Title({
@@ -26,6 +27,7 @@ function Title({
   titleEpisodes,
   titleFullName,
   titleId,
+  titleType,
 }: TitleType) {
   let episodes;
   if (titleEpisodes === 1) {
@@ -96,7 +98,9 @@ function Title({
       to={`article/${transliterate(titleName)}?${titleId}`}
     >
       <div className="title-poster-wraper">
-        <span className="title-status status">{titleStatus}</span>
+        <span className="title-status status">
+          {titleStatus || `¯\\(°_o)/¯`}
+        </span>
 
         {titlePoster ? (
           <img className="title-poster poster" src={titlePoster} alt="poster" />
@@ -107,14 +111,16 @@ function Title({
             alt="poster"
           />
         )}
-        <span className="age-rest">{titleAgeRest}</span>
+        <span className="age-rest">{titleAgeRest || `¯\\(°_o)/¯`}</span>
         <div className="play-button-wraper" />
       </div>
       <div className="title-name-tags">
         <span className="title-name name" title={titleFullName}>
           {titleName}
         </span>
-        <span className="title-episodes">{episodes}</span>
+        <span className="title-episodes">
+          {titleType === "anime" ? "Фильм" : episodes}
+        </span>
         <div className="title-tags tags">
           <span className="tag">
             {titleTags?.slice(0, 3).map((tag, i, arr) => {

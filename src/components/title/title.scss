@@ -21,11 +21,11 @@
     font-size: 16px;
     max-width: 170px;
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
     position: relative;
     z-index: 2;
     cursor: help;
+    max-height: 45px;
   }
 
   .status,

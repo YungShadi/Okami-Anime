@@ -20,6 +20,8 @@
   height: -moz-fit-content;
   height: fit-content;
   padding: 15px;
+  min-width: 70vw;
+  min-height: 70vh;
 }
 
 .title-info {

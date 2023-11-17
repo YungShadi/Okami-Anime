@@ -28,6 +28,7 @@ function MainPage() {
               titlePoster={title.material_data.poster_url}
               titleEpisodes={title.episodes_count}
               titleId={title.id}
+              titleType={title.type}
               titleClass="season-title"
             />
           ))}
