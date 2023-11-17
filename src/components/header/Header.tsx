@@ -40,6 +40,14 @@ function Header() {
     window.addEventListener("scroll", onScrollHandle);
     return () => window.removeEventListener("scroll", onScrollHandle);
   }, []);
+
+  const [randomLink, setRandomLink] = useState("");
+
+  const randomTitleHandle = () => {
+    setRandomLink(
+      "etot-glupyy-svin-ne-ponimaet-mechtu-devochkizayki?serial-54507",
+    );
+  };
   return (
     <>
       {/* // here we have nav links to change visible page */}
@@ -87,7 +95,11 @@ function Header() {
             Каталог
           </NavLink>
           {/* should lead to a random title */}
-          <NavLink className="header-random" to="article/:random">
+          <NavLink
+            className="header-random"
+            onClick={() => randomTitleHandle()}
+            to={`article/${randomLink}`}
+          >
             Случайное
           </NavLink>
         </div>

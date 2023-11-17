@@ -34,6 +34,7 @@ function TitlePage() {
   const { handleGetCurrentTitle } = useTitles();
 
   const titleId = location.search.replace("?", "");
+  console.log(titleId);
 
   useEffect(() => {
     handleGetCurrentTitle(titleId).then((result) => {

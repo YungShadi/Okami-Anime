@@ -131,11 +131,20 @@
 .input-title {
   background: none;
   border: none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #3ce3e8;
   width: 220px;
   height: 40px;
   color: white;
   font-size: 23px;
+  padding: 5px;
+  transition: 0.5s;
+}
+
+.input-title:focus {
+  outline: none;
+  background-color: #3ce3e8;
+  color: black;
+  border-radius: 5px;
 }
 
 .header-profile {
