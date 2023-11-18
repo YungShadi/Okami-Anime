@@ -5,6 +5,18 @@
   box-sizing: border-box;
 }
 
+body {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  background-color: #2179df;
+  transition: 1s;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+  color: white;
+}
+
 body:before {
   content: "";
   display: block;

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Vk from "../img/basil_vk-solid.svg";
 import Telegram from "../img/mingcute_telegram-fill.svg";
 import Discord from "../img/ic_baseline-discord.svg";
+
 // import { ErrorDto } from "../../types/errorDto";
 
 function Footer() {
@@ -19,30 +20,35 @@ function Footer() {
   // const dispatch = useDispatch();
   return (
     <footer className="footer">
-      <div className="footer-links">
-        <a className="link link-vk" href="our.vk">
-          <img src={Vk} alt="vkontakte" />
-        </a>
-        <a className="link link-tg" href="our.tg">
-          <img src={Telegram} alt="telegram" />
-        </a>
-        <a className="link link-dis" href="our.dis">
-          <img src={Discord} alt="discord" />
-        </a>
-      </div>
-      <span className="email">
-        <a
-          className="email-link"
-          href="mailto:animeokamidev@gmail.com&body=привет"
-        >
-          animeokamidev@gmail.com
-        </a>
+      <span className="footer-worning">
+        Контент на сайте представлен в ознакомительных целях
       </span>
-      <div className="copyrigth">
-        <span className="copyrigth-year">©️ 2023</span>
-        <Link className="copyrigth-info" to="copyright">
-          Информация для правообладателей
-        </Link>
+      <div className="footer-content">
+        <div className="footer-links">
+          <a className="link link-vk" href="our.vk">
+            <img src={Vk} alt="vkontakte" />
+          </a>
+          <a className="link link-tg" href="our.tg">
+            <img src={Telegram} alt="telegram" />
+          </a>
+          <a className="link link-dis" href="our.dis">
+            <img src={Discord} alt="discord" />
+          </a>
+        </div>
+        <span className="email">
+          <a
+            className="email-link"
+            href="mailto:animeokamidev@gmail.com&body=привет"
+          >
+            animeokamidev@gmail.com
+          </a>
+        </span>
+        <div className="copyrigth">
+          <span className="copyrigth-year">©️ 2023</span>
+          <Link className="copyrigth-info" to="copyright">
+            Информация для правообладателей
+          </Link>
+        </div>
       </div>
       {/* <button
         type="button"

@@ -87,6 +87,34 @@
   position: relative;
   font-size: 14px;
 }
+.search-result-title {
+  display: block;
+  height: 125px;
+  width: 100%;
+  margin: 0;
+  .title-status,
+  .age-rest {
+    display: none;
+  }
+  .title-poster-wraper {
+    width: 100px;
+    height: 125px;
+    .title-poster {
+      width: 100px;
+      height: 125px;
+    }
+  }
+}
+.search-result-title:hover {
+  .play-button-wraper {
+    display: none;
+  }
+  .poster {
+    -webkit-filter: brightness(70%);
+    filter: brightness(70%);
+    scale: 1.03;
+  }
+}
 @media (max-width: 1100px) {
   .title-main {
     display: flex;

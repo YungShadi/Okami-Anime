@@ -1,24 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Title from "../title";
 import { useTitles } from "../../hooks/useTitles";
 import "./main-page.css";
+import { TitleDto } from "../../types/titleDto";
+import Reklama from "../img/Безымянный.png";
 
 // ! В будущем, при получении данных о тайтлах и переходе в конкертный если о нем есть данные в state
 // ! то лучше брать их. если нет - посылаем запрос по id в ссылке
 
 function MainPage() {
-  const titles = useSelector((state) => state.titles.titlesArray);
+  const titles = useSelector((state) => state?.titles.titlesArray);
   // eslint-disable-next-line no-unused-vars
   const { isLoadingTitles } = useTitles();
   console.log(titles);
+
+  useEffect(() => {
+    document.title = "ŌkamiAnime";
+  }, []);
 
   return (
     <section className="main" style={{ flexGrow: "1" }}>
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
-          {titles.slice(0, 6).map((title) => (
+          {titles.slice(0, 6).map((title: TitleDto) => (
             <Title
               titleFullName={title.title}
               titleName={title.material_data.title}
@@ -38,7 +44,7 @@ function MainPage() {
       <div className="recently-added-anime">
         <h2 className="recetly-added-title">Недавно добавленные</h2>
         <div className="recently-added-titles">
-          {titles.map((title) => (
+          {titles.map((title: TitleDto) => (
             <Title
               titleFullName={title.title}
               titleName={title.material_data.title}
@@ -48,12 +54,14 @@ function MainPage() {
               titlePoster={title.material_data.poster_url}
               titleEpisodes={title.episodes_count}
               titleId={title.id}
+              titleType={title.type}
               titleClass="recently-added"
             />
           ))}
         </div>
       </div>
       <div className="devider" />
+      <img src={Reklama} alt="" className="ad"/>
     </section>
   );
 }

@@ -1,9 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { paginationState } from "../../redux/paginationSlice";
 import { MobileDto } from "../../types/mobileDto";
+
 import {
   toggleMenuAction,
   toggleFilterAction,
@@ -35,6 +37,12 @@ function CataloguePage() {
   );
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
+  const location = useLocation();
+  location.search += "&selected_tags=asdad,asda";
+  // ! get params from url
+  // ! need to undestand hwo this works
+  const myParam = new URLSearchParams(location.search).get("page");
+  console.log(myParam);
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
@@ -44,6 +52,11 @@ function CataloguePage() {
       }
     };
   });
+
+  useEffect(() => {
+    document.title = "Каталог";
+  }, []);
+
   if (searchState) {
     dispatch(toggleSearchAction(false));
   }

@@ -25,6 +25,10 @@ function ProfilePage() {
     }
   });
 
+  useEffect(() => {
+    document.title = `${username}`;
+  }, []);
+
   return (
     <div className="profile">
       <div className="profile-info">
@@ -42,7 +46,7 @@ function ProfilePage() {
           </div>
           <div className="profile-history">
             Последние просмотренные:
-            <div className="title">some titile</div>
+            <div className="">some titile</div>
           </div>
         </div>
       </div>

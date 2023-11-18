@@ -10,11 +10,23 @@
     AppleGothic,
     sans-serif;
   display: flex;
-  flex-direction: column;
   align-items: center;
   padding: 20px 10px;
   margin-top: auto;
   flex: 0;
+  justify-content: center;
+  padding-right: 230px;
+}
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-worning {
+  display: block;
+  width: 180px;
+  margin-right: 50px;
+  font-size: 15px;
 }
 .footer-links {
   .link {

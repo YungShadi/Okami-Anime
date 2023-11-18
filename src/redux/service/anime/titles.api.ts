@@ -19,8 +19,18 @@ export const titlesApi = createApi({
         method: "GET",
       }),
     }),
+    searchTitle: builder.mutation({
+      query: (searchValue) => ({
+        url: `search?${token}&title=${searchValue}&with_material_data=true`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export const { useGetTitlesQuery, useGetTitileByIdMutation } = titlesApi;
+export const {
+  useGetTitlesQuery,
+  useGetTitileByIdMutation,
+  useSearchTitleMutation,
+} = titlesApi;

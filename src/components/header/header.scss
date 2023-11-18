@@ -126,6 +126,10 @@
   padding-right: 10px;
   font-family: "Atomic Age", cursive;
 }
+.search-wraper {
+  display: flex;
+  flex-direction: column;
+}
 .input-title {
   background: none;
   border: none;
@@ -142,6 +146,25 @@
   background-color: $base-light-blue;
   color: black;
   border-radius: 5px;
+}
+.search-result-wraper {
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  background-color: $background-trans;
+  z-index: 100000;
+  margin-top: 50px;
+  margin-left: -50px;
+  .search-result-title {
+    margin: 0;
+  }
+}
+.search-wraper.hide {
+  .search-result-wraper {
+    display: none;
+  }
 }
 .header-profile {
   margin-left: 110px;

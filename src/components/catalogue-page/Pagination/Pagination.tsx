@@ -1,9 +1,11 @@
 /* eslint-disable no-return-assign */
 import React from "react";
+import { Link } from "react-router-dom";
 import { usePagination } from "../../../hooks/usePagination";
-import "./Pagination.css";
 import { PaginationDto } from "../../../types/paginationDto";
 import { usePaginationRange } from "../../../hooks/usePaginationRange";
+
+import "./Pagination.css";
 
 export default function Pagination({
   totalCount,
@@ -42,19 +44,21 @@ export default function Pagination({
         Загрузить еще...
       </button>
       <div className="catalogue-pagination">
-        <button
+        <Link
           className="pagination-button"
           type="button"
           onClick={handlePreviousPage}
+          to={`?page=${currentPage - 1}`}
         >
           {"<"}
-        </button>
+        </Link>
         {paginationRange?.map((page: number | string | Element) => {
           if (currentPage === page) {
             return (
-              <button type="button" className="pagination-button active">
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
+              <Link type="button" className="pagination-button active" to="#">
                 {page}
-              </button>
+              </Link>
             );
           }
           if (page === "..." && paginationRange?.[1] === page) {
@@ -76,22 +80,24 @@ export default function Pagination({
             ));
           }
           return (
-            <button
+            <Link
               type="button"
               className="pagination-button"
               onClick={() => handlePageChange(page)}
+              to={`?page=${page}`}
             >
               {page}
-            </button>
+            </Link>
           );
         })}
-        <button
+        <Link
           className="pagination-button"
           type="button"
           onClick={handleNextPage}
+          to={`?page=${currentPage + 1}`}
         >
           {">"}
-        </button>
+        </Link>
       </div>
     </div>
   );

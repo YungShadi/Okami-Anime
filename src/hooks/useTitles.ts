@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   useGetTitlesQuery,
   useGetTitileByIdMutation,
+  useSearchTitleMutation,
 } from "../redux/service/anime/titles.api";
 import { setTitlesAction } from "../redux/titlesSlice";
 
@@ -12,6 +13,7 @@ export const useTitles = () => {
   const { data: titlesArray, isLoading: isLoadingTitles } =
     useGetTitlesQuery(undefined);
   const [getTitle] = useGetTitileByIdMutation();
+  const [searchTitle] = useSearchTitleMutation();
 
   useEffect(() => {
     if (!isLoadingTitles && titlesArray) {
@@ -23,9 +25,15 @@ export const useTitles = () => {
     return result;
   };
 
+  const handleSearchTitle = async (searchValue: string) => {
+    const result = await searchTitle(searchValue);
+    return result;
+  };
+
   return {
     isLoadingTitles,
     titlesArray,
     handleGetCurrentTitle,
+    handleSearchTitle,
   };
 };

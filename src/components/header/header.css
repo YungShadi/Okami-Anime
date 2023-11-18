@@ -128,6 +128,11 @@
   font-family: "Atomic Age", cursive;
 }
 
+.search-wraper {
+  display: flex;
+  flex-direction: column;
+}
+
 .input-title {
   background: none;
   border: none;
@@ -145,6 +150,26 @@
   background-color: #3ce3e8;
   color: black;
   border-radius: 5px;
+}
+
+.search-result-wraper {
+  width: 300px;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  background-color: rgba(6, 75, 140, 0.8);
+  z-index: 100000;
+  margin-top: 50px;
+  margin-left: -50px;
+}
+.search-result-wraper .search-result-title {
+  margin: 0;
+}
+
+.search-wraper.hide .search-result-wraper {
+  display: none;
 }
 
 .header-profile {

@@ -11,6 +11,7 @@ import OrderedList from "../img/ant-design_ordered-list-outlined.svg";
 import UnorderedList from "../img/ant-design_unordered-list-outlined.svg";
 import DefaultProfPicture from "../img/Аватар.png";
 import { useTitles } from "../../hooks/useTitles";
+import { TitleDto } from "../../types/titleDto";
 
 interface OptionTitle {
   title: string;
@@ -27,20 +28,25 @@ function TitlePage() {
   const [triggerOrder, setTriggerOrder] = useState(false);
 
   const [showFullComment, setShowFullComment] = useState(false);
-  const [titleArray, setTitleArray] = useState({});
+  const [titleData, setTitleData] = useState<TitleDto>({});
+  const [isThereError, setIsThereError] = useState(false);
 
   const location = useLocation();
 
   const { handleGetCurrentTitle } = useTitles();
 
   const titleId = location.search.replace("?", "");
-  console.log(titleId);
 
   useEffect(() => {
-    handleGetCurrentTitle(titleId).then((result) => {
-      setTitleArray(result.data.results[0]);
-    });
-  }, []);
+    handleGetCurrentTitle(titleId)
+      .then((result) => {
+        setTitleData(result?.data.results[0]);
+        document.title = result?.data.results[0].material_data.title;
+      })
+      .catch(() => {
+        setIsThereError(true);
+      });
+  }, [titleId]);
   // options for condition of title chose
   const selsectOptions: Array<OptionTitle> = [
     {
@@ -226,238 +232,257 @@ function TitlePage() {
   function showOptions() {
     setTriggerToggle(!triggerToggle);
   }
+  if (isThereError) {
+    return <p>Тайтл не найден</p>;
+  }
 
   return (
     <div className="title">
-      {titleArray.title && (
-        <div className="title-info">
-          <div className="poster-wraper">
-            <img
-              className="title-poster"
-              alt="poster"
-              src={titleArray.material_data.poster_url}
-            />
-            {/* title condition */}
-            <div className="select-wrapper">
-              <button
-                className="select-trigger"
-                type="button"
-                onClick={showOptions}
-              >
-                {triggerContent}
-              </button>
-              <div
-                className="select-options"
-                style={{
-                  height: triggerToggle ? "300px" : "0px",
-                  display: "block",
-                }}
-              >
-                {selsectOptions.map(
-                  (option) =>
-                    selectState !== option.state && (
-                      <button
-                        className="option"
-                        type="button"
-                        onClick={() => setSelectState(option.state)}
-                      >
-                        <div className="option-content">{option.title}</div>
-                        <div className="option-line" />
-                        {option.img}
-                      </button>
-                    ),
-                )}
-                <div className="option">
-                  <div className="option-content" style={{ color: "#FF0900" }}>
-                    Удалить
-                  </div>
-                  <div className="option-line" />
-                  <img src="" alt="" className="option-img" />
-                </div>
-              </div>
-            </div>
-            {/* view order */}
-            <div className="view-order-wraper">
-              <button
-                className="view-order-trigger"
-                type="button"
-                onClick={() => setTriggerOrder(!triggerOrder)}
-              >
-                Порядок просмотра
-              </button>
-              <ol
-                className="view-order-list"
-                style={{
-                  height: triggerOrder ? "150px" : "0",
-                  display: "block",
-                }}
-                type="1"
-              >
-                {/* view order elements */}
-                <li className="view-oreder-element current">Ангел 1</li>
-                <li className="view-oreder-element">Ангел 3</li>
-                <li className="view-oreder-element">Ангел 1232</li>
-                <li className="view-oreder-element">Ангелы какие-то3</li>{" "}
-                <li className="view-oreder-element">Ангелы какие-то4</li>{" "}
-              </ol>
-            </div>
-          </div>
-          {/* title info */}
-          <div className="title-text-info">
-            <span className="title-name">{titleArray.title}</span>
-            <div className="title-alt-names">
-              <span className="title-alt-name">{titleArray.title_orig}</span>
-            </div>
-            <span className="title-genre">Жанры: боевик, драмма</span>
-            <span className="title-year">Год: 1337</span>
-            <span className="title-status">Статус: В разработке</span>
-            <span className="title-type">Тип: Блицкриг</span>
-            <span className="title-ep">Количество серий: 13/37</span>
-            <span className="title-dub">
-              Озвучки: МояМама, твояMatre, Jam, StudioBand
-            </span>
-            <span className="title-desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Doloremque, quis quae accusamus numquam labore ea deleniti cumque.
-              Delectus, dolorum officia? Nisi voluptates magni inventore iure
-              labore quidem debitis, ab placeat. Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Hic sapiente eos ducimus quo
-              reiciendis inventore a? Eum ratione sit, repellat odio sunt esse
-              fugit quaerat saepe deserunt facere itaque atque. Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Hic sapiente eos
-              ducimus quo reiciendis inventore a? Eum ratione sit, repellat odio
-              sunt esse fugit quaerat saepe deserunt facere itaque atque.
-            </span>
-          </div>
-        </div>
-      )}
-      {/* player and player header */}
-      {titleArray.title && (
-        <div className="player-wraper">
-          <div className="title-header">
-            {/* player header */}
-            <span className="header-tab just-player">Плеер</span>
-          </div>
-          <div className="player">
-            {/* iframe includes player link */}
-            {titleArray.link ? (
-              <iframe
-                title="player"
-                src={`${titleArray.link}`}
-                allow="autoplay *; fullscreen *"
-                key="player"
-                className="player"
-              />
-            ) : (
-              <div>Видео не найдено :(</div>
-            )}
-          </div>
-          {/* episodes here */}
-        </div>
-      )}
-      {/* comments wraper, here post comments and comments */}
-      {titleArray.title && (
-        <div className="comments-wraper">
-          <div className="title-header">
-            <span className="header-tab just-player">Комментарии</span>
-          </div>
-          <div className="comments-input">
-            {/* styles for comment */}
-            <div className="comments-styles">
-              <img src={Bold} alt="bold" className="style" />
-              <img src={Italic} alt="italic" className="style" />
-              <img src={Underline} alt="underline" className="style" />
-              <img src={LineThrough} alt="linethrough" className="style" />
-              <img src={OrderedList} alt="ordered list" className="style" />
-              <img src={UnorderedList} alt="unordered list" className="style" />
-            </div>
-            <textarea
-              className="comment-input"
-              placeholder="Напишите ваш коммнтарий"
-            />
-          </div>
-          <button className="comment-send" type="button">
-            Отправить комментарий
-          </button>
-          <div className="devider-line-long" />
-          {/* comments */}
-          <div className="comments">
-            {/* comment map here */}
-            <div className={`comment ${showFullComment ? "show-full" : ""}`}>
+      <React.Suspense>
+        {titleData.title && (
+          <div className="title-info">
+            <div className="poster-wraper">
               <img
-                src={DefaultProfPicture}
-                alt="profile pic"
-                className="prof-pic"
+                className="title-poster"
+                alt="poster"
+                src={titleData.material_data.poster_url || Poster}
               />
-              <div className="comment-content">
-                <div className="comment-name-date">
-                  <div className="user-name">Chel</div>
-                  <div className="date"> 14.14.1321</div>
-                </div>
-                <div
-                  className={`comment-text ${
-                    showFullComment ? "show-full" : ""
-                  }`}
+              {/* title condition */}
+              <div className="select-wrapper">
+                <button
+                  className="select-trigger"
+                  type="button"
+                  onClick={showOptions}
                 >
-                  абоба
-                </div>
-                <div className="comment-under-buttons">
-                  <a className="comment-answer" href="-">
-                    Ответить
-                  </a>
-                  {1 > 480 && (
-                    <button
-                      type="button"
-                      className="comment-full"
-                      onClick={() => setShowFullComment(!showFullComment)}
-                    >
-                      {showFullComment
-                        ? "Скрыть комментарий"
-                        : "Показать комментарий полностью"}
-                    </button>
+                  {triggerContent}
+                </button>
+                <div
+                  className="select-options"
+                  style={{
+                    height: triggerToggle ? "300px" : "0px",
+                    display: "block",
+                  }}
+                >
+                  {selsectOptions.map(
+                    (option) =>
+                      selectState !== option.state && (
+                        <button
+                          className="option"
+                          type="button"
+                          onClick={() => setSelectState(option.state)}
+                        >
+                          <div className="option-content">{option.title}</div>
+                          <div className="option-line" />
+                          {option.img}
+                        </button>
+                      ),
                   )}
+                  <div className="option">
+                    <div
+                      className="option-content"
+                      style={{ color: "#FF0900" }}
+                    >
+                      Удалить
+                    </div>
+                    <div className="option-line" />
+                    <img src="" alt="" className="option-img" />
+                  </div>
                 </div>
               </div>
-              <div className="comment-devider" />
-              {/* once agian i hate how its done with svg */}
-              <div className="comment-rating">
-                <svg
-                  width="55"
-                  height="55"
-                  viewBox="0 15 55 55"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              {/* view order */}
+              <div className="view-order-wraper">
+                <button
+                  className="view-order-trigger"
+                  type="button"
+                  onClick={() => setTriggerOrder(!triggerOrder)}
                 >
-                  <g>
-                    <path
-                      d="M43.6306 50C44.5151 50 44.9641 48.9361 44.3471 48.3024L28.2165 31.7358C27.8239 31.3327 27.1761 31.3327 26.7835 31.7358L10.6529 48.3024C10.0359 48.9361 10.4849 50 11.3694 50L43.6306 50Z"
-                      fill="#3CE3E8"
-                    />
-                  </g>
-                </svg>
-                <div className="curr-rating">12</div>
-                <svg
-                  width="55"
-                  height="55"
-                  viewBox="0 -20 55 55"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                  Порядок просмотра
+                </button>
+                <ol
+                  className="view-order-list"
+                  style={{
+                    height: triggerOrder ? "150px" : "0",
+                    display: "block",
+                  }}
+                  type="1"
                 >
-                  <g>
-                    <path
-                      d="M11.3694 0C10.4849 0 10.0359 1.0639 10.6529 1.69762L26.7835 18.2642C27.1761 18.6673 27.8239 18.6673 28.2165 18.2642L44.3471 1.69762C44.9641 1.0639 44.5151 0 43.6306 0L11.3694 0Z"
-                      fill="#E83C46"
-                    />
-                  </g>
-                </svg>
+                  {/* view order elements */}
+                  <li className="view-oreder-element current">Ангел 1</li>
+                  <li className="view-oreder-element">Ангел 3</li>
+                  <li className="view-oreder-element">Ангел 1232</li>
+                  <li className="view-oreder-element">Ангелы какие-то3</li>{" "}
+                  <li className="view-oreder-element">Ангелы какие-то4</li>{" "}
+                </ol>
               </div>
             </div>
-            <div className="comment" style={{ display: "none" }}>
-              comment here
+            {/* title info */}
+            <div className="title-text-info">
+              <span className="title-name">{titleData.title}</span>
+              <div className="title-alt-names">
+                <span className="title-alt-name">{titleData.title_orig}</span>
+              </div>
+              <span className="title-genre">
+                Жанры:{" "}
+                {titleData.material_data.anime_genres.map((genre) => (
+                  <span>{genre} </span>
+                ))}
+              </span>
+              <span className="title-year">
+                Год: {titleData.material_data.released_at}
+              </span>
+              <span className="title-status">
+                Статус: {titleData.material_data.all_status}
+              </span>
+              <span className="title-type">Тип: {titleData.type}</span>
+              <span className="title-ep">
+                Количество серий:{" "}
+                {titleData.material_data.episodes_aired ===
+                titleData.material_data.episodes_total
+                  ? titleData.material_data.episodes_total
+                  : `${titleData.material_data.episodes_aired}/${titleData.material_data.episodes_total}`}
+              </span>
+              <span className="title-dub">
+                Озвучки: {titleData.translation.title}
+              </span>
+              <span className="title-desc">
+                {titleData.material_data.anime_description ||
+                  "Нету описания :("}
+              </span>
             </div>
           </div>
-        </div>
-      )}
+        )}
+        {/* player and player header */}
+        {titleData.title && (
+          <div className="player-wraper">
+            <div className="title-header">
+              {/* player header */}
+              <span className="header-tab just-player">Плеер</span>
+            </div>
+            <div className="player">
+              {/* iframe includes player link */}
+              {titleData.link ? (
+                <iframe
+                  title="player"
+                  src={`${titleData.link}`}
+                  allow="autoplay *; fullscreen *"
+                  key="player"
+                  className="player"
+                />
+              ) : (
+                <div>Видео не найдено :(</div>
+              )}
+            </div>
+            {/* episodes here */}
+          </div>
+        )}
+        {/* comments wraper, here post comments and comments */}
+        {titleData.title && (
+          <div className="comments-wraper">
+            <div className="title-header">
+              <span className="header-tab just-player">Комментарии</span>
+            </div>
+            <div className="comments-input">
+              {/* styles for comment */}
+              <div className="comments-styles">
+                <img src={Bold} alt="bold" className="style" />
+                <img src={Italic} alt="italic" className="style" />
+                <img src={Underline} alt="underline" className="style" />
+                <img src={LineThrough} alt="linethrough" className="style" />
+                <img src={OrderedList} alt="ordered list" className="style" />
+                <img
+                  src={UnorderedList}
+                  alt="unordered list"
+                  className="style"
+                />
+              </div>
+              <textarea
+                className="comment-input"
+                placeholder="Напишите ваш коммнтарий"
+              />
+            </div>
+            <button className="comment-send" type="button">
+              Отправить комментарий
+            </button>
+            <div className="devider-line-long" />
+            {/* comments */}
+            <div className="comments">
+              {/* comment map here */}
+              <div className={`comment ${showFullComment ? "show-full" : ""}`}>
+                <img
+                  src={DefaultProfPicture}
+                  alt="profile pic"
+                  className="prof-pic"
+                />
+                <div className="comment-content">
+                  <div className="comment-name-date">
+                    <div className="user-name">Chel</div>
+                    <div className="date"> 14.14.1321</div>
+                  </div>
+                  <div
+                    className={`comment-text ${
+                      showFullComment ? "show-full" : ""
+                    }`}
+                  >
+                    абоба
+                  </div>
+                  <div className="comment-under-buttons">
+                    <a className="comment-answer" href="-">
+                      Ответить
+                    </a>
+                    {1 > 480 && (
+                      <button
+                        type="button"
+                        className="comment-full"
+                        onClick={() => setShowFullComment(!showFullComment)}
+                      >
+                        {showFullComment
+                          ? "Скрыть комментарий"
+                          : "Показать комментарий полностью"}
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <div className="comment-devider" />
+                {/* once agian i hate how its done with svg */}
+                <div className="comment-rating">
+                  <svg
+                    width="55"
+                    height="55"
+                    viewBox="0 15 55 55"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        d="M43.6306 50C44.5151 50 44.9641 48.9361 44.3471 48.3024L28.2165 31.7358C27.8239 31.3327 27.1761 31.3327 26.7835 31.7358L10.6529 48.3024C10.0359 48.9361 10.4849 50 11.3694 50L43.6306 50Z"
+                        fill="#3CE3E8"
+                      />
+                    </g>
+                  </svg>
+                  <div className="curr-rating">12</div>
+                  <svg
+                    width="55"
+                    height="55"
+                    viewBox="0 -20 55 55"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g>
+                      <path
+                        d="M11.3694 0C10.4849 0 10.0359 1.0639 10.6529 1.69762L26.7835 18.2642C27.1761 18.6673 27.8239 18.6673 28.2165 18.2642L44.3471 1.69762C44.9641 1.0639 44.5151 0 43.6306 0L11.3694 0Z"
+                        fill="#E83C46"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div className="comment" style={{ display: "none" }}>
+                comment here
+              </div>
+            </div>
+          </div>
+        )}
+      </React.Suspense>
     </div>
   );
 }

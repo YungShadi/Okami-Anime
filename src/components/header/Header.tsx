@@ -2,22 +2,34 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
-import "./header.css";
 import { UserDto } from "../../types/userDto";
 import { MobileDto } from "../../types/mobileDto";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
 import { useAuth } from "../../hooks/useAuth";
+import { useTitles } from "../../hooks/useTitles";
+import useDebounce from "../../hooks/useDebounce";
 import { toggleMenuAction, toggleSearchAction } from "../../redux/mobileSlcie";
 import search from "../img/search-frame.svg";
 import ArrowUp from "../img/up-arrow-svgrepo-com.svg";
+import { TitleDto } from "../../types/titleDto";
+import Title from "../title";
+
+import "./header.css";
 
 // header, navigation, user
 function Header() {
   const { isAuthenticated } = useAuth();
+  const { handleSearchTitle } = useTitles();
   const location = useLocation();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
+  const [searchInput, setSearchInput] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [isShearchShown, setIsSearchShown] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+  const [randomLink, setRandomLink] = useState("");
+
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username,
   );
@@ -41,12 +53,29 @@ function Header() {
     return () => window.removeEventListener("scroll", onScrollHandle);
   }, []);
 
-  const [randomLink, setRandomLink] = useState("");
-
   const randomTitleHandle = () => {
     setRandomLink(
       "etot-glupyy-svin-ne-ponimaet-mechtu-devochkizayki?serial-54507",
     );
+  };
+  const debounceSearch = useDebounce(searchInput, 500);
+
+  useEffect(() => {
+    if (debounceSearch) {
+      setIsSearching(true);
+      handleSearchTitle(debounceSearch).then((result) => {
+        setSearchResult(result.data.results);
+      });
+      console.log(searchResult);
+      setIsSearching(false);
+    } else {
+      console.log("not found");
+      setSearchResult([]);
+    }
+  }, [debounceSearch]);
+
+  const handleSearchBlur = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) setIsSearchShown(false);
   };
   return (
     <>
@@ -88,10 +117,50 @@ function Header() {
           </button>
         )}
         {location.pathname !== "/catalogue" && (
-          <input type="text" placeholder="Поиск" className="input-title" />
+          <div
+            className={`search-wraper ${isShearchShown ? "show" : "hide"}`}
+            onFocus={() => {
+              setIsSearchShown(true);
+            }}
+            onBlur={(e) => {
+              handleSearchBlur(e);
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Поиск"
+              className="input-title"
+              value={searchInput}
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+              }}
+            />
+            {searchResult.length > 0 && (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                className="search-result-wraper"
+                onClick={() => {
+                  setSearchInput("");
+                }}
+              >
+                {searchResult.slice(0, 5).map((title: TitleDto) => (
+                  <Title
+                    titleClass="search-result-title"
+                    titleName={title.title}
+                    titlePoster={title.material_data.poster_url}
+                    titleId={title.id}
+                  />
+                ))}
+                <button type="button">Показать еще</button>
+              </div>
+            )}
+          </div>
         )}
         <div className="nav-buttons">
-          <NavLink className="header-cat" to="catalogue">
+          <NavLink className="header-cat" to={{
+            pathname: "/catalogue",
+            search: "?page=1"
+          }}>
             Каталог
           </NavLink>
           {/* should lead to a random title */}
