@@ -1,29 +1,45 @@
-@import "stylsheet";
+@import "./stylsheet.scss";
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
 
-body {
+// body {
+//   width: 100%;
+//   height: 100%;
+//   align-items: center;
+//   background: url("./components/img/bacground19201080.webp") fixed;
+//   background-size: cover;
+//   top: 0px;
+//   left: 0px;
+//   z-index: -1;
+//   background-position: center;
+//   background-size: cover;
+//   background-color: #2179df;
+//   transition: 1s;
+//   font-family:
+//     Century Gothic,
+//     CenturyGothic,
+//     AppleGothic,
+//     sans-serif;
+//   color: white;
+// }
+body:before {
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  align-items: center;
-  background: url("./components/img/bacground19201080.webp") fixed;
+  z-index: -10;
+  background: url("./components/img/bacground19201080.webp") no-repeat center
+    center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  top: 0px;
-  left: 0px;
-  z-index: -1;
-  background-position: center;
-  background-size: cover;
-  background-color: #2179df;
-  transition: 1s;
-  font-family:
-    Century Gothic,
-    CenturyGothic,
-    AppleGothic,
-    sans-serif;
-  color: white;
 }
 body::-webkit-scrollbar {
   width: 10px; /* ширина scrollbar */
