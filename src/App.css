@@ -16,7 +16,9 @@ body {
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   color: white;
   max-width: 100vw;
-  max-height: 100vh;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  margin-left: 0px;
 }
 
 body:before {

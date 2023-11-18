@@ -11,7 +11,7 @@
     right: 10px;
   }
 }
-.season-anime{
+.season-anime {
   max-width: 1305px;
 }
 .season-titles,
@@ -60,7 +60,6 @@
   .season-anime {
     height: fit-content;
     width: 100%;
-    max-width: 400px;
     .season-anime-title {
       margin-left: 30px;
     }
@@ -79,6 +78,8 @@
     padding-left: 5px;
     background: none;
     gap: 5px;
+    margin-left: auto;
+    margin-right: auto;
     .title-main {
       width: 85vw;
       height: 150px;
@@ -93,8 +94,9 @@
     height: fit-content;
   }
   .recently-added-titles {
-    row-gap: 60px;
+    row-gap: 20px;
     margin-top: 30px;
+    justify-content: space-around;
   }
   .recetly-added-title {
     margin-left: 15px;

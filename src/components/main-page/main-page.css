@@ -67,7 +67,6 @@
     height: -moz-fit-content;
     height: fit-content;
     width: 100%;
-    max-width: 400px;
   }
   .season-anime .season-anime-title {
     margin-left: 30px;
@@ -87,6 +86,8 @@
     padding-left: 5px;
     background: none;
     gap: 5px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .season-titles .title-main {
     width: 85vw;
@@ -102,8 +103,9 @@
     height: fit-content;
   }
   .recently-added-titles {
-    row-gap: 60px;
+    row-gap: 20px;
     margin-top: 30px;
+    justify-content: space-around;
   }
   .recetly-added-title {
     margin-left: 15px;

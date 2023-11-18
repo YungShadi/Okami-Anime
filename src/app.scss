@@ -20,7 +20,8 @@ body {
     sans-serif;
   color: white;
   max-width: 100vw;
-  max-height: 100vh;
+  max-height: fit-content;
+  margin-left: 0px;
 }
 body:before {
   width: 100%;
