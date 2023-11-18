@@ -38,11 +38,10 @@ function CataloguePage() {
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
   const location = useLocation();
-  location.search += "&selected_tags=asdad,asda";
   // ! get params from url
   // ! need to undestand hwo this works
-  const myParam = new URLSearchParams(location.search).get("page");
-  console.log(myParam);
+  const currentPage = new URLSearchParams(location.search).get("page");
+  console.log(currentPage);
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
@@ -99,7 +98,12 @@ function CataloguePage() {
             />
           ))}
         </div>
-        <Pagination totalCount={30} pageSize={1} siblingCount={1} />
+        <Pagination
+          totalCount={30}
+          pageSize={1}
+          siblingCount={1}
+          currentPageCatalogue={Number(currentPage)}
+        />
       </section>
     </div>
   );

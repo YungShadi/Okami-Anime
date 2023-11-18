@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { usePagination } from "../../../hooks/usePagination";
 import { PaginationDto } from "../../../types/paginationDto";
@@ -11,6 +11,7 @@ export default function Pagination({
   totalCount,
   pageSize,
   siblingCount,
+  currentPageCatalogue,
 }: PaginationDto) {
   const {
     pages,
@@ -19,7 +20,12 @@ export default function Pagination({
     handlePreviousPage,
     currentPage,
     handlePageChange,
-  } = usePagination({ totalCount, pageSize, siblingCount });
+  } = usePagination({
+    totalCount,
+    pageSize,
+    siblingCount,
+    currentPageCatalogue,
+  });
 
   const pageArray = [];
 
@@ -33,6 +39,10 @@ export default function Pagination({
     currentPage,
     siblingCount,
   });
+
+  useEffect(() => {
+    handlePageChange(currentPageCatalogue);
+  }, []);
 
   return (
     <div className="pagination-wrapper">
