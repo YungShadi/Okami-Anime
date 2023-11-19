@@ -1,13 +1,27 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import "./Feedback.css";
 import { useDispatch } from "react-redux";
 import { toggleFeedbeackAction } from "../../redux/feedbackSlice";
 
+import "./Feedback.css";
+
 export default function Feedback() {
+  const [addCurrentUrl, setAddCurrentUrl] = useState(false);
+  const [textAreaContent, setTextAreaContent] = useState("");
+  const currentUrl = window.location.href;
+
+  useEffect(() => {
+    if (addCurrentUrl) {
+      setTextAreaContent(`${textAreaContent} url: ${currentUrl}`);
+    } else {
+      setTextAreaContent(textAreaContent.replace(`url: ${currentUrl}`, ""));
+    }
+  }, [addCurrentUrl]);
+
   const dispatch = useDispatch();
+
   return createPortal(
     <>
       <div className="feedback-modal">
@@ -33,8 +47,23 @@ export default function Feedback() {
               наказание :)
             </p>
           </span>
-
-          <textarea className="feedback-textarea" placeholder="Текст" />
+          <div className="feedback-add-url">
+            <label htmlFor="feedback-url">
+              <input
+                type="checkbox"
+                name="link"
+                id="feedback-url"
+                onChange={() => setAddCurrentUrl(!addCurrentUrl)}
+              />
+              Добавить ссылку на текущую страницу?
+            </label>
+          </div>
+          <textarea
+            className="feedback-textarea"
+            placeholder="Текст"
+            value={textAreaContent}
+            onChange={(e) => setTextAreaContent(e.target.value)}
+          />
           <button type="button">Отправить</button>
         </div>
       </div>
@@ -43,6 +72,6 @@ export default function Feedback() {
         onClick={() => dispatch(toggleFeedbeackAction(false))}
       />
     </>,
-    document.body
+    document.body,
   );
 }

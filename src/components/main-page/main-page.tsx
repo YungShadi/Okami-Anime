@@ -12,8 +12,7 @@ import Reklama from "../img/Безымянный.png";
 function MainPage() {
   const titles = useSelector((state) => state?.titles.titlesArray);
   // eslint-disable-next-line no-unused-vars
-  const { isLoadingTitles } = useTitles();
-  console.log(titles);
+  useTitles();
 
   useEffect(() => {
     document.title = "ŌkamiAnime";
@@ -26,8 +25,9 @@ function MainPage() {
         <div className="season-titles">
           {titles.slice(0, 6).map((title: TitleDto) => (
             <Title
+              titleClass="season-title"
               titleFullName={title.title}
-              titleName={title.material_data.title}
+              titleName={title.material_data.title || title.title}
               titleAgeRest={title.material_data.rating_mpaa}
               titleStatus={title.material_data.anime_status}
               titleTags={title.material_data.anime_genres}
@@ -35,7 +35,6 @@ function MainPage() {
               titleEpisodes={title.episodes_count}
               titleId={title.id}
               titleType={title.type}
-              titleClass="season-title"
             />
           ))}
         </div>
@@ -46,8 +45,9 @@ function MainPage() {
         <div className="recently-added-titles">
           {titles.map((title: TitleDto) => (
             <Title
+              titleClass="recently-added"
               titleFullName={title.title}
-              titleName={title.material_data.title}
+              titleName={title.material_data.title || title.title}
               titleAgeRest={title.material_data.rating_mpaa}
               titleStatus={title.material_data.anime_status}
               titleTags={title.material_data.anime_genres}
@@ -55,13 +55,12 @@ function MainPage() {
               titleEpisodes={title.episodes_count}
               titleId={title.id}
               titleType={title.type}
-              titleClass="recently-added"
             />
           ))}
         </div>
       </div>
       <div className="devider" />
-      <img src={Reklama} alt="" className="ad"/>
+      <img src={Reklama} alt="" className="ad" />
     </section>
   );
 }

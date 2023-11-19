@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { UserDto } from "../../types/userDto";
 import { MobileDto } from "../../types/mobileDto";
-import Logo from "../img/icom.svg";
-import DefaultIcon from "../img/user.svg";
 import { useAuth } from "../../hooks/useAuth";
 import { useTitles } from "../../hooks/useTitles";
-import useDebounce from "../../hooks/useDebounce";
+import { TitleDto } from "../../types/titleDto";
 import { toggleMenuAction, toggleSearchAction } from "../../redux/mobileSlcie";
+import useDebounce from "../../hooks/useDebounce";
 import search from "../img/search-frame.svg";
 import ArrowUp from "../img/up-arrow-svgrepo-com.svg";
-import { TitleDto } from "../../types/titleDto";
 import Title from "../title";
+import Logo from "../img/icom.svg";
+import DefaultIcon from "../img/user.svg";
+import Poster from "../img/poster.png";
 
 import "./header.css";
 
@@ -29,6 +30,7 @@ function Header() {
   const [isShearchShown, setIsSearchShown] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [randomLink, setRandomLink] = useState("");
+  const [searchHeigth, setSearchHeigth] = useState(0);
 
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username,
@@ -61,22 +63,34 @@ function Header() {
   const debounceSearch = useDebounce(searchInput, 500);
 
   useEffect(() => {
-    if (debounceSearch) {
-      setIsSearching(true);
-      handleSearchTitle(debounceSearch).then((result) => {
-        setSearchResult(result.data.results);
-      });
-      console.log(searchResult);
+    setIsSearching(true);
+    handleSearchTitle(debounceSearch).then((result) => {
+      setSearchResult(result.data.results);
       setIsSearching(false);
-    } else {
-      console.log("not found");
-      setSearchResult([]);
-    }
+    });
   }, [debounceSearch]);
+
+  useEffect(() => {
+    if (searchResult.length === 0) {
+      setSearchHeigth(0);
+    } else {
+      const maxDisplayedResults = 5; // You may customize this value
+      const calculatedHeight =
+        searchResult.length <= maxDisplayedResults
+          ? searchResult.length * 125 + 50
+          : maxDisplayedResults * 125 + 50;
+
+      setSearchHeigth(calculatedHeight);
+    }
+  }, [searchResult.length]);
+  useEffect(() => {
+    console.log(searchHeigth);
+  }, [searchHeigth]);
 
   const handleSearchBlur = (e) => {
     if (!e.currentTarget.contains(e.relatedTarget)) setIsSearchShown(false);
   };
+
   return (
     <>
       {/* // here we have nav links to change visible page */}
@@ -135,32 +149,53 @@ function Header() {
                 setSearchInput(e.target.value);
               }}
             />
-            {searchResult.length > 0 && (
+            {searchInput && searchResult.length > 0 && (
               // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
               <div
                 className="search-result-wraper"
                 onClick={() => {
                   setSearchInput("");
+                  setSearchResult([]);
+                }}
+                style={{
+                  height: searchHeigth > 0 ? searchHeigth : 0,
+                  opacity: searchHeigth > 0 ? 1 : 0,
                 }}
               >
                 {searchResult.slice(0, 5).map((title: TitleDto) => (
                   <Title
                     titleClass="search-result-title"
-                    titleName={title.title}
+                    titleFullName={title.title}
+                    titleName={title.material_data.title}
+                    titleAgeRest={title.material_data.rating_mpaa}
+                    titleStatus={title.material_data.anime_status}
+                    titleTags={title.material_data.anime_genres}
                     titlePoster={title.material_data.poster_url}
+                    titleEpisodes={title.episodes_count}
                     titleId={title.id}
+                    titleType={title.type}
                   />
                 ))}
-                <button type="button">Показать еще</button>
+                <button type="button" className="header-search-button">
+                  Показать еще {searchResult.length}
+                </button>
+              </div>
+            )}
+            {searchInput && searchResult.length === 0 && (
+              <div className="search-result-wraper unfiend">
+                <span>Ничего не найдено по вашему запросу</span>
               </div>
             )}
           </div>
         )}
         <div className="nav-buttons">
-          <NavLink className="header-cat" to={{
-            pathname: "/catalogue",
-            search: "?page=1"
-          }}>
+          <NavLink
+            className="header-cat"
+            to={{
+              pathname: "/catalogue",
+              search: "?page=1",
+            }}
+          >
             Каталог
           </NavLink>
           {/* should lead to a random title */}

@@ -19,6 +19,7 @@ body {
   max-height: -moz-fit-content;
   max-height: fit-content;
   margin-left: 0px;
+  overflow-x: hidden;
 }
 
 body:before {
