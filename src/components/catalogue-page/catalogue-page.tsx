@@ -16,6 +16,7 @@ import Search from "../img/search.svg";
 import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
 import Title from "../title";
+
 import "./catalogue-page.css";
 
 function CataloguePage() {

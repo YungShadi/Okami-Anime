@@ -14,7 +14,6 @@ import ArrowUp from "../img/up-arrow-svgrepo-com.svg";
 import Title from "../title";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
-import Poster from "../img/poster.png";
 
 import "./header.css";
 

@@ -1,13 +1,12 @@
 import React, { lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
-import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-
 import ErrorPage from "./components/error/ErrorPage";
 import Layout from "./components/layout/layout";
 import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
+
+import "./App.css";
 
 const MainPage = lazy(() => import("./components/main-page/main-page"));
 const TitlePage = lazy(() => import("./components/title-page/title-page"));

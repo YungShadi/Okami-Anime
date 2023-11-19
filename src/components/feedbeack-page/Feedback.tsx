@@ -14,7 +14,7 @@ export default function Feedback() {
 
   useEffect(() => {
     if (addCurrentUrl) {
-      setTextAreaContent(`${textAreaContent} url: ${currentUrl}`);
+      setTextAreaContent(`${textAreaContent.trim()} url: ${currentUrl}`);
     } else {
       setTextAreaContent(textAreaContent.replace(`url: ${currentUrl}`, ""));
     }

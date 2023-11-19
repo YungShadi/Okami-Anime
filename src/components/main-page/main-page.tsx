@@ -10,7 +10,11 @@ import Reklama from "../img/Безымянный.png";
 // ! то лучше брать их. если нет - посылаем запрос по id в ссылке
 
 function MainPage() {
-  const titles = useSelector((state) => state?.titles.titlesArray);
+  const titles = useSelector(
+    (state: { titles: { titlesArray: TitleDto[] } }) =>
+      state?.titles.titlesArray,
+  );
+
   // eslint-disable-next-line no-unused-vars
   useTitles();
 
