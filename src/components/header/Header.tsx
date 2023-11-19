@@ -25,7 +25,6 @@ function Header() {
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const [searchInput, setSearchInput] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
   const [isShearchShown, setIsSearchShown] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [randomLink, setRandomLink] = useState("");
@@ -62,10 +61,8 @@ function Header() {
   const debounceSearch = useDebounce(searchInput, 500);
 
   useEffect(() => {
-    setIsSearching(true);
     handleSearchTitle(debounceSearch).then((result) => {
       setSearchResult(result.data.results);
-      setIsSearching(false);
     });
   }, [debounceSearch]);
 
@@ -86,7 +83,7 @@ function Header() {
     console.log(searchHeigth);
   }, [searchHeigth]);
 
-  const handleSearchBlur = (e) => {
+  const handleSearchBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
     if (!e.currentTarget.contains(e.relatedTarget)) setIsSearchShown(false);
   };
 

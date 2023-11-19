@@ -42,7 +42,6 @@ function CataloguePage() {
   // ! get params from url
   // ! need to undestand hwo this works
   const currentPage = new URLSearchParams(location.search).get("page");
-  console.log(currentPage);
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
