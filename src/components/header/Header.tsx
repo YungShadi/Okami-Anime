@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { UserDto } from "../../types/userDto";
@@ -22,6 +22,7 @@ function Header() {
   const { isAuthenticated } = useAuth();
   const { handleSearchTitle } = useTitles();
   const location = useLocation();
+  const navigate = useNavigate();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const [searchInput, setSearchInput] = useState("");
@@ -79,9 +80,6 @@ function Header() {
       setSearchHeigth(calculatedHeight);
     }
   }, [searchResult.length]);
-  useEffect(() => {
-    console.log(searchHeigth);
-  }, [searchHeigth]);
 
   const handleSearchBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
     if (!e.currentTarget.contains(e.relatedTarget)) setIsSearchShown(false);
@@ -127,6 +125,7 @@ function Header() {
           </button>
         )}
         {location.pathname !== "/catalogue" && (
+          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
           <div
             className={`search-wraper ${isShearchShown ? "show" : "hide"}`}
             onFocus={() => {
@@ -134,6 +133,10 @@ function Header() {
             }}
             onBlur={(e) => {
               handleSearchBlur(e);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                navigate(`/catalogue?page=1&search=${searchInput}`);
             }}
           >
             <input
@@ -191,6 +194,7 @@ function Header() {
               pathname: "/catalogue",
               search: "?page=1",
             }}
+            reloadDocument={location.pathname === "/catalogue"}
           >
             Каталог
           </NavLink>

@@ -115,7 +115,8 @@
   padding-left: 5px;
   color: white;
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-  height: 30px;
+  min-height: 30px;
+  max-height: 30px;
 }
 
 .filter-list {

@@ -13,10 +13,10 @@ import "../catalogue-page.css";
 
 function FilterWrapper() {
   const filterStateMobile = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isFilterOpened
+    (state: { mobile: MobileDto }) => state.mobile.isFilterOpened,
   );
   const mobileView = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMobileView
+    (state: { mobile: MobileDto }) => state.mobile.isMobileView,
   );
   const [tagFilterExpand, setTagFilterExpand] = useState(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState(false);
@@ -73,7 +73,7 @@ function FilterWrapper() {
       status: "inactive",
     },
     {
-      title: "Психологический триллер ",
+      title: "Психологический триллер",
       value: "psy-triller",
       status: "inactive",
     },
@@ -303,7 +303,7 @@ function FilterWrapper() {
           onClick={() => dispatch(toggleFilterAction(false))}
         />
       </>,
-      document.body
+      document.body,
     );
   }
   return (

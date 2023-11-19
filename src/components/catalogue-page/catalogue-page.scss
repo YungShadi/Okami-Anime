@@ -117,7 +117,8 @@
     CenturyGothic,
     AppleGothic,
     sans-serif;
-  height: 30px;
+  min-height: 30px;
+  max-height: 30px;
 }
 .filter-list {
   display: flex;

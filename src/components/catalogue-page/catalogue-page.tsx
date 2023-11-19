@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
@@ -36,12 +37,14 @@ function CataloguePage() {
   const titlesArray = useSelector(
     (state: { pagination: paginationState }) => state.pagination.titlesArray,
   );
+  const [searchInput, setSearchInput] = useState("");
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
   const location = useLocation();
-  // ! get params from url
-  // ! need to undestand hwo this works
+  console.log(location);
+
   const currentPage = new URLSearchParams(location.search).get("page");
+  const initialSearch = new URLSearchParams(location.search).get("search");
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
@@ -50,10 +53,11 @@ function CataloguePage() {
         dispatch(toggleMenuAction(!menuState));
       }
     };
-  });
+  }, []);
 
   useEffect(() => {
     document.title = "Каталог";
+    if (initialSearch) setSearchInput(initialSearch);
   }, []);
 
   if (searchState) {
@@ -85,6 +89,10 @@ function CataloguePage() {
             placeholder="Поиск"
             className="input-title"
             style={{ marginLeft: "20px" }}
+            value={searchInput}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+            }}
           />
         </div>
         <div className="titles-wraper">
