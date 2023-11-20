@@ -38,6 +38,7 @@
   text-decoration: none;
   text-align: center;
   padding-top: 4px;
+  font-size: 16px;
 }
 
 .pagination-button.active {

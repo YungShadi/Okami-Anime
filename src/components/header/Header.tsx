@@ -14,6 +14,7 @@ import ArrowUp from "../img/up-arrow-svgrepo-com.svg";
 import Title from "../title";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
+import Lupa from "../img/search.svg";
 
 import "./header.css";
 
@@ -148,6 +149,9 @@ function Header() {
                 setSearchInput(e.target.value);
               }}
             />
+            <button type="button" className="header-search-lupa">
+              <img src={Lupa} alt="" />
+            </button>
             {searchInput && searchResult.length > 0 && (
               // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
               <div

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
-import { paginationState } from "../../redux/paginationSlice";
+import { TitleDto } from "../../types/titleDto";
 import { MobileDto } from "../../types/mobileDto";
 
 import {
@@ -34,17 +34,18 @@ function CataloguePage() {
   const searchState = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened,
   );
-  const titlesArray = useSelector(
-    (state: { pagination: paginationState }) => state.pagination.titlesArray,
+  const titles = useSelector(
+    (state: { titles: { titlesArray: TitleDto[] } }) =>
+      state?.titles.titlesArray,
   );
   const [searchInput, setSearchInput] = useState("");
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
   const location = useLocation();
-  console.log(location);
 
-  const currentPage = new URLSearchParams(location.search).get("page");
-  const initialSearch = new URLSearchParams(location.search).get("search");
+  const pageParams = new URLSearchParams(location.search);
+  const currentPage = pageParams.get("page");
+  const initialSearch = pageParams.get("search");
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
@@ -96,13 +97,18 @@ function CataloguePage() {
           />
         </div>
         <div className="titles-wraper">
-          {titlesArray.map((title) => (
+          {titles.map((title: TitleDto) => (
             <Title
-              titleName={title.titleName}
-              titleAgeRest={title.titleAgeRest}
-              titleStatus={title.titleStatus}
-              titleTags={title.titleTags}
-              titleClass=""
+              titleClass="catalogue-page-title"
+              titleFullName={title.title}
+              titleName={title.material_data.title || title.title}
+              titleAgeRest={title.material_data.rating_mpaa}
+              titleStatus={title.material_data.anime_status}
+              titleTags={title.material_data.anime_genres}
+              titlePoster={title.material_data.poster_url}
+              titleEpisodes={title.episodes_count}
+              titleId={title.id}
+              titleType={title.type}
             />
           ))}
         </div>
@@ -111,6 +117,7 @@ function CataloguePage() {
           pageSize={1}
           siblingCount={1}
           currentPageCatalogue={Number(currentPage)}
+          pageParams={pageParams}
         />
       </section>
     </div>

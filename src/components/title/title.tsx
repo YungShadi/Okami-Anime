@@ -92,12 +92,12 @@ function Title({
     return result;
   }
   return (
-    <Link
-      className={`${titleClass} title-main`}
-      style={{ color: "white", textDecoration: "none" }}
-      to={`article/${transliterate(titleName)}?${titleId}`}
-    >
-      <div className="title-poster-wraper">
+    <div className={`${titleClass} title-main`}>
+      <Link
+        className="title-poster-wraper"
+        style={{ color: "white", textDecoration: "none" }}
+        to={`article/${transliterate(titleName)}?${titleId}`}
+      >
         <span className="title-status status">
           {titleStatus || `¯\\(°_o)/¯`}
         </span>
@@ -113,7 +113,7 @@ function Title({
         )}
         <span className="age-rest">{titleAgeRest || `¯\\(°_o)/¯`}</span>
         <div className="play-button-wraper" />
-      </div>
+      </Link>
       <div className="title-name-tags">
         <span className="title-name name" title={titleFullName}>
           {titleName}
@@ -122,19 +122,39 @@ function Title({
           {titleType === "anime" ? "Фильм" : episodes}
         </span>
         <div className="title-tags tags">
-          <span className="tag">
-            {titleTags?.slice(0, 3).map((tag, i, arr) => {
-              if (i + 1 === arr.length) {
-                return <span>{tag}</span>;
-              }
-              return <span>{tag}, </span>;
-            })}
-          </span>
+          {titleTags?.slice(0, 3).map((tag, i, arr) => {
+            if (i + 1 === arr.length) {
+              return (
+                <Link
+                  className="tag"
+                  to={{
+                    pathname: "/catalogue",
+                    search: `page=1&included-tags=${tag}`,
+                  }}
+                  reloadDocument
+                >
+                  {tag}
+                </Link>
+              );
+            }
+            return (
+              <Link
+                className="tag"
+                to={{
+                  pathname: "/catalogue",
+                  search: `page=1&included-tags=${tag}`,
+                }}
+                reloadDocument
+              >
+                {tag}, {' '}
+              </Link>
+            );
+          })}
         </div>
         <span className="title-type">TB Сериал /</span>
         <span className="title-year"> 2023</span>
       </div>
-    </Link>
+    </div>
   );
 }
 export default Title;

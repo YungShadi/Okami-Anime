@@ -206,12 +206,14 @@
   border-radius: 6px;
   background-color: rgba(6, 75, 140, 0.8);
   display: flex;
-  gap: 20px;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
   padding: 10px 20px;
   min-height: 760px;
   margin-bottom: 20px;
   flex-wrap: wrap;
   align-content: flex-start;
+  min-width: 1280px;
 }
 
 .filter-span {

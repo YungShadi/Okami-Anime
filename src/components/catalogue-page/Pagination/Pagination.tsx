@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { usePagination } from "../../../hooks/usePagination";
-import { PaginationDto } from "../../../types/paginationDto";
 import { usePaginationRange } from "../../../hooks/usePaginationRange";
+import { PaginationDto } from "../../../types/paginationDto";
 
 import "./Pagination.css";
 
@@ -12,6 +12,7 @@ export default function Pagination({
   pageSize,
   siblingCount,
   currentPageCatalogue,
+  pageParams,
 }: PaginationDto) {
   const {
     pages,
@@ -25,7 +26,35 @@ export default function Pagination({
     pageSize,
     siblingCount,
     currentPageCatalogue,
+    pageParams,
   });
+
+  const initialSearch = pageParams.get("search");
+  const includedTags = pageParams.get("included-tags");
+  const excludedTags = pageParams.get("excluded-tags");
+  const includedTypes = pageParams.get("included-types");
+  const excludedTypes = pageParams.get("excluded-types");
+  const status = pageParams.get("status");
+
+  const createLink = (action: string, page: number) => {
+    let link;
+    if (action === "next-page") {
+      if (currentPage !== pages) link = `?page=${currentPage + 1}`;
+      else link = `?page=${currentPage}`;
+    } else if (action === "previous-page") {
+      if (currentPage !== 1) link = `?page=${currentPage - 1}`;
+      else link = `?page=${currentPage}`;
+    } else if (page) {
+      link = `?page=${page}`;
+    }
+    if (initialSearch) link += `&search=${initialSearch}`;
+    if (includedTags) link += `&included-tags=${includedTags}`;
+    if (excludedTags) link += `&excluded-tags=${excludedTags}`;
+    if (includedTypes) link += `&included-types=${includedTypes}`;
+    if (excludedTypes) link += `&excluded-types=${excludedTypes}`;
+    if (status) link += `&status=${status}`;
+    return link;
+  };
 
   const pageArray = [];
 
@@ -58,7 +87,7 @@ export default function Pagination({
           className="pagination-button"
           type="button"
           onClick={handlePreviousPage}
-          to={`?page=${currentPage - 1}`}
+          to={createLink("previous-page")}
         >
           {"<"}
         </Link>
@@ -66,9 +95,13 @@ export default function Pagination({
           if (currentPage === page) {
             return (
               // eslint-disable-next-line jsx-a11y/anchor-is-valid
-              <Link type="button" className="pagination-button active" to="#">
+              <button
+                type="button"
+                className="pagination-button active"
+                disabled
+              >
                 {page}
-              </Link>
+              </button>
             );
           }
           if (page === "..." && paginationRange?.[1] === page) {
@@ -94,7 +127,7 @@ export default function Pagination({
               type="button"
               className="pagination-button"
               onClick={() => handlePageChange(page)}
-              to={`?page=${page}`}
+              to={createLink("some-page", page)}
             >
               {page}
             </Link>
@@ -104,7 +137,7 @@ export default function Pagination({
           className="pagination-button"
           type="button"
           onClick={handleNextPage}
-          to={`?page=${currentPage + 1}`}
+          to={createLink("next-page")}
         >
           {">"}
         </Link>

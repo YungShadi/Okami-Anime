@@ -3,4 +3,5 @@ export interface PaginationDto {
   pageSize: number;
   totalCount: number;
   currentPageCatalogue: number;
+  pageParams: URLSearchParams;
 }
