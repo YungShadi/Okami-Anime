@@ -72,22 +72,22 @@ export default function Pagination({
             );
           }
           if (page === "..." && paginationRange?.[1] === page) {
-            return (paginationRange[1] = (
+            return (
               <button type="button" className="pagination-button" disabled>
                 {page}
               </button>
-            ));
+            );
           }
           if (
             page === "..." &&
             // eslint-disable-next-line no-unsafe-optional-chaining
             paginationRange?.[paginationRange?.length - 2] === page
           ) {
-            return (paginationRange[paginationRange.length - 2] = (
+            return (
               <button type="button" className="pagination-button" disabled>
                 {page}
               </button>
-            ));
+            );
           }
           return (
             <Link
