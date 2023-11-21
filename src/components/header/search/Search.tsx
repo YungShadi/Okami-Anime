@@ -36,7 +36,7 @@ export default function Search() {
     if (searchResult.length === 0) {
       setSearchHeigth(0);
     } else {
-      const maxDisplayedResults = 5; // You may customize this value
+      const maxDisplayedResults = 5;
       const calculatedHeight =
         searchResult.length <= maxDisplayedResults
           ? searchResult.length * 125 + 50
