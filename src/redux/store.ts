@@ -8,6 +8,7 @@ import errorSlice from "./errorSlice";
 import feedbackSlice from "./feedbackSlice";
 import paginationSlice from "./paginationSlice";
 import titlesSlice from "./titlesSlice";
+import filterSlice from "./filterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     feedback: feedbackSlice,
     pagination: paginationSlice,
     titles: titlesSlice,
+    filter: filterSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([userApi.middleware, titlesApi.middleware]),

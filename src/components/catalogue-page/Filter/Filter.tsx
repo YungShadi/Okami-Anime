@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addActiveTag, excludeTag } from "../../../redux/filterSlice";
 import DropDown from "../../img/dropDown.svg";
 
 function Filter({
@@ -28,6 +30,7 @@ function Filter({
   filterStateSet: React.Dispatch<React.SetStateAction<boolean>>;
   filterHeight: number;
 }) {
+  const dispatch = useDispatch();
   const [activeTags, setActiveTags] = useState<Array<string>>([]);
   const [activeType, setActiveType] = useState<Array<string>>([]);
   const [activeStatus, setActiveStatus] = useState<Array<string>>([]);
@@ -36,12 +39,20 @@ function Filter({
   const [statusFilterExpand, setStatusFilterExpand] = useState<boolean>(false);
   const [tagsSearch, setTagsSearch] = useState<string>("");
   const [tagsSearchArray, setTagsSearchArray] = useState<Array<string>>([]);
+  const tags = useSelector((state) => state.filter.tagArray);
+  const activeTagss = useSelector((state) => state.filter.activeTags);
+
+  console.log(tags);
+  useEffect(() => {
+    console.log(activeTagss);
+  }, [activeTagss]);
+
   function handleFilterOptionClick(
     title: string,
     status: string,
     index: number,
     optionValue: string,
-    value: string
+    value: string,
   ) {
     const newTagArray: {
       title: string;
@@ -73,7 +84,7 @@ function Filter({
           setActiveTags([...activeTags, value]);
         }
         const filteredTags = newTagArray.filter(
-          (tag) => tag.status === "add-option"
+          (tag) => tag.status === "add-option",
         );
         setActiveTags(filteredTags.map((tag) => tag.value));
         return activeTags;
@@ -92,7 +103,7 @@ function Filter({
           setActiveType([...activeType, value]);
         }
         const filteredType = newTypeArray.filter(
-          (tag) => tag.status === "add-option"
+          (tag) => tag.status === "add-option",
         );
         setActiveType(filteredType.map((tag) => tag.value));
         return setActiveType;
@@ -106,7 +117,7 @@ function Filter({
           setActiveStatus([...activeStatus, value]);
         }
         const filteredStatus = newStatusArray.filter(
-          (tag) => tag.status === "add-option"
+          (tag) => tag.status === "add-option",
         );
         setActiveStatus(filteredStatus.map((tag) => tag.value));
         return setActiveStatus;
@@ -132,7 +143,7 @@ function Filter({
 
   useEffect(() => {
     const arrayAfterSearch = filterArray.filter((tag) =>
-      tag.title.toLowerCase().includes(tagsSearch.trim().toLowerCase())
+      tag.title.toLowerCase().includes(tagsSearch.trim().toLowerCase()),
     );
     setTagsSearchArray(arrayAfterSearch);
   }, [filterArray, tagsSearch]);
@@ -223,15 +234,7 @@ function Filter({
                   <button
                     className="filter-option"
                     type="button"
-                    onClick={() => {
-                      handleFilterOptionClick(
-                        title,
-                        status,
-                        index,
-                        filterValue,
-                        value
-                      );
-                    }}
+                    onClick={() => dispatch(addActiveTag())}
                     tabIndex={0}
                     onBlur={(e) => {
                       if (!(e && e.relatedTarget)) {
@@ -262,7 +265,7 @@ function Filter({
                         status,
                         index,
                         filterValue,
-                        value
+                        value,
                       );
                     }}
                     tabIndex={0}
