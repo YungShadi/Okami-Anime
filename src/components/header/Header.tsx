@@ -1,36 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
+import Search from "./search/Search";
 import { UserDto } from "../../types/userDto";
 import { MobileDto } from "../../types/mobileDto";
 import { useAuth } from "../../hooks/useAuth";
-import { useTitles } from "../../hooks/useTitles";
-import { TitleDto } from "../../types/titleDto";
-import { toggleMenuAction, toggleSearchAction } from "../../redux/mobileSlcie";
-import useDebounce from "../../hooks/useDebounce";
-import search from "../img/search-frame.svg";
+import { toggleMenuAction } from "../../redux/mobileSlcie";
 import ArrowUp from "../img/up-arrow-svgrepo-com.svg";
-import Title from "../title";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
-import Lupa from "../img/search.svg";
 
 import "./header.css";
 
 // header, navigation, user
 function Header() {
   const { isAuthenticated } = useAuth();
-  const { handleSearchTitle } = useTitles();
   const location = useLocation();
-  const navigate = useNavigate();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
-  const [searchInput, setSearchInput] = useState("");
-  const [isShearchShown, setIsSearchShown] = useState(false);
-  const [searchResult, setSearchResult] = useState([]);
+
   const [randomLink, setRandomLink] = useState("");
-  const [searchHeigth, setSearchHeigth] = useState(0);
 
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username,
@@ -60,31 +50,6 @@ function Header() {
       "etot-glupyy-svin-ne-ponimaet-mechtu-devochkizayki?serial-54507",
     );
   };
-  const debounceSearch = useDebounce(searchInput, 500);
-
-  useEffect(() => {
-    handleSearchTitle(debounceSearch).then((result) => {
-      setSearchResult(result.data.results);
-    });
-  }, [debounceSearch]);
-
-  useEffect(() => {
-    if (searchResult.length === 0) {
-      setSearchHeigth(0);
-    } else {
-      const maxDisplayedResults = 5; // You may customize this value
-      const calculatedHeight =
-        searchResult.length <= maxDisplayedResults
-          ? searchResult.length * 125 + 50
-          : maxDisplayedResults * 125 + 50;
-
-      setSearchHeigth(calculatedHeight);
-    }
-  }, [searchResult.length]);
-
-  const handleSearchBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) setIsSearchShown(false);
-  };
 
   return (
     <>
@@ -108,89 +73,7 @@ function Header() {
           </div>
           <span className="logo-title">ŌkamiAnime</span>
         </Link>
-        {location.pathname === "/catalogue" ? (
-          <button
-            type="button"
-            className="header-mobile-button mobile-search incative"
-            disabled
-          >
-            <img src={search} alt="search" />
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="header-mobile-button mobile-search"
-            onClick={() => dispatch(toggleSearchAction(!searchState))}
-          >
-            <img src={search} alt="search" />
-          </button>
-        )}
-        {location.pathname !== "/catalogue" && (
-          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-          <div
-            className={`search-wraper ${isShearchShown ? "show" : "hide"}`}
-            onFocus={() => {
-              setIsSearchShown(true);
-            }}
-            onBlur={(e) => {
-              handleSearchBlur(e);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter")
-                navigate(`/catalogue?page=1&search=${searchInput}`);
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Поиск"
-              className="input-title"
-              value={searchInput}
-              onChange={(e) => {
-                setSearchInput(e.target.value);
-              }}
-            />
-            <button type="button" className="header-search-lupa">
-              <img src={Lupa} alt="" />
-            </button>
-            {searchInput && searchResult.length > 0 && (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-              <div
-                className="search-result-wraper"
-                onClick={() => {
-                  setSearchInput("");
-                  setSearchResult([]);
-                }}
-                style={{
-                  height: searchHeigth > 0 ? searchHeigth : 0,
-                  opacity: searchHeigth > 0 ? 1 : 0,
-                }}
-              >
-                {searchResult.slice(0, 5).map((title: TitleDto) => (
-                  <Title
-                    titleClass="search-result-title"
-                    titleFullName={title.title}
-                    titleName={title.material_data.title}
-                    titleAgeRest={title.material_data.rating_mpaa}
-                    titleStatus={title.material_data.anime_status}
-                    titleTags={title.material_data.anime_genres}
-                    titlePoster={title.material_data.poster_url}
-                    titleEpisodes={title.episodes_count}
-                    titleId={title.id}
-                    titleType={title.type}
-                  />
-                ))}
-                <button type="button" className="header-search-button">
-                  Показать еще {searchResult.length}
-                </button>
-              </div>
-            )}
-            {searchInput && searchResult.length === 0 && (
-              <div className="search-result-wraper unfiend">
-                <span>Ничего не найдено по вашему запросу</span>
-              </div>
-            )}
-          </div>
-        )}
+        <Search />
         <div className="nav-buttons">
           <NavLink
             className="header-cat"

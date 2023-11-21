@@ -97,6 +97,7 @@ function Title({
         className="title-poster-wraper"
         style={{ color: "white", textDecoration: "none" }}
         to={`article/${transliterate(titleName)}?${titleId}`}
+        reloadDocument
       >
         <span className="title-status status">
           {titleStatus || `¯\\(°_o)/¯`}
@@ -146,7 +147,7 @@ function Title({
                 }}
                 reloadDocument
               >
-                {tag}, {' '}
+                {tag},{" "}
               </Link>
             );
           })}
