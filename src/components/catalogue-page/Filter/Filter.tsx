@@ -2,7 +2,11 @@
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleTags } from "../../../redux/filterSlice";
+import {
+  handleTags,
+  handleTypes,
+  handleStatus,
+} from "../../../redux/filterSlice";
 import DropDown from "../../img/dropDown.svg";
 
 type FilterType = {
@@ -42,16 +46,12 @@ function Filter({
   const activeTags = useSelector((state) => state.filter.activeTags);
   const excludedTags = useSelector((state) => state.filter.excludedTags);
 
-  // console.log(tags);
-
-  function handleFilterOptionClick(tag, optionValue) {
+  function handleFilterOptionClick(tag: string, optionValue: string) {
     if (optionValue === "genre") return dispatch(handleTags(tag));
-
-    if (optionValue === "type") if (optionValue === "status") return 0;
+    if (optionValue === "type") return dispatch(handleTypes(tag));
+    if (optionValue === "status") return dispatch(handleStatus(tag));
+    return null;
   }
-  useEffect(() => {
-    console.log(excludedTags);
-  }, [excludedTags]);
 
   function expandFilter(value: string) {
     filterStateSet(!filterState);

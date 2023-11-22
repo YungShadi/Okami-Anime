@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { WritableDraft } from "immer/dist/internal";
 
 const initialState = {
   tagArray: [
@@ -180,50 +181,102 @@ const initialState = {
   excludedTypes: [],
 };
 
+const handleFilters = (
+  action: { payload: any; type?: string },
+  itemsArray: any[],
+  activeArray: any[],
+  excludedArray?: any[],
+) => {
+  const actionValue = action.payload.value;
+  if (action.payload.status === "inactive") {
+    const newArray = [...itemsArray];
+    const index = newArray.findIndex((tag) => tag.value === actionValue);
+    newArray[index] = {
+      ...newArray[index],
+      status: "active",
+    };
+    activeArray = [...activeArray, actionValue];
+    itemsArray = newArray;
+    return {
+      itemsArray: newArray,
+      activeArray,
+      excludedArray,
+    };
+  }
+  if (action.payload.status === "active") {
+    const newArray = [...itemsArray];
+    const index = newArray.findIndex((tag) => tag.value === actionValue);
+    newArray[index] = {
+      ...newArray[index],
+      status: excludedArray ? "excluded" : "inactive",
+    };
+    activeArray = activeArray.filter((tag) => tag.value !== actionValue);
+    if (excludedArray) excludedArray = [...excludedArray, actionValue];
+    itemsArray = newArray;
+    return {
+      itemsArray: newArray,
+      activeArray,
+      excludedArray,
+    };
+  }
+  if (excludedArray) {
+    if (action.payload.status === "excluded") {
+      const newArray = [...itemsArray];
+      const index = newArray.findIndex((tag) => tag.value === actionValue);
+      newArray[index] = {
+        ...newArray[index],
+        status: "inactive",
+      };
+      excludedArray = excludedArray.filter((tag) => tag.value !== actionValue);
+      itemsArray = newArray;
+      return {
+        itemsArray: newArray,
+        activeArray,
+        excludedArray,
+      };
+    }
+  }
+  return {
+    itemsArray,
+    activeArray,
+    excludedArray,
+  };
+};
+
 export const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
     handleTags: (state, action) => {
-      if (action.payload.status === "inactive") {
-        const newTagArray = [...state.tagArray];
-        const index = newTagArray.findIndex(
-          (tag) => tag.value === action.payload.value,
-        );
-        newTagArray[index] = {
-          ...newTagArray[index],
-          status: "active",
-        };
-        state.activeTags = [...state.activeTags, action.payload];
-        state.tagArray = newTagArray;
-      } else if (action.payload.status === "active") {
-        const newTagArray = [...state.tagArray];
-        const index = newTagArray.findIndex(
-          (tag) => tag.value === action.payload.value,
-        );
-        newTagArray[index] = {
-          ...newTagArray[index],
-          status: "excluded",
-        };
-        state.activeTags = state.activeTags.filter(
-          (tag) => tag.value !== action.payload.value,
-        );
-        state.excludedTags = [...state.excludedTags, action.payload];
-        state.tagArray = newTagArray;
-      } else {
-        const newTagArray = [...state.tagArray];
-        const index = newTagArray.findIndex(
-          (tag) => tag.value === action.payload.value,
-        );
-        newTagArray[index] = {
-          ...newTagArray[index],
-          status: "inactive",
-        };
-        state.excludedTags = state.excludedTags.filter(
-          (tag) => tag.value !== action.payload.value,
-        );
-        state.tagArray = newTagArray;
-      }
+      const { itemsArray, activeArray, excludedArray } = handleFilters(
+        action,
+        state.tagArray,
+        state.activeTags,
+        state.excludedTags,
+      );
+      state.tagArray = itemsArray;
+      state.activeTags = activeArray;
+      state.excludedTags = excludedArray;
+    },
+    handleTypes: (state, action) => {
+      const { itemsArray, activeArray, excludedArray } = handleFilters(
+        action,
+        state.typeArray,
+        state.activeTypes,
+        state.excludedTypes,
+      );
+      state.typeArray = itemsArray;
+      state.activeTypes = activeArray;
+      state.excludedTypes = excludedArray;
+    },
+    handleStatus: (state, action) => {
+      const { itemsArray, activeArray } = handleFilters(
+        action,
+        state.statusArray,
+        state.activeStatus,
+      );
+      state.statusArray = itemsArray;
+      state.activeStatus = activeArray;
     },
   },
 });
