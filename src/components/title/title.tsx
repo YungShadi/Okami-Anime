@@ -5,12 +5,12 @@ import DefaultPoster from "../img/poster.png";
 import "./title.css";
 
 type TitleType = {
-  titleStatus: string;
-  titleAgeRest: string;
+  titleStatus: string | undefined;
+  titleAgeRest: string | undefined;
   titleName: string;
-  titleTags: string[];
+  titleTags: string[] | undefined;
   titleClass: string;
-  titlePoster: string;
+  titlePoster: string | undefined;
   titleEpisodes: number;
   titleFullName: string;
   titleId: string;
@@ -38,6 +38,7 @@ function Title({
     episodes = `${titleEpisodes} эпизодов`;
   }
   function transliterate(word: string) {
+    if (!word) return "lol";
     // Словарь для транслитерации
     const translitDict: Record<string, string> = {
       а: "a",
@@ -96,7 +97,7 @@ function Title({
       <Link
         className="title-poster-wraper"
         style={{ color: "white", textDecoration: "none" }}
-        to={`article/${transliterate(titleName)}?${titleId}`}
+        to={`/article/${transliterate(titleName)}?${titleId}`}
         reloadDocument
       >
         <span className="title-status status">
@@ -116,7 +117,7 @@ function Title({
         <div className="play-button-wraper" />
       </Link>
       <div className="title-name-tags">
-        <span className="title-name name" title={titleFullName}>
+        <span className="title-name name" title={titleFullName || `¯\\(°_o)/¯`}>
           {titleName}
         </span>
         <span className="title-episodes">

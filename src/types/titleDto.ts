@@ -42,7 +42,7 @@ export interface TitleDto {
   last_season: number;
   lgbt: false;
   link: string;
-  material_data: MaterialData;
+  material_data?: MaterialData;
   other_title: string;
   quality: string;
   screenshots: string[];

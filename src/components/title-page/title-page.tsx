@@ -31,7 +31,7 @@ function TitlePage() {
           result.data.results.length > 0
         ) {
           setTitleData(result.data.results[0]);
-          document.title = result.data.results[0].material_data.title;
+          document.title = result.data.results[0].material_data?.title;
         } else {
           setIsThereError(true);
         }

@@ -6,13 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { TitleDto } from "../../types/titleDto";
 import { MobileDto } from "../../types/mobileDto";
-
 import {
   toggleMenuAction,
   toggleFilterAction,
   toggleSearchAction,
 } from "../../redux/mobileSlcie";
-
 import Search from "../img/search.svg";
 import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
@@ -101,14 +99,15 @@ function CataloguePage() {
             <Title
               titleClass="catalogue-page-title"
               titleFullName={title.title}
-              titleName={title.material_data.title || title.title}
-              titleAgeRest={title.material_data.rating_mpaa}
-              titleStatus={title.material_data.anime_status}
-              titleTags={title.material_data.anime_genres}
-              titlePoster={title.material_data.poster_url}
+              titleName={title.material_data?.title || title.title}
+              titleAgeRest={title.material_data?.rating_mpaa}
+              titleStatus={title.material_data?.anime_status}
+              titleTags={title.material_data?.anime_genres}
+              titlePoster={title.material_data?.poster_url}
               titleEpisodes={title.episodes_count}
               titleId={title.id}
               titleType={title.type}
+              key={title.id}
             />
           ))}
         </div>

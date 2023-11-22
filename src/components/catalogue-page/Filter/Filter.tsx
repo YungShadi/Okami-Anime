@@ -2,20 +2,10 @@
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addActiveTag, excludeTag } from "../../../redux/filterSlice";
+import { handleTags } from "../../../redux/filterSlice";
 import DropDown from "../../img/dropDown.svg";
 
-function Filter({
-  filterName,
-  filterArray,
-  filterValue,
-  filterDesc,
-  filterState,
-  filterZIndex,
-  filterSearch,
-  filterStateSet,
-  filterHeight,
-}: {
+type FilterType = {
   filterName: string;
   filterArray: {
     title: string;
@@ -29,102 +19,39 @@ function Filter({
   filterSearch: boolean;
   filterStateSet: React.Dispatch<React.SetStateAction<boolean>>;
   filterHeight: number;
-}) {
+};
+function Filter({
+  filterName,
+  filterArray,
+  filterValue,
+  filterDesc,
+  filterState,
+  filterZIndex,
+  filterSearch,
+  filterStateSet,
+  filterHeight,
+}: FilterType) {
   const dispatch = useDispatch();
-  const [activeTags, setActiveTags] = useState<Array<string>>([]);
-  const [activeType, setActiveType] = useState<Array<string>>([]);
-  const [activeStatus, setActiveStatus] = useState<Array<string>>([]);
+
   const [tagFilterExpand, setTagFilterExpand] = useState<boolean>(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState<boolean>(false);
   const [statusFilterExpand, setStatusFilterExpand] = useState<boolean>(false);
   const [tagsSearch, setTagsSearch] = useState<string>("");
   const [tagsSearchArray, setTagsSearchArray] = useState<Array<string>>([]);
   const tags = useSelector((state) => state.filter.tagArray);
-  const activeTagss = useSelector((state) => state.filter.activeTags);
+  const activeTags = useSelector((state) => state.filter.activeTags);
+  const excludedTags = useSelector((state) => state.filter.excludedTags);
 
-  console.log(tags);
-  useEffect(() => {
-    console.log(activeTagss);
-  }, [activeTagss]);
+  // console.log(tags);
 
-  function handleFilterOptionClick(
-    title: string,
-    status: string,
-    index: number,
-    optionValue: string,
-    value: string,
-  ) {
-    const newTagArray: {
-      title: string;
-      value: string;
-      status: string;
-    }[] = [...filterArray];
-    const newStatusArray: {
-      title: string;
-      value: string;
-      status: string;
-    }[] = [...filterArray];
-    const newTypeArray: {
-      title: string;
-      value: string;
-      status: string;
-    }[] = [...filterArray];
-    switch (optionValue) {
-      case "genre":
-        if (status === "inactive") {
-          newTagArray[index]!.status = "add-option";
-          setActiveTags([...activeTags, value]);
-        }
-        if (status === "add-option") {
-          newTagArray[index]!.status = "remove-option";
-          setActiveTags([...activeTags, value]);
-        }
-        if (status === "remove-option") {
-          newTagArray[index]!.status = "inactive";
-          setActiveTags([...activeTags, value]);
-        }
-        const filteredTags = newTagArray.filter(
-          (tag) => tag.status === "add-option",
-        );
-        setActiveTags(filteredTags.map((tag) => tag.value));
-        return activeTags;
+  function handleFilterOptionClick(tag, optionValue) {
+    if (optionValue === "genre") return dispatch(handleTags(tag));
 
-      case "type":
-        if (status === "inactive") {
-          newTypeArray[index]!.status = "add-option";
-          setActiveType([...activeType, value]);
-        }
-        if (status === "add-option") {
-          newTypeArray[index]!.status = "remove-option";
-          setActiveType([...activeType, value]);
-        }
-        if (status === "remove-option") {
-          newTypeArray[index]!.status = "inactive";
-          setActiveType([...activeType, value]);
-        }
-        const filteredType = newTypeArray.filter(
-          (tag) => tag.status === "add-option",
-        );
-        setActiveType(filteredType.map((tag) => tag.value));
-        return setActiveType;
-      case "status":
-        if (status === "inactive") {
-          newStatusArray[index]!.status = "add-option";
-          setActiveStatus([...activeStatus, value]);
-        }
-        if (status === "add-option") {
-          newStatusArray[index]!.status = "inactive";
-          setActiveStatus([...activeStatus, value]);
-        }
-        const filteredStatus = newStatusArray.filter(
-          (tag) => tag.status === "add-option",
-        );
-        setActiveStatus(filteredStatus.map((tag) => tag.value));
-        return setActiveStatus;
-      default:
-        return 0;
-    }
+    if (optionValue === "type") if (optionValue === "status") return 0;
   }
+  useEffect(() => {
+    console.log(excludedTags);
+  }, [excludedTags]);
 
   function expandFilter(value: string) {
     filterStateSet(!filterState);
@@ -230,43 +157,12 @@ function Filter({
           )}
           <div className="filter-list">
             {tagsSearchArray.length === 0 && !tagsSearch
-              ? filterArray.map(({ title, status, value }, index) => (
-                  <button
-                    className="filter-option"
-                    type="button"
-                    onClick={() => dispatch(addActiveTag())}
-                    tabIndex={0}
-                    onBlur={(e) => {
-                      if (!(e && e.relatedTarget)) {
-                        filterStateSet(false);
-                        if (tagFilterExpand === true) {
-                          setTagFilterExpand(false);
-                        }
-                        if (typeFilterExpand === true) {
-                          setTypeFilterExpand(false);
-                        }
-                        if (statusFilterExpand === true) {
-                          setStatusFilterExpand(false);
-                        }
-                      }
-                    }}
-                  >
-                    <span className={`option-checkbox ${status}`} />
-                    <span className="filter-desc">{title}</span>
-                  </button>
-                ))
-              : tagsSearchArray.map(({ title, status, value }, index) => (
+              ? filterArray.map((tag) => (
                   <button
                     className="filter-option"
                     type="button"
                     onClick={() => {
-                      handleFilterOptionClick(
-                        title,
-                        status,
-                        index,
-                        filterValue,
-                        value,
-                      );
+                      handleFilterOptionClick(tag, filterValue);
                     }}
                     tabIndex={0}
                     onBlur={(e) => {
@@ -284,8 +180,35 @@ function Filter({
                       }
                     }}
                   >
-                    <span className={`option-checkbox ${status}`} />
-                    <span className="filter-desc">{title}</span>
+                    <span className={`option-checkbox ${tag.status}`} />
+                    <span className="filter-desc">{tag.title}</span>
+                  </button>
+                ))
+              : tagsSearchArray.map((tag) => (
+                  <button
+                    className="filter-option"
+                    type="button"
+                    onClick={() => {
+                      handleFilterOptionClick(tag, filterValue);
+                    }}
+                    tabIndex={0}
+                    onBlur={(e) => {
+                      if (!(e && e.relatedTarget)) {
+                        filterStateSet(false);
+                        if (tagFilterExpand === true) {
+                          setTagFilterExpand(false);
+                        }
+                        if (typeFilterExpand === true) {
+                          setTypeFilterExpand(false);
+                        }
+                        if (statusFilterExpand === true) {
+                          setStatusFilterExpand(false);
+                        }
+                      }
+                    }}
+                  >
+                    <span className={`option-checkbox ${tag.status}`} />
+                    <span className="filter-desc">{tag.title}</span>
                   </button>
                 ))}
           </div>

@@ -202,14 +202,14 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
 
   let episodes;
   if (
-    titleData.material_data.episodes_aired ===
-    titleData.material_data.episodes_total
+    titleData.material_data?.episodes_aired ===
+    titleData.material_data?.episodes_total
   ) {
-    episodes = titleData.material_data.episodes_total;
-  } else if (titleData.material_data.episodes_total === 0) {
-    episodes = `${titleData.material_data.episodes_aired}/?`;
+    episodes = titleData.material_data?.episodes_total;
+  } else if (titleData.material_data?.episodes_total === 0) {
+    episodes = `${titleData.material_data?.episodes_aired}/?`;
   } else {
-    episodes = `${titleData.material_data.episodes_aired}/${titleData.material_data.episodes_total}`;
+    episodes = `${titleData.material_data?.episodes_aired}/${titleData.material_data?.episodes_total}`;
   }
   return (
     <div className="title-info">
@@ -217,7 +217,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
         <img
           className="title-poster"
           alt="poster"
-          src={titleData.material_data.poster_url || Poster}
+          src={titleData.material_data?.poster_url || Poster}
         />
         {/* title condition */}
         <div className="select-wrapper">
@@ -297,10 +297,10 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           ))}
         </span>
         <span className="title-year">
-          Год: {titleData.material_data.released_at}
+          Год: {titleData.material_data?.released_at}
         </span>
         <span className="title-status">
-          Статус: {titleData.material_data.all_status}
+          Статус: {titleData.material_data?.all_status}
         </span>
         <span className="title-type">Тип: {titleData.type}</span>
         <span className="title-ep">Количество серий: {episodes}</span>
@@ -308,7 +308,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           Озвучки: {titleData.translation.title}
         </span>
         <span className="title-desc">
-          {titleData.material_data.anime_description || "Нету описания :("}
+          {titleData.material_data?.anime_description || "Нету описания :("}
         </span>
       </div>
     </div>

@@ -12,7 +12,7 @@ import Reklama from "../img/Безымянный.png";
 function MainPage() {
   const titles = useSelector(
     (state: { titles: { titlesArray: TitleDto[] } }) =>
-      state?.titles.titlesArray,
+      state.titles.titlesArray,
   );
 
   // eslint-disable-next-line no-unused-vars
@@ -31,14 +31,15 @@ function MainPage() {
             <Title
               titleClass="season-title"
               titleFullName={title.title}
-              titleName={title.material_data.title || title.title}
-              titleAgeRest={title.material_data.rating_mpaa}
-              titleStatus={title.material_data.anime_status}
-              titleTags={title.material_data.anime_genres}
-              titlePoster={title.material_data.poster_url}
+              titleName={title.material_data?.title || title.title}
+              titleAgeRest={title.material_data?.rating_mpaa}
+              titleStatus={title.material_data?.anime_status}
+              titleTags={title.material_data?.anime_genres}
+              titlePoster={title.material_data?.poster_url}
               titleEpisodes={title.episodes_count}
               titleId={title.id}
               titleType={title.type}
+              key={title.id}
             />
           ))}
         </div>
@@ -51,14 +52,15 @@ function MainPage() {
             <Title
               titleClass="recently-added"
               titleFullName={title.title}
-              titleName={title.material_data.title || title.title}
-              titleAgeRest={title.material_data.rating_mpaa}
-              titleStatus={title.material_data.anime_status}
-              titleTags={title.material_data.anime_genres}
-              titlePoster={title.material_data.poster_url}
+              titleName={title.material_data?.title || title.title}
+              titleAgeRest={title.material_data?.rating_mpaa}
+              titleStatus={title.material_data?.anime_status}
+              titleTags={title.material_data?.anime_genres}
+              titlePoster={title.material_data?.poster_url}
               titleEpisodes={title.episodes_count}
               titleId={title.id}
               titleType={title.type}
+              key={title.id}
             />
           ))}
         </div>

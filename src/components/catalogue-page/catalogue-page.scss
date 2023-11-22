@@ -166,16 +166,16 @@
   .option-checkbox.inactive {
     background-color: $base-light-blue;
   }
-  .option-checkbox.add-option {
+  .option-checkbox.active {
     background-color: #2eaf79;
   }
-  .option-checkbox.remove-option {
+  .option-checkbox.excluded {
     background-color: #e83c3c;
   }
-  .option-checkbox.add-option::after {
+  .option-checkbox.active::after {
     content: url("../img/filer-checked.svg");
   }
-  .option-checkbox.remove-option::after {
+  .option-checkbox.excluded::after {
     content: url("../img/filter-cross.svg");
     position: relative;
     bottom: 2px;

@@ -166,16 +166,16 @@
 .filter-option .option-checkbox.inactive {
   background-color: #3ce3e8;
 }
-.filter-option .option-checkbox.add-option {
+.filter-option .option-checkbox.active {
   background-color: #2eaf79;
 }
-.filter-option .option-checkbox.remove-option {
+.filter-option .option-checkbox.excluded {
   background-color: #e83c3c;
 }
-.filter-option .option-checkbox.add-option::after {
+.filter-option .option-checkbox.active::after {
   content: url("../img/filer-checked.svg");
 }
-.filter-option .option-checkbox.remove-option::after {
+.filter-option .option-checkbox.excluded::after {
   content: url("../img/filter-cross.svg");
   position: relative;
   bottom: 2px;

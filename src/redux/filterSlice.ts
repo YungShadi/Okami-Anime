@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   tagArray: [
@@ -184,25 +184,50 @@ export const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    addActiveTag: (state, action) => {
-      state.activeTags = [...state.activeTags, action.payload];
-    },
-    addActiveType: (state, action) => {
-      state.activeTypes = [...state.activeTypes, action.payload];
-    },
-    addActiveStatus: (state, action) => {
-      state.activeStatus = [...state.activeStatus, action.payload];
-    },
-    excludeTag: (state, action) => {
-      state.activeTags = state.activeTags.filter(
-        (tag) => tag !== action.payload,
-      );
-      state.excludedTags = [...state.excludedTags, action.payload];
+    handleTags: (state, action) => {
+      if (action.payload.status === "inactive") {
+        const newTagArray = [...state.tagArray];
+        const index = newTagArray.findIndex(
+          (tag) => tag.value === action.payload.value,
+        );
+        newTagArray[index] = {
+          ...newTagArray[index],
+          status: "active",
+        };
+        state.activeTags = [...state.activeTags, action.payload];
+        state.tagArray = newTagArray;
+      } else if (action.payload.status === "active") {
+        const newTagArray = [...state.tagArray];
+        const index = newTagArray.findIndex(
+          (tag) => tag.value === action.payload.value,
+        );
+        newTagArray[index] = {
+          ...newTagArray[index],
+          status: "excluded",
+        };
+        state.activeTags = state.activeTags.filter(
+          (tag) => tag.value !== action.payload.value,
+        );
+        state.excludedTags = [...state.excludedTags, action.payload];
+        state.tagArray = newTagArray;
+      } else {
+        const newTagArray = [...state.tagArray];
+        const index = newTagArray.findIndex(
+          (tag) => tag.value === action.payload.value,
+        );
+        newTagArray[index] = {
+          ...newTagArray[index],
+          status: "inactive",
+        };
+        state.excludedTags = state.excludedTags.filter(
+          (tag) => tag.value !== action.payload.value,
+        );
+        state.tagArray = newTagArray;
+      }
     },
   },
 });
 
-export const { addActiveType, addActiveTag, addActiveStatus, excludeTag } =
-  filterSlice.actions;
+export const { handleTags, handleTypes, handleStatus } = filterSlice.actions;
 
 export default filterSlice.reducer;
