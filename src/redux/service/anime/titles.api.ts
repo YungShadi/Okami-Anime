@@ -11,7 +11,7 @@ export const titlesApi = createApi({
   endpoints: (builder) => ({
     getTitles: builder.query({
       query: () =>
-        `list?${token}&limit=12&types=anime-serial%2Canime&with_material_data=true&has_field=rating_mpaa`,
+        `list?${token}&limit=100&types=anime-serial%2Canime&with_material_data=true&has_field=rating_mpaa`,
     }),
     getTitileById: builder.mutation({
       query: (titleId) => ({

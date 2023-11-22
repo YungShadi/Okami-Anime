@@ -294,16 +294,18 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           Жанры:{" "}
           {titleData.material_data?.anime_genres?.map((genre) => (
             <span>{genre} </span>
-          ))}
+          )) || "Нет информации"}
         </span>
         <span className="title-year">
-          Год: {titleData.material_data?.released_at}
+          Год: {titleData.material_data?.released_at || "Нет информации"}
         </span>
         <span className="title-status">
-          Статус: {titleData.material_data?.all_status}
+          Статус: {titleData.material_data?.all_status || "Нет информации"}
         </span>
         <span className="title-type">Тип: {titleData.type}</span>
-        <span className="title-ep">Количество серий: {episodes}</span>
+        <span className="title-ep">
+          Количество серий: {episodes || "Нет информации"}
+        </span>
         <span className="title-dub">
           Озвучки: {titleData.translation.title}
         </span>
