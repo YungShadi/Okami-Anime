@@ -30,6 +30,8 @@
   gap: 20px;
   height: -moz-min-content;
   height: min-content;
+  min-width: 65vw;
+  min-height: 60vh;
 }
 .title-info .poster-wraper {
   height: -moz-fit-content;
@@ -108,11 +110,12 @@
 .title-info .title-text-info {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 40px;
   height: 100%;
   font-size: 19px;
   height: -moz-fit-content;
   height: fit-content;
+  width: 90%;
 }
 .title-info .title-text-info .title-name {
   font-size: 35px;
@@ -124,7 +127,7 @@
 
 .title-desc {
   display: inline-block;
-  max-width: 970px;
+  max-width: 100%;
   width: -moz-fit-content;
   width: fit-content;
   white-space: pre-line;
@@ -183,13 +186,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 65vw;
   margin: 0 auto;
 }
 .player-wraper .player,
 .player-wraper .player-placeholder {
-  width: 1204px;
+  width: 65vw;
   height: 720px;
   margin-left: auto;
   margin-right: auto;
@@ -201,10 +203,6 @@
 }
 .player-wraper .player body,
 .player-wraper .player-placeholder body {
-  background-color: white;
-}
-
-iframe html body {
   background-color: white;
 }
 
@@ -295,7 +293,7 @@ iframe html body {
   display: inline-flex;
   gap: 15px;
   height: 50px;
-  width: 1205px;
+  width: 65vw;
   align-items: center;
 }
 
@@ -332,7 +330,7 @@ iframe html body {
 }
 
 .comments-wraper {
-  width: 1205px;
+  width: 65vw;
   height: -moz-fit-content;
   height: fit-content;
   margin-left: auto;
@@ -348,7 +346,7 @@ iframe html body {
   gap: 5px;
   background-color: #05315a;
   padding-top: 5px;
-  width: 1205px;
+  width: 65vw;
 }
 .comments-styles .style {
   width: 40px;
@@ -357,7 +355,7 @@ iframe html body {
 }
 
 .comment-input {
-  width: 1205px;
+  width: 65vw;
   height: 150px;
   resize: none;
   background: #064b8c;
@@ -379,11 +377,11 @@ iframe html body {
   color: black;
   width: 250px;
   height: 50px;
-  margin-left: 80%;
   font-size: 20px;
-  margin-bottom: 60px;
   border-radius: 3px;
   transition: 0.5s;
+  align-self: flex-end;
+  margin-bottom: 30px;
 }
 
 .comment-send:hover {
@@ -391,7 +389,7 @@ iframe html body {
 }
 
 .devider-line-long {
-  width: 1250px;
+  width: 65vw;
   height: 2px;
   background-color: #05315a;
   margin-bottom: 50px;
@@ -401,7 +399,7 @@ iframe html body {
   background-color: #05315a;
   display: flex;
   flex-direction: column;
-  width: 1205px;
+  width: 65vw;
   height: -moz-fit-content;
   height: fit-content;
   margin-left: auto;
@@ -412,7 +410,7 @@ iframe html body {
   padding: 5px;
 }
 .comments .comment {
-  width: 1160px;
+  width: 64vw;
   height: 150px;
   padding: 10px;
   background-color: #064b8c;
@@ -429,7 +427,7 @@ iframe html body {
 }
 
 .comment-content {
-  width: 950px;
+  width: 60vw;
   height: 100%;
 }
 .comment-content .comment-name-date {

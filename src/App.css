@@ -13,11 +13,7 @@ body {
   z-index: -1;
   background-color: #2179df;
   transition: 1s;
-  font-family:
-    Century Gothic,
-    CenturyGothic,
-    AppleGothic,
-    sans-serif;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   color: white;
   max-width: 100vw;
   max-height: -moz-fit-content;
@@ -37,8 +33,7 @@ body:before {
   width: 100vw;
   height: 100vh;
   z-index: -10;
-  background: url("./components/img/bacground19201080.webp") no-repeat center
-    center;
+  background: url("./components/img/bacground19201080.webp") no-repeat center center;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -57,15 +52,12 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: #2179df; /* цвет плашки */
   border-radius: 20px; /* закругления плашки */
+  width: 10px;
 }
 
 .okami {
   color: white;
-  font-family:
-    Century Gothic,
-    CenturyGothic,
-    AppleGothic,
-    sans-serif;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,6 +105,6 @@ body::-webkit-scrollbar-thumb {
 
 @media (min-width: 1100px) {
   .okami {
-    min-height: 730px;
+    min-height: 80vh;
   }
-} /*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=App.css.map */

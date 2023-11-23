@@ -1,16 +1,20 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useTitles } from "../../hooks/useTitles";
 import { TitleDto } from "../../types/titleDto";
-import TitleData from "./TitleData/titleData";
-import Player from "./Player/player";
-import CommentsWraper from "./Comments/commentsWraper";
+// import TitleData from "./TitleData/titleData";
+// import Player from "./Player/player";
+// import CommentsWraper from "./Comments/commentsWraper";
 
 import "./title-page.css";
 
 function TitlePage() {
+  const TitleData = lazy(() => import("./TitleData/titleData"));
+  const Player = lazy(() => import("./Player/player"));
+  const CommentsWraper = lazy(() => import("./Comments/commentsWraper"));
+
   const [titleData, setTitleData] = useState<TitleDto>({} as TitleDto);
   const [isThereError, setIsThereError] = useState(false);
 
@@ -25,13 +29,9 @@ function TitlePage() {
   useEffect(() => {
     handleGetCurrentTitle(titleId)
       .then((result) => {
-        if (
-          "data" in result &&
-          result.data.results &&
-          result.data.results.length > 0
-        ) {
-          setTitleData(result.data.results[0]);
-          document.title = result.data.results[0].material_data?.title;
+        if ("data" in result) {
+          setTitleData(result.data);
+          document.title = result.data.material_data?.title;
         } else {
           setIsThereError(true);
         }
@@ -49,13 +49,17 @@ function TitlePage() {
 
   return (
     <div className="title">
-      <React.Suspense>
-        {titleData.title && <TitleData titleData={titleData} />}
-        {/* player and player header */}
-        <Player playerLink={titleData.link} />
-        {/* comments wraper, here post comments and comments */}
-        {titleData.title && <CommentsWraper />}
-      </React.Suspense>
+      <Suspense fallback={<p>Загрузка</p>}>
+        {titleData.title && (
+          <>
+            <TitleData titleData={titleData} />
+            {/* player and player header */}
+            <Player playerLink={titleData.link} />
+            {/* comments wraper, here post comments and comments */}
+            <CommentsWraper />
+          </>
+        )}
+      </Suspense>
     </div>
   );
 }

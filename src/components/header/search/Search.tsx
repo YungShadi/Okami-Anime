@@ -27,9 +27,12 @@ export default function Search() {
   const debounceSearch = useDebounce(searchInput, 500);
 
   useEffect(() => {
-    handleSearchTitle(debounceSearch).then((result) => {
-      setSearchResult(result.data.results);
-    });
+    if (debounceSearch && debounceSearch.length >= 2) {
+      handleSearchTitle(debounceSearch).then((result) => {
+        if (result.data.length > 0) setSearchResult(result.data);
+        else setSearchResult([]);
+      });
+    }
   }, [debounceSearch]);
 
   useEffect(() => {
@@ -127,7 +130,7 @@ export default function Search() {
           )}
           {searchInput && searchResult.length === 0 && (
             <div className="search-result-wraper unfiend">
-              <span>Ничего не найдено по вашему запросу</span>
+              <span>Ничего не найдено по запросу: {debounceSearch}</span>
             </div>
           )}
         </div>

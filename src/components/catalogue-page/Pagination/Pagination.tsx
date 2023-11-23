@@ -75,13 +75,14 @@ export default function Pagination({
 
   return (
     <div className="pagination-wrapper">
-      <button
+      <Link
         type="button"
         onClick={handleNextPageLoadMore}
         className="pagination-load-more"
+        to={createLink("next-page")}
       >
         Загрузить еще...
-      </button>
+      </Link>
       <div className="catalogue-pagination">
         <Link
           className="pagination-button"

@@ -17,7 +17,7 @@ export const useTitles = () => {
 
   useEffect(() => {
     if (!isLoadingTitles && titlesArray) {
-      dispatch(setTitlesAction(titlesArray.results));
+      dispatch(setTitlesAction(titlesArray.content));
     }
   });
   const handleGetCurrentTitle = async (titleId: string) => {

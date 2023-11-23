@@ -15,7 +15,6 @@ function MainPage() {
       state.titles.titlesArray,
   );
 
-  // eslint-disable-next-line no-unused-vars
   useTitles();
 
   useEffect(() => {

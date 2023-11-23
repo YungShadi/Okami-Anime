@@ -306,9 +306,13 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
         <span className="title-ep">
           Количество серий: {episodes || "Нет информации"}
         </span>
-        <span className="title-dub">
-          Озвучки: {titleData.translation.title}
-        </span>
+        <div>
+          Озвучки:{" "}
+          {titleData.allTranslations.map((dub) => (
+            <span className="title-dub">{dub}, </span>
+          ))}
+        </div>
+
         <span className="title-desc">
           {titleData.material_data?.anime_description || "Нету описания :("}
         </span>

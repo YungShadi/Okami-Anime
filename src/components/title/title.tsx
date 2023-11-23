@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DefaultPoster from "../img/poster.png";
 
 import "./title.css";
+import { useSelector } from "react-redux";
 
 type TitleType = {
   titleStatus: string | undefined;
@@ -29,6 +30,19 @@ function Title({
   titleId,
   titleType,
 }: TitleType) {
+  const [currentTags, setCurrentTags] = useState<string[]>([]);
+  const tags = useSelector((state) => state.filter.tagArray);
+  const getCurrentTags = () => {
+    const newTags = titleTags?.flatMap((tag) =>
+      tags.filter((el) => el.title === tag),
+    );
+    setCurrentTags(newTags || []);
+  };
+
+  useEffect(() => {
+    getCurrentTags();
+  }, []);
+
   let episodes;
   if (titleEpisodes === 1) {
     episodes = "1 эпизод";
@@ -98,7 +112,6 @@ function Title({
         className="title-poster-wraper"
         style={{ color: "white", textDecoration: "none" }}
         to={`/article/${transliterate(titleName)}?${titleId}`}
-        reloadDocument
       >
         <span className="title-status status">
           {titleStatus || `¯\\(°_o)/¯`}
@@ -133,7 +146,6 @@ function Title({
                     pathname: "/catalogue",
                     search: `page=1&included-tags=${tag}`,
                   }}
-                  reloadDocument
                 >
                   {tag}
                 </Link>
@@ -146,7 +158,6 @@ function Title({
                   pathname: "/catalogue",
                   search: `page=1&included-tags=${tag}`,
                 }}
-                reloadDocument
               >
                 {tag},{" "}
               </Link>

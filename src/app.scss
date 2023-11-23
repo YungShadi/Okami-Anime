@@ -55,6 +55,7 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: #2179df; /* цвет плашки */
   border-radius: 20px; /* закругления плашки */
+  width: 10px;
 }
 .okami {
   color: white;
@@ -117,6 +118,6 @@ body::-webkit-scrollbar-thumb {
 }
 @media (min-width: 1100px) {
   .okami {
-    min-height: 730px;
+    min-height: 80vh;
   }
 }

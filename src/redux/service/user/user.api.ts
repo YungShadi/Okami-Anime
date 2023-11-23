@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://c357-95-25-239-176.ngrok-free.app/`,
+    baseUrl: `https://0d34-95-25-231-191.ngrok-free.app`,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
@@ -58,11 +58,11 @@ export const userApi = createApi({
     }),
     refreshJWT: builder.mutation({
       query: () => ({
-        url: "/auth/token/refresh",
+        url: "auth/token/refresh",
         method: "GET",
         credentials: "include",
         headers: {
-          authorization: `${Cookies.get("refresh_token")}`,
+          authorization: `${Cookies.get("refresh_jwt_token")}`,
         },
       }),
     }),
@@ -76,4 +76,5 @@ export const {
   useRegisterUserMutation,
   useLogoutMutation,
   useRefreshJWTMutation,
+  useGetTitlesQuery,
 } = userApi;

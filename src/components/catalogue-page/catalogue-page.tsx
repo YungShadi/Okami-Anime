@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import { TitleDto } from "../../types/titleDto";
@@ -20,6 +20,7 @@ import "./catalogue-page.css";
 
 function CataloguePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
@@ -45,8 +46,19 @@ function CataloguePage() {
   const currentPage = pageParams.get("page");
   const initialSearch = pageParams.get("search");
 
+  if (!currentPage) {
+    navigate("/catalogue?page=1");
+  }
+
+  if (searchState) {
+    dispatch(toggleSearchAction(false));
+  }
+
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
+    document.title = "Каталог";
+    if (initialSearch) setSearchInput(initialSearch);
+
     return () => {
       if (menuState) {
         dispatch(toggleMenuAction(!menuState));
@@ -54,14 +66,6 @@ function CataloguePage() {
     };
   }, []);
 
-  useEffect(() => {
-    document.title = "Каталог";
-    if (initialSearch) setSearchInput(initialSearch);
-  }, []);
-
-  if (searchState) {
-    dispatch(toggleSearchAction(false));
-  }
   return (
     <div className="catalogue-page">
       {mobileView ? (

@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import { WritableDraft } from "immer/dist/internal";
 
 const initialState = {
   tagArray: [

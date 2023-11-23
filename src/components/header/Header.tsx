@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
@@ -19,7 +19,6 @@ function Header() {
   const location = useLocation();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
-
   const [randomLink, setRandomLink] = useState("");
 
   const username = useSelector(
@@ -73,7 +72,9 @@ function Header() {
           </div>
           <span className="logo-title">ŌkamiAnime</span>
         </Link>
-        <Search />
+        <Suspense>
+          <Search />
+        </Suspense>
         <div className="nav-buttons">
           <NavLink
             className="header-cat"
@@ -95,7 +96,7 @@ function Header() {
           </NavLink>
         </div>
         {/* user display depending on localStorage(maybe there is another way) */}
-        {!isAuthenticated ? (
+        {isAuthenticated ? (
           <Link className="header-profile" to={`profile/${username}`}>
             <span className="profile-name">{username}</span>
             <img className="profile-pic" alt="profile" src={DefaultIcon} />
