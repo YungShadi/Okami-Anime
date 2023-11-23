@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DefaultPoster from "../img/poster.png";
 
 import "./title.css";
-import { useSelector } from "react-redux";
 
 type TitleType = {
   titleStatus: string | undefined;

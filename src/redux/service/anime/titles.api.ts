@@ -22,7 +22,7 @@ export const titlesApi = createApi({
     }),
     searchTitle: builder.mutation({
       query: (searchValue) => ({
-        url: `anime/search/title=${searchValue}`,
+        url: `anime/search/title=${searchValue}&page=0`,
         method: "GET",
       }),
     }),

@@ -35,7 +35,7 @@ function MainPage() {
               titleStatus={title.material_data?.anime_status}
               titleTags={title.material_data?.anime_genres}
               titlePoster={title.material_data?.poster_url}
-              titleEpisodes={title.episodes_count}
+              titleEpisodes={title.last_episode}
               titleId={title.id}
               titleType={title.type}
               key={title.id}
@@ -56,7 +56,7 @@ function MainPage() {
               titleStatus={title.material_data?.anime_status}
               titleTags={title.material_data?.anime_genres}
               titlePoster={title.material_data?.poster_url}
-              titleEpisodes={title.episodes_count}
+              titleEpisodes={title.last_episode}
               titleId={title.id}
               titleType={title.type}
               key={title.id}

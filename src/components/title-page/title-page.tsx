@@ -49,7 +49,7 @@ function TitlePage() {
 
   return (
     <div className="title">
-      <Suspense fallback={<p>Загрузка</p>}>
+      <Suspense>
         {titleData.title && (
           <>
             <TitleData titleData={titleData} />

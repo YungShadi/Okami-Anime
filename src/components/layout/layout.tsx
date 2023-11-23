@@ -17,25 +17,22 @@ const MobileMenu = lazy(() => import("../header/mobile-meu/mobileMenu"));
 // by default its displaying header and footer
 function Layout() {
   const mobielView = useSelector(
-    (state: { mobile: MobileDto }) => state?.mobile.isMobileView
+    (state: { mobile: MobileDto }) => state?.mobile.isMobileView,
   );
   const errorArray = useSelector(
-    (state: { error: ErrorDto }) => state.error.errorObj
+    (state: { error: ErrorDto }) => state.error.errorObj,
   );
   const feedbackState = useSelector(
-    (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen
+    (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen,
   );
   return (
     <>
       <Header />
       <div className="okami">
         {!mobielView && <FeedbackButton />}
-        <main style={{ minHeight: "70vh" }}>
-          <Suspense fallback={<Loading />}>
-            <Outlet />
-          </Suspense>
-        </main>
-
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
         {mobielView && (
           <Suspense>{createPortal(<MobileMenu />, document.body)}</Suspense>
         )}

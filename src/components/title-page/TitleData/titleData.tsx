@@ -202,14 +202,14 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
 
   let episodes;
   if (
-    titleData.material_data?.episodes_aired ===
+    titleData.last_episode ===
     titleData.material_data?.episodes_total
   ) {
     episodes = titleData.material_data?.episodes_total;
   } else if (titleData.material_data?.episodes_total === 0) {
-    episodes = `${titleData.material_data?.episodes_aired}/?`;
+    episodes = `${titleData.last_episode}/?`;
   } else {
-    episodes = `${titleData.material_data?.episodes_aired}/${titleData.material_data?.episodes_total}`;
+    episodes = `${titleData.last_episode}/${titleData.material_data?.episodes_total}`;
   }
   return (
     <div className="title-info">

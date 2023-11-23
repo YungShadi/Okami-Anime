@@ -29,7 +29,8 @@ export default function Search() {
   useEffect(() => {
     if (debounceSearch && debounceSearch.length >= 2) {
       handleSearchTitle(debounceSearch).then((result) => {
-        if (result.data.length > 0) setSearchResult(result.data);
+        if (result.data.content.length > 0)
+          setSearchResult(result.data.content);
         else setSearchResult([]);
       });
     }

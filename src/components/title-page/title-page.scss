@@ -20,7 +20,7 @@
   height: -moz-fit-content;
   height: fit-content;
   padding: 15px;
-  min-width: 70vw;
+  min-width: 50vw;
   min-height: 70vh;
 }
 .title-info {
@@ -30,7 +30,7 @@
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  min-width: 65vw;
+  min-width: 55vw;
   min-height: 60vh;
   .poster-wraper {
     height: -webkit-fit-content;
@@ -187,11 +187,11 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 65vw;
+  width: 55vw;
   margin: 0 auto;
   .player,
   .player-placeholder {
-    width: 65vw;
+    width: 55vw;
     height: 720px;
     margin-left: auto;
     margin-right: auto;
@@ -284,7 +284,7 @@
   display: inline-flex;
   gap: 15px;
   height: 50px;
-  width: 65vw;
+  width: 55vw;
   align-items: center;
 }
 .episode-wraper {
@@ -321,7 +321,7 @@
 }
 
 .comments-wraper {
-  width: 65vw;
+  width: 55vw;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -337,15 +337,15 @@
   gap: 5px;
   background-color: $base-dark-blue;
   padding-top: 5px;
-  width: 65vw;
+  width: 55vw;
   .style {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
   }
 }
 .comment-input {
-  width: 65vw;
+  width: 55vw;
   height: 150px;
   resize: none;
   background: #064b8c;
@@ -375,7 +375,7 @@
   background-color: #3c87e8;
 }
 .devider-line-long {
-  width: 65vw;
+  width: 55vw;
   height: 2px;
   background-color: $base-dark-blue;
   margin-bottom: 50px;
@@ -384,7 +384,7 @@
   background-color: $base-dark-blue;
   display: flex;
   flex-direction: column;
-  width: 65vw;
+  width: 55vw;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -395,7 +395,7 @@
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 5px;
   .comment {
-    width: 64vw;
+    width: 54vw;
     height: 150px;
     padding: 10px;
     background-color: #064b8c;
@@ -411,7 +411,7 @@
   }
 }
 .comment-content {
-  width: 60vw;
+  width: 50vw;
   height: 100%;
   .comment-name-date {
     font-size: 20px;
