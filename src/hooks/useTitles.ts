@@ -4,6 +4,7 @@ import {
   useGetTitlesQuery,
   useGetTitileByIdMutation,
   useSearchTitleMutation,
+  useLazyGetTitlesQuery,
 } from "../redux/service/anime/titles.api";
 import { setTitlesAction } from "../redux/titlesSlice";
 
@@ -11,22 +12,31 @@ import { setTitlesAction } from "../redux/titlesSlice";
 export const useTitles = () => {
   const dispatch = useDispatch();
   const { data: titlesArray, isLoading: isLoadingTitles } =
-    useGetTitlesQuery(undefined);
+    useGetTitlesQuery(0);
   const [getTitle] = useGetTitileByIdMutation();
-  const [searchTitle] = useSearchTitleMutation();
+  const [searchTitle, { isLoading: isSearchLoading }] =
+    useSearchTitleMutation();
+  const [getTiles, { isLoading: isTitlesLoadingLazy }] =
+    useLazyGetTitlesQuery();
 
   useEffect(() => {
-    if (!isLoadingTitles && titlesArray) {
+    if (titlesArray) {
       dispatch(setTitlesAction(titlesArray.content));
     }
-  });
+  }, [titlesArray]);
+
   const handleGetCurrentTitle = async (titleId: string) => {
     const result = await getTitle(titleId);
     return result;
   };
 
-  const handleSearchTitle = async (searchValue: string) => {
-    const result = await searchTitle(searchValue);
+  const handleSearchTitles = async (searchValue: string, page: number) => {
+    const result = await searchTitle({ searchValue, page });
+    return result;
+  };
+
+  const handleGetTitles = async (page: number) => {
+    const result = await getTiles(page);
     return result;
   };
 
@@ -34,6 +44,9 @@ export const useTitles = () => {
     isLoadingTitles,
     titlesArray,
     handleGetCurrentTitle,
-    handleSearchTitle,
+    handleSearchTitles,
+    isSearchLoading,
+    handleGetTitles,
+    isTitlesLoadingLazy,
   };
 };

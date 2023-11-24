@@ -11,6 +11,7 @@ export const titlesSlice = createSlice({
   initialState,
   reducers: {
     setTitlesAction: (state, action) => {
+      console.log("a");
       state.titlesArray = action.payload;
     },
     setCurrentTitle: (state, action) => {

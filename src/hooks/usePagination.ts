@@ -12,6 +12,12 @@ import {
 export const usePagination = ({ totalCount, pageSize }: PaginationDto) => {
   const pages = Math.ceil(totalCount / pageSize);
   const dispatch = useDispatch();
+  // const {
+  //   handleSearchTitles,
+  //   isSearchLoading,
+  //   handleGetTitles,
+  //   isTitlesLoadingLazy,
+  // } = useTitles();
   const currentPage = useSelector(
     (state: { pagination: paginationState }) => state.pagination.currentPage,
   );
@@ -22,11 +28,15 @@ export const usePagination = ({ totalCount, pageSize }: PaginationDto) => {
     }
   };
   const handleNextPageLoadMore = () => {
-    if (currentPage < pages) dispatch(nextPageLoadMoreAction());
+    if (currentPage < pages) {
+      dispatch(nextPageLoadMoreAction());
+    }
   };
 
   const handlePreviousPage = () => {
-    if (currentPage > 1) dispatch(previousPageAction());
+    if (currentPage > 1) {
+      dispatch(previousPageAction());
+    }
   };
 
   const handlePageChange = (page: number) => {

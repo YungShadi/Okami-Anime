@@ -11,6 +11,7 @@ import {
   toggleFilterAction,
   toggleSearchAction,
 } from "../../redux/mobileSlcie";
+import { useTitles } from "../../hooks/useTitles";
 import Search from "../img/search.svg";
 import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
@@ -21,6 +22,9 @@ import "./catalogue-page.css";
 function CataloguePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  // const linkState = location.state;
+
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
@@ -35,16 +39,18 @@ function CataloguePage() {
   );
   const titles = useSelector(
     (state: { titles: { titlesArray: TitleDto[] } }) =>
-      state?.titles.titlesArray,
+      state.titles.titlesArray,
   );
-  const [searchInput, setSearchInput] = useState("");
-
-  // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
-  const location = useLocation();
 
   const pageParams = new URLSearchParams(location.search);
   const currentPage = pageParams.get("page");
   const initialSearch = pageParams.get("search");
+
+  const { isSearchLoading } = useTitles();
+
+  const [searchInput, setSearchInput] = useState("");
+
+  // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
 
   if (!currentPage) {
     navigate("/catalogue?page=1");
@@ -99,21 +105,14 @@ function CataloguePage() {
           />
         </div>
         <div className="titles-wraper">
-          {titles.map((title: TitleDto) => (
-            <Title
-              titleClass="catalogue-page-title"
-              titleFullName={title.title}
-              titleName={title.material_data?.title || title.title}
-              titleAgeRest={title.material_data?.rating_mpaa}
-              titleStatus={title.material_data?.anime_status}
-              titleTags={title.material_data?.anime_genres}
-              titlePoster={title.material_data?.poster_url}
-              titleEpisodes={title.episodes_count}
-              titleId={title.id}
-              titleType={title.type}
-              key={title.id}
-            />
-          ))}
+          {!isSearchLoading &&
+            titles.map((title: TitleDto) => (
+              <Title
+                titleClass="catalogue-page-title"
+                titleData={title}
+                key={title.id}
+              />
+            ))}
         </div>
         <Pagination
           totalCount={30}

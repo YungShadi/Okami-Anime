@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://0d34-95-25-231-191.ngrok-free.app`,
+    baseUrl: `https://b189-95-25-231-191.ngrok-free.app`,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
@@ -76,5 +76,4 @@ export const {
   useRegisterUserMutation,
   useLogoutMutation,
   useRefreshJWTMutation,
-  useGetTitlesQuery,
 } = userApi;

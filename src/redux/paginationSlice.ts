@@ -96,7 +96,6 @@ export const paginationSlice = createSlice({
     },
     nextPageLoadMoreAction: (state) => {
       state.currentPage++;
-      state.titlesArray = [...state.titlesArray, ...state.titlesArray];
     },
     previousPageAction: (state) => {
       state.currentPage--;

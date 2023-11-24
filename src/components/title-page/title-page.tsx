@@ -19,6 +19,8 @@ function TitlePage() {
   const [isThereError, setIsThereError] = useState(false);
 
   const location = useLocation();
+  const linkState = location.state;
+  console.log(linkState);
 
   const { handleGetCurrentTitle } = useTitles();
 
@@ -27,18 +29,22 @@ function TitlePage() {
   console.log(params);
 
   useEffect(() => {
-    handleGetCurrentTitle(titleId)
-      .then((result) => {
-        if ("data" in result) {
-          setTitleData(result.data);
-          document.title = result.data.material_data?.title;
-        } else {
+    if (linkState) {
+      setTitleData(linkState);
+    } else {
+      handleGetCurrentTitle(titleId)
+        .then((result) => {
+          if ("data" in result) {
+            setTitleData(result.data);
+            document.title = result.data.material_data?.title;
+          } else {
+            setIsThereError(true);
+          }
+        })
+        .catch(() => {
           setIsThereError(true);
-        }
-      })
-      .catch(() => {
-        setIsThereError(true);
-      });
+        });
+    }
   }, [titleId]);
 
   // options for condition of title chose

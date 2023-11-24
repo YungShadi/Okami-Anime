@@ -116,10 +116,14 @@
 .search-result-title .title-poster-wraper {
   width: 100px;
   height: 125px;
+  margin-left: 0;
 }
 .search-result-title .title-poster-wraper .title-poster {
   width: 100px;
   height: 125px;
+}
+.search-result-title .tag {
+  margin-left: 0;
 }
 
 .search-result-title:hover .play-button-wraper {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Title from "../title";
 import { useTitles } from "../../hooks/useTitles";
@@ -10,37 +10,28 @@ import Reklama from "../img/Безымянный.png";
 // ! то лучше брать их. если нет - посылаем запрос по id в ссылке
 
 function MainPage() {
+  const { isLoadingTitles } = useTitles();
+
   const titles = useSelector(
     (state: { titles: { titlesArray: TitleDto[] } }) =>
       state.titles.titlesArray,
   );
-
-  useTitles();
-
-  useEffect(() => {
-    document.title = "ŌkamiAnime";
-  }, []);
 
   return (
     <section className="main" style={{ flexGrow: "1" }}>
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
-          {titles.slice(0, 6).map((title: TitleDto) => (
-            <Title
-              titleClass="season-title"
-              titleFullName={title.title}
-              titleName={title.material_data?.title || title.title}
-              titleAgeRest={title.material_data?.rating_mpaa}
-              titleStatus={title.material_data?.anime_status}
-              titleTags={title.material_data?.anime_genres}
-              titlePoster={title.material_data?.poster_url}
-              titleEpisodes={title.last_episode}
-              titleId={title.id}
-              titleType={title.type}
-              key={title.id}
-            />
-          ))}
+          {!isLoadingTitles &&
+            titles
+              .slice(0, 6)
+              .map((title: TitleDto) => (
+                <Title
+                  titleClass="season-title"
+                  titleData={title}
+                  key={title.id}
+                />
+              ))}
         </div>
         <div className="devider" />
       </div>
@@ -50,15 +41,7 @@ function MainPage() {
           {titles.map((title: TitleDto) => (
             <Title
               titleClass="recently-added"
-              titleFullName={title.title}
-              titleName={title.material_data?.title || title.title}
-              titleAgeRest={title.material_data?.rating_mpaa}
-              titleStatus={title.material_data?.anime_status}
-              titleTags={title.material_data?.anime_genres}
-              titlePoster={title.material_data?.poster_url}
-              titleEpisodes={title.last_episode}
-              titleId={title.id}
-              titleType={title.type}
+              titleData={title}
               key={title.id}
             />
           ))}

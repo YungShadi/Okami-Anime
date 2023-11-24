@@ -18,7 +18,7 @@ export default function Search() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { handleSearchTitle } = useTitles();
+  const { handleSearchTitles, isSearchLoading } = useTitles();
 
   const searchState = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened,
@@ -28,7 +28,7 @@ export default function Search() {
 
   useEffect(() => {
     if (debounceSearch && debounceSearch.length >= 2) {
-      handleSearchTitle(debounceSearch).then((result) => {
+      handleSearchTitles(debounceSearch, 0).then((result) => {
         if (result.data.content.length > 0)
           setSearchResult(result.data.content);
         else setSearchResult([]);
@@ -85,8 +85,10 @@ export default function Search() {
             handleSearchBlur(e);
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter")
-              navigate(`/catalogue?page=1&search=${searchInput}`);
+            if (e.key === "Enter" && searchResult.length > 0)
+              navigate(`/catalogue?page=1&search=${searchInput}`, {
+                state: searchResult,
+              });
           }}
         >
           <input
@@ -98,10 +100,19 @@ export default function Search() {
               setSearchInput(e.target.value);
             }}
           />
-          <button type="button" className="header-search-lupa">
+          <button
+            type="button"
+            className="header-search-lupa"
+            onClick={() => {
+              if (searchResult.length > 0)
+                navigate(`/catalogue?page=1&search=${searchInput}`, {
+                  state: searchResult,
+                });
+            }}
+          >
             <img src={Lupa} alt="" />
           </button>
-          {searchInput && searchResult.length > 0 && (
+          {!isSearchLoading && searchInput && searchResult.length > 0 && (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
             <div
               className="search-result-wraper"
@@ -113,15 +124,8 @@ export default function Search() {
               {searchResult.slice(0, 5).map((title: TitleDto) => (
                 <Title
                   titleClass="search-result-title"
-                  titleFullName={title.title}
-                  titleName={title.material_data.title}
-                  titleAgeRest={title.material_data.rating_mpaa}
-                  titleStatus={title.material_data.anime_status}
-                  titleTags={title.material_data.anime_genres}
-                  titlePoster={title.material_data.poster_url}
-                  titleEpisodes={title.episodes_count}
-                  titleId={title.id}
-                  titleType={title.type}
+                  titleData={title}
+                  key={title.id}
                 />
               ))}
               <button type="button" className="header-search-button">
@@ -129,9 +133,16 @@ export default function Search() {
               </button>
             </div>
           )}
-          {searchInput && searchResult.length === 0 && (
+          {!isSearchLoading &&
+            searchResult.length === 0 &&
+            searchInput.length > 2 && (
+              <div className="search-result-wraper unfiend">
+                <span>Ничего не найдено по запросу: {debounceSearch}</span>
+              </div>
+            )}
+          {isSearchLoading && (
             <div className="search-result-wraper unfiend">
-              <span>Ничего не найдено по запросу: {debounceSearch}</span>
+              <span>Загрузка...</span>
             </div>
           )}
         </div>

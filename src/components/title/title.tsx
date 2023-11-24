@@ -2,34 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DefaultPoster from "../img/poster.png";
+import { TitleDto } from "../../types/titleDto";
 
 import "./title.css";
 
 type TitleType = {
-  titleStatus: string | undefined;
-  titleAgeRest: string | undefined;
-  titleName: string;
-  titleTags: string[] | undefined;
   titleClass: string;
-  titlePoster: string | undefined;
-  titleEpisodes: number;
-  titleFullName: string;
-  titleId: string;
-  titleType: string;
+  titleData: TitleDto;
 };
 
-function Title({
-  titleName,
-  titleAgeRest,
-  titleStatus,
-  titleTags,
-  titleClass,
-  titlePoster,
-  titleEpisodes,
-  titleFullName,
-  titleId,
-  titleType,
-}: TitleType) {
+function Title({ titleClass, titleData }: TitleType) {
+  const titleTags = titleData.material_data?.anime_genres;
+  const titleEpisodes = titleData.last_episode;
+  const titleName = titleData.material_data?.title;
+  const titleId = titleData.id;
+  const titleStatus = titleData.material_data?.anime_status;
+  const titlePoster = titleData.material_data?.poster_url;
+  const titleAgeRest = titleData.material_data?.rating_mpaa;
+  const titleFullName = titleData.material_data?.anime_title;
+  const titleType = titleData.type;
+
   const [currentTags, setCurrentTags] = useState<string[]>([]);
   const tags = useSelector((state) => state.filter.tagArray);
   const getCurrentTags = () => {
@@ -112,6 +104,7 @@ function Title({
         className="title-poster-wraper"
         style={{ color: "white", textDecoration: "none" }}
         to={`/article/${transliterate(titleName)}?${titleId}`}
+        state={titleData}
       >
         <span className="title-status status">
           {titleStatus || `¯\\(°_o)/¯`}

@@ -183,7 +183,7 @@
   top: 75px;
   transition: height 0.2s;
 }
-.search-result-wraper a:last-of-type {
+.search-result-wraper .search-result-title:last-of-type {
   margin-bottom: 10px;
 }
 .search-result-wraper .search-result-title {
