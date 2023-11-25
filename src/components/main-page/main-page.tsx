@@ -1,5 +1,4 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import Title from "../title";
 import { useTitles } from "../../hooks/useTitles";
 import "./main-page.css";
@@ -10,20 +9,23 @@ import Reklama from "../img/Безымянный.png";
 // ! то лучше брать их. если нет - посылаем запрос по id в ссылке
 
 function MainPage() {
-  const { isLoadingTitles } = useTitles();
+  const { isTitlesLoadingLazy, handleGetTitles } = useTitles();
 
-  const titles = useSelector(
-    (state: { titles: { titlesArray: TitleDto[] } }) =>
-      state.titles.titlesArray,
-  );
+  const [displayedTitles, setDisplayedTitles] = useState([]);
+
+  useEffect(() => {
+    handleGetTitles(0, "").then((res) => {
+      setDisplayedTitles(res.data.content);
+    });
+  }, []);
 
   return (
     <section className="main" style={{ flexGrow: "1" }}>
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
-          {!isLoadingTitles &&
-            titles
+          {!isTitlesLoadingLazy &&
+            displayedTitles
               .slice(0, 6)
               .map((title: TitleDto) => (
                 <Title
@@ -38,13 +40,14 @@ function MainPage() {
       <div className="recently-added-anime">
         <h2 className="recetly-added-title">Недавно добавленные</h2>
         <div className="recently-added-titles">
-          {titles.map((title: TitleDto) => (
-            <Title
-              titleClass="recently-added"
-              titleData={title}
-              key={title.id}
-            />
-          ))}
+          {!isTitlesLoadingLazy &&
+            displayedTitles.map((title: TitleDto) => (
+              <Title
+                titleClass="recently-added"
+                titleData={title}
+                key={title.id}
+              />
+            ))}
         </div>
       </div>
       <div className="devider" />

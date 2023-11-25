@@ -16,6 +16,7 @@ import Search from "../img/search.svg";
 import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
 import Title from "../title";
+import useDebounce from "../../hooks/useDebounce";
 
 import "./catalogue-page.css";
 
@@ -41,14 +42,16 @@ function CataloguePage() {
     (state: { titles: { titlesArray: TitleDto[] } }) =>
       state.titles.titlesArray,
   );
+  const [totalElements, setTotalElements] = useState(18);
 
   const pageParams = new URLSearchParams(location.search);
   const currentPage = pageParams.get("page");
   const initialSearch = pageParams.get("search");
 
-  const { isSearchLoading } = useTitles();
+  const { isTitlesLoadingLazy, handleGetTitles } = useTitles();
 
   const [searchInput, setSearchInput] = useState("");
+  const debounceSearch = useDebounce(searchInput, 500);
 
   // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
 
@@ -59,7 +62,21 @@ function CataloguePage() {
   if (searchState) {
     dispatch(toggleSearchAction(false));
   }
+  const handlePageChangeCatalogue = (
+    page: number,
+    search: string | undefined,
+    isLoadMore?: boolean,
+  ) => {
+    handleGetTitles(page, search, isLoadMore).then((res) =>
+      setTotalElements(res.data.totalElements),
+    );
+  };
 
+  useEffect(() => {
+    handleGetTitles(0, debounceSearch).then((res) =>
+      setTotalElements(res.data.totalElements),
+    );
+  }, [debounceSearch]);
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
     document.title = "Каталог";
@@ -105,7 +122,7 @@ function CataloguePage() {
           />
         </div>
         <div className="titles-wraper">
-          {!isSearchLoading &&
+          {!isTitlesLoadingLazy &&
             titles.map((title: TitleDto) => (
               <Title
                 titleClass="catalogue-page-title"
@@ -115,11 +132,13 @@ function CataloguePage() {
             ))}
         </div>
         <Pagination
-          totalCount={30}
-          pageSize={1}
-          siblingCount={1}
+          totalCount={totalElements}
+          pageSize={18}
+          siblingCount={2}
           currentPageCatalogue={Number(currentPage)}
           pageParams={pageParams}
+          handlePageChangeCatalogue={handlePageChangeCatalogue}
+          search={searchInput || ""}
         />
       </section>
     </div>

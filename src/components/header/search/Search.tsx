@@ -18,7 +18,7 @@ export default function Search() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { handleSearchTitles, isSearchLoading } = useTitles();
+  const { handleGetTitles, isTitlesLoadingLazy } = useTitles();
 
   const searchState = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened,
@@ -28,7 +28,7 @@ export default function Search() {
 
   useEffect(() => {
     if (debounceSearch && debounceSearch.length >= 2) {
-      handleSearchTitles(debounceSearch, 0).then((result) => {
+      handleGetTitles(0, debounceSearch).then((result) => {
         if (result.data.content.length > 0)
           setSearchResult(result.data.content);
         else setSearchResult([]);
@@ -112,7 +112,7 @@ export default function Search() {
           >
             <img src={Lupa} alt="" />
           </button>
-          {!isSearchLoading && searchInput && searchResult.length > 0 && (
+          {!isTitlesLoadingLazy && searchInput && searchResult.length > 0 && (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
             <div
               className="search-result-wraper"
@@ -133,14 +133,14 @@ export default function Search() {
               </button>
             </div>
           )}
-          {!isSearchLoading &&
+          {!isTitlesLoadingLazy &&
             searchResult.length === 0 &&
             searchInput.length > 2 && (
               <div className="search-result-wraper unfiend">
                 <span>Ничего не найдено по запросу: {debounceSearch}</span>
               </div>
             )}
-          {isSearchLoading && (
+          {isTitlesLoadingLazy && (
             <div className="search-result-wraper unfiend">
               <span>Загрузка...</span>
             </div>

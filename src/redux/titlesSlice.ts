@@ -11,8 +11,10 @@ export const titlesSlice = createSlice({
   initialState,
   reducers: {
     setTitlesAction: (state, action) => {
-      console.log("a");
       state.titlesArray = action.payload;
+    },
+    expandTitlesAction: (state, action) => {
+      state.titlesArray = [...state.titlesArray, ...action.payload];
     },
     setCurrentTitle: (state, action) => {
       state.title = action.payload;
@@ -20,6 +22,7 @@ export const titlesSlice = createSlice({
   },
 });
 
-export const { setTitlesAction, setCurrentTitle } = titlesSlice.actions;
+export const { setTitlesAction, setCurrentTitle, expandTitlesAction } =
+  titlesSlice.actions;
 
 export default titlesSlice.reducer;

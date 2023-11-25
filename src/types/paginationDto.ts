@@ -4,4 +4,6 @@ export interface PaginationDto {
   totalCount: number;
   currentPageCatalogue: number;
   pageParams: URLSearchParams;
+  handlePageChangeCatalogue: CallableFunction;
+  search: string;
 }

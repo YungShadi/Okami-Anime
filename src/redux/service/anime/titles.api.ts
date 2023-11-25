@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const titlesApi = createApi({
   reducerPath: "titlesApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://b189-95-25-231-191.ngrok-free.app`,
+    baseUrl: `https://29a1-95-25-231-191.ngrok-free.app`,
   }),
   tagTypes: ["titles"],
   endpoints: (builder) => ({
@@ -15,16 +15,13 @@ export const titlesApi = createApi({
       }),
       invalidatesTags: ["titles"],
     }),
-    searchTitle: builder.mutation({
-      query: ({ searchValue, page }) => ({
-        url: `anime/search/title=${searchValue}&page=${page}`,
-        method: "GET",
-      }),
-      invalidatesTags: ["titles"],
-    }),
     getTitles: builder.query({
-      query: (page = 0) => ({
-        url: `anime/list/page=${page}&limit=18`,
+      query: ({ searchValue, page = 0 }) => ({
+        url: `anime/list${
+          searchValue
+            ? `/search/title=${searchValue}&page=${page}`
+            : `/page=${page}`
+        }`,
         method: "GET",
         credentials: "include",
         headers: {
@@ -40,6 +37,5 @@ export const titlesApi = createApi({
 export const {
   useGetTitlesQuery,
   useGetTitileByIdMutation,
-  useSearchTitleMutation,
   useLazyGetTitlesQuery,
 } = titlesApi;

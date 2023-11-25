@@ -1,51 +1,41 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
-  useGetTitlesQuery,
   useGetTitileByIdMutation,
-  useSearchTitleMutation,
   useLazyGetTitlesQuery,
 } from "../redux/service/anime/titles.api";
-import { setTitlesAction } from "../redux/titlesSlice";
+import { setTitlesAction, expandTitlesAction } from "../redux/titlesSlice";
 
 // eslint-disable-next-line import/prefer-default-export
 export const useTitles = () => {
   const dispatch = useDispatch();
-  const { data: titlesArray, isLoading: isLoadingTitles } =
-    useGetTitlesQuery(0);
   const [getTitle] = useGetTitileByIdMutation();
-  const [searchTitle, { isLoading: isSearchLoading }] =
-    useSearchTitleMutation();
+
   const [getTiles, { isLoading: isTitlesLoadingLazy }] =
     useLazyGetTitlesQuery();
-
-  useEffect(() => {
-    if (titlesArray) {
-      dispatch(setTitlesAction(titlesArray.content));
-    }
-  }, [titlesArray]);
 
   const handleGetCurrentTitle = async (titleId: string) => {
     const result = await getTitle(titleId);
     return result;
   };
 
-  const handleSearchTitles = async (searchValue: string, page: number) => {
-    const result = await searchTitle({ searchValue, page });
-    return result;
-  };
+  const handleGetTitles = async (
+    page: number,
+    searchValue?: string,
+    isLoadMore?: boolean,
+  ) => {
+    const result = await getTiles({ searchValue, page });
+    if (isLoadMore) {
+      dispatch(expandTitlesAction(result.data.content));
+      console.log(isLoadMore);
 
-  const handleGetTitles = async (page: number) => {
-    const result = await getTiles(page);
+      return result;
+    }
+    dispatch(setTitlesAction(result.data.content));
     return result;
   };
 
   return {
-    isLoadingTitles,
-    titlesArray,
     handleGetCurrentTitle,
-    handleSearchTitles,
-    isSearchLoading,
     handleGetTitles,
     isTitlesLoadingLazy,
   };

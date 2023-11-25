@@ -13,6 +13,8 @@ export default function Pagination({
   siblingCount,
   currentPageCatalogue,
   pageParams,
+  handlePageChangeCatalogue,
+  search,
 }: PaginationDto) {
   const {
     pages,
@@ -27,6 +29,8 @@ export default function Pagination({
     siblingCount,
     currentPageCatalogue,
     pageParams,
+    handlePageChangeCatalogue,
+    search,
   });
 
   const initialSearch = pageParams.get("search");
@@ -36,7 +40,7 @@ export default function Pagination({
   const excludedTypes = pageParams.get("excluded-types");
   const status = pageParams.get("status");
 
-  const createLink = (action: string, page: number) => {
+  const createLink = (action: string, page?: number) => {
     let link;
     if (action === "next-page") {
       if (currentPage !== pages) link = `?page=${currentPage + 1}`;
