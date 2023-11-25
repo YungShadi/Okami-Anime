@@ -34,10 +34,10 @@ export default function Pagination({
   });
 
   const initialSearch = pageParams.get("search");
-  const includedTags = pageParams.get("included-tags");
-  const excludedTags = pageParams.get("excluded-tags");
-  const includedTypes = pageParams.get("included-types");
-  const excludedTypes = pageParams.get("excluded-types");
+  const includedTags = pageParams.get("active_tags");
+  const excludedTags = pageParams.get("excluded_tags");
+  const includedTypes = pageParams.get("active_types");
+  const excludedTypes = pageParams.get("excluded_types");
   const status = pageParams.get("status");
 
   const createLink = (action: string, page?: number) => {
@@ -52,10 +52,10 @@ export default function Pagination({
       link = `?page=${page}`;
     }
     if (initialSearch) link += `&search=${initialSearch}`;
-    if (includedTags) link += `&included-tags=${includedTags}`;
-    if (excludedTags) link += `&excluded-tags=${excludedTags}`;
-    if (includedTypes) link += `&included-types=${includedTypes}`;
-    if (excludedTypes) link += `&excluded-types=${excludedTypes}`;
+    if (includedTags) link += `&active_tags=${includedTags}`;
+    if (excludedTags) link += `&excluded_tags=${excludedTags}`;
+    if (includedTypes) link += `&active_types=${includedTypes}`;
+    if (excludedTypes) link += `&excluded_types=${excludedTypes}`;
     if (status) link += `&status=${status}`;
     return link;
   };

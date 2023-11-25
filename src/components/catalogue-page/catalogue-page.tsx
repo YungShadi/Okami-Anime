@@ -11,6 +11,7 @@ import {
   toggleFilterAction,
   toggleSearchAction,
 } from "../../redux/mobileSlcie";
+import { handleLinkTags } from "../../redux/filterSlice";
 import { useTitles } from "../../hooks/useTitles";
 import Search from "../img/search.svg";
 import FiltersWrapper from "./Filter/FiltersWrapper";
@@ -47,13 +48,14 @@ function CataloguePage() {
   const pageParams = new URLSearchParams(location.search);
   const currentPage = pageParams.get("page");
   const initialSearch = pageParams.get("search");
+  const activeTags = pageParams.getAll("active_tags");
+  const yearFrom = pageParams.get("from");
+  const yearTo = pageParams.get("to");
 
   const { titlesLoadStatus, handleGetTitles } = useTitles();
 
   const [searchInput, setSearchInput] = useState("");
   const debounceSearch = useDebounce(searchInput, 500);
-
-  // const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
 
   if (!currentPage) {
     navigate("/catalogue?page=1");
@@ -62,6 +64,7 @@ function CataloguePage() {
   if (searchState) {
     dispatch(toggleSearchAction(false));
   }
+
   const handlePageChangeCatalogue = (
     page: number,
     search: string | undefined,
@@ -72,11 +75,11 @@ function CataloguePage() {
     );
   };
 
-  useEffect(() => {
-    handleGetTitles(0, debounceSearch).then((res) =>
-      setTotalElements(res.data.totalElements),
-    );
-  }, [debounceSearch]);
+  // useEffect(() => {
+  //   handleGetTitles(0, debounceSearch).then((res) =>
+  //     setTotalElements(res.data.totalElements),
+  //   );
+  // }, [debounceSearch]);
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
     document.title = "Каталог";
@@ -93,12 +96,23 @@ function CataloguePage() {
     <div className="catalogue-page">
       {mobileView ? (
         filterStateMobile ? (
-          createPortal(<FiltersWrapper />, document.body)
+          createPortal(
+            <FiltersWrapper
+              searchInput={searchInput}
+              yearFrom={yearFrom}
+              yearTo={yearTo}
+            />,
+            document.body,
+          )
         ) : (
           ""
         )
       ) : (
-        <FiltersWrapper />
+        <FiltersWrapper
+          searchInput={searchInput}
+          yearFrom={yearFrom}
+          yearTo={yearTo}
+        />
       )}
       <button
         type="button"
@@ -139,6 +153,8 @@ function CataloguePage() {
           pageParams={pageParams}
           handlePageChangeCatalogue={handlePageChangeCatalogue}
           search={searchInput || ""}
+          yearFrom={yearFrom}
+          yearTo={yearTo}
         />
       </section>
     </div>

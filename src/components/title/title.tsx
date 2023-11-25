@@ -41,7 +41,7 @@ function Title({ titleClass, titleData }: TitleType) {
     getCurrentTags();
   }, []);
 
-  let episodes;
+  let episodes: string;
   if (titleEpisodes === 1) {
     episodes = "1 эпизод";
   } else if (titleEpisodes <= 4) {
@@ -146,7 +146,7 @@ function Title({ titleClass, titleData }: TitleType) {
                     className="tag"
                     to={{
                       pathname: "/catalogue",
-                      search: `page=1&included-tags=${tag.value}`,
+                      search: `page=1&active_tags=${tag.value}`,
                     }}
                   >
                     {tag.title}
@@ -158,7 +158,7 @@ function Title({ titleClass, titleData }: TitleType) {
                   className="tag"
                   to={{
                     pathname: "/catalogue",
-                    search: `page=1&included-tags=${tag.value}`,
+                    search: `page=1&active_tags=${tag.value}`,
                   }}
                 >
                   {tag.title},{" "}

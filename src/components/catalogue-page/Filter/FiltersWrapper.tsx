@@ -1,16 +1,26 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactSlider from "react-slider";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toggleFilterAction } from "../../../redux/mobileSlcie";
 import Filter from "./Filter";
+import {
+  handleLinkActiveTags,
+  handleLinkExcludedTags,
+  handleLinkActiveTypes,
+  handleLinkExcludedTypes,
+  handleLinkStatus,
+} from "../../../redux/filterSlice";
 import { MobileDto } from "../../../types/mobileDto";
 import CloseCross from "../../img/close-cross.svg";
 import "../catalogue-page.css";
 
-function FilterWrapper() {
+function FilterWrapper({ searchInput, yearFrom, yearTo }) {
+  const location = useLocation();
   const filterStateMobile = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isFilterOpened,
   );
@@ -20,11 +30,87 @@ function FilterWrapper() {
   const tagArray = useSelector((state) => state.filter.tagArray);
   const typeArray = useSelector((state) => state.filter.typeArray);
   const statusArray = useSelector((state) => state.filter.statusArray);
+  const activeTags = useSelector((state) => state.filter.activeTags);
+  const activeTypes = useSelector((state) => state.filter.activeTypes);
+  const activeStatus = useSelector((state) => state.filter.activeStatus);
+  const excludedTags = useSelector((state) => state.filter.excludedTags);
+  const excludedTypes = useSelector((state) => state.filter.excludedTypes);
+
+  const pageParams = new URLSearchParams(location.search);
+
+  const activeTagsLink = pageParams.getAll("active_tags");
+  const excludedTagsLink = pageParams.getAll("excluded_tags");
+  const activeTypesLink = pageParams.getAll("active_types");
+  const excludedTypesLink = pageParams.getAll("excluded_types");
+  const statusLink = pageParams.getAll("status");
+
+  const [yearsFilter, setYearsFilter] = useState([1977, 2023]);
 
   const [tagFilterExpand, setTagFilterExpand] = useState(false);
   const [typeFilterExpand, setTypeFilterExpand] = useState(false);
   const [statusFilterExpand, setStatusFilterExpand] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const applyThings = (value: string, array: string[], link: string) => {
+    link += `${value}=`;
+    array.map((thing, i, arr) => {
+      if (i + 1 === arr.length) {
+        link += `${thing}`;
+      } else {
+        link += `${thing},`;
+      }
+    });
+    return link;
+  };
+
+  const createSearch = () => {
+    let link = "/catalogue?page=1";
+    if (searchInput) link += `search=${searchInput}&`;
+
+    if (activeTags.length !== 0) {
+      link = applyThings("&active_tags", activeTags, link);
+    }
+
+    if (excludedTags.length !== 0) {
+      link = applyThings("&excluded_tags", excludedTags, link);
+    }
+
+    if (activeTypes.length !== 0) {
+      link = applyThings("&active_types", activeTypes, link);
+    }
+
+    if (excludedTypes.length !== 0) {
+      link = applyThings("&excluded_types", excludedTypes, link);
+    }
+
+    if (activeStatus.length !== 0) {
+      link = applyThings("&status", activeStatus, link);
+    }
+
+    if (yearsFilter) {
+      link += `&from=${yearsFilter[0]}`;
+      link += `&to=${yearsFilter[1]}`;
+    }
+    navigate(link);
+  };
+  useEffect(() => {
+    if (activeTagsLink[0]) {
+      dispatch(handleLinkActiveTags(activeTagsLink[0].split(",")));
+    }
+    if (excludedTagsLink[0]) {
+      dispatch(handleLinkExcludedTags(excludedTagsLink[0].split(",")));
+    }
+    if (activeTypesLink[0]) {
+      dispatch(handleLinkActiveTypes(activeTypesLink[0].split(",")));
+    }
+    if (excludedTypesLink[0]) {
+      dispatch(handleLinkExcludedTypes(excludedTypesLink[0].split(",")));
+    }
+    if (statusLink[0]) {
+      dispatch(handleLinkStatus(statusLink[0].split(",")));
+    }
+  }, []);
 
   return (
     <>
@@ -51,7 +137,7 @@ function FilterWrapper() {
             className="filter-slider"
             thumbClassName="slider-thumb"
             trackClassName="slider-track"
-            defaultValue={[1977, 2023]}
+            defaultValue={yearFrom && yearTo ? [yearFrom, yearTo] : yearsFilter}
             renderThumb={(props, state) => (
               <div {...props}>
                 <span className="thumb-content">{state.valueNow}</span>
@@ -60,7 +146,7 @@ function FilterWrapper() {
             min={1977}
             max={2023}
             ariaValuetext=""
-            // onChange={(years) => setYearsFilter(years)}
+            onChange={(years) => setYearsFilter(years)}
           />
           <div className="slider-pips">
             <div className="pip-horisontal big" />
@@ -126,7 +212,11 @@ function FilterWrapper() {
           />
         </div>
         <div className="filter-button-wraper">
-          <button className="filter-button" type="button">
+          <button
+            className="filter-button"
+            type="button"
+            onClick={() => createSearch()}
+          >
             Искать
           </button>
         </div>

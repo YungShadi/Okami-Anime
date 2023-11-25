@@ -188,6 +188,7 @@ const handleFilters = (
   excludedArray?: FilterArrayElement[] | [] | undefined,
 ) => {
   const actionValue = action.payload.value;
+
   if (action.payload.status === "inactive") {
     const newArray = [...itemsArray];
     const index = newArray.findIndex((tag) => tag.value === actionValue);
@@ -210,7 +211,7 @@ const handleFilters = (
       ...newArray[index],
       status: excludedArray ? "excluded" : "inactive",
     };
-    activeArray = activeArray.filter((tag) => tag.value !== actionValue);
+    activeArray = activeArray.filter((tag) => tag !== actionValue);
     if (excludedArray) excludedArray = [...excludedArray, actionValue];
     itemsArray = newArray;
     return {
@@ -227,7 +228,7 @@ const handleFilters = (
         ...newArray[index],
         status: "inactive",
       };
-      excludedArray = excludedArray.filter((tag) => tag.value !== actionValue);
+      excludedArray = excludedArray.filter((tag) => tag !== actionValue);
       itemsArray = newArray;
       return {
         itemsArray: newArray,
@@ -278,9 +279,63 @@ export const filterSlice = createSlice({
       state.statusArray = itemsArray;
       state.activeStatus = activeArray;
     },
+    handleLinkActiveTags: (state, action) => {
+      state.activeTags = action.payload;
+      const newArray = [...state.tagArray];
+      action.payload.forEach((tag) => {
+        const index = newArray.findIndex((arrTag) => arrTag.value === tag);
+        newArray[index] = { ...newArray[index], status: "active" };
+      });
+      state.tagArray = newArray;
+    },
+    handleLinkExcludedTags: (state, action) => {
+      state.excludedTags = action.payload;
+      const newArray = [...state.tagArray];
+      action.payload.forEach((tag) => {
+        const index = newArray.findIndex((arrTag) => arrTag.value === tag);
+        newArray[index] = { ...newArray[index], status: "excluded" };
+      });
+      state.tagArray = newArray;
+    },
+    handleLinkActiveTypes: (state, action) => {
+      state.activeTypes = action.payload;
+      const newArray = [...state.typeArray];
+      action.payload.forEach((tag) => {
+        const index = newArray.findIndex((arrTag) => arrTag.value === tag);
+        newArray[index] = { ...newArray[index], status: "active" };
+      });
+      state.typeArray = newArray;
+    },
+    handleLinkExcludedTypes: (state, action) => {
+      state.excludedTypes = action.payload;
+      const newArray = [...state.typeArray];
+      action.payload.forEach((tag) => {
+        const index = newArray.findIndex((arrTag) => arrTag.value === tag);
+        newArray[index] = { ...newArray[index], status: "excluded" };
+      });
+      state.typeArray = newArray;
+    },
+    handleLinkStatus: (state, action) => {
+      state.activeStatus = action.payload;
+      const newArray = [...state.statusArray];
+      action.payload.forEach((tag) => {
+        const index = newArray.findIndex((arrTag) => arrTag.value === tag);
+        newArray[index] = { ...newArray[index], status: "active" };
+      });
+      state.statusArray = newArray;
+    },
   },
 });
 
-export const { handleTags, handleTypes, handleStatus } = filterSlice.actions;
+export const {
+  handleTags,
+  handleTypes,
+  handleStatus,
+  handleLinkActiveTags,
+  handleLinkExcludedTags,
+  handleLinkActiveTypes,
+  handleLinkExcludedTypes,
+  handleLinkStatus
+} = filterSlice.actions;
 
 export default filterSlice.reducer;
