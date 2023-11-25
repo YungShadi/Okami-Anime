@@ -18,7 +18,8 @@ export default function Search() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { handleGetTitles, isTitlesLoadingLazy } = useTitles();
+  const { handleGetTitles, isTitlesLoadingLazy, titlesLoadStatus } =
+    useTitles();
 
   const searchState = useSelector(
     (state: { mobile: MobileDto }) => state?.mobile.isSearchOpened,
@@ -133,14 +134,14 @@ export default function Search() {
               </button>
             </div>
           )}
-          {!isTitlesLoadingLazy &&
+          {titlesLoadStatus === "fulfilled" &&
             searchResult.length === 0 &&
             searchInput.length > 2 && (
               <div className="search-result-wraper unfiend">
                 <span>Ничего не найдено по запросу: {debounceSearch}</span>
               </div>
             )}
-          {isTitlesLoadingLazy && (
+          {titlesLoadStatus !== "fulfilled" && (
             <div className="search-result-wraper unfiend">
               <span>Загрузка...</span>
             </div>

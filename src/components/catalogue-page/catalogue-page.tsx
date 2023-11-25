@@ -25,7 +25,7 @@ function CataloguePage() {
   const navigate = useNavigate();
   const location = useLocation();
   // const linkState = location.state;
-
+  // TODO может быть стоит создать отдельный стейт для хранения тайтло в каталоге
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
@@ -48,7 +48,7 @@ function CataloguePage() {
   const currentPage = pageParams.get("page");
   const initialSearch = pageParams.get("search");
 
-  const { isTitlesLoadingLazy, handleGetTitles } = useTitles();
+  const { titlesLoadStatus, handleGetTitles } = useTitles();
 
   const [searchInput, setSearchInput] = useState("");
   const debounceSearch = useDebounce(searchInput, 500);
@@ -122,7 +122,7 @@ function CataloguePage() {
           />
         </div>
         <div className="titles-wraper">
-          {!isTitlesLoadingLazy &&
+          {titlesLoadStatus === "fulfilled" &&
             titles.map((title: TitleDto) => (
               <Title
                 titleClass="catalogue-page-title"

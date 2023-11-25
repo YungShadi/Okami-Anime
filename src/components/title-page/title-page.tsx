@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation /* {useParams} */ } from "react-router-dom";
 import { useTitles } from "../../hooks/useTitles";
 import { TitleDto } from "../../types/titleDto";
 // import TitleData from "./TitleData/titleData";
@@ -20,13 +20,11 @@ function TitlePage() {
 
   const location = useLocation();
   const linkState = location.state;
-  console.log(linkState);
 
   const { handleGetCurrentTitle } = useTitles();
 
   const titleId = location.search.replace("?", "");
-  const params = useParams();
-  console.log(params);
+  // const params = useParams();
 
   useEffect(() => {
     if (linkState) {

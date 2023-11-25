@@ -49,10 +49,14 @@ export interface TitleDto {
   shikimori_id: string;
   title: string;
   title_orig: string;
-  translation: { id: 1272; title: "AniLibria.Subtitles"; type: "subtitles" };
+  translation: TranslationData;
   type: string;
   updated_at: string;
   worldart_link: string;
   year: 2022;
-  allTranslations: string[];
+  allTranslations: TranslationData[];
+}
+export interface TitlesStateDto {
+  titlesArray: TitleDto[] | [];
+  title: TitleDto | [];
 }

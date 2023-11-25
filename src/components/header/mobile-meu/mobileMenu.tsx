@@ -7,15 +7,15 @@ import { useAuth } from "../../../hooks/useAuth";
 import { toggleMenuAction } from "../../../redux/mobileSlcie";
 import { MobileDto } from "../../../types/mobileDto";
 import defaultPic from "../../img/Аватар.png";
-
+// TODO переделать этот компонент полностью, мне не нравиться как он сделан
 function MobileMenu() {
   const dispatch = useDispatch();
   const { isAuthenticated } = useAuth();
   const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened
+    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
   const username = useSelector(
-    (state: { auth: UserDto }) => state.auth.username
+    (state: { auth: UserDto }) => state.auth.username,
   );
 
   return (

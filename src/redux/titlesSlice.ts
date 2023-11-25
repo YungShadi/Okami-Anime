@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
+import { TitlesStateDto } from "../types/titleDto";
 
-const initialState = {
+const initialState: TitlesStateDto = {
   titlesArray: [],
   title: [],
 };

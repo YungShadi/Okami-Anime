@@ -10,8 +10,10 @@ export const useTitles = () => {
   const dispatch = useDispatch();
   const [getTitle] = useGetTitileByIdMutation();
 
-  const [getTiles, { isLoading: isTitlesLoadingLazy }] =
-    useLazyGetTitlesQuery();
+  const [
+    getTiles,
+    { isLoading: isTitlesLoadingLazy, status: titlesLoadStatus },
+  ] = useLazyGetTitlesQuery();
 
   const handleGetCurrentTitle = async (titleId: string) => {
     const result = await getTitle(titleId);
@@ -38,5 +40,6 @@ export const useTitles = () => {
     handleGetCurrentTitle,
     handleGetTitles,
     isTitlesLoadingLazy,
+    titlesLoadStatus,
   };
 };

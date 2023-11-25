@@ -5,26 +5,27 @@ import "./main-page.css";
 import { TitleDto } from "../../types/titleDto";
 import Reklama from "../img/Безымянный.png";
 
-// ! В будущем, при получении данных о тайтлах и переходе в конкертный если о нем есть данные в state
-// ! то лучше брать их. если нет - посылаем запрос по id в ссылке
-
 function MainPage() {
-  const { isTitlesLoadingLazy, handleGetTitles } = useTitles();
+  const { isTitlesLoadingLazy, handleGetTitles, titlesLoadStatus } =
+    useTitles();
 
   const [displayedTitles, setDisplayedTitles] = useState([]);
 
   useEffect(() => {
     handleGetTitles(0, "").then((res) => {
-      setDisplayedTitles(res.data.content);
+      setDisplayedTitles(res.data.content || []);
     });
   }, []);
-
+  useEffect(() => {
+    console.log(isTitlesLoadingLazy, titlesLoadStatus);
+  }, [isTitlesLoadingLazy, titlesLoadStatus]);
+  // TODO Надо подумать над кэшированием
   return (
     <section className="main" style={{ flexGrow: "1" }}>
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
-          {!isTitlesLoadingLazy &&
+          {titlesLoadStatus === "fulfilled" &&
             displayedTitles
               .slice(0, 6)
               .map((title: TitleDto) => (

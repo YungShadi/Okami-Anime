@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
+import { FilterDto, FilterArrayElement } from "../types/filterDto";
 
-const initialState = {
+const initialState: FilterDto = {
   tagArray: [
     {
       title: "Сёнэн",
@@ -182,9 +183,9 @@ const initialState = {
 
 const handleFilters = (
   action: { payload: any; type?: string },
-  itemsArray: any[],
-  activeArray: any[],
-  excludedArray?: any[],
+  itemsArray: FilterArrayElement[] | [],
+  activeArray: FilterArrayElement[] | [],
+  excludedArray?: FilterArrayElement[] | [] | undefined,
 ) => {
   const actionValue = action.payload.value;
   if (action.payload.status === "inactive") {

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DefaultPoster from "../img/poster.png";
 import { TitleDto } from "../../types/titleDto";
+import { FilterArrayElement } from "../../types/filterDto";
 
 import "./title.css";
 
@@ -22,8 +23,13 @@ function Title({ titleClass, titleData }: TitleType) {
   const titleFullName = titleData.material_data?.anime_title;
   const titleType = titleData.type;
 
-  const [currentTags, setCurrentTags] = useState<string[]>([]);
-  const tags = useSelector((state) => state.filter.tagArray);
+  const [currentTags, setCurrentTags] = useState<FilterArrayElement[]>([]);
+
+  const tags = useSelector(
+    (state: { filter: { tagArray: FilterArrayElement[] } }) =>
+      state.filter.tagArray,
+  );
+
   const getCurrentTags = () => {
     const newTags = titleTags?.flatMap((tag) =>
       tags.filter((el) => el.title === tag),
@@ -43,6 +49,7 @@ function Title({ titleClass, titleData }: TitleType) {
   } else {
     episodes = `${titleEpisodes} эпизодов`;
   }
+
   function transliterate(word: string) {
     if (!word) return "lol";
     // Словарь для транслитерации
@@ -98,12 +105,13 @@ function Title({ titleClass, titleData }: TitleType) {
     result = result.replace(/\s+/g, "-");
     return result;
   }
+
   return (
     <div className={`${titleClass} title-main`}>
       <Link
         className="title-poster-wraper"
         style={{ color: "white", textDecoration: "none" }}
-        to={`/article/${transliterate(titleName)}?${titleId}`}
+        to={`/article/${transliterate(titleName || `¯\\(°_o)/¯`)}?${titleId}`}
         state={titleData}
       >
         <span className="title-status status">
@@ -130,32 +138,33 @@ function Title({ titleClass, titleData }: TitleType) {
           {titleType === "anime" ? "Фильм" : episodes}
         </span>
         <div className="title-tags tags">
-          {titleTags?.slice(0, 3).map((tag, i, arr) => {
-            if (i + 1 === arr.length) {
+          {currentTags &&
+            currentTags?.slice(0, 3).map((tag, i, arr) => {
+              if (i + 1 === arr.length) {
+                return (
+                  <Link
+                    className="tag"
+                    to={{
+                      pathname: "/catalogue",
+                      search: `page=1&included-tags=${tag.value}`,
+                    }}
+                  >
+                    {tag.title}
+                  </Link>
+                );
+              }
               return (
                 <Link
                   className="tag"
                   to={{
                     pathname: "/catalogue",
-                    search: `page=1&included-tags=${tag}`,
+                    search: `page=1&included-tags=${tag.value}`,
                   }}
                 >
-                  {tag}
+                  {tag.title},{" "}
                 </Link>
               );
-            }
-            return (
-              <Link
-                className="tag"
-                to={{
-                  pathname: "/catalogue",
-                  search: `page=1&included-tags=${tag}`,
-                }}
-              >
-                {tag},{" "}
-              </Link>
-            );
-          })}
+            })}
         </div>
         <span className="title-type">TB Сериал /</span>
         <span className="title-year"> 2023</span>
