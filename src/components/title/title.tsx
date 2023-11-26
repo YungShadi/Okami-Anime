@@ -130,7 +130,77 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
     result = result.replace(/\s+/g, "-");
     return result;
   }
+  if (titleClass === "search-result-title") {
+    return (
+      <Link
+        className={`${titleClass} title-main`}
+        to={`/article/${transliterate(titleName || `¯\\(°_o)/¯`)}?${titleId}`}
+        state={titleData}
+      >
+        <div
+          className="title-poster-wraper"
+          style={{ color: "white", textDecoration: "none" }}
+        >
+          <span className="title-status status">
+            {defineStatus() || `¯\\(°_o)/¯`}
+          </span>
+          <img
+            className="title-poster poster"
+            src={titlePoster || DefaultPoster}
+            alt="poster"
+          />
 
+          <span className="age-rest">{defineAgeRest() || `¯\\(°_o)/¯`}</span>
+          <div className="play-button-wraper" />
+        </div>
+        <div className="title-name-tags">
+          <span
+            className="title-name name"
+            title={titleFullName || `¯\\(°_o)/¯`}
+          >
+            {titleName}
+          </span>
+          <span className="title-episodes">
+            {titleType === "anime" ? "Фильм" : getEpisodeString()}
+          </span>
+          <div className="title-tags tags">
+            {titleTags
+              ?.flatMap((tag) => tags.filter((el) => el.title === tag))
+              .map((tag, i, arr) => {
+                if (i + 1 === arr.length) {
+                  return (
+                    <Link
+                      className="tag"
+                      to={{
+                        pathname: "/catalogue",
+                        search: `page=1&active_tags=${tag.value}`,
+                      }}
+                      key={tag.value}
+                    >
+                      {tag.title}
+                    </Link>
+                  );
+                }
+                return (
+                  <Link
+                    className="tag"
+                    to={{
+                      pathname: "/catalogue",
+                      search: `page=1&active_tags=${tag.value}`,
+                    }}
+                    key={tag.value}
+                  >
+                    {tag.title},{" "}
+                  </Link>
+                );
+              })}
+          </div>
+          <span className="title-type">TB Сериал /</span>
+          <span className="title-year"> 2023</span>
+        </div>
+      </Link>
+    );
+  }
   return (
     <div className={`${titleClass} title-main`}>
       <Link

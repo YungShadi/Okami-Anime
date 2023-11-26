@@ -139,7 +139,19 @@ export default function Search() {
                     key={title.id}
                   />
                 ))}
-                <button type="button" className="header-search-button">
+                <button
+                  type="button"
+                  className="header-search-button"
+                  onClick={(e) => {
+                    if (searchResult.length > 0)
+                      navigate(`/catalogue?page=1&search=${searchInput}`, {
+                        state: searchResult,
+                      });
+                    setSearchResult([]);
+                    setSearchInput("");
+                    handleSearchBlur(e);
+                  }}
+                >
                   Показать еще {searchResult.length}
                 </button>
               </div>
