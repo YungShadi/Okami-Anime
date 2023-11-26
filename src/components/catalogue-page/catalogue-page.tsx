@@ -17,7 +17,7 @@ import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
 import Title from "../Title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
-// import useDebounce from "../../hooks/useDebounce";
+import useDebounce from "../../hooks/useDebounce";
 
 import "./catalogue-page.css";
 // TODO надо вынести в отдельный компонент и использовать в других местах
@@ -57,7 +57,7 @@ function CataloguePage() {
   const { titlesLoadStatus, handleGetTitles } = useTitles();
 
   const [searchInput, setSearchInput] = useState("");
-  // const debounceSearch = useDebounce(searchInput, 500);
+  const debounceSearch = useDebounce(searchInput, 500);
 
   if (!currentPage) {
     navigate("/catalogue?page=1");
@@ -72,7 +72,11 @@ function CataloguePage() {
     search: string | undefined,
     isLoadMore?: boolean,
   ) => {
-    if (isLoadMore) setIsLoadMoreAction(true);
+    if (isLoadMore) {
+      setIsLoadMoreAction(true);
+    } else {
+      window.scrollTo(0, 0);
+    }
     handleGetTitles(page, search, isLoadMore).then((res) => {
       setTotalElements(res.data.totalElements);
       if (isLoadMore) {
@@ -81,17 +85,19 @@ function CataloguePage() {
       }
     });
   };
-  // TODO как сделать поиск пока не оч прозрачно
-  // useEffect(() => {
-  //   handleGetTitles(0, debounceSearch).then((res) =>
-  //     setTotalElements(res.data.totalElements),
-  //   );
-  // }, [debounceSearch]);
+  const handleSearch = (search: string) => {
+    handleGetTitles(0, search, false).then((res) => {
+      setTotalElements(res.data.totalElements);
+    });
+  };
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
     document.title = "Каталог";
-    if (initialSearch) setSearchInput(initialSearch);
+    if (initialSearch) {
+      setSearchInput(initialSearch);
+      handleSearch(initialSearch);
+    }
     return () => {
       if (menuState) {
         dispatch(toggleMenuAction(!menuState));
@@ -135,17 +141,25 @@ function CataloguePage() {
       </button>
       <section className="search-and-titles">
         <div className="catalogue-search">
-          <img src={Search} alt="s-lupa" />
           <input
             type="text"
             placeholder="Поиск"
             className="input-title"
-            style={{ marginLeft: "20px" }}
             value={searchInput}
             onChange={(e) => {
               setSearchInput(e.target.value);
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch(searchInput);
+            }}
           />
+          <button
+            type="button"
+            className="catalogue-search-button"
+            onClick={() => handleSearch(searchInput)}
+          >
+            <img src={Search} alt="s-lupa" />
+          </button>
         </div>
         <div className="titles-wraper">
           {titlesLoadStatus === "fulfilled" ? (

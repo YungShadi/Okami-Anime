@@ -6,6 +6,11 @@
   grid-template-columns: 300px 1fr;
   gap: 20px;
 }
+.catalogue-page-title {
+  .poster {
+    width: 190px;
+  }
+}
 .search-and-titles {
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -212,7 +217,9 @@
   flex-wrap: wrap;
   align-content: flex-start;
   min-width: 1280px;
+  width: 6vw;
 }
+
 .filter-span {
   margin-bottom: 30px;
   height: 42px;
@@ -326,17 +333,24 @@
 }
 
 .catalogue-search {
-  width: 1280px;
+  width: 100%;
   background-color: rgba(6, 75, 140, 0.8);
   margin-bottom: 10px;
   border-radius: 6px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  .catalogue-search-button {
+    width: 10%;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
   .input-title {
-    width: 1200px;
+    width: 95%;
     border-bottom: none;
     outline: none;
+    padding-left: 10px;
   }
 }
 .mobile-button-filter {

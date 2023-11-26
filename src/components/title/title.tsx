@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DefaultPoster from "../img/poster.png";
@@ -23,28 +23,10 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
   const titleFullName = titleData.material_data?.anime_title;
   const titleType = titleData.type;
 
-  const [currentTags, setCurrentTags] = useState<FilterArrayElement[]>([]);
-
   const tags = useSelector(
     (state: { filter: { tagArray: FilterArrayElement[] } }) =>
       state.filter.tagArray,
   );
-
-  const getCurrentTags = useMemo(
-    () => () => {
-      const newTags = titleTags?.flatMap((tag) =>
-        tags.filter((el) => el.title === tag),
-      );
-      setCurrentTags(newTags || []);
-    },
-    [titleTags, tags],
-  );
-
-  useEffect(() => {
-    if (titleData.material_data) {
-      getCurrentTags();
-    }
-  }, []);
 
   function getEpisodeString() {
     if (titleEpisodes % 10 === 1 && titleEpisodes % 100 !== 11) {
@@ -177,8 +159,9 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
           {titleType === "anime" ? "Фильм" : getEpisodeString()}
         </span>
         <div className="title-tags tags">
-          {currentTags &&
-            currentTags?.slice(0, 3).map((tag, i, arr) => {
+          {titleTags
+            ?.flatMap((tag) => tags.filter((el) => el.title === tag))
+            .map((tag, i, arr) => {
               if (i + 1 === arr.length) {
                 return (
                   <Link

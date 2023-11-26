@@ -86,10 +86,14 @@ export default function Search() {
             handleSearchBlur(e);
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && searchResult.length > 0)
+            if (e.key === "Enter" && searchResult.length > 0) {
               navigate(`/catalogue?page=1&search=${searchInput}`, {
                 state: searchResult,
               });
+              setSearchResult([]);
+              setSearchInput("");
+              handleSearchBlur(e);
+            }
           }}
         >
           <input
@@ -104,48 +108,56 @@ export default function Search() {
           <button
             type="button"
             className="header-search-lupa"
-            onClick={() => {
+            onClick={(e) => {
               if (searchResult.length > 0)
                 navigate(`/catalogue?page=1&search=${searchInput}`, {
                   state: searchResult,
                 });
+              setSearchResult([]);
+              setSearchInput("");
+              handleSearchBlur(e);
             }}
           >
             <img src={Lupa} alt="" />
           </button>
-          {!isTitlesLoadingLazy && searchInput && searchResult.length > 0 && (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-            <div
-              className="search-result-wraper"
-              style={{
-                height: searchHeigth > 0 ? searchHeigth : 0,
-                opacity: searchHeigth > 0 ? 1 : 0,
-              }}
-            >
-              {searchResult.slice(0, 5).map((title: TitleDto) => (
-                <Title
-                  titleClass="search-result-title"
-                  titleData={title}
-                  key={title.id}
-                />
-              ))}
-              <button type="button" className="header-search-button">
-                Показать еще {searchResult.length}
-              </button>
-            </div>
-          )}
+          {!isTitlesLoadingLazy &&
+            searchInput &&
+            searchResult.length > 0 &&
+            titlesLoadStatus === "fulfilled" && (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                className="search-result-wraper"
+                style={{
+                  height: searchHeigth > 0 ? searchHeigth : 0,
+                  opacity: searchHeigth > 0 ? 1 : 0,
+                }}
+              >
+                {searchResult.slice(0, 5).map((title: TitleDto) => (
+                  <Title
+                    titleClass="search-result-title"
+                    titleData={title}
+                    key={title.id}
+                  />
+                ))}
+                <button type="button" className="header-search-button">
+                  Показать еще {searchResult.length}
+                </button>
+              </div>
+            )}
           {titlesLoadStatus === "fulfilled" &&
+            titlesLoadStatus !== "uninitialized" &&
             searchResult.length === 0 &&
             searchInput.length > 2 && (
               <div className="search-result-wraper unfiend">
                 <span>Ничего не найдено по запросу: {debounceSearch}</span>
               </div>
             )}
-          {titlesLoadStatus !== "fulfilled" && (
-            <div className="search-result-wraper unfiend">
-              <span>Загрузка...</span>
-            </div>
-          )}
+          {titlesLoadStatus !== "fulfilled" &&
+            titlesLoadStatus !== "uninitialized" && (
+              <div className="search-result-wraper unfiend">
+                <span>Загрузка...</span>
+              </div>
+            )}
         </div>
       )}
     </>

@@ -392,13 +392,15 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           <span className={`title-desc ${showFullDesc ? "show" : "hide"}`}>
             {titleDesc || "Нету описания :("}
           </span>
-          <button
-            type="button"
-            onClick={() => setShowFullDesc(!showFullDesc)}
-            className={`title-desc-button ${showFullDesc ? "show" : "hide"}`}
-          >
-            <i className="arrow-wraper" />
-          </button>
+          {titleDesc?.length > 360 && (
+            <button
+              type="button"
+              onClick={() => setShowFullDesc(!showFullDesc)}
+              className={`title-desc-button ${showFullDesc ? "show" : "hide"}`}
+            >
+              <i className="arrow-wraper" />
+            </button>
+          )}
         </div>
       </div>
     </div>

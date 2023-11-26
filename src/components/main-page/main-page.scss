@@ -12,10 +12,10 @@
   }
 }
 .season-anime {
-  min-width: 70vw;
+  max-width: 71vw;
   width: 100%;
   .season-titles {
-    min-width: inherit;
+    padding-top: 20px;
   }
 }
 .season-titles,
@@ -29,6 +29,9 @@
   border-radius: 10px;
   margin-bottom: 50px;
   flex-wrap: wrap;
+}
+.recetly-added-title {
+  margin-bottom: 20px;
 }
 .recently-added-anime {
   .recetly-added-title::before {
