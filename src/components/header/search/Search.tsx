@@ -56,6 +56,26 @@ export default function Search() {
       setIsSearchShown(false);
     }
   };
+  const onClickHandle = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLDivElement>
+      | React.FocusEvent<HTMLDivElement, Element>,
+  ) => {
+    if (searchResult.length > 0)
+      navigate(`/catalogue?page=1&search=${searchInput}`, {
+        state: searchResult,
+      });
+    setSearchInput("");
+    handleSearchBlur(e);
+    setSearchResult([]);
+  };
+
+  const onAnimeClickHandle = (e: React.FocusEvent<HTMLDivElement, Element>) => {
+    setSearchInput("");
+    handleSearchBlur(e);
+    setSearchResult([]);
+  };
   return (
     <>
       {location.pathname === "/catalogue" ? (
@@ -86,14 +106,7 @@ export default function Search() {
             handleSearchBlur(e);
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && searchResult.length > 0) {
-              navigate(`/catalogue?page=1&search=${searchInput}`, {
-                state: searchResult,
-              });
-              setSearchResult([]);
-              setSearchInput("");
-              handleSearchBlur(e);
-            }
+            if (e.key === "Enter") onClickHandle(e);
           }}
         >
           <input
@@ -108,15 +121,7 @@ export default function Search() {
           <button
             type="button"
             className="header-search-lupa"
-            onClick={(e) => {
-              if (searchResult.length > 0)
-                navigate(`/catalogue?page=1&search=${searchInput}`, {
-                  state: searchResult,
-                });
-              setSearchResult([]);
-              setSearchInput("");
-              handleSearchBlur(e);
-            }}
+            onClick={(e) => onClickHandle(e)}
           >
             <img src={Lupa} alt="" />
           </button>
@@ -137,20 +142,13 @@ export default function Search() {
                     titleClass="search-result-title"
                     titleData={title}
                     key={title.id}
+                    onClickHandle={onAnimeClickHandle}
                   />
                 ))}
                 <button
                   type="button"
                   className="header-search-button"
-                  onClick={(e) => {
-                    if (searchResult.length > 0)
-                      navigate(`/catalogue?page=1&search=${searchInput}`, {
-                        state: searchResult,
-                      });
-                    setSearchResult([]);
-                    setSearchInput("");
-                    handleSearchBlur(e);
-                  }}
+                  onClick={(e) => onClickHandle(e)}
                 >
                   Показать еще {searchResult.length}
                 </button>
