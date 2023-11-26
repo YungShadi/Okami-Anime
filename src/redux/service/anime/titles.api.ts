@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
+import BASE_URL from "../UTL";
 
 export const titlesApi = createApi({
   reducerPath: "titlesApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://866b-95-25-231-191.ngrok-free.app`,
+    baseUrl: BASE_URL,
   }),
   tagTypes: ["titles"],
   endpoints: (builder) => ({

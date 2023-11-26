@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Poster from "../../img/Постер.png";
+import Skeleton from "react-loading-skeleton";
 import { TitleDto } from "../../../types/titleDto";
+import Poster from "../../img/Постер.png";
 
 interface OptionTitle {
   title: string;
@@ -14,6 +15,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
   const [triggerContent, setTriggerContent] = useState(
     <div className="trigger-content">Добавить в список</div>,
   );
+  const [imgLoaded, setImgLoaded] = useState(false);
   const [triggerOrder, setTriggerOrder] = useState(false);
   const selsectOptions: Array<OptionTitle> = [
     {
@@ -201,10 +203,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
   }
 
   let episodes;
-  if (
-    titleData.last_episode ===
-    titleData.material_data?.episodes_total
-  ) {
+  if (titleData.last_episode === titleData.material_data?.episodes_total) {
     episodes = titleData.material_data?.episodes_total;
   } else if (titleData.material_data?.episodes_total === 0) {
     episodes = `${titleData.last_episode}/?`;
@@ -292,7 +291,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
         </div>
         <span className="title-genre">
           Жанры:{" "}
-          {titleData.material_data?.anime_genres?.map((genre) => (
+          {titleData.material_data?.anime_genres.map((genre) => (
             <span>{genre} </span>
           )) || "Нет информации"}
         </span>

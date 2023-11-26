@@ -94,6 +94,7 @@ function FilterWrapper({ searchInput, yearFrom, yearTo }) {
     }
     navigate(link);
   };
+  
   useEffect(() => {
     if (activeTagsLink[0]) {
       dispatch(handleLinkActiveTags(activeTagsLink[0].split(",")));

@@ -15,7 +15,7 @@ import Qoute from "../../img/qouteIcon.svg";
 
 export default function CommentsWraper() {
   const [commentValue, setCommentValue] = useState("");
-
+  // TODO как реализовать стилизацию комментариев? скорее всего надо самомоу написать че-то типо bbcode
   const handleTextStyle = (style: string) => {
     switch (style) {
       case "bold":

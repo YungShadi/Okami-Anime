@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DefaultPoster from "../img/poster.png";
@@ -12,7 +12,7 @@ type TitleType = {
   titleData: TitleDto;
 };
 
-function Title({ titleClass, titleData }: TitleType) {
+const Title = React.memo(({ titleClass, titleData }: TitleType) => {
   const titleTags = titleData.material_data?.anime_genres;
   const titleEpisodes = titleData.last_episode;
   const titleName = titleData.material_data?.title;
@@ -30,15 +30,20 @@ function Title({ titleClass, titleData }: TitleType) {
       state.filter.tagArray,
   );
 
-  const getCurrentTags = () => {
-    const newTags = titleTags?.flatMap((tag) =>
-      tags.filter((el) => el.title === tag),
-    );
-    setCurrentTags(newTags || []);
-  };
+  const getCurrentTags = useMemo(
+    () => () => {
+      const newTags = titleTags?.flatMap((tag) =>
+        tags.filter((el) => el.title === tag),
+      );
+      setCurrentTags(newTags || []);
+    },
+    [titleTags, tags],
+  );
 
   useEffect(() => {
-    getCurrentTags();
+    if (titleData.material_data) {
+      getCurrentTags();
+    }
   }, []);
 
   let episodes: string;
@@ -117,16 +122,12 @@ function Title({ titleClass, titleData }: TitleType) {
         <span className="title-status status">
           {titleStatus || `¯\\(°_o)/¯`}
         </span>
+        <img
+          className="title-poster poster"
+          src={titlePoster || DefaultPoster}
+          alt="poster"
+        />
 
-        {titlePoster ? (
-          <img className="title-poster poster" src={titlePoster} alt="poster" />
-        ) : (
-          <img
-            className="title-poster poster"
-            src={DefaultPoster}
-            alt="poster"
-          />
-        )}
         <span className="age-rest">{titleAgeRest || `¯\\(°_o)/¯`}</span>
         <div className="play-button-wraper" />
       </Link>
@@ -171,5 +172,5 @@ function Title({ titleClass, titleData }: TitleType) {
       </div>
     </div>
   );
-}
+});
 export default Title;

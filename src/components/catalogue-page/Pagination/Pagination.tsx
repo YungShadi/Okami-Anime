@@ -40,8 +40,8 @@ export default function Pagination({
   const excludedTypes = pageParams.get("excluded_types");
   const status = pageParams.get("status");
 
-  const createLink = (action: string, page?: number) => {
-    let link;
+  const createLink = (action: string, page?: number): string => {
+    let link = "";
     if (action === "next-page") {
       if (currentPage !== pages) link = `?page=${currentPage + 1}`;
       else link = `?page=${currentPage}`;

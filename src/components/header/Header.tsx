@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
 import Search from "./search/Search";
@@ -16,7 +16,6 @@ import "./header.css";
 // header, navigation, user
 function Header() {
   const { isAuthenticated } = useAuth();
-  const location = useLocation();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const [randomLink, setRandomLink] = useState("");

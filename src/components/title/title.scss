@@ -1,7 +1,7 @@
 @import "../../stylsheet.scss";
 
 .title-main {
-  width: 190px;
+  width: 200px;
   transition: 0.5s;
   height: 410px;
   margin-top: 20px;
@@ -14,7 +14,7 @@
     z-index: 1;
     position: relative;
     transition: 0.3s;
-    width: 190px;
+    width: 200px;
   }
   .name {
     display: inline-block;
@@ -133,6 +133,13 @@
     -webkit-filter: brightness(70%);
     filter: brightness(70%);
     scale: 1.03;
+  }
+}
+.catalogue-page {
+  .titles-wraper {
+    .catalogue-page-title {
+      width: 190px;
+    }
   }
 }
 @media (max-width: 1100px) {
