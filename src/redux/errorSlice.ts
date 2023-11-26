@@ -13,13 +13,14 @@ export const errorSlice = createSlice({
   reducers: {
     addErrorAction: (state, action) => {
       state.errorObj = [...state.errorObj, action.payload];
-      state.amountOfErrors++;
+      state.amountOfErrors = state.errorObj.length;
     },
     removeErrorAction: (state, action) => {
-      state.errorObj = state.errorObj.filter(
-        (error) => error.index !== action.payload
-      );
-      state.amountOfErrors--;
+      state.errorObj.filter((error) => error.index !== action.payload);
+      state.errorObj.forEach((error) => {
+        if (error.index >= action.payload) error.index--;
+      });
+      state.amountOfErrors = state.errorObj.length;
     },
   },
 });

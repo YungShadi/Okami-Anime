@@ -46,13 +46,51 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
     }
   }, []);
 
-  let episodes: string;
-  if (titleEpisodes === 1) {
-    episodes = "1 эпизод";
-  } else if (titleEpisodes <= 4) {
-    episodes = `${titleEpisodes} эпизода`;
-  } else {
-    episodes = `${titleEpisodes} эпизодов`;
+  function getEpisodeString() {
+    if (titleEpisodes % 10 === 1 && titleEpisodes % 100 !== 11) {
+      return `${titleEpisodes} эпизод`;
+    }
+    if (
+      (titleEpisodes % 10 === 2 ||
+        titleEpisodes % 10 === 3 ||
+        titleEpisodes % 10 === 4) &&
+      titleEpisodes % 100 !== 12 &&
+      titleEpisodes % 100 !== 13 &&
+      titleEpisodes % 100 !== 14
+    ) {
+      return `${titleEpisodes} эпизода`;
+    }
+    return `${titleEpisodes} эпизодов`;
+  }
+
+  function defineStatus() {
+    switch (titleStatus) {
+      case "ongoing":
+        return "Онгоинг";
+      case "released":
+        return "Вышло";
+
+      default:
+        return `¯\\(°_o)/¯`;
+    }
+  }
+
+  function defineAgeRest() {
+    switch (titleAgeRest) {
+      case "G":
+        return "0+";
+      case "PG":
+        return "6+";
+      case "PG-13":
+        return "12+";
+      case "R":
+        return "18+";
+      case "NC-17":
+        return "21+";
+
+      default:
+        return `¯\\(°_o)/¯`;
+    }
   }
 
   function transliterate(word: string) {
@@ -120,7 +158,7 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
         state={titleData}
       >
         <span className="title-status status">
-          {titleStatus || `¯\\(°_o)/¯`}
+          {defineStatus() || `¯\\(°_o)/¯`}
         </span>
         <img
           className="title-poster poster"
@@ -128,7 +166,7 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
           alt="poster"
         />
 
-        <span className="age-rest">{titleAgeRest || `¯\\(°_o)/¯`}</span>
+        <span className="age-rest">{defineAgeRest() || `¯\\(°_o)/¯`}</span>
         <div className="play-button-wraper" />
       </Link>
       <div className="title-name-tags">
@@ -136,7 +174,7 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
           {titleName}
         </span>
         <span className="title-episodes">
-          {titleType === "anime" ? "Фильм" : episodes}
+          {titleType === "anime" ? "Фильм" : getEpisodeString()}
         </span>
         <div className="title-tags tags">
           {currentTags &&
@@ -149,6 +187,7 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
                       pathname: "/catalogue",
                       search: `page=1&active_tags=${tag.value}`,
                     }}
+                    key={tag.value}
                   >
                     {tag.title}
                   </Link>
@@ -161,6 +200,7 @@ const Title = React.memo(({ titleClass, titleData }: TitleType) => {
                     pathname: "/catalogue",
                     search: `page=1&active_tags=${tag.value}`,
                   }}
+                  key={tag.value}
                 >
                   {tag.title},{" "}
                 </Link>

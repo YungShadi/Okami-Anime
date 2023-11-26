@@ -17,6 +17,7 @@ function ErrorPopout({
 }) {
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(true);
+  
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsVisible(false);
@@ -30,7 +31,7 @@ function ErrorPopout({
     };
   }, [index, dispatch]);
 
-  const height = `${10 + index * 80}px`;
+  const height = `${10 + index * 50}px`;
   let errorTitle;
   if (errorCode >= 400 || errorCode < 500) {
     errorTitle = <p>Ошибка на стороне клиента</p>;
@@ -41,19 +42,19 @@ function ErrorPopout({
   return createPortal(
     <div
       className={`error-popout ${isVisible ? "" : "disappear"}`}
-      // onClick={() => {
-      //   setIsVisible(false);
-      //   setTimeout(() => {
-      //     dispatch(removeErrorAction(index));
-      //   }, 500);
-      // }}
+      onClick={() => {
+        setIsVisible(false);
+        setTimeout(() => {
+          dispatch(removeErrorAction(index));
+        }, 500);
+      }}
       style={{ bottom: height }}
     >
       <p>{errorTitle}</p>
       <p>{errorMessage}</p>
       <p>{errorCode}</p>
     </div>,
-    document.body
+    document.body,
   );
 }
 export default ErrorPopout;

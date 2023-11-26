@@ -12,6 +12,10 @@
   border-radius: 20px;
 }
 
+button {
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+}
+
 .title {
   margin-left: auto;
   margin-right: auto;
@@ -32,6 +36,10 @@
   height: min-content;
   min-width: 55vw;
   min-height: 60vh;
+}
+.title-info .tag {
+  color: #3ce3e8;
+  text-decoration: none;
 }
 .title-info .poster-wraper {
   height: -moz-fit-content;
@@ -125,13 +133,59 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.title-dub-show-all {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #3ce3e8;
+  cursor: pointer;
+}
+
 .title-desc {
   display: inline-block;
   max-width: 100%;
   width: -moz-fit-content;
   width: fit-content;
   white-space: pre-line;
-  margin-bottom: 15px;
+  max-height: 120px;
+  overflow: hidden;
+  line-height: 25px;
+  padding: 10px 10px 0 10px;
+}
+
+.title-desc.hide {
+  max-height: 120px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), rgba(0, 0, 0, 0));
+          mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), rgba(0, 0, 0, 0));
+}
+
+.title-desc.show {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+
+.title-desc-button {
+  display: block;
+  width: 100%;
+  border: none;
+  color: white;
+  background-color: #05315a;
+  border-bottom: 1px solid #3ce3e8;
+  margin-bottom: 10px;
+  height: 20px;
+}
+.title-desc-button .arrow-wraper {
+  transform: rotate(90deg);
+  display: inline-block;
+  position: relative;
+  bottom: 15px;
+}
+.title-desc-button .arrow-wraper::after {
+  content: url("../img/mdi_menu-down.svg");
+}
+
+.title-desc-button.show .arrow-wraper {
+  transform: rotate(-90deg);
 }
 
 .view-order-wraper {
@@ -342,16 +396,20 @@
 
 .comments-styles {
   display: flex;
-  height: 50px;
-  gap: 5px;
+  height: 40px;
+  gap: 10px;
   background-color: #05315a;
-  padding-top: 5px;
   width: 55vw;
+  align-items: center;
 }
 .comments-styles .style {
   width: 30px;
   height: 30px;
   cursor: pointer;
+}
+
+.comments-styles .style:nth-of-type(3n + 3) {
+  margin-right: 10px;
 }
 
 .comment-input {

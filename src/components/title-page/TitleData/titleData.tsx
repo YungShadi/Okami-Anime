@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Skeleton from "react-loading-skeleton";
+import React, { useState, useEffect, useMemo } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { FilterArrayElement } from "../../../types/filterDto";
 import { TitleDto } from "../../../types/titleDto";
 import Poster from "../../img/Постер.png";
 
@@ -10,13 +12,25 @@ interface OptionTitle {
 }
 
 export default function TitleData({ titleData }: { titleData: TitleDto }) {
+  const titleTags = titleData.material_data?.anime_genres;
+  // const titleEpisodes = titleData.last_episode;
+  // const titleName = titleData.material_data?.title;
+  // const titleId = titleData.id;
+  // const titleStatus = titleData.material_data?.anime_status;
+  // const titlePoster = titleData.material_data?.poster_url;
+  // const titleAgeRest = titleData.material_data?.rating_mpaa;
+  // const titleFullName = titleData.material_data?.anime_title;
+  // const titleType = titleData.type;
+  const titleDub = titleData.allTranslations;
+  const titleDesc = titleData.material_data?.anime_description;
   const [triggerToggle, setTriggerToggle] = useState(false);
   const [selectState, setSelectState] = useState("Добавить в список");
   const [triggerContent, setTriggerContent] = useState(
     <div className="trigger-content">Добавить в список</div>,
   );
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [showAllDubs, setShowAllDubs] = useState(false);
   const [triggerOrder, setTriggerOrder] = useState(false);
+  const [showFullDesc, setShowFullDesc] = useState(false);
   const selsectOptions: Array<OptionTitle> = [
     {
       title: "Буду смотреть",
@@ -134,6 +148,28 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
       ),
     },
   ];
+  const [currentTags, setCurrentTags] = useState<FilterArrayElement[]>([]);
+
+  const tags = useSelector(
+    (state: { filter: { tagArray: FilterArrayElement[] } }) =>
+      state.filter.tagArray,
+  );
+
+  const getCurrentTags = useMemo(
+    () => () => {
+      const newTags = titleTags?.flatMap((tag) =>
+        tags.filter((el) => el.title === tag),
+      );
+      setCurrentTags(newTags || []);
+    },
+    [titleTags, tags],
+  );
+
+  useEffect(() => {
+    if (titleData.material_data) {
+      getCurrentTags();
+    }
+  }, []);
 
   // useEffect chenging current displayable conditionn and svg to color #3CE3E8
   useEffect(() => {
@@ -210,6 +246,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
   } else {
     episodes = `${titleData.last_episode}/${titleData.material_data?.episodes_total}`;
   }
+
   return (
     <div className="title-info">
       <div className="poster-wraper">
@@ -291,9 +328,35 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
         </div>
         <span className="title-genre">
           Жанры:{" "}
-          {titleData.material_data?.anime_genres.map((genre) => (
-            <span>{genre} </span>
-          )) || "Нет информации"}
+          {currentTags &&
+            currentTags?.slice(0, 3).map((tag, i, arr) => {
+              if (i + 1 === arr.length) {
+                return (
+                  <Link
+                    className="tag"
+                    to={{
+                      pathname: "/catalogue",
+                      search: `page=1&active_tags=${tag.value}`,
+                    }}
+                    key={tag.value}
+                  >
+                    {tag.title}
+                  </Link>
+                );
+              }
+              return (
+                <Link
+                  className="tag"
+                  to={{
+                    pathname: "/catalogue",
+                    search: `page=1&active_tags=${tag.value}`,
+                  }}
+                  key={tag.value}
+                >
+                  {tag.title},{" "}
+                </Link>
+              );
+            })}
         </span>
         <span className="title-year">
           Год: {titleData.material_data?.released_at || "Нет информации"}
@@ -301,20 +364,42 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
         <span className="title-status">
           Статус: {titleData.material_data?.all_status || "Нет информации"}
         </span>
-        <span className="title-type">Тип: {titleData.type}</span>
+        <span className="title-type">
+          Тип: {titleData.type || "Нет информации"}
+        </span>
         <span className="title-ep">
           Количество серий: {episodes || "Нет информации"}
         </span>
-        <div>
+        <div className="title-dubs">
           Озвучки:{" "}
-          {titleData.allTranslations.map((dub) => (
-            <span className="title-dub">{dub}, </span>
-          ))}
+          {titleDub.slice(0, showAllDubs ? -1 : 6).map((dub, i, arr) => {
+            if (i + 1 === arr.length) {
+              return <span className="title-dub">{dub} </span>;
+            }
+            return <span className="title-dub">{dub}, </span>;
+          })}
+          {titleDub.length > 6 && !showAllDubs && (
+            <button
+              type="button"
+              onClick={() => setShowAllDubs(true)}
+              className="title-dub-show-all"
+            >
+              Еще...
+            </button>
+          )}
         </div>
-
-        <span className="title-desc">
-          {titleData.material_data?.anime_description || "Нету описания :("}
-        </span>
+        <div>
+          <span className={`title-desc ${showFullDesc ? "show" : "hide"}`}>
+            {titleDesc || "Нету описания :("}
+          </span>
+          <button
+            type="button"
+            onClick={() => setShowFullDesc(!showFullDesc)}
+            className={`title-desc-button ${showFullDesc ? "show" : "hide"}`}
+          >
+            <i className="arrow-wraper" />
+          </button>
+        </div>
       </div>
     </div>
   );

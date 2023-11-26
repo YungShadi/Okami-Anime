@@ -1,6 +1,6 @@
 export interface ErrorDto {
   errorObj: Array<{
-    statusCode: number;
+    statusCode?: number;
     errorMessage: string;
     index: number;
   }>;

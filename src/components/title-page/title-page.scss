@@ -11,6 +11,13 @@
   background-color: #2179df;
   border-radius: 20px;
 }
+button {
+  font-family:
+    Century Gothic,
+    CenturyGothic,
+    AppleGothic,
+    sans-serif;
+}
 .title {
   margin-left: auto;
   margin-right: auto;
@@ -32,6 +39,10 @@
   height: min-content;
   min-width: 55vw;
   min-height: 60vh;
+  .tag {
+    color: $base-light-blue;
+    text-decoration: none;
+  }
   .poster-wraper {
     height: -webkit-fit-content;
     height: -moz-fit-content;
@@ -125,6 +136,13 @@
     }
   }
 }
+.title-dub-show-all {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: $base-light-blue;
+  cursor: pointer;
+}
 .title-desc {
   display: inline-block;
   max-width: 100%;
@@ -132,8 +150,47 @@
   width: -moz-fit-content;
   width: fit-content;
   white-space: pre-line;
-  margin-bottom: 15px;
+  max-height: 120px;
+  overflow: hidden;
+  line-height: 25px;
+  padding: 10px 10px 0 10px;
 }
+.title-desc.hide {
+  max-height: 120px;
+  mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - 2rem),
+    rgba(0, 0, 0, 0)
+  );
+}
+.title-desc.show {
+  max-height: fit-content;
+}
+.title-desc-button {
+  display: block;
+  width: 100%;
+  border: none;
+  color: white;
+  background-color: $base-dark-blue;
+  border-bottom: 1px solid #3ce3e8;
+  margin-bottom: 10px;
+  height: 20px;
+  .arrow-wraper {
+    transform: rotate(90deg);
+    display: inline-block;
+    position: relative;
+    bottom: 15px;
+  }
+  .arrow-wraper::after {
+    content: url("../img/mdi_menu-down.svg");
+  }
+}
+.title-desc-button.show {
+  .arrow-wraper {
+    transform: rotate(-90deg);
+  }
+}
+
 .view-order-wraper {
   width: 300px;
   margin-top: 20px;
@@ -333,16 +390,19 @@
 }
 .comments-styles {
   display: flex;
-  height: 50px;
-  gap: 5px;
+  height: 40px;
+  gap: 10px;
   background-color: $base-dark-blue;
-  padding-top: 5px;
   width: 55vw;
+  align-items: center;
   .style {
     width: 30px;
     height: 30px;
     cursor: pointer;
   }
+}
+.comments-styles .style:nth-of-type(3n + 3) {
+  margin-right: 10px;
 }
 .comment-input {
   width: 55vw;

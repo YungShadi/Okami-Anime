@@ -51,43 +51,56 @@ export const useAuth = () => {
   }, [currentUser, isCurrentUserLoading, jwtToken]);
 
   const handleReg = async (userData: UserDto) => {
-    // eslint-disable-next-line camelcase
-    const { access_jwt_token, refresh_jwt_token } =
-      await regestration(userData).unwrap();
-    Cookies.set("access_jwt_token", access_jwt_token, {
-      expires: 31,
-      secure: true,
-    });
-    Cookies.set("refresh_jwt_token", refresh_jwt_token);
+    try {
+      // eslint-disable-next-line camelcase
+      const { access_jwt_token, refresh_jwt_token } =
+        await regestration(userData).unwrap();
+      Cookies.set("access_jwt_token", access_jwt_token, {
+        expires: 31,
+        secure: true,
+      });
+      Cookies.set("refresh_jwt_token", refresh_jwt_token);
+    } catch (error) {
+      throw new Error(error);
+    }
   };
   const handleLogin = async (userData: UserDto) => {
-    // eslint-disable-next-line camelcase
-    const { authorities, username, access_jwt_token, refresh_jwt_token } =
-      await login(userData).unwrap();
-    Cookies.set("access_jwt_token", access_jwt_token, {
-      expires: 31,
-      secure: true,
-    });
-    Cookies.set("refresh_jwt_token", refresh_jwt_token);
-    setIsAuthenticated(true);
+    try {
+      // eslint-disable-next-line camelcase
+      const { authorities, username, access_jwt_token, refresh_jwt_token } =
+        await login(userData).unwrap();
 
-    if (authorities && authorities === "UNDEFINED") {
-      navigate("/");
-    } else if (authorities.inclides("ROLE_USER")) {
-      navigate(`${username}/profile`);
-    } else {
-      navigate("/");
+      Cookies.set("access_jwt_token", access_jwt_token, {
+        expires: 31,
+        secure: true,
+      });
+      Cookies.set("refresh_jwt_token", refresh_jwt_token);
+      setIsAuthenticated(true);
+
+      if (authorities && authorities === "UNDEFINED") {
+        navigate("/");
+      } else if (authorities.inclides("ROLE_USER")) {
+        navigate(`${username}/profile`);
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      throw new Error(error);
     }
   };
 
   const handleLogout = () => {
-    logout([]).then(() => {
-      Cookies.remove("access_jwt_token");
-      Cookies.remove("refresh_jwt_token");
-      setIsAuthenticated(false);
-      // setUserRole(null);
-      navigate("/");
-    });
+    logout([])
+      .then(() => {
+        Cookies.remove("access_jwt_token");
+        Cookies.remove("refresh_jwt_token");
+        setIsAuthenticated(false);
+        // setUserRole(null);
+        navigate("/");
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   };
 
   return {

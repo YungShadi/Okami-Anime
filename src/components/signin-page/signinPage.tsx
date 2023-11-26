@@ -33,7 +33,11 @@ function SigniinPage() {
   const { login } = useAuth();
 
   const onSubmit: SubmitHandler<UserDto> = (data) => {
-    login(data);
+    try {
+      login(data);
+    } catch (e) {
+      throw new Error(e);
+    }
   };
   if (isAuthenticated) {
     navigate("/");

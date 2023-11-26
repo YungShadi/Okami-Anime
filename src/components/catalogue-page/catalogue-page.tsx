@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { createPortal } from "react-dom";
 import { TitleDto } from "../../types/titleDto";
 import { MobileDto } from "../../types/mobileDto";
@@ -16,36 +15,12 @@ import { useTitles } from "../../hooks/useTitles";
 import Search from "../img/search.svg";
 import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
-import Title from "../title";
+import Title from "../Title";
+import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 // import useDebounce from "../../hooks/useDebounce";
 
-import "react-loading-skeleton/dist/skeleton.css";
 import "./catalogue-page.css";
-
-function SkeletonTitle() {
-  return (
-    <SkeletonTheme baseColor="#05315A" highlightColor="#0C4281">
-      <div className="catalogue-page-title title-main skeleton-title">
-        <div className="title-poster-wraper">
-          <div className="title-poster poster">
-            <Skeleton width={190} height={300} />
-          </div>
-        </div>
-        <div className="title-name-tags">
-          <span className="title-name name">
-            <Skeleton width={190} />
-          </span>
-          <span className="title-episodes">
-            <Skeleton width={100} />
-          </span>
-          <div className="title-tags tags">
-            <Skeleton width={190} />
-          </div>
-        </div>
-      </div>
-    </SkeletonTheme>
-  );
-}
+// TODO надо вынести в отдельный компонент и использовать в других местах
 
 function CataloguePage() {
   const dispatch = useDispatch();
