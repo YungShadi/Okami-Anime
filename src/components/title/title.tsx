@@ -10,6 +10,7 @@ import "./title.css";
 type TitleType = {
   titleClass: string;
   titleData: TitleDto;
+  onClickHandle: CallableFunction;
 };
 
 const Title = React.memo(
