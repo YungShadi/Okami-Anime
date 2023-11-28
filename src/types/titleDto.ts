@@ -54,7 +54,7 @@ export interface TitleDto {
   updated_at: string;
   worldart_link: string;
   year: 2022;
-  allTranslations: TranslationData[];
+  allTranslations: string[];
 }
 export interface TitlesStateDto {
   titlesArray: TitleDto[] | [];

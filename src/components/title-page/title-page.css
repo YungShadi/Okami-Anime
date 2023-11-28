@@ -24,7 +24,7 @@ button {
   height: -moz-fit-content;
   height: fit-content;
   padding: 15px;
-  min-width: 50vw;
+  min-width: 73.5vw;
   min-height: 70vh;
 }
 
@@ -35,7 +35,6 @@ button {
   height: -moz-min-content;
   height: min-content;
   min-width: 55vw;
-  min-height: 60vh;
 }
 .title-info .tag {
   color: #3ce3e8;
@@ -123,7 +122,8 @@ button {
   font-size: 19px;
   height: -moz-fit-content;
   height: fit-content;
-  width: 90%;
+  width: 55vw;
+  max-width: 55vw;
 }
 .title-info .title-text-info .title-name {
   font-size: 35px;
@@ -131,6 +131,13 @@ button {
 .title-info .title-text-info .title-alt-name {
   font-size: 20px;
   color: rgba(255, 255, 255, 0.6);
+}
+
+.title-info.skeleton span {
+  display: flex;
+}
+.title-info.skeleton span .react-loading-skeleton {
+  width: 400px;
 }
 
 .title-dub-show-all {

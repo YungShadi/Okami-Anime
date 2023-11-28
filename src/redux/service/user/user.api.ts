@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import BASE_URL from "../UTL";
+import BASE_URL from "../URL";
 
 export const userApi = createApi({
   reducerPath: "userApi",

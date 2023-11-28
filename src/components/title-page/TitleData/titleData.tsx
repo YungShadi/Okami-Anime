@@ -22,7 +22,8 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
   // const titleFullName = titleData.material_data?.anime_title;
   // const titleType = titleData.type;
   const titleDub = titleData.allTranslations;
-  const titleDesc = titleData.material_data?.anime_description;
+  const titleDesc =
+    titleData.material_data?.anime_description || "Нет описания :(";
   const [triggerToggle, setTriggerToggle] = useState(false);
   const [selectState, setSelectState] = useState("Добавить в список");
   const [triggerContent, setTriggerContent] = useState(
@@ -389,8 +390,12 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           )}
         </div>
         <div>
-          <span className={`title-desc ${showFullDesc ? "show" : "hide"}`}>
-            {titleDesc || "Нету описания :("}
+          <span
+            className={`title-desc ${
+              showFullDesc || titleDesc.length < 360 ? "show" : "hide"
+            }`}
+          >
+            {titleDesc}
           </span>
           {titleDesc?.length > 360 && (
             <button

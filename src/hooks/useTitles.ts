@@ -8,7 +8,7 @@ import { setTitlesAction, expandTitlesAction } from "../redux/titlesSlice";
 // eslint-disable-next-line import/prefer-default-export
 export const useTitles = () => {
   const dispatch = useDispatch();
-  const [getTitle] = useGetTitileByIdMutation();
+  const [getTitle, { status: currentTitleStatus }] = useGetTitileByIdMutation();
 
   const [
     getTiles,
@@ -28,8 +28,6 @@ export const useTitles = () => {
     const result = await getTiles({ searchValue, page });
     if (isLoadMore) {
       dispatch(expandTitlesAction(result.data.content));
-      console.log(isLoadMore);
-
       return result;
     }
     dispatch(setTitlesAction(result.data.content));
@@ -41,5 +39,7 @@ export const useTitles = () => {
     handleGetTitles,
     isTitlesLoadingLazy,
     titlesLoadStatus,
+    currentTitleStatus,
+    getTiles,
   };
 };

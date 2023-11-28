@@ -17,7 +17,6 @@ import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
 import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
-import useDebounce from "../../hooks/useDebounce";
 
 import "./catalogue-page.css";
 // TODO надо вынести в отдельный компонент и использовать в других местах
@@ -44,7 +43,7 @@ function CataloguePage() {
     (state: { titles: { titlesArray: TitleDto[] } }) =>
       state.titles.titlesArray,
   );
-  const [prevTitles, setPrevTitles] = useState([]);
+  const [prevTitles, setPrevTitles] = useState<TitleDto[]>([]);
   const [totalElements, setTotalElements] = useState(18);
   const [isLoadMoreAction, setIsLoadMoreAction] = useState(true);
 
@@ -55,9 +54,7 @@ function CataloguePage() {
   const yearTo = pageParams.get("to");
 
   const { titlesLoadStatus, handleGetTitles } = useTitles();
-
   const [searchInput, setSearchInput] = useState("");
-  const debounceSearch = useDebounce(searchInput, 500);
 
   if (!currentPage) {
     navigate("/catalogue?page=1");
@@ -85,9 +82,11 @@ function CataloguePage() {
       }
     });
   };
+
   const handleSearch = (search: string) => {
     handleGetTitles(0, search, false).then((res) => {
       setTotalElements(res.data.totalElements);
+      navigate(`/catalogue?page=1&search=${search}`);
     });
   };
 

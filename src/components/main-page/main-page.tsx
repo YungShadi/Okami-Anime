@@ -1,34 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useTitles } from "../../hooks/useTitles";
+import React from "react";
 import { TitleDto } from "../../types/titleDto";
 import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 import Reklama from "../img/Безымянный.png";
 
 import "./main-page.css";
+import { useGetTitlesQuery } from "../../redux/service/anime/titles.api";
 
 function MainPage() {
-  const { isTitlesLoadingLazy, handleGetTitles, titlesLoadStatus } =
-    useTitles();
+  const { data: titles, status: titlesLoadStatus } = useGetTitlesQuery({
+    search: "",
+    page: 0,
+  });
 
-  const [displayedTitles, setDisplayedTitles] = useState([]);
-
-  useEffect(() => {
-    handleGetTitles(0, "").then((res) => {
-      setDisplayedTitles(res.data.content || []);
-    });
-  }, []);
-  useEffect(() => {
-    console.log(isTitlesLoadingLazy, titlesLoadStatus);
-  }, [isTitlesLoadingLazy, titlesLoadStatus]);
-  // TODO Надо подумать над кэшированием
   return (
     <section className="main" style={{ flexGrow: "1" }}>
       <div className="season-anime">
         <h2 className="season-anime-title">Аниме сезона</h2>
         <div className="season-titles">
           {titlesLoadStatus === "fulfilled" ? (
-            displayedTitles
+            titles.content
               .slice(0, 6)
               .map((title: TitleDto) => (
                 <Title
@@ -52,7 +43,7 @@ function MainPage() {
         <h2 className="recetly-added-title">Недавно добавленные</h2>
         <div className="recently-added-titles">
           {titlesLoadStatus === "fulfilled" ? (
-            displayedTitles.map((title: TitleDto) => (
+            titles.content.map((title: TitleDto) => (
               <Title
                 titleClass="recently-added"
                 titleData={title}

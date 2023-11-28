@@ -4,9 +4,8 @@ import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useLocation /* {useParams} */ } from "react-router-dom";
 import { useTitles } from "../../hooks/useTitles";
 import { TitleDto } from "../../types/titleDto";
-// import TitleData from "./TitleData/titleData";
-// import Player from "./Player/player";
-// import CommentsWraper from "./Comments/commentsWraper";
+import SkeletonTitlePage from "./skeletonTitlePage";
+import Metadata from "../Metadata";
 
 import "./title-page.css";
 
@@ -19,9 +18,10 @@ function TitlePage() {
   const [isThereError, setIsThereError] = useState(false);
 
   const location = useLocation();
-  const linkState = location.state;
+  const linkState: TitleDto = location.state;
+  const currentUrl = window.location.href;
 
-  const { handleGetCurrentTitle } = useTitles();
+  const { handleGetCurrentTitle, currentTitleStatus } = useTitles();
 
   const titleId = location.search.replace("?", "");
   // const params = useParams();
@@ -34,7 +34,6 @@ function TitlePage() {
         .then((result) => {
           if ("data" in result) {
             setTitleData(result.data);
-            document.title = result.data.material_data?.title;
           } else {
             setIsThereError(true);
           }
@@ -45,26 +44,38 @@ function TitlePage() {
     }
   }, [titleId]);
 
-  // options for condition of title chose
+  useEffect(() => {
+    console.log(currentTitleStatus);
+  }, [currentTitleStatus]);
+  // if (isThereError) {
+  //   return <p>Тайтл не найден</p>;
+  // }
 
-  if (isThereError) {
-    return <p>Тайтл не найден</p>;
-  }
-
+  if (isThereError) return <p>Не удалось заргрузить тайтл</p>;
   return (
-    <div className="title">
-      <Suspense>
-        {titleData.title && (
-          <>
-            <TitleData titleData={titleData} />
-            {/* player and player header */}
-            <Player playerLink={titleData.link} />
-            {/* comments wraper, here post comments and comments */}
-            <CommentsWraper />
-          </>
-        )}
-      </Suspense>
-    </div>
+    <>
+      <Metadata
+        title={titleData.material_data?.title || ""}
+        description={titleData.material_data?.anime_description || ""}
+        url={currentUrl}
+        image={titleData.material_data?.poster_url || ""}
+      />
+      <div className="title">
+        <Suspense>
+          {linkState || currentTitleStatus === "fulfilled" ? (
+            <>
+              <TitleData titleData={titleData} />
+              {/* player and player header */}
+              <Player playerLink={titleData.link} />
+              {/* comments wraper, here post comments and comments */}
+              <CommentsWraper />
+            </>
+          ) : (
+            <SkeletonTitlePage />
+          )}
+        </Suspense>
+      </div>
+    </>
   );
 }
 

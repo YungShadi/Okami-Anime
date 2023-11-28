@@ -81,8 +81,6 @@ function Header() {
               pathname: "/catalogue",
               search: "?page=1",
             }}
-            // TODO делаю пока перезагрузку, надо придумать че делать со стейтом без нее
-            reloadDocument
           >
             Каталог
           </NavLink>
