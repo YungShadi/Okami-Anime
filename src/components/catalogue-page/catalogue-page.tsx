@@ -15,7 +15,7 @@ import { useTitles } from "../../hooks/useTitles";
 import Search from "../img/search.svg";
 import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
-import Title from "../Title";
+import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 import useDebounce from "../../hooks/useDebounce";
 
@@ -168,6 +168,7 @@ function CataloguePage() {
                 titleClass="catalogue-page-title"
                 titleData={title}
                 key={title.id}
+                onClickHandle={() => console.log(1)}
               />
             ))
           ) : (
@@ -178,6 +179,7 @@ function CataloguePage() {
                     titleClass="catalogue-page-title"
                     titleData={title}
                     key={title.id}
+                    onClickHandle={() => console.log(1)}
                   />
                 ))}
               {Array.from({ length: 18 }, (_, index) => (

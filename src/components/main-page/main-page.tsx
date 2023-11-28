@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Title from "../Title";
 import { useTitles } from "../../hooks/useTitles";
-import "./main-page.css";
 import { TitleDto } from "../../types/titleDto";
-import Reklama from "../img/Безымянный.png";
+import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
+import Reklama from "../img/Безымянный.png";
+
+import "./main-page.css";
 
 function MainPage() {
   const { isTitlesLoadingLazy, handleGetTitles, titlesLoadStatus } =
@@ -34,6 +35,7 @@ function MainPage() {
                   titleClass="season-title"
                   titleData={title}
                   key={title.id}
+                  onClickHandle={() => console.log(1)}
                 />
               ))
           ) : (
@@ -55,6 +57,7 @@ function MainPage() {
                 titleClass="recently-added"
                 titleData={title}
                 key={title.id}
+                onClickHandle={() => console.log(1)}
               />
             ))
           ) : (

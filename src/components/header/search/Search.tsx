@@ -6,7 +6,7 @@ import { useTitles } from "../../../hooks/useTitles";
 import { TitleDto } from "../../../types/titleDto";
 import useDebounce from "../../../hooks/useDebounce";
 import search from "../../img/search-frame.svg";
-import Title from "../../Title";
+import Title from "../../title";
 import Lupa from "../../img/search.svg";
 import { MobileDto } from "../../../types/mobileDto";
 
