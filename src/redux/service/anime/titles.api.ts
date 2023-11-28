@@ -11,7 +11,7 @@ export const titlesApi = createApi({
   tagTypes: ["titles"],
   endpoints: (builder) => ({
     getTitileById: builder.mutation({
-      query: (titleId) => ({
+      query: (titleId: string) => ({
         url: `/anime/${titleId}`,
         method: "GET",
       }),

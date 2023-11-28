@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, {
+  Suspense,
+  lazy,
+  useDeferredValue,
+  useEffect,
+  useState,
+} from "react";
 import { useLocation /* {useParams} */ } from "react-router-dom";
 import { useTitles } from "../../hooks/useTitles";
 import { TitleDto } from "../../types/titleDto";
@@ -15,6 +21,7 @@ function TitlePage() {
   const CommentsWraper = lazy(() => import("./Comments/commentsWraper"));
 
   const [titleData, setTitleData] = useState<TitleDto>({} as TitleDto);
+  const defferedTitle = useDeferredValue(titleData);
   const [isThereError, setIsThereError] = useState(false);
 
   const location = useLocation();
@@ -47,11 +54,11 @@ function TitlePage() {
   useEffect(() => {
     console.log(currentTitleStatus);
   }, [currentTitleStatus]);
-  // if (isThereError) {
-  //   return <p>Тайтл не найден</p>;
-  // }
 
-  if (isThereError) return <p>Не удалось заргрузить тайтл</p>;
+  if (isThereError) {
+    return <p>Тайтл не найден</p>;
+  }
+
   return (
     <>
       <Metadata
@@ -62,11 +69,11 @@ function TitlePage() {
       />
       <div className="title">
         <Suspense>
-          {linkState || currentTitleStatus === "fulfilled" ? (
+          {defferedTitle || currentTitleStatus === "fulfilled" ? (
             <>
-              <TitleData titleData={titleData} />
+              <TitleData titleData={defferedTitle} />
               {/* player and player header */}
-              <Player playerLink={titleData.link} />
+              <Player playerLink={defferedTitle.link} />
               {/* comments wraper, here post comments and comments */}
               <CommentsWraper />
             </>

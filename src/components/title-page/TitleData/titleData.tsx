@@ -373,13 +373,14 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
         </span>
         <div className="title-dubs">
           Озвучки:{" "}
-          {titleDub.slice(0, showAllDubs ? -1 : 6).map((dub, i, arr) => {
-            if (i + 1 === arr.length) {
-              return <span className="title-dub">{dub} </span>;
-            }
-            return <span className="title-dub">{dub}, </span>;
-          })}
-          {titleDub.length > 6 && !showAllDubs && (
+          {titleDub &&
+            titleDub.slice(0, showAllDubs ? -1 : 6).map((dub, i, arr) => {
+              if (i + 1 === arr.length) {
+                return <span className="title-dub">{dub} </span>;
+              }
+              return <span className="title-dub">{dub}, </span>;
+            })}
+          {titleDub && titleDub.length > 6 && !showAllDubs && (
             <button
               type="button"
               onClick={() => setShowAllDubs(true)}

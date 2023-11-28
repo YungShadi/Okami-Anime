@@ -1,15 +1,16 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import "./Feedback.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFeedbeackAction } from "../../redux/feedbackSlice";
 import { FeedbackDto } from "../../types/feedbackDto";
 import FeedbackIcon from "../img/feedback-svgrepo-com.svg";
 
+import "./Feedback.css";
+
 export default function FeedbackButton() {
   const dispatch = useDispatch();
   const feedbackState = useSelector(
-    (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen
+    (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen,
   );
   return createPortal(
     feedbackState ? (
@@ -34,6 +35,6 @@ export default function FeedbackButton() {
         </button>
       </div>
     ),
-    document.body
+    document.body,
   );
 }

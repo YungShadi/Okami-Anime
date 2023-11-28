@@ -151,6 +151,7 @@ const Title = React.memo(
               className="title-poster poster"
               src={titlePoster || DefaultPoster}
               alt="poster"
+              loading="lazy"
             />
 
             <span className="age-rest">{defineAgeRest() || `¯\\(°_o)/¯`}</span>

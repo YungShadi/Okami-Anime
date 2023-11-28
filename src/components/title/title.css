@@ -8,11 +8,12 @@
   font-size: 14px;
 }
 .title-main .poster {
-  height: 295px;
   z-index: 1;
   position: relative;
   transition: 0.3s;
-  width: 200px;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-height: 290px;
 }
 .title-main .name {
   display: inline-block;
@@ -64,6 +65,7 @@
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+  background-color: #05315a;
 }
 
 .title-type,
