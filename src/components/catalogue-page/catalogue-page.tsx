@@ -19,14 +19,12 @@ import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 
 import "./catalogue-page.css";
-// TODO надо вынести в отдельный компонент и использовать в других местах
 
 function CataloguePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   // const linkState = location.state;
-  // TODO может быть стоит создать отдельный стейт для хранения тайтло в каталоге
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );

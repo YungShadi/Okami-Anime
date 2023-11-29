@@ -9,6 +9,8 @@ import { FeedbackDto } from "../../types/feedbackDto";
 import "./Feedback.css";
 
 export default function Feedback() {
+  const dispatch = useDispatch();
+
   const [addCurrentUrl, setAddCurrentUrl] = useState(false);
   const [textAreaContent, setTextAreaContent] = useState("");
   const [isShowing, setIsShowin] = useState(false);
@@ -16,6 +18,12 @@ export default function Feedback() {
     (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen,
   );
   const currentUrl = window.location.href;
+  const closeFeedback = () => {
+    setIsShowin(false);
+    setTimeout(() => {
+      dispatch(toggleFeedbeackAction(false));
+    }, 300);
+  };
 
   useEffect(() => {
     if (addCurrentUrl) {
@@ -29,20 +37,13 @@ export default function Feedback() {
     setIsShowin(feedbackState);
   }, [feedbackState]);
 
-  const dispatch = useDispatch();
-
   // const handleEscClose = (e) => {
   //   console.log(e.key);
   // };
 
   useEffect(() => {
     const handleEscClose = (e) => {
-      if (e.key === "Escape") {
-        setIsShowin(false);
-        setTimeout(() => {
-          dispatch(toggleFeedbeackAction(false));
-        }, 300);
-      }
+      if (e.key === "Escape") closeFeedback();
     };
 
     if (feedbackState) {
@@ -99,15 +100,7 @@ export default function Feedback() {
           <button type="button">Отправить</button>
         </div>
       </div>
-      <div
-        className="background"
-        onClick={() => {
-          setIsShowin(false);
-          setTimeout(() => {
-            dispatch(toggleFeedbeackAction(false));
-          }, 300);
-        }}
-      />
+      <div className="background" onClick={() => closeFeedback()} />
     </>,
     document.body,
   );

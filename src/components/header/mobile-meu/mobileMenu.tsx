@@ -7,6 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { toggleMenuAction } from "../../../redux/mobileSlcie";
 import { MobileDto } from "../../../types/mobileDto";
 import defaultPic from "../../img/Аватар.png";
+
 // TODO переделать этот компонент полностью, мне не нравиться как он сделан
 function MobileMenu() {
   const dispatch = useDispatch();
