@@ -267,7 +267,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
       <>
         <div className="full-image-wraper">
           <img
-            src={titleData.material_data?.poster_url}
+            src={titleData.material_data?.poster_url || "Нет постера"}
             alt="poster"
             className="full-image"
           />

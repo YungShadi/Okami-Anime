@@ -15,8 +15,8 @@
   margin-bottom: auto;
   height: 290px;
   width: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 .title-main .name {
   display: inline-block;
@@ -37,6 +37,7 @@
   color: black;
   padding: 4px;
   font-size: 14px;
+  transition: 0.4s;
 }
 .title-main .age-rest {
   align-self: flex-end;
@@ -45,6 +46,10 @@
 .title-poster-wraper:hover .poster {
   filter: brightness(70%);
   scale: 1.03;
+}
+.title-poster-wraper:hover .status,
+.title-poster-wraper:hover .age-rest {
+  opacity: 0;
 }
 
 .title-poster-wraper:hover .play-button-wraper {

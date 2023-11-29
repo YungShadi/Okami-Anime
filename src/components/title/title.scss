@@ -17,7 +17,7 @@
     margin-bottom: auto;
     height: 290px;
     width: 200px;
-    object-fit: cover;
+    object-fit: fill;
   }
   .name {
     display: inline-block;
@@ -39,6 +39,7 @@
     color: black;
     padding: 4px;
     font-size: 14px;
+    transition: 0.4s;
   }
   .age-rest {
     align-self: flex-end;
@@ -49,6 +50,10 @@
     -webkit-filter: brightness(70%);
     filter: brightness(70%);
     scale: 1.03;
+  }
+  .status,
+  .age-rest {
+    opacity: 0;
   }
 }
 .title-poster-wraper:hover {

@@ -181,6 +181,7 @@ button {
   border-bottom: 1px solid #3ce3e8;
   margin-bottom: 10px;
   height: 20px;
+  cursor: pointer;
   .arrow-wraper {
     transform: rotate(90deg);
     display: inline-block;
@@ -250,11 +251,11 @@ button {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 55vw;
+  width: 65vw;
   margin: 0 auto;
   .player,
   .player-placeholder {
-    width: 55vw;
+    width: -webkit-fill-available;
     height: 720px;
     margin-left: auto;
     margin-right: auto;
@@ -347,7 +348,7 @@ button {
   display: inline-flex;
   gap: 15px;
   height: 50px;
-  width: 55vw;
+  width: inherit;
   align-items: center;
 }
 .episode-wraper {
@@ -384,7 +385,7 @@ button {
 }
 
 .comments-wraper {
-  width: 55vw;
+  width: 60vw;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -399,7 +400,7 @@ button {
   height: 40px;
   gap: 10px;
   background-color: $base-dark-blue;
-  width: 55vw;
+  width: inherit;
   align-items: center;
   .style {
     width: 30px;
@@ -411,7 +412,7 @@ button {
   margin-right: 10px;
 }
 .comment-input {
-  width: 55vw;
+  width: 60vw;
   height: 150px;
   resize: none;
   background: #064b8c;
@@ -441,7 +442,7 @@ button {
   background-color: #3c87e8;
 }
 .devider-line-long {
-  width: 55vw;
+  width: inherit;
   height: 2px;
   background-color: $base-dark-blue;
   margin-bottom: 50px;
@@ -450,7 +451,7 @@ button {
   background-color: $base-dark-blue;
   display: flex;
   flex-direction: column;
-  width: 55vw;
+  width: inherit;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -461,7 +462,6 @@ button {
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 5px;
   .comment {
-    width: 54vw;
     height: 150px;
     padding: 10px;
     background-color: #064b8c;
