@@ -2,14 +2,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleFeedbeackAction } from "../../redux/feedbackSlice";
+import { FeedbackDto } from "../../types/feedbackDto";
 
 import "./Feedback.css";
 
 export default function Feedback() {
   const [addCurrentUrl, setAddCurrentUrl] = useState(false);
   const [textAreaContent, setTextAreaContent] = useState("");
+  const [isShowing, setIsShowin] = useState(false);
+  const feedbackState = useSelector(
+    (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen,
+  );
   const currentUrl = window.location.href;
 
   useEffect(() => {
@@ -20,12 +25,39 @@ export default function Feedback() {
     }
   }, [addCurrentUrl]);
 
+  useEffect(() => {
+    setIsShowin(feedbackState);
+  }, [feedbackState]);
+
   const dispatch = useDispatch();
+
+  // const handleEscClose = (e) => {
+  //   console.log(e.key);
+  // };
+
+  useEffect(() => {
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        setIsShowin(false);
+        setTimeout(() => {
+          dispatch(toggleFeedbeackAction(false));
+        }, 300);
+      }
+    };
+
+    if (feedbackState) {
+      window.addEventListener("keydown", handleEscClose);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscClose);
+    };
+  }, [feedbackState]);
 
   return createPortal(
     <>
       <div className="feedback-modal">
-        <div className="feedback">
+        <div className={`feedback ${isShowing ? "" : "hide"}`}>
           <h2 className="feedback-titile">Отпраить сообщение разработчикам</h2>
           <span className="txt-prt">
             Случлилась какая-то ошибка? Или появились предложения по
@@ -69,7 +101,12 @@ export default function Feedback() {
       </div>
       <div
         className="background"
-        onClick={() => dispatch(toggleFeedbeackAction(false))}
+        onClick={() => {
+          setIsShowin(false);
+          setTimeout(() => {
+            dispatch(toggleFeedbeackAction(false));
+          }, 300);
+        }}
       />
     </>,
     document.body,

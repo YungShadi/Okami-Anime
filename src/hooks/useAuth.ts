@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { UserDto } from "../types/userDto";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 import {
   useCurrentUserQuery,
   useLoginUserMutation,
@@ -11,12 +11,16 @@ import {
   //   useRefreshJWTMutation,
 } from "../redux/service/user/user.api";
 import { currentUserAction, logoutAction } from "../redux/aunthSlice";
+import { UserDto } from "../types/userDto";
+
+import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line import/prefer-default-export
 export const useAuth = () => {
   const dispatch = useDispatch();
   const jwtToken = !!Cookies.get("access_jwt_token");
   const navigate = useNavigate();
+
   // const { pathname } = useLocation();
   const { data: currentUser, isLoading: isCurrentUserLoading } =
     useCurrentUserQuery(undefined, {
@@ -85,6 +89,7 @@ export const useAuth = () => {
         navigate("/");
       }
     } catch (error) {
+      toast.error(error.error);
       throw new Error(error);
     }
   };
@@ -99,6 +104,7 @@ export const useAuth = () => {
         navigate("/");
       })
       .catch((error) => {
+        toast.error(error.error);
         throw new Error(error);
       });
   };

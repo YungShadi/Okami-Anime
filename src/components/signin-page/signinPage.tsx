@@ -1,16 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { CapthcaDto } from "../../types/captchaDto";
-import { MobileDto } from "../../types/mobileDto";
-import { toggleMenuAction } from "../../redux/mobileSlcie";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../hooks/useAuth";
+import { toggleMenuAction } from "../../redux/mobileSlcie";
 import { UserDto } from "../../types/userDto";
+import { MobileDto } from "../../types/mobileDto";
+
 import "../signup-page/signupPage.css";
-// import { toggleCaptchaAction } from "../../redux/capthcaSlice";
-// import Captcha from "../signup-page/Captcha";
 
 function SigniinPage() {
   const menuState = useSelector(
@@ -51,6 +49,7 @@ function SigniinPage() {
       }
     };
   });
+
   return (
     <div className="signup">
       <form className="signup-form form" onSubmit={handleSubmit(onSubmit)}>

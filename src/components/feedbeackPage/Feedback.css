@@ -1,9 +1,10 @@
 .feedback {
   position: absolute;
-  background-color: rgba(5, 49, 90, 1);
+  background-color: rgb(5, 49, 90);
   top: 150px;
   z-index: 100000000;
   max-width: 990px;
+  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -11,17 +12,27 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #3ce3e8;
+  animation-name: feedback-appear;
+  animation-duration: 0.5s;
+  transition: 0.3s;
 }
+
+.feedback.hide {
+  animation: feedback-disappear 0.4s;
+}
+
 .feedback-modal {
   margin: 0 auto;
   max-width: 1000px;
   color: white;
   top: 0px;
 }
+
 .feedback-titile {
   margin-bottom: 10px;
   font-size: 25px;
 }
+
 .feedback-textarea {
   max-height: 200px;
   max-width: 970px;
@@ -31,15 +42,18 @@
   padding: 5px;
   outline: none;
 }
+
 .txt-prt {
   display: block;
   width: 100%;
   margin-bottom: 5px;
   font-size: 19px;
 }
+
 .feedback-button-wrapper {
   display: block;
 }
+
 .feedback-button {
   transform: rotate(-90deg);
   border: 1px solid #3ce3e8;
@@ -52,23 +66,22 @@
   position: fixed;
   top: 200px;
   left: -90px;
-  font-family:
-    Century Gothic,
-    CenturyGothic,
-    AppleGothic,
-    sans-serif;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   cursor: pointer;
   transition: 0.6s;
 }
+
 .feedback-button:hover,
 .feedback-button:active {
   left: -40px;
-  .feedback-button-img {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-40px) rotate(90deg);
-  }
 }
+.feedback-button:hover .feedback-button-img,
+.feedback-button:active .feedback-button-img {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-40px) rotate(90deg);
+}
+
 .feedback-button-img {
   transform: rotate(90deg);
   border: 1px solid #3ce3e8;
@@ -81,10 +94,33 @@
   transition: 0.2s;
   padding-left: 10px;
 }
+
 .feedback-add-url {
   display: flex;
   margin-bottom: 10px;
 }
+
 #feedback-url {
   margin-right: 10px;
 }
+
+@keyframes feedback-appear {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes feedback-disappear {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.5;
+  }
+}/*# sourceMappingURL=Feedback.css.map */

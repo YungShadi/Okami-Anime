@@ -52,6 +52,9 @@ function App() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // TODO popout errors
+  // TODO Feedback animation and lazy load
+  // TODO mobile menu
 
   return (
     <Routes>
