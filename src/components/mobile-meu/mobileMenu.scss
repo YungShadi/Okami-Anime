@@ -1,0 +1,125 @@
+@import "../../stylsheet.scss";
+
+.mobile-menu-wraper {
+  width: 100%;
+  font-family:
+    Century Gothic,
+    CenturyGothic,
+    AppleGothic,
+    sans-serif;
+}
+.mobile-menu-wraper.hide {
+  .mobile-menu {
+    transform: translateX(-100vw);
+    
+  }
+ 
+}
+.mobile-menu {
+  position: fixed;
+  width: 50vw;
+  height: 100vh;
+  top: 0;
+  background-color: #0e4381;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.6s;
+  padding: 20px;
+  z-index: 1000000;
+  animation: menu-appear 0.5s;
+}
+.mobile-menu.hide {
+  animation: menu-disappear 0.6s;
+}
+.mobile-menu-background {
+  animation: background-appear 0.5s;
+  filter: grayscale(1);
+}
+.menu-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    animation-name: link-appear;
+    animation-duration: 1s;
+  }
+  a:nth-child(1) {
+    animation-duration: 0.6s;
+  }
+  a:nth-child(2) {
+    animation-duration: 0.7s;
+  }
+  a:nth-child(3) {
+    animation-duration: 0.8s;
+  }
+  a:nth-child(4) {
+    animation-duration: 0.9s;
+  }
+  a:nth-child(5) {
+    animation-duration: 1s;
+  }
+  a:nth-child(6) {
+    animation-duration: 1s;
+  }
+  a:nth-child(6) {
+    animation-duration: 1s;
+  }
+  .active {
+    border: 1px solid red;
+  }
+}
+.menu-logo {
+  filter: invert(1);
+  width: 20px;
+  height: 20px;
+}
+.mobile-menu-background.hide {
+  animation-name: background-disappear;
+  animation-duration: 0.6s;
+}
+@keyframes menu-appear {
+  0% {
+    transform: translateX(-100vw);
+  }
+  50% {
+    transform: translateX(0);
+  }
+}
+@keyframes background-appear {
+  0% {
+    filter: grayscale(0);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.7;
+    filter: grayscale(1);
+  }
+}
+@keyframes background-disappear {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes menu-disappear {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+@keyframes link-appear {
+  0% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

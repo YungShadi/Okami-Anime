@@ -1,5 +1,4 @@
 import React, { Suspense, lazy } from "react";
-import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { Outlet } from "react-router-dom";
@@ -11,7 +10,7 @@ import Header from "../header";
 import Loading from "./Loading";
 import Footer from "../footer";
 
-const MobileMenu = lazy(() => import("../header/mobile-meu/mobileMenu"));
+const MobileMenu = lazy(() => import("../mobile-meu/mobileMenu"));
 // by default its displaying header and footer
 function Layout() {
   const mobielView = useSelector(
@@ -21,6 +20,7 @@ function Layout() {
   const feedbackState = useSelector(
     (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen,
   );
+
   return (
     <>
       <Header />
@@ -30,7 +30,9 @@ function Layout() {
           <Outlet />
         </Suspense>
         {mobielView && (
-          <Suspense>{createPortal(<MobileMenu />, document.body)}</Suspense>
+          <Suspense>
+            <MobileMenu />
+          </Suspense>
         )}
         <Suspense>{feedbackState && !mobielView && <Feedback />}</Suspense>
         <ToastContainer

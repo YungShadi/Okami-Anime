@@ -1,9 +1,9 @@
 import React, { lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ErrorPage from "./components/error/ErrorPage";
 import Layout from "./components/layout/layout";
-import { MobileDto } from "./types/mobileDto";
+// import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
 
 import "./App.css";
@@ -23,19 +23,19 @@ const PersonalAgreementPage = lazy(
 
 function App() {
   const dispatch = useDispatch();
-  const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
-  );
+  // const menuState = useSelector(
+  //   (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
+  // );
 
-  useEffect(() => {
-    if (menuState) {
-      document.body.style.overflow = "hidden";
-      // document.body.style.opacity = "0.8";
-    } else {
-      document.body.style.overflow = "";
-      // document.body.style.opacity = "";
-    }
-  }, [menuState]);
+  // useEffect(() => {
+  //   if (menuState) {
+  //     document.body.style.overflow = "hidden";
+  //     // document.body.style.opacity = "0.8";
+  //   } else {
+  //     document.body.style.overflow = "";
+  //     // document.body.style.opacity = "";
+  //   }
+  // }, [menuState]);
 
   useEffect(() => {
     if (window.screen.width <= 600) {
