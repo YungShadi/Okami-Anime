@@ -339,7 +339,7 @@
 .catalogue-search {
   width: 100%;
   background-color: rgba(6, 75, 140, 0.8);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 6px;
   display: flex;
   justify-content: flex-start;
@@ -356,6 +356,7 @@
   border-bottom: none;
   outline: none;
   padding-left: 10px;
+  border-right: 1px solid #3ce3e8;
 }
 
 .mobile-button-filter {

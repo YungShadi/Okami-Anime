@@ -17,8 +17,6 @@ button {
 }
 
 .title {
-  margin-left: auto;
-  margin-right: auto;
   background: rgba(5, 49, 90, 0.6);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
   height: -moz-fit-content;
@@ -552,11 +550,11 @@ button {
   position: fixed;
   top: 30px;
   z-index: 1000000;
-  width: 50%;
   height: auto;
   max-height: 95vh;
   animation: img-appear 0.5s;
-  left: 25%;
+  left: 35%;
+  min-width: 600px;
   -o-object-fit: contain;
      object-fit: contain;
 }

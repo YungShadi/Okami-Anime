@@ -1,7 +1,10 @@
 @import "../../stylsheet.scss";
 
 .season-anime {
-  width: fit-content;
+  max-width: 70vw;
+  .season-titles {
+    padding-top: 20px;
+  }
   .season-anime-title {
     margin-bottom: 25px;
   }
@@ -11,13 +14,6 @@
     right: 10px;
   }
 }
-.season-anime {
-  max-width: 71vw;
-  width: 100%;
-  .season-titles {
-    padding-top: 20px;
-  }
-}
 .season-titles,
 .recently-added-titles {
   max-width: fit-content;
@@ -25,7 +21,7 @@
   background-color: $background-trans;
   padding: 0 20px 20px 20px;
   display: flex;
-  gap: 22px;
+  gap: 20px;
   border-radius: 10px;
   margin-bottom: 50px;
   flex-wrap: wrap;
