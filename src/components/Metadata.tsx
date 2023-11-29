@@ -5,6 +5,7 @@ type MetadataType = {
   title: string;
   description: string;
   url: string;
+  // eslint-disable-next-line react/require-default-props
   image?: string;
 };
 export default function Metadata({
@@ -15,7 +16,7 @@ export default function Metadata({
 }: MetadataType) {
   return (
     <Helmet>
-      <title>{title}</title>
+      <title> {title} - бесплатно смотреть аниме онлайн</title>
       <meta name="description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="website" />

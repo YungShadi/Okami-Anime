@@ -1,4 +1,8 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FilterArrayElement } from "../../../types/filterDto";
@@ -32,6 +36,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
   const [showAllDubs, setShowAllDubs] = useState(false);
   const [triggerOrder, setTriggerOrder] = useState(false);
   const [showFullDesc, setShowFullDesc] = useState(false);
+  const [showFullPoster, setShowFullPoster] = useState(false);
   const selsectOptions: Array<OptionTitle> = [
     {
       title: "Буду смотреть",
@@ -247,7 +252,37 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
   } else {
     episodes = `${titleData.last_episode}/${titleData.material_data?.episodes_total}`;
   }
+  function FullScreenImage() {
+    useEffect(() => {
+      function handleEsc(e: { key: string }) {
+        if (e.key === "Escape") {
+          setShowFullPoster(false);
+        }
+      }
 
+      window.addEventListener("keydown", handleEsc);
+      return () => window.removeEventListener("keydown", handleEsc);
+    }, []);
+    return createPortal(
+      <>
+        <div className="full-image-wraper">
+          <img
+            src={titleData.material_data?.poster_url}
+            alt="poster"
+            className="full-image"
+          />
+        </div>
+        <div
+          className="background"
+          onClick={() => {
+            setShowFullPoster(false);
+            console.log(showFullPoster);
+          }}
+        />
+      </>,
+      document.body,
+    );
+  }
   return (
     <div className="title-info">
       <div className="poster-wraper">
@@ -255,6 +290,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           className="title-poster"
           alt="poster"
           src={titleData.material_data?.poster_url || Poster}
+          onClick={() => setShowFullPoster(true)}
         />
         {/* title condition */}
         <div className="select-wrapper">
@@ -321,6 +357,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           </ol>
         </div>
       </div>
+      {showFullPoster && <FullScreenImage />}
       {/* title info */}
       <div className="title-text-info">
         <span className="title-name">{titleData.title}</span>

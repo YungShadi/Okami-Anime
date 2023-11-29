@@ -15,6 +15,7 @@ export default function Pagination({
   pageParams,
   handlePageChangeCatalogue,
   search,
+  isLoadMoreButton,
 }: PaginationDto) {
   const {
     pages,
@@ -30,6 +31,7 @@ export default function Pagination({
     currentPageCatalogue,
     pageParams,
     handlePageChangeCatalogue,
+    isLoadMoreButton,
     search,
   });
 
@@ -79,14 +81,16 @@ export default function Pagination({
 
   return (
     <div className="pagination-wrapper">
-      <Link
-        type="button"
-        onClick={handleNextPageLoadMore}
-        className="pagination-load-more"
-        to={createLink("next-page")}
-      >
-        Загрузить еще...
-      </Link>
+      {isLoadMoreButton && (
+        <Link
+          type="button"
+          onClick={handleNextPageLoadMore}
+          className="pagination-load-more"
+          to={createLink("next-page")}
+        >
+          Загрузить еще...
+        </Link>
+      )}
       <div className="catalogue-pagination">
         <Link
           className="pagination-button"
@@ -131,10 +135,10 @@ export default function Pagination({
             <Link
               type="button"
               className="pagination-button"
-              onClick={() => handlePageChange(page)}
-              to={createLink("some-page", page)}
+              onClick={() => handlePageChange(Number(page))}
+              to={createLink("some-page", Number(page))}
             >
-              {page}
+              {Number(page)}
             </Link>
           );
         })}

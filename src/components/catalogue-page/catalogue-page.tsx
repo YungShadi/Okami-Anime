@@ -19,6 +19,7 @@ import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 
 import "./catalogue-page.css";
+import Metadata from "../Metadata";
 
 function CataloguePage() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function CataloguePage() {
   const [prevTitles, setPrevTitles] = useState<TitleDto[]>([]);
   const [totalElements, setTotalElements] = useState(18);
   const [isLoadMoreAction, setIsLoadMoreAction] = useState(true);
+  const [searchTitle, setSearchTitle] = useState("Каталог аниме");
 
   const pageParams = new URLSearchParams(location.search);
   const currentPage = pageParams.get("page");
@@ -51,7 +53,7 @@ function CataloguePage() {
   const yearFrom = pageParams.get("from");
   const yearTo = pageParams.get("to");
 
-  const { titlesLoadStatus, handleGetTitles } = useTitles();
+  const { titlesLoadStatus, handleGetTitles, isTitlesFetching } = useTitles();
   const [searchInput, setSearchInput] = useState("");
 
   if (!currentPage) {
@@ -82,11 +84,26 @@ function CataloguePage() {
   };
 
   const handleSearch = (search: string) => {
-    handleGetTitles(0, search, false).then((res) => {
-      setTotalElements(res.data.totalElements);
-      navigate(`/catalogue?page=1&search=${search}`);
-    });
+    if (isTitlesFetching) return;
+    const trimmedSearch = search.trim();
+    if (trimmedSearch.length < 1) {
+      setSearchTitle("Каталог аниме");
+      handleGetTitles(0, "", false).then((res) => {
+        setTotalElements(res.data.totalElements);
+        navigate(`/catalogue?page=1`);
+      });
+    } else {
+      setSearchTitle(`Поиск по запросу: ${trimmedSearch}`);
+      handleGetTitles(0, trimmedSearch, false).then((res) => {
+        setTotalElements(res.data.totalElements);
+        navigate(`/catalogue?page=1&search=${trimmedSearch}`);
+      });
+    }
   };
+
+  // const handleSearchTitle = () => {
+  //   if (initialSearch) setSearchTitle(`Поиск по запросу: ${initialSearch}`);
+  // };
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
@@ -94,6 +111,7 @@ function CataloguePage() {
     if (initialSearch) {
       setSearchInput(initialSearch);
       handleSearch(initialSearch);
+      setSearchTitle(`Поиск по запросу: ${initialSearch}`);
     }
     return () => {
       if (menuState) {
@@ -108,94 +126,113 @@ function CataloguePage() {
   }, [titles]);
 
   return (
-    <div className="catalogue-page">
-      {mobileView ? (
-        filterStateMobile ? (
-          createPortal(
-            <FiltersWrapper
-              searchInput={searchInput}
-              yearFrom={yearFrom}
-              yearTo={yearTo}
-            />,
-            document.body,
+    <>
+      <Metadata
+        title="Каталог"
+        description="Ваш источник увлекательных аниме! Смотрите бесплатно лучшие аниме онлайн на нашем сайте. Огромная коллекция анимационных шедевров!."
+        url={window.location.href}
+      />
+      <div className="catalogue-page">
+        {mobileView ? (
+          filterStateMobile ? (
+            createPortal(
+              <FiltersWrapper
+                searchInput={searchInput}
+                yearFrom={yearFrom}
+                yearTo={yearTo}
+              />,
+              document.body,
+            )
+          ) : (
+            ""
           )
         ) : (
-          ""
-        )
-      ) : (
-        <FiltersWrapper
-          searchInput={searchInput}
-          yearFrom={yearFrom}
-          yearTo={yearTo}
-        />
-      )}
-      <button
-        type="button"
-        className="mobile-button-filter"
-        onClick={() => dispatch(toggleFilterAction(!filterStateMobile))}
-      >
-        Открыть фильтр
-      </button>
-      <section className="search-and-titles">
-        <div className="catalogue-search">
-          <input
-            type="text"
-            placeholder="Поиск"
-            className="input-title"
-            value={searchInput}
-            onChange={(e) => {
-              setSearchInput(e.target.value);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") handleSearch(searchInput);
-            }}
+          <FiltersWrapper
+            searchInput={searchInput}
+            yearFrom={yearFrom}
+            yearTo={yearTo}
           />
-          <button
-            type="button"
-            className="catalogue-search-button"
-            onClick={() => handleSearch(searchInput)}
-          >
-            <img src={Search} alt="s-lupa" />
-          </button>
-        </div>
-        <div className="titles-wraper">
-          {titlesLoadStatus === "fulfilled" ? (
-            titles.map((title: TitleDto) => (
-              <Title
-                titleClass="catalogue-page-title"
-                titleData={title}
-                key={title.id}
-                onClickHandle={() => console.log(1)}
-              />
-            ))
-          ) : (
-            <>
-              {isLoadMoreAction &&
-                prevTitles.map((title: TitleDto) => (
-                  <Title
-                    titleClass="catalogue-page-title"
-                    titleData={title}
-                    key={title.id}
-                    onClickHandle={() => console.log(1)}
-                  />
+        )}
+        <button
+          type="button"
+          className="mobile-button-filter"
+          onClick={() => dispatch(toggleFilterAction(!filterStateMobile))}
+        >
+          Открыть фильтр
+        </button>
+        <section className="search-and-titles">
+          <div className="catalogue-search">
+            <input
+              type="text"
+              placeholder="Поиск"
+              className="input-title"
+              value={searchInput}
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearch(searchInput);
+              }}
+            />
+            <button
+              type="button"
+              className="catalogue-search-button"
+              onClick={() => handleSearch(searchInput)}
+            >
+              <img src={Search} alt="s-lupa" />
+            </button>
+          </div>
+          <Pagination
+            totalCount={totalElements}
+            pageSize={18}
+            siblingCount={2}
+            currentPageCatalogue={Number(currentPage)}
+            pageParams={pageParams}
+            handlePageChangeCatalogue={handlePageChangeCatalogue}
+            search={searchInput || ""}
+            isLoadMoreButton={false}
+          />
+          <h2 className="wraper-title">{searchTitle}</h2>
+          <div className="titles-wraper">
+            {titlesLoadStatus === "fulfilled" ? (
+              titles.map((title: TitleDto) => (
+                <Title
+                  titleClass="catalogue-page-title"
+                  titleData={title}
+                  key={title.id}
+                  onClickHandle={() => console.log(1)}
+                />
+              ))
+            ) : (
+              <>
+                {isLoadMoreAction &&
+                  prevTitles.map((title: TitleDto) => (
+                    <Title
+                      titleClass="catalogue-page-title"
+                      titleData={title}
+                      key={title.id}
+                      onClickHandle={() => console.log(1)}
+                    />
+                  ))}
+                {Array.from({ length: 18 }, (_, index) => (
+                  <SkeletonTitle key={index} />
                 ))}
-              {Array.from({ length: 18 }, (_, index) => (
-                <SkeletonTitle key={index} />
-              ))}
-            </>
-          )}
-        </div>
-        <Pagination
-          totalCount={totalElements}
-          pageSize={18}
-          siblingCount={2}
-          currentPageCatalogue={Number(currentPage)}
-          pageParams={pageParams}
-          handlePageChangeCatalogue={handlePageChangeCatalogue}
-          search={searchInput || ""}
-        />
-      </section>
-    </div>
+              </>
+            )}
+          </div>
+          <Pagination
+            totalCount={totalElements}
+            pageSize={18}
+            siblingCount={2}
+            currentPageCatalogue={Number(currentPage)}
+            pageParams={pageParams}
+            handlePageChangeCatalogue={handlePageChangeCatalogue}
+            search={searchInput || ""}
+            isLoadMoreButton
+          />
+        </section>
+      </div>
+    </>
   );
 }
 

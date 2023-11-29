@@ -6,4 +6,5 @@ export interface PaginationDto {
   pageParams: URLSearchParams;
   handlePageChangeCatalogue: CallableFunction;
   search: string;
+  isLoadMoreButton: boolean;
 }

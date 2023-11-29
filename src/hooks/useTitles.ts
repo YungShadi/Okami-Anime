@@ -12,7 +12,11 @@ export const useTitles = () => {
 
   const [
     getTiles,
-    { isLoading: isTitlesLoadingLazy, status: titlesLoadStatus },
+    {
+      isLoading: isTitlesLoadingLazy,
+      status: titlesLoadStatus,
+      isFetching: isTitlesFetching,
+    },
   ] = useLazyGetTitlesQuery();
 
   const handleGetCurrentTitle = async (titleId: string) => {
@@ -41,5 +45,6 @@ export const useTitles = () => {
     titlesLoadStatus,
     currentTitleStatus,
     getTiles,
+    isTitlesFetching,
   };
 };

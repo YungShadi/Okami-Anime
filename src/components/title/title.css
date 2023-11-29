@@ -13,7 +13,10 @@
   transition: 0.3s;
   margin-top: auto;
   margin-bottom: auto;
-  max-height: 290px;
+  height: 290px;
+  width: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .title-main .name {
   display: inline-block;

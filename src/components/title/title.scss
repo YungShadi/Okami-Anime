@@ -15,7 +15,9 @@
     transition: 0.3s;
     margin-top: auto;
     margin-bottom: auto;
-    max-height: 290px;
+    height: 290px;
+    width: 200px;
+    object-fit: cover;
   }
   .name {
     display: inline-block;
