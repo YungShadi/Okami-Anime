@@ -13,7 +13,7 @@ export default function Feedback() {
 
   const [addCurrentUrl, setAddCurrentUrl] = useState(false);
   const [textAreaContent, setTextAreaContent] = useState("");
-  const [isShowing, setIsShowin] = useState(false);
+  const [isShowing, setIsShowin] = useState(true);
   const feedbackState = useSelector(
     (state: { feedback: FeedbackDto }) => state.feedback.isFeedbackOpen,
   );
@@ -32,10 +32,6 @@ export default function Feedback() {
       setTextAreaContent(textAreaContent.replace(`url: ${currentUrl}`, ""));
     }
   }, [addCurrentUrl]);
-
-  useEffect(() => {
-    setIsShowin(feedbackState);
-  }, [feedbackState]);
 
   // const handleEscClose = (e) => {
   //   console.log(e.key);
