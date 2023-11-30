@@ -7,7 +7,6 @@ import { createPortal } from "react-dom";
 import { TitleDto } from "../../types/titleDto";
 import { MobileDto } from "../../types/mobileDto";
 import {
-  toggleMenuAction,
   toggleFilterAction,
   toggleSearchAction,
 } from "../../redux/mobileSlcie";
@@ -26,9 +25,6 @@ function CataloguePage() {
   const navigate = useNavigate();
   const location = useLocation();
   // const linkState = location.state;
-  const menuState = useSelector(
-    (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
-  );
   const filterStateMobile = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isFilterOpened,
   );
@@ -113,11 +109,6 @@ function CataloguePage() {
       handleSearch(initialSearch);
       setSearchTitle(`Поиск по запросу: ${initialSearch}`);
     }
-    return () => {
-      if (menuState) {
-        dispatch(toggleMenuAction(!menuState));
-      }
-    };
   }, []);
 
   useEffect(() => {

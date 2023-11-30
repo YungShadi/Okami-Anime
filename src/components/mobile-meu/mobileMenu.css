@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .mobile-menu-wraper {
   width: 100%;
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
@@ -65,7 +66,16 @@
   animation-duration: 1s;
 }
 .menu-navigation .active {
-  border: 1px solid red;
+  display: flex;
+  align-items: center;
+}
+.menu-navigation .active::before {
+  content: "";
+  height: 40px;
+  width: 8px;
+  border-radius: 5px;
+  background-color: #3ce3e8;
+  margin-right: 10px;
 }
 
 .menu-logo {
@@ -77,6 +87,90 @@
 .mobile-menu-background.hide {
   animation-name: background-disappear;
   animation-duration: 0.6s;
+}
+
+.mobile-close {
+  display: block;
+}
+
+.mobile-close-button {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  top: 60px;
+  right: 25px;
+  z-index: 10000000;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid #3ce3e8;
+  animation-name: button-appear;
+  animation-duration: 0.5s;
+}
+
+.palka {
+  width: 2px;
+  height: 30px;
+  position: relative;
+  top: 4px;
+  background-color: #3ce3e8;
+  border-radius: 10px;
+  rotate: 45deg;
+  display: inline-block;
+  left: 0;
+}
+
+.palka.second {
+  rotate: -45deg;
+  left: -1px;
+}
+
+.mobile-close.hide .mobile-close-button {
+  animation-name: button-disappear;
+  animation-duration: 0.5s;
+  transform: translateX(100px);
+}
+
+.menu-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid #3ce3e8;
+  color: white;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: button-appear 1s;
+}
+.menu-button span {
+  display: inline-block;
+  position: relative;
+  top: 40px;
+  width: 80px;
+}
+
+.menu-button-img {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 15px;
+}
+
+.mobile-close-button::after {
+  content: "Закрыть";
+  color: #3ce3e8;
+  font-size: 16px;
+  position: relative;
+  top: 10px;
+  right: 12px;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
 
 @keyframes menu-appear {
@@ -119,5 +213,23 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+@keyframes button-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes button-disappear {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px);
   }
 }/*# sourceMappingURL=mobileMenu.css.map */

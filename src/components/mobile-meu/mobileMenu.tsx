@@ -9,7 +9,8 @@ import { NavLink } from "react-router-dom";
 import { toggleMenuAction } from "../../redux/mobileSlcie";
 import { MobileDto } from "../../types/mobileDto";
 import DefaultPic from "../img/Аватар.png";
-import Logo from "../img/icom.svg";
+import Feedback from "../img/feedback.svg";
+import DoorOut from "../img/doorOut.svg";
 
 import "./mobileMenu.css";
 
@@ -44,32 +45,51 @@ function MobileMenu() {
               <span className="menu-username">loh</span>
             </div>
             <div className="menu-navigation">
-              <NavLink to="/">
-                <img
-                  src={Logo}
-                  alt="logo"
-                  style={{ filter: "invert(1)" }}
-                  className="menu-logo"
-                />
-                Главная страница
-              </NavLink>
-              <NavLink to="/">Профиль</NavLink>
+              <NavLink to="/">Главная страница</NavLink>
               <NavLink to="catalogue?page=1">Каталог</NavLink>
-              <NavLink to="catalogue?page=1">Топ 100</NavLink>
-              <NavLink to="/">Списки</NavLink>
-              <NavLink to="/">Случайное аниме</NavLink>
-              <NavLink to="catalogue?page=1">Сообщить об ошибке</NavLink>
+              <NavLink to="catalogue?page=1/top100">Топ 100</NavLink>
+              <NavLink to="/profile">Профиль</NavLink>
+              <NavLink to="/profile/lists">Списки</NavLink>
+              <NavLink to="/profile/settings">Настройки</NavLink>
+              <NavLink to="/some-random-link">Случайное аниме</NavLink>
+              <div className="menu-buttons">
+                <button type="button" className="menu-button">
+                  <img
+                    src={Feedback}
+                    alt="feedback"
+                    className="menu-button-img"
+                  />
+                  <span>Сообщить об ошибке</span>
+                </button>
+                <button type="button" className="menu-button">
+                  <img
+                    src={DoorOut}
+                    alt="feedback"
+                    className="menu-button-img"
+                  />
+                  <span>Выйти из аккаунта</span>
+                </button>
+              </div>
             </div>
           </div>
         </nav>
+        <div className={`mobile-close ${isMenuOpened ? "show" : "hide"}`}>
+          <button
+            type="button"
+            onClick={handleMenuClose}
+            className="mobile-close-button"
+            id="#close-mobile"
+          >
+            <div className="palka" />
+            <div className="palka second" />
+          </button>
+        </div>
         <div
           className={`background mobile-menu-background ${
             isMenuOpened ? "show" : "hide"
           }`}
           onClick={handleMenuClose}
-        >
-          <button type="button">close</button>
-        </div>
+        />
       </>,
 
       document.body,
