@@ -4,10 +4,10 @@ import React, { useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-// import { UserDto } from "../../../types/userDto";
-// import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { toggleMenuAction } from "../../redux/mobileSlcie";
 import { MobileDto } from "../../types/mobileDto";
+import { UserDto } from "../../types/userDto";
 import DefaultPic from "../img/Аватар.png";
 import Feedback from "../img/feedback.svg";
 import DoorOut from "../img/doorOut.svg";
@@ -18,13 +18,13 @@ import "./mobileMenu.css";
 function MobileMenu() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const dispatch = useDispatch();
-  // const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const menuState = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
   );
-  // const username = useSelector(
-  //   (state: { auth: UserDto }) => state.auth.username,
-  // );
+  const username = useSelector(
+    (state: { auth: UserDto }) => state.auth.username,
+  );
   useLayoutEffect(() => {
     setIsMenuOpened(menuState);
   }, [menuState]);
@@ -41,17 +41,84 @@ function MobileMenu() {
         <nav className={`mobile-menu-wraper ${isMenuOpened ? "show" : "hide"}`}>
           <div className="mobile-menu">
             <div className="menu-profile">
-              <img src={DefaultPic} alt="profile pic" />
-              <span className="menu-username">loh</span>
+              {isAuthenticated && (
+                <NavLink to="/profile" onClick={handleMenuClose}>
+                  <img
+                    src={DefaultPic}
+                    alt="profile pic"
+                    className="menu-profile-pic"
+                  />
+                  <h2 className="menu-username">{username}</h2>
+                </NavLink>
+              )}
+              {!isAuthenticated && (
+                <>
+                  <h2>Вход в аккаунт не выпонен</h2>
+                  <span>Вы можете</span>
+                  <NavLink
+                    onClick={handleMenuClose}
+                    to="/sign-in"
+                    className="menu-link"
+                  >
+                    Войти
+                  </NavLink>
+                  <span>или</span>
+                  <NavLink
+                    onClick={handleMenuClose}
+                    to="sign-up"
+                    className="menu-link"
+                  >
+                    Зарегестрироваться
+                  </NavLink>
+                </>
+              )}
             </div>
             <div className="menu-navigation">
-              <NavLink to="/">Главная страница</NavLink>
-              <NavLink to="catalogue?page=1">Каталог</NavLink>
-              <NavLink to="catalogue?page=1/top100">Топ 100</NavLink>
-              <NavLink to="/profile">Профиль</NavLink>
-              <NavLink to="/profile/lists">Списки</NavLink>
-              <NavLink to="/profile/settings">Настройки</NavLink>
-              <NavLink to="/some-random-link">Случайное аниме</NavLink>
+              <NavLink onClick={handleMenuClose} to="/" className="menu-link">
+                Главная страница
+              </NavLink>
+              <NavLink
+                onClick={handleMenuClose}
+                to="catalogue?page=1"
+                className="menu-link"
+              >
+                Каталог
+              </NavLink>
+              <NavLink
+                onClick={handleMenuClose}
+                to="catalogue?page=1/top100"
+                className="menu-link"
+              >
+                Топ 100
+              </NavLink>
+              <NavLink
+                onClick={handleMenuClose}
+                to="/profile"
+                className="menu-link"
+              >
+                Профиль
+              </NavLink>
+              <NavLink
+                onClick={handleMenuClose}
+                to="/profile/lists"
+                className="menu-link"
+              >
+                Списки
+              </NavLink>
+              <NavLink
+                onClick={handleMenuClose}
+                to="/profile/settings"
+                className="menu-link"
+              >
+                Настройки
+              </NavLink>
+              <NavLink
+                onClick={handleMenuClose}
+                to="/some-random-link"
+                className="menu-link"
+              >
+                Случайное аниме
+              </NavLink>
               <div className="menu-buttons">
                 <button type="button" className="menu-button">
                   <img
@@ -61,7 +128,7 @@ function MobileMenu() {
                   />
                   <span>Сообщить об ошибке</span>
                 </button>
-                <button type="button" className="menu-button">
+                <button type="button" className="menu-button" onClick={logout}>
                   <img
                     src={DoorOut}
                     alt="feedback"

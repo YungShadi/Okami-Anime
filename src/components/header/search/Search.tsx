@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import useDebounce from "../../../hooks/useDebounce";
 import { toggleSearchAction } from "../../../redux/mobileSlcie";
 import { useTitles } from "../../../hooks/useTitles";
 import { TitleDto } from "../../../types/titleDto";
-import useDebounce from "../../../hooks/useDebounce";
-import search from "../../img/search-frame.svg";
+import { MobileDto } from "../../../types/mobileDto";
 import Title from "../../title";
 import Lupa from "../../img/search.svg";
-import { MobileDto } from "../../../types/mobileDto";
+import search from "../../img/search-frame.svg";
 
 export default function Search() {
   const [searchInput, setSearchInput] = useState("");
@@ -62,12 +62,14 @@ export default function Search() {
       | React.KeyboardEvent<HTMLDivElement>
       | React.FocusEvent<HTMLDivElement, Element>,
   ) => {
-    if (searchResult.length > 0)
-      navigate(`/catalogue?page=1&search=${searchInput}`, {
+    navigate(
+      `/catalogue?page=1${searchInput ? `&search=${searchInput}` : ""}`,
+      {
         state: searchResult,
-      });
+      },
+    );
     setSearchInput("");
-    handleSearchBlur(e);
+    handleSearchBlur(e as React.FocusEvent<HTMLDivElement, Element>);
     setSearchResult([]);
   };
 
@@ -155,7 +157,6 @@ export default function Search() {
               </div>
             )}
           {titlesLoadStatus === "fulfilled" &&
-            titlesLoadStatus !== "uninitialized" &&
             searchResult.length === 0 &&
             searchInput.length > 2 && (
               <div className="search-result-wraper unfiend">
