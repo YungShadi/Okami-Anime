@@ -1,15 +1,13 @@
 .footer {
-  width: 100%;
+  width: 100vw;
   height: 130px;
   background-color: rgba(0, 0, 0, 0.3);
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
   display: flex;
   align-items: center;
-  padding: 20px 10px;
   margin-top: auto;
   flex: 0;
   justify-content: center;
-  padding-right: 230px;
 }
 
 .footer-content {

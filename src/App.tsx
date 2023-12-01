@@ -61,7 +61,11 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<MainPage />} />
         <Route path="title" element={<TitlePage />} />
-        <Route path="catalogue" element={<CataloguePage />} />
+        <Route path="catalogue" element={<CataloguePage />}>
+          <Route path="top" element={<CataloguePage />} />
+          <Route path="ongoing" element={<CataloguePage />} />
+          <Route path="announcement" element={<CataloguePage />} />
+        </Route>
         <Route path="article/:random" element={<TitlePage />} />
         <Route path="article" element={<TitlePage />} />
         <Route path="copyright" element={<Copyright />} />

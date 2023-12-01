@@ -24,6 +24,8 @@ function CataloguePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { pathname } = location;
+
   // const linkState = location.state;
   const filterStateMobile = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isFilterOpened,
@@ -44,17 +46,13 @@ function CataloguePage() {
   const [searchTitle, setSearchTitle] = useState("Каталог аниме");
 
   const pageParams = new URLSearchParams(location.search);
-  const currentPage = pageParams.get("page");
+  const currentPage = pageParams.get("page") ?? 1;
   const initialSearch = pageParams.get("search");
   const yearFrom = pageParams.get("from");
   const yearTo = pageParams.get("to");
 
   const { titlesLoadStatus, handleGetTitles, isTitlesFetching } = useTitles();
   const [searchInput, setSearchInput] = useState("");
-
-  if (!currentPage) {
-    navigate("/catalogue?page=1");
-  }
 
   if (searchState) {
     dispatch(toggleSearchAction(false));
@@ -71,12 +69,20 @@ function CataloguePage() {
       window.scrollTo(0, 0);
     }
     handleGetTitles(page, search, isLoadMore).then((res) => {
+      console.log(page);
+
       setTotalElements(res.data.totalElements);
       if (isLoadMore) {
         setIsLoadMoreAction(false);
         setPrevTitles([...prevTitles, ...res.data.content]);
       }
     });
+  };
+
+  const handleSearchTitle = () => {
+    if (pathname === "/catalogue/ongoing") setSearchTitle(`Онгоинги`);
+    if (pathname === "/catalogue/top") setSearchTitle("Топ 100 тайтлов");
+    if (pathname === "/catalogue/announcement") setSearchTitle("Анонсы");
   };
 
   const handleSearch = (search: string) => {
@@ -97,12 +103,11 @@ function CataloguePage() {
     }
   };
 
-  // const handleSearchTitle = () => {
-  //   if (initialSearch) setSearchTitle(`Поиск по запросу: ${initialSearch}`);
-  // };
-
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
+    if (!currentPage) {
+      navigate(`${location.pathname}?page=1`);
+    }
     document.title = "Каталог";
     if (initialSearch) {
       setSearchInput(initialSearch);
@@ -110,6 +115,10 @@ function CataloguePage() {
       setSearchTitle(`Поиск по запросу: ${initialSearch}`);
     }
   }, []);
+
+  useEffect(() => {
+    handleSearchTitle();
+  }, [location.pathname]);
 
   useEffect(() => {
     setPrevTitles([...titles]);
@@ -176,7 +185,7 @@ function CataloguePage() {
           <Pagination
             totalCount={totalElements}
             pageSize={18}
-            siblingCount={2}
+            siblingCount={mobileView ? 1 : 2}
             currentPageCatalogue={Number(currentPage)}
             pageParams={pageParams}
             handlePageChangeCatalogue={handlePageChangeCatalogue}
@@ -214,7 +223,7 @@ function CataloguePage() {
           <Pagination
             totalCount={totalElements}
             pageSize={18}
-            siblingCount={2}
+            siblingCount={mobileView ? 1 : 2}
             currentPageCatalogue={Number(currentPage)}
             pageParams={pageParams}
             handlePageChangeCatalogue={handlePageChangeCatalogue}

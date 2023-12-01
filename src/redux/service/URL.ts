@@ -1,3 +1,3 @@
-const BASE_URL = `https://9e8e-95-25-231-191.ngrok-free.app`;
+const BASE_URL = `https://4914-95-25-237-17.ngrok-free.app`;
 
 export default BASE_URL;

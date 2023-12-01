@@ -20,9 +20,6 @@ function Footer() {
   // const dispatch = useDispatch();
   return (
     <footer className="footer">
-      <span className="footer-worning">
-        Контент на сайте представлен в ознакомительных целях
-      </span>
       <div className="footer-content">
         <div className="footer-links">
           <a className="link link-vk" href="our.vk">

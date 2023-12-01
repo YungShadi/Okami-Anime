@@ -2,28 +2,29 @@
 
 .header {
   margin-top: 25px;
-  width: 100%;
+  width: 100vw;
   height: 60px;
   color: white;
   display: flex;
-  border-top: 2px solid $base-light-blue;
-  border-bottom: 2px solid $base-light-blue;
+  border-top: 2px solid #3ce3e8;
+  border-bottom: 2px solid #3ce3e8;
   align-items: center;
   font-family: "Inter", sans-serif;
-  justify-content: center;
-  gap: 25px;
+  /* gap: 25px; */
   top: 0;
   z-index: 100000;
   opacity: 1;
   transition:
     border 0s,
     all 0.5s ease-in-out;
+  margin-bottom: 40px;
+  max-width: 100vw;
+  justify-content: center;
   a {
     color: white;
     font-style: normal;
     font-size: 22px;
     text-decoration: none;
-    margin-left: 20px;
   }
 
   margin-bottom: 40px;
@@ -41,7 +42,8 @@
   width: -moz-fit-content;
   width: fit-content;
   display: flex;
-  a {
+  a,
+  button {
     display: inline-flex;
     height: 100%;
     text-align: center;
@@ -50,11 +52,29 @@
     padding-left: 10px;
     padding-right: 10px;
     transition: 0.3s;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
   }
-  a:hover {
+  a:hover,
+  button:hover {
     background-color: $base-light-blue;
     color: #000000;
   }
+}
+.catalogue-options.hide {
+  display: none;
+}
+.catalogue-options {
+  list-style-type: none;
+  background-color: $base-dark-blue;
+  position: absolute;
+  z-index: 10000;
+  border-bottom: 2px solid $base-light-blue;
+}
+.catalogue-option {
+  height: 40px;
 }
 .off-screen-fixed {
   position: -webkit-sticky;
@@ -91,6 +111,7 @@
   height: 70px;
   display: flex;
   transition: 0.3s;
+  margin: 0 20px;
 }
 .logo::before {
   content: " ";
@@ -132,6 +153,7 @@
 .search-wraper {
   display: flex;
   align-items: center;
+  margin-right: 20px;
   .header-search-lupa {
     background-color: inherit;
     border: none;
@@ -300,7 +322,6 @@
       AppleGothic,
       sans-serif;
     border-radius: 5px;
-    margin-left: 25px;
     img {
       position: relative;
       bottom: 13px;

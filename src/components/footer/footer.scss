@@ -1,7 +1,7 @@
 @import "../../stylsheet.scss";
 
 .footer {
-  width: 100%;
+  width: 100vw;
   height: 130px;
   background-color: rgba($color: black, $alpha: 0.3);
   font-family:
@@ -11,11 +11,9 @@
     sans-serif;
   display: flex;
   align-items: center;
-  padding: 20px 10px;
   margin-top: auto;
   flex: 0;
   justify-content: center;
-  padding-right: 230px;
 }
 .footer-content {
   display: flex;

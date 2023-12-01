@@ -19,6 +19,7 @@ function Header() {
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const [randomLink, setRandomLink] = useState("");
+  const [isDropdownShown, setIsDropDownShown] = useState(false);
 
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username,
@@ -75,15 +76,39 @@ function Header() {
           <Search />
         </Suspense>
         <div className="nav-buttons">
-          <NavLink
-            className="header-cat"
-            to={{
-              pathname: "/catalogue",
-              search: "?page=1",
-            }}
+          <div
+            className="catalogue-options-wraper"
+            onMouseEnter={() => setIsDropDownShown(true)}
+            onMouseLeave={() => setIsDropDownShown(false)}
           >
-            Каталог
-          </NavLink>
+            <button type="button">Каталог</button>
+            <ul
+              className={`catalogue-options ${
+                isDropdownShown ? "show" : "hide"
+              }`}
+            >
+              <li className="catalogue-option">
+                <NavLink to="/catalogue?page=1" end>
+                  Каталог аниме
+                </NavLink>
+              </li>
+              <li className="catalogue-option">
+                <NavLink to="/catalogue/top?page=1" end>
+                  Топ 100
+                </NavLink>
+              </li>
+              <li className="catalogue-option">
+                <NavLink to="/catalogue/ongoing?page=1" end>
+                  Онгоинги
+                </NavLink>
+              </li>
+              <li className="catalogue-option">
+                <NavLink to="/catalogue/announcement?page=1" end>
+                  Анонсы
+                </NavLink>
+              </li>
+            </ul>
+          </div>
           {/* should lead to a random title */}
           <NavLink
             className="header-random"

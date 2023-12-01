@@ -97,7 +97,7 @@ export default function Search() {
           <img src={search} alt="search" />
         </button>
       )}
-      {location.pathname !== "/catalogue" && (
+      {!location.pathname.includes("/catalogue") && (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
           className={`search-wraper ${isShearchShown ? "show" : "hide"}`}

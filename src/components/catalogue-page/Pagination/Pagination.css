@@ -2,11 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: -15px;
+  max-width: 100vw;
 }
 
 .pagination-load-more {
-  width: 20vw;
+  width: 50vw;
   height: 30px;
   margin: 0 auto;
   margin-bottom: 10px;
@@ -20,6 +20,7 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  max-width: 50%;
 }
 
 .catalogue-pagination {
@@ -29,6 +30,7 @@
   justify-content: space-between;
   margin: 0 auto;
   gap: 10px;
+  max-width: 90vw;
 }
 
 .pagination-button {
@@ -43,6 +45,7 @@
   text-align: center;
   padding-top: 4px;
   font-size: 16px;
+  min-height: 30px;
 }
 
 .pagination-button.active {
@@ -52,5 +55,6 @@
 }
 
 .pagination-button:disabled {
+  padding-top: 0;
   cursor: auto;
 }/*# sourceMappingURL=Pagination.css.map */
