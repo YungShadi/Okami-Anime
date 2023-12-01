@@ -30,6 +30,8 @@ export const useTitles = () => {
     isLoadMore?: boolean,
   ) => {
     const result = await getTiles({ searchValue, page });
+    console.log(page, "hook");
+
     if (isLoadMore) {
       dispatch(expandTitlesAction(result.data.content));
       return result;

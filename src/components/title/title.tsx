@@ -226,12 +226,15 @@ const Title = React.memo(
           <div className="play-button-wraper" />
         </Link>
         <div className="title-name-tags">
-          <span
+          <Link
             className="title-name name"
             title={titleFullName || `¯\\(°_o)/¯`}
+            to={`/article/${transliterate(
+              titleName || `¯\\(°_o)/¯`,
+            )}?${titleId}`}
           >
             {titleName}
-          </span>
+          </Link>
           <span className="title-episodes">
             {titleType === "anime" ? "Фильм" : getEpisodeString()}
           </span>

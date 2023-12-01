@@ -68,8 +68,9 @@ function CataloguePage() {
     } else {
       window.scrollTo(0, 0);
     }
+
     handleGetTitles(page, search, isLoadMore).then((res) => {
-      console.log(page);
+      console.log(page, "catalogue");
 
       setTotalElements(res.data.totalElements);
       if (isLoadMore) {
@@ -125,6 +126,47 @@ function CataloguePage() {
     if (titles.length > 0) setIsLoadMoreAction(false);
   }, [titles]);
 
+  let titlesJsx;
+  if (titles.length > 0) {
+    titlesJsx = (
+      <div className="titles-wraper">
+        {titlesLoadStatus === "fulfilled" ? (
+          titles.map((title: TitleDto) => (
+            <Title
+              titleClass="catalogue-page-title"
+              titleData={title}
+              key={title.id}
+              onClickHandle={() => console.log(1)}
+            />
+          ))
+        ) : (
+          <>
+            {isLoadMoreAction &&
+              prevTitles.map((title: TitleDto) => (
+                <Title
+                  titleClass="catalogue-page-title"
+                  titleData={title}
+                  key={title.id}
+                  onClickHandle={() => console.log(1)}
+                />
+              ))}
+            {Array.from({ length: 18 }, (_, index) => (
+              <SkeletonTitle key={index} />
+            ))}
+          </>
+        )}
+      </div>
+    );
+  } else {
+    titlesJsx = (
+      <div className="titles-wraper">
+        <p>Не найдено</p>
+      </div>
+    );
+  }
+  useEffect(() => {
+    if (searchInput.length === 0 && initialSearch) handleSearch("");
+  }, [searchInput]);
   return (
     <>
       <Metadata
@@ -193,33 +235,7 @@ function CataloguePage() {
             isLoadMoreButton={false}
           />
           <h2 className="wraper-title">{searchTitle}</h2>
-          <div className="titles-wraper">
-            {titlesLoadStatus === "fulfilled" ? (
-              titles.map((title: TitleDto) => (
-                <Title
-                  titleClass="catalogue-page-title"
-                  titleData={title}
-                  key={title.id}
-                  onClickHandle={() => console.log(1)}
-                />
-              ))
-            ) : (
-              <>
-                {isLoadMoreAction &&
-                  prevTitles.map((title: TitleDto) => (
-                    <Title
-                      titleClass="catalogue-page-title"
-                      titleData={title}
-                      key={title.id}
-                      onClickHandle={() => console.log(1)}
-                    />
-                  ))}
-                {Array.from({ length: 18 }, (_, index) => (
-                  <SkeletonTitle key={index} />
-                ))}
-              </>
-            )}
-          </div>
+          {titlesJsx}
           <Pagination
             totalCount={totalElements}
             pageSize={18}

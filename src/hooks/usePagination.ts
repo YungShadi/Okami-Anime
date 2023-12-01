@@ -31,14 +31,14 @@ export const usePagination = ({
     if (currentPage < pages) {
       dispatch(nextPageLoadMoreAction());
       handlePageChangeCatalogue(currentPage, search, true);
-      console.log("load more");
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       dispatch(previousPageAction());
-      handlePageChangeCatalogue(currentPage, search);
+      handlePageChangeCatalogue(currentPage - 2, search);
+      console.log(currentPage, "custom hook");
     }
   };
 

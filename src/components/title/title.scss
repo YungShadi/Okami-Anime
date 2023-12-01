@@ -29,8 +29,13 @@
     z-index: 2;
     cursor: help;
     max-height: 45px;
+    color: white;
+    text-decoration: none;
+    transition: 0.5s;
   }
-
+  .name:hover {
+    color: $base-light-blue;
+  }
   .status,
   .age-rest {
     background-color: $base-light-blue;

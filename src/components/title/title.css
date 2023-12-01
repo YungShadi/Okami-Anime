@@ -28,6 +28,12 @@
   z-index: 2;
   cursor: help;
   max-height: 45px;
+  color: white;
+  text-decoration: none;
+  transition: 0.5s;
+}
+.title-main .name:hover {
+  color: #3ce3e8;
 }
 .title-main .status,
 .title-main .age-rest {
