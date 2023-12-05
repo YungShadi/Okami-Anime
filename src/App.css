@@ -66,6 +66,8 @@ body::-webkit-scrollbar-thumb {
   margin: 0 auto;
   margin-bottom: 20px;
   min-height: 60vh;
+  overflow: hidden;
+  transition: 0.3s;
 }
 
 .captcha-window {

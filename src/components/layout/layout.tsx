@@ -24,7 +24,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <div className="okami">
+      <div className="okami" id="okami">
         {!mobielView && <FeedbackButton />}
         <Suspense fallback={<Loading />}>
           <Outlet />

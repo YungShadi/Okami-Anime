@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -33,6 +33,12 @@ function MobileMenu() {
     setIsMenuOpened(false);
     setTimeout(() => dispatch(toggleMenuAction(false)), 500);
   };
+
+  // mb some other way to do this one, or remove it
+  const okami = document.getElementById("okami");
+  useEffect(() => {
+    okami!.style.marginLeft = isMenuOpened ? "100px" : "0px";
+  }, [isMenuOpened]);
 
   return (
     menuState &&
