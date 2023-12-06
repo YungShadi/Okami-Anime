@@ -25,8 +25,9 @@ button {
   height: -moz-fit-content;
   height: fit-content;
   padding: 15px;
-  min-width: 73.5vw;
+  width: 73.5vw;
   min-height: 70vh;
+  max-width: 1920px;
 }
 .title-info {
   display: grid;
@@ -35,7 +36,8 @@ button {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  min-width: 55vw;
+  width: 55vw;
+  max-width: 1920px;
   .tag {
     color: $base-light-blue;
     text-decoration: none;
@@ -124,7 +126,7 @@ button {
     height: -moz-fit-content;
     height: fit-content;
     width: 55vw;
-    max-width: 55vw;
+    max-width: 1500px;
     .title-name {
       font-size: 35px;
     }
@@ -252,6 +254,7 @@ button {
   align-items: center;
   flex-direction: column;
   width: 65vw;
+  max-width: 1700px;
   margin: 0 auto;
   .player,
   .player-placeholder {
@@ -267,6 +270,8 @@ button {
     body {
       background-color: white;
     }
+    width: 65vw;
+    max-width: 1700px;
   }
 }
 
@@ -349,6 +354,7 @@ button {
   gap: 15px;
   height: 50px;
   width: inherit;
+  max-width: 1700px;
   align-items: center;
 }
 .episode-wraper {
@@ -394,6 +400,8 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 60vw;
+  max-width: 1600px;
 }
 .comments-styles {
   display: flex;
@@ -422,6 +430,7 @@ button {
   padding-top: 10px;
   padding-left: 10px;
   font-size: 15px;
+  max-width: 1700px;
 }
 .comment-input:focus {
   outline: none;
@@ -461,12 +470,16 @@ button {
   justify-content: center;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 5px;
+  width: 60vw;
+  max-width: 1700px;
   .comment {
     height: 150px;
     padding: 10px;
     background-color: #064b8c;
     display: flex;
     gap: 20px;
+    width: 65vw;
+    max-width: 1700px;
     .prof-pic {
       height: 100px;
       width: 75px;
@@ -538,6 +551,7 @@ button {
   min-width: 600px;
   object-fit: contain;
 }
+
 @media (max-width: 1100px) {
   .poster-wraper {
     align-items: center;

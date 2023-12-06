@@ -101,15 +101,17 @@ function SignupPage() {
             checked={checkboxStatus}
             onClick={() => setCheckboxStatus(!checkboxStatus)}
           />
-          Даю согласие на{" "}
-          <Link to="/personal-agreement" style={LinkStyle}>
-            обработку персональных данных
-          </Link>
-          {cbError && (
-            <span style={{ display: "inline-block", color: "red" }}>
-              Подвердите согласие на обработку данных
-            </span>
-          )}
+          <p>
+            Даю согласие на{" "}
+            <Link to="/personal-agreement" style={LinkStyle}>
+              обработку персональных данных
+            </Link>
+            {cbError && (
+              <span style={{ display: "inline-block", color: "red" }}>
+                Подвердите согласие на обработку данных
+              </span>
+            )}
+          </p>
         </label>
         <button type="submit" className="from-submit">
           Зарегестрироваться

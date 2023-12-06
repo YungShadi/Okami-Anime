@@ -54,7 +54,7 @@ function App() {
   }, []);
   // [x] popout errors
   // [x] Feedback animation and lazy load
-  // TODO mobile menu
+  // [x] mobile menu
 
   return (
     <Routes>

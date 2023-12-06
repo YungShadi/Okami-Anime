@@ -12,9 +12,9 @@ import DefaultPic from "../img/Аватар.png";
 import Feedback from "../img/feedback.svg";
 import DoorOut from "../img/doorOut.svg";
 
-import "./mobileMenu.css";
+import "./mobileMenu.scss";
 
-// TODO переделать этот компонент полностью, мне не нравиться как он сделан
+// [x] переделать этот компонент полностью, мне не нравиться как он сделан
 function MobileMenu() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const dispatch = useDispatch();

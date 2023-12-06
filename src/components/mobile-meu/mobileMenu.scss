@@ -25,6 +25,11 @@
   transition: 0.6s;
   z-index: 1000000;
   animation: menu-appear 0.5s;
+  font-family:
+    Century Gothic,
+    CenturyGothic,
+    AppleGothic,
+    sans-serif;
 }
 .mobile-menu.hide {
   animation: menu-disappear 0.6s;

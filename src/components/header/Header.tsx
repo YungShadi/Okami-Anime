@@ -57,79 +57,81 @@ function Header() {
         className={`header ${scrollIsEnough > 75 ? "off-screen-fixed" : ""}`}
         ref={headerRef}
       >
-        <button
-          className="header-mobile-button mobile-menu-close"
-          type="button"
-          onClick={() => dispatch(toggleMenuAction(!menuState))}
-        >
-          <div className="line-burger line-burger1" />
-          <div className="line-burger line-burger2" />
-          <div className="line-burger line-burger3" />
-        </button>
-        <Link className="logo" to="/">
-          <div className="img-background">
-            <img className="logo-img" alt="log" src={Logo} />
-          </div>
-          <span className="logo-title">ŌkamiAnime</span>
-        </Link>
-        <Suspense>
-          <Search />
-        </Suspense>
-        <div className="nav-buttons">
-          <div
-            className="catalogue-options-wraper"
-            onMouseEnter={() => setIsDropDownShown(true)}
-            onMouseLeave={() => setIsDropDownShown(false)}
+        <div className="header-wrpaer">
+          <button
+            className="header-mobile-button mobile-menu-close"
+            type="button"
+            onClick={() => dispatch(toggleMenuAction(!menuState))}
           >
-            <button type="button">Каталог</button>
-            <ul
-              className={`catalogue-options ${
-                isDropdownShown ? "show" : "hide"
-              }`}
-            >
-              <li className="catalogue-option">
-                <NavLink to="/catalogue?page=1" end>
-                  Каталог аниме
-                </NavLink>
-              </li>
-              <li className="catalogue-option">
-                <NavLink to="/catalogue/top?page=1" end>
-                  Топ 100
-                </NavLink>
-              </li>
-              <li className="catalogue-option">
-                <NavLink to="/catalogue/ongoing?page=1" end>
-                  Онгоинги
-                </NavLink>
-              </li>
-              <li className="catalogue-option">
-                <NavLink to="/catalogue/announcement?page=1" end>
-                  Анонсы
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-          {/* should lead to a random title */}
-          <NavLink
-            className="header-random"
-            onClick={() => randomTitleHandle()}
-            to={`article/${randomLink}`}
-          >
-            Случайное
-          </NavLink>
-        </div>
-        {/* user display depending on localStorage(maybe there is another way) */}
-        {isAuthenticated ? (
-          <Link className="header-profile" to={`profile/${username}`}>
-            <span className="profile-name">{username}</span>
-            <img className="profile-pic" alt="profile" src={DefaultIcon} />
+            <div className="line-burger line-burger1" />
+            <div className="line-burger line-burger2" />
+            <div className="line-burger line-burger3" />
+          </button>
+          <Link className="logo" to="/">
+            <div className="img-background">
+              <img className="logo-img" alt="log" src={Logo} />
+            </div>
+            <span className="logo-title">ŌkamiAnime</span>
           </Link>
-        ) : (
-          <div className="aunth-buttons">
-            <NavLink to="sign-up">Зарагестрироваться</NavLink>
-            <NavLink to="sign-in">Войти</NavLink>
+          <Suspense>
+            <Search />
+          </Suspense>
+          <div className="nav-buttons">
+            <div
+              className="catalogue-options-wraper"
+              onMouseEnter={() => setIsDropDownShown(true)}
+              onMouseLeave={() => setIsDropDownShown(false)}
+            >
+              <button type="button">Каталог</button>
+              <ul
+                className={`catalogue-options ${
+                  isDropdownShown ? "show" : "hide"
+                }`}
+              >
+                <li className="catalogue-option">
+                  <NavLink to="/catalogue?page=1" end>
+                    Каталог аниме
+                  </NavLink>
+                </li>
+                <li className="catalogue-option">
+                  <NavLink to="/catalogue/top?page=1" end>
+                    Топ 100
+                  </NavLink>
+                </li>
+                <li className="catalogue-option">
+                  <NavLink to="/catalogue/ongoing?page=1" end>
+                    Онгоинги
+                  </NavLink>
+                </li>
+                <li className="catalogue-option">
+                  <NavLink to="/catalogue/announcement?page=1" end>
+                    Анонсы
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+            {/* should lead to a random title */}
+            <NavLink
+              className="header-random"
+              onClick={() => randomTitleHandle()}
+              to={`article/${randomLink}`}
+            >
+              Случайное
+            </NavLink>
           </div>
-        )}
+          {/* user display depending on localStorage(maybe there is another way) */}
+          {isAuthenticated ? (
+            <Link className="header-profile" to={`profile/${username}`}>
+              <span className="profile-name">{username}</span>
+              <img className="profile-pic" alt="profile" src={DefaultIcon} />
+            </Link>
+          ) : (
+            <div className="aunth-buttons">
+              <NavLink to="sign-up">Зарагестрироваться</NavLink>
+              <NavLink to="sign-in">Войти</NavLink>
+            </div>
+          )}
+        </div>
       </header>
       {searchState && mobileView && (
         <input className="mobile-header-search" placeholder="Поиск" />

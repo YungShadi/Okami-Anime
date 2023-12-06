@@ -3,9 +3,12 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
 
+@font-face {
+  font-family: "Century Gothic", "CenturyGothic", AppleGothic, sans-serif;
+  src: local("Century Gothic"), url("../fonts/CenturyGothic.woff2"), format("woff2");
+}
 body {
   width: 100vw;
   height: 100%;
@@ -62,12 +65,11 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1350px;
   margin: 0 auto;
   margin-bottom: 20px;
   min-height: 60vh;
-  overflow: hidden;
   transition: 0.3s;
+  max-width: 1700px;
 }
 
 .captcha-window {
@@ -112,4 +114,4 @@ body::-webkit-scrollbar-thumb {
     min-height: 80vh;
     max-width: 1350px;
   }
-}/*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=app.css.map */

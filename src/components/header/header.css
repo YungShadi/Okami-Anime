@@ -3,10 +3,8 @@
   width: 100vw;
   height: 60px;
   color: white;
-  display: flex;
   border-top: 2px solid #3ce3e8;
   border-bottom: 2px solid #3ce3e8;
-  align-items: center;
   font-family: "Inter", sans-serif;
   /* gap: 25px; */
   top: 0;
@@ -27,6 +25,17 @@
 .header .active {
   background-color: #3ce3e8;
   color: #000000;
+}
+
+.header-wrpaer {
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100%;
 }
 
 .header-mobile-button {
