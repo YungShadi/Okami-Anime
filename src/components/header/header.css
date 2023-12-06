@@ -27,6 +27,16 @@
   color: #000000;
 }
 
+.catalogue-button {
+  font-family: "Inter", sans-serif;
+}
+
+.catalogue-button::after {
+  content: url("../img/dropDown.svg");
+  margin-left: 5px;
+  margin-top: 3px;
+}
+
 .header-wrpaer {
   max-width: 1700px;
   margin-left: auto;

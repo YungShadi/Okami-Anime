@@ -10,8 +10,9 @@
   }
   .season-anime-title::before {
     content: url(../img/season.svg);
+    margin-right: 10px;
     position: relative;
-    right: 10px;
+    top: 3px;
   }
 }
 .season-titles,

@@ -183,7 +183,7 @@ button {
   cursor: pointer;
 }
 .title-desc-button .arrow-wraper {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   display: inline-block;
   position: relative;
   bottom: 15px;
@@ -193,7 +193,7 @@ button {
 }
 
 .title-desc-button.show .arrow-wraper {
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
 }
 
 .view-order-wraper {

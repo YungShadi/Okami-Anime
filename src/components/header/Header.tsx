@@ -82,7 +82,7 @@ function Header() {
               onMouseEnter={() => setIsDropDownShown(true)}
               onMouseLeave={() => setIsDropDownShown(false)}
             >
-              <button type="button">Каталог</button>
+              <button type="button" className="catalogue-button">Каталог</button>
               <ul
                 className={`catalogue-options ${
                   isDropdownShown ? "show" : "hide"
