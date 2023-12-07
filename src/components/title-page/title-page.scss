@@ -27,7 +27,7 @@ button {
   padding: 15px;
   width: 73.5vw;
   min-height: 70vh;
-  max-width: 1920px;
+  max-width: 1350px;
 }
 .title-info {
   display: grid;
@@ -37,7 +37,7 @@ button {
   height: -moz-min-content;
   height: min-content;
   width: 55vw;
-  max-width: 1920px;
+  max-width: 1350px;
   .tag {
     color: $base-light-blue;
     text-decoration: none;
@@ -126,7 +126,7 @@ button {
     height: -moz-fit-content;
     height: fit-content;
     width: 55vw;
-    max-width: 1500px;
+    max-width: 1000px;
     .title-name {
       font-size: 35px;
     }
@@ -254,7 +254,7 @@ button {
   align-items: center;
   flex-direction: column;
   width: 65vw;
-  max-width: 1700px;
+  max-width: 1300px;
   margin: 0 auto;
   .player,
   .player-placeholder {
@@ -271,7 +271,7 @@ button {
       background-color: white;
     }
     width: 65vw;
-    max-width: 1700px;
+    max-width: 1300px;
   }
 }
 
@@ -354,11 +354,11 @@ button {
   gap: 15px;
   height: 50px;
   width: inherit;
-  max-width: 1700px;
+  max-width: 1300px;
   align-items: center;
 }
 .episode-wraper {
-  max-width: 1260px;
+  max-width: 1300px;
   flex-wrap: wrap;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -401,7 +401,7 @@ button {
   flex-direction: column;
   align-items: center;
   width: 60vw;
-  max-width: 1600px;
+  max-width: 1300px;
 }
 .comments-styles {
   display: flex;
@@ -430,7 +430,7 @@ button {
   padding-top: 10px;
   padding-left: 10px;
   font-size: 15px;
-  max-width: 1700px;
+  max-width: 1300px;
 }
 .comment-input:focus {
   outline: none;
@@ -471,15 +471,15 @@ button {
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 5px;
   width: 60vw;
-  max-width: 1700px;
+  max-width: 1300px;
   .comment {
     height: 150px;
     padding: 10px;
     background-color: #064b8c;
     display: flex;
     gap: 20px;
-    width: 65vw;
-    max-width: 1700px;
+    width: 59vw;
+    max-width: 1300px;
     .prof-pic {
       height: 100px;
       width: 75px;

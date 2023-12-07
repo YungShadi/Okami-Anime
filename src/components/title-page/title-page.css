@@ -24,7 +24,7 @@ button {
   padding: 15px;
   width: 73.5vw;
   min-height: 70vh;
-  max-width: 1920px;
+  max-width: 1350px;
 }
 
 .title-info {
@@ -34,7 +34,7 @@ button {
   height: -moz-min-content;
   height: min-content;
   width: 55vw;
-  max-width: 1920px;
+  max-width: 1350px;
 }
 .title-info .tag {
   color: #3ce3e8;
@@ -123,7 +123,7 @@ button {
   height: -moz-fit-content;
   height: fit-content;
   width: 55vw;
-  max-width: 1500px;
+  max-width: 1000px;
 }
 .title-info .title-text-info .title-name {
   font-size: 35px;
@@ -249,7 +249,7 @@ button {
   align-items: center;
   flex-direction: column;
   width: 65vw;
-  max-width: 1700px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 .player-wraper .player,
@@ -264,7 +264,7 @@ button {
   border-right: 2px solid #3ce3e8;
   border-left: 1px solid #3ce3e8;
   width: 65vw;
-  max-width: 1700px;
+  max-width: 1300px;
 }
 .player-wraper .player body,
 .player-wraper .player-placeholder body {
@@ -359,12 +359,12 @@ button {
   gap: 15px;
   height: 50px;
   width: inherit;
-  max-width: 1700px;
+  max-width: 1300px;
   align-items: center;
 }
 
 .episode-wraper {
-  max-width: 1260px;
+  max-width: 1300px;
   flex-wrap: wrap;
   height: -moz-fit-content;
   height: fit-content;
@@ -405,7 +405,7 @@ button {
   flex-direction: column;
   align-items: center;
   width: 60vw;
-  max-width: 1600px;
+  max-width: 1300px;
 }
 
 .comments-styles {
@@ -437,7 +437,7 @@ button {
   padding-top: 10px;
   padding-left: 10px;
   font-size: 15px;
-  max-width: 1700px;
+  max-width: 1300px;
 }
 
 .comment-input:focus {
@@ -482,7 +482,7 @@ button {
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 5px;
   width: 60vw;
-  max-width: 1700px;
+  max-width: 1300px;
 }
 .comments .comment {
   height: 150px;
@@ -490,8 +490,8 @@ button {
   background-color: #064b8c;
   display: flex;
   gap: 20px;
-  width: 65vw;
-  max-width: 1700px;
+  width: 59vw;
+  max-width: 1300px;
 }
 .comments .comment .prof-pic {
   height: 100px;

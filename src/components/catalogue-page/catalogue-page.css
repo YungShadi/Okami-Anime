@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 20px;
+  max-width: 1700px;
 }
 
 .catalogue-page-title .poster {
@@ -344,6 +345,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  max-width: 1280px;
 }
 .catalogue-search .catalogue-search-button {
   width: 10%;

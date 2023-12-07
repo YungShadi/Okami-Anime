@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 100vw;
+  max-width: 1280px;
 }
 
 .pagination-load-more {
