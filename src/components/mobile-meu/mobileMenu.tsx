@@ -134,14 +134,20 @@ function MobileMenu() {
                   />
                   <span>Сообщить об ошибке</span>
                 </button>
-                <button type="button" className="menu-button" onClick={logout}>
-                  <img
-                    src={DoorOut}
-                    alt="feedback"
-                    className="menu-button-img"
-                  />
-                  <span>Выйти из аккаунта</span>
-                </button>
+                {isAuthenticated && (
+                  <button
+                    type="button"
+                    className="menu-button"
+                    onClick={logout}
+                  >
+                    <img
+                      src={DoorOut}
+                      alt="feedback"
+                      className="menu-button-img"
+                    />
+                    <span>Выйти из аккаунта</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>

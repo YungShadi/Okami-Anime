@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .mobile-menu-wraper {
   width: 100%;
   font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
@@ -153,7 +152,7 @@
   width: 2px;
   height: 30px;
   position: relative;
-  top: 4px;
+  top: 1px;
   background-color: #3ce3e8;
   border-radius: 10px;
   rotate: 45deg;
@@ -203,16 +202,6 @@
   height: 30px;
   position: relative;
   top: 15px;
-}
-
-.mobile-close-button::after {
-  content: "Закрыть";
-  color: #3ce3e8;
-  font-size: 16px;
-  position: relative;
-  top: 10px;
-  right: 12px;
-  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }
 
 @keyframes menu-appear {

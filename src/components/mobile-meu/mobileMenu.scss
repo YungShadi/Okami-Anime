@@ -152,7 +152,7 @@
   width: 2px;
   height: 30px;
   position: relative;
-  top: 4px;
+  top: 1px;
   background-color: $base-light-blue;
   border-radius: 10px;
   rotate: 45deg;
@@ -204,19 +204,7 @@
   position: relative;
   top: 15px;
 }
-.mobile-close-button::after {
-  content: "Закрыть";
-  color: $base-light-blue;
-  font-size: 16px;
-  position: relative;
-  top: 10px;
-  right: 12px;
-  font-family:
-    Century Gothic,
-    CenturyGothic,
-    AppleGothic,
-    sans-serif;
-}
+
 @keyframes menu-appear {
   0% {
     transform: translateX(-100vw);

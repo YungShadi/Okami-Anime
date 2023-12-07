@@ -77,12 +77,22 @@ function Header() {
             <Search />
           </Suspense>
           <div className="nav-buttons">
+            {/* should lead to a random title */}
+            <NavLink
+              className="header-random"
+              onClick={() => randomTitleHandle()}
+              to={`article/${randomLink}`}
+            >
+              Случайное
+            </NavLink>
             <div
               className="catalogue-options-wraper"
               onMouseEnter={() => setIsDropDownShown(true)}
               onMouseLeave={() => setIsDropDownShown(false)}
             >
-              <button type="button" className="catalogue-button">Каталог</button>
+              <button type="button" className="catalogue-button">
+                Каталог
+              </button>
               <ul
                 className={`catalogue-options ${
                   isDropdownShown ? "show" : "hide"
@@ -110,14 +120,6 @@ function Header() {
                 </li>
               </ul>
             </div>
-            {/* should lead to a random title */}
-            <NavLink
-              className="header-random"
-              onClick={() => randomTitleHandle()}
-              to={`article/${randomLink}`}
-            >
-              Случайное
-            </NavLink>
           </div>
           {/* user display depending on localStorage(maybe there is another way) */}
           {isAuthenticated ? (
