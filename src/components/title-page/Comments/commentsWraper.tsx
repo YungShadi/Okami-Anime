@@ -107,7 +107,11 @@ export default function CommentsWraper() {
       </button>
       <div className="devider-line-long" />
       {/* comments */}
-      <Comment />
+      <div className="comments">
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </div>
   );
 }

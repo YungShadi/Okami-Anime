@@ -396,7 +396,7 @@ button {
 }
 
 .comments-wraper {
-  width: 60vw;
+  width: 65vw;
   height: -moz-fit-content;
   height: fit-content;
   margin-left: auto;
@@ -404,7 +404,6 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60vw;
   max-width: 1300px;
 }
 
@@ -427,7 +426,7 @@ button {
 }
 
 .comment-input {
-  width: 60vw;
+  width: 65vw;
   height: 150px;
   resize: none;
   background: #064b8c;
@@ -481,7 +480,7 @@ button {
   justify-content: center;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 5px;
-  width: 60vw;
+  width: 65vw;
   max-width: 1300px;
 }
 .comments .comment {
@@ -490,7 +489,7 @@ button {
   background-color: #064b8c;
   display: flex;
   gap: 20px;
-  width: 59vw;
+  width: 64vw;
   max-width: 1300px;
 }
 .comments .comment .prof-pic {
