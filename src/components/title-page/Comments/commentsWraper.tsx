@@ -19,13 +19,13 @@ export default function CommentsWraper() {
   const handleTextStyle = (style: string) => {
     switch (style) {
       case "bold":
-        return setCommentValue(`${commentValue}** **`);
+        return setCommentValue(`${commentValue}* *`);
       case "italic":
         return setCommentValue(`${commentValue}_ _`);
       case "underline":
         return setCommentValue(`${commentValue}__ __`);
       case "linethrough":
-        return setCommentValue(`${commentValue}~~ ~~`);
+        return setCommentValue(`${commentValue}** **`);
       case "orderedList":
         return setCommentValue(`${commentValue}\n1.Элемент\n2.Элемент`);
       case "unorderedList":
@@ -33,7 +33,7 @@ export default function CommentsWraper() {
       case "qoute":
         return setCommentValue(`${commentValue}\n>Цитата`);
       case "spoiler":
-        return setCommentValue(`${commentValue}[s][/s]`);
+        return setCommentValue(`${commentValue} ~s Спойлер s~`);
       case "link-img":
         return setCommentValue(
           `${commentValue}![Image](сюда ссылку на картинку)`,

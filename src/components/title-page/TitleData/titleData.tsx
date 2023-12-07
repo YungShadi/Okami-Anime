@@ -37,6 +37,7 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
   const [triggerOrder, setTriggerOrder] = useState(false);
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [showFullPoster, setShowFullPoster] = useState(false);
+
   const selsectOptions: Array<OptionTitle> = [
     {
       title: "Буду смотреть",
@@ -428,13 +429,15 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
           )}
         </div>
         <div>
-          <span
+          <div
             className={`title-desc ${
               showFullDesc || titleDesc.length < 360 ? "show" : "hide"
             }`}
           >
-            {titleDesc}
-          </span>
+            {titleDesc.split("\n").map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
           {titleDesc?.length > 360 && (
             <button
               type="button"

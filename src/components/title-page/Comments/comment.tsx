@@ -3,7 +3,32 @@ import DefaultProfPicture from "../../img/Аватар.png";
 
 export default function Comment() {
   const [showFullComment, setShowFullComment] = useState(false);
+  const commentText = `*Lorem ipsum dolor* sit amet _consectetur adipisicing_ elit. **Explicabo, maxime impedit!** Maiores, laudantium. __Nulla__ id quas hic illum quod cupiditate voluptates veniam similique magni animi voluptatum autem consequatur, accusantium soluta.
+  ~s Наруто s~
+  1. Наруто
+  2. Саске\n
+  3. Сакура
+  
 
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, maxime impedit! Maiores, laudantium. Nulla id quas hic illum quod cupiditate voluptates veniam similique magni animi voluptatum autem consequatur, accusantium soluta.
+
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, maxime impedit! Maiores, laudantium. Nulla id quas hic illum quod cupiditate voluptates veniam similique magni animi voluptatum autem consequatur, accusantium soluta.
+  `;
+
+  // eslint-disable-next-line no-extend-native
+  String.prototype.replaceMultiple = function () {
+    let v = this;
+    [...arguments].forEach((arg) => (v = v.replace(arg[0], arg[1])));
+    return v;
+  };
+
+  const formatComment = commentText.replaceMultiple(
+    [/(?<!\*)\*([^*]+)\*(?!\*)/gm, "<b>$1</b>"], // Bold
+    [/(?<!_)_([^_]+)_(?!_)/gm, "<i>$1</i>"], // Italic
+    [/\*\*([^*]+)\*\*/gm, "<s>$1</s>"], // Strikethrough
+    [/__([^__]+)__/gm, "<u>$1</u>"], // underline
+    [/~s([^~s]+)s~/gm, `<div class=spoiler>$1</div>`],
+  );
   return (
     <>
       {/* comment map here */}
@@ -15,13 +40,16 @@ export default function Comment() {
             <div className="date"> 14.14.1321</div>
           </div>
           <div className={`comment-text ${showFullComment ? "show-full" : ""}`}>
-            абоба
+            {/* {commentText.split("\n").map((paragraph) => (
+              <p>{paragraph}</p>
+            ))} */}
+            <p dangerouslySetInnerHTML={{ __html: formatComment }} />
           </div>
           <div className="comment-under-buttons">
             <a className="comment-answer" href="-">
               Ответить
             </a>
-            {1 > 480 && (
+            {commentText.length > 480 && (
               <button
                 type="button"
                 className="comment-full"

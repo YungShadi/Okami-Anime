@@ -32,9 +32,11 @@ function SignupPage() {
     }
   };
 
-  if (isAuthenticated) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
@@ -61,7 +63,8 @@ function SignupPage() {
             {...register("username", {
               required: true,
               minLength: 3,
-              pattern: /^[a-zA-Z0-9]{4,10}$/,
+              maxLength: 20,
+              pattern: /^[a-zA-Z0-9]/,
             })}
             className="form-input login-input"
           />

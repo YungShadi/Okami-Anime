@@ -64,6 +64,7 @@ export const useAuth = () => {
         secure: true,
       });
       Cookies.set("refresh_jwt_token", refresh_jwt_token);
+      setIsAuthenticated(true);
     } catch (error) {
       throw new Error(error);
     }

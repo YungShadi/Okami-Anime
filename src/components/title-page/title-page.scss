@@ -162,6 +162,9 @@ button {
   overflow: hidden;
   line-height: 25px;
   padding: 10px 10px 0 10px;
+  p {
+    margin-bottom: 10px;
+  }
 }
 .title-desc.hide {
   max-height: 120px;
