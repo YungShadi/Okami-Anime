@@ -66,6 +66,11 @@ export const useAuth = () => {
       Cookies.set("refresh_jwt_token", refresh_jwt_token);
       setIsAuthenticated(true);
     } catch (error) {
+      toast.error(
+        error.error === "TypeError: Failed to fetch"
+          ? "Не удалось отправить данные"
+          : "Неожиданная ошибка",
+      );
       throw new Error(error);
     }
   };
@@ -90,7 +95,11 @@ export const useAuth = () => {
         navigate("/");
       }
     } catch (error) {
-      toast.error(error.error);
+      toast.error(
+        error.error === "TypeError: Failed to fetch"
+          ? "Не удалось отправить данные"
+          : "Неожиданная ошибка",
+      );
       throw new Error(error);
     }
   };

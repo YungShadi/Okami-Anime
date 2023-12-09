@@ -47,20 +47,6 @@ function Footer() {
           </Link>
         </div>
       </div>
-      {/* <button
-        type="button"
-        onClick={() => {
-          dispatch(
-            addErrorAction({
-              statusCode: Math.floor(Math.random() * 1000),
-              errorMessage: "Some Error Zaglushka",
-              index: amountOfErrors,
-            })
-          );
-        }}
-      >
-        add error
-      </button> */}
     </footer>
   );
 }

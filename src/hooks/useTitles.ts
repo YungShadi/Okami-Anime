@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import {
   useGetTitileByIdMutation,
   useLazyGetTitlesQuery,
@@ -20,8 +21,13 @@ export const useTitles = () => {
   ] = useLazyGetTitlesQuery();
 
   const handleGetCurrentTitle = async (titleId: string) => {
-    const result = await getTitle(titleId);
-    return result;
+    try {
+      const result = await getTitle(titleId);
+      return result;
+    } catch (error) {
+      toast.error(error.error);
+      throw new Error(error);
+    }
   };
 
   const handleGetTitles = async (
@@ -29,15 +35,18 @@ export const useTitles = () => {
     searchValue?: string,
     isLoadMore?: boolean,
   ) => {
-    const result = await getTiles({ searchValue, page });
-    console.log(page, "hook");
-
-    if (isLoadMore) {
-      dispatch(expandTitlesAction(result.data.content));
+    try {
+      const result = await getTiles({ searchValue, page });
+      if (isLoadMore) {
+        dispatch(expandTitlesAction(result.data.content));
+        return result;
+      }
+      dispatch(setTitlesAction(result.data.content));
       return result;
+    } catch (error) {
+      toast.error("Не удалось получить данные");
+      throw new Error(error);
     }
-    dispatch(setTitlesAction(result.data.content));
-    return result;
   };
 
   return {
