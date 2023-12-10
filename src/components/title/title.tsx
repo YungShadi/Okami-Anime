@@ -10,11 +10,12 @@ import "./title.css";
 type TitleType = {
   titleClass: string;
   titleData: TitleDto;
-  onClickHandle: CallableFunction;
+  // eslint-disable-next-line react/require-default-props
+  _onClickHandle?: CallableFunction;
 };
 
 const Title = React.memo(
-  ({ titleClass, titleData, onClickHandle }: TitleType) => {
+  ({ titleClass, titleData, _onClickHandle }: TitleType) => {
     const titleTags = titleData.material_data?.anime_genres;
     const titleEpisodes = titleData.last_episode;
     const titleName = titleData.material_data?.title;
@@ -138,7 +139,9 @@ const Title = React.memo(
           className={`${titleClass} title-main`}
           to={`/article/${transliterate(titleName || `¯\\(°_o)/¯`)}?${titleId}`}
           state={titleData}
-          onClick={(e) => onClickHandle(e)}
+          onClick={(e) => {
+            if (_onClickHandle) _onClickHandle(e);
+          }}
         >
           <div
             className="title-poster-wraper"

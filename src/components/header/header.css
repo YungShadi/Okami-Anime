@@ -89,6 +89,27 @@
   position: absolute;
   z-index: 10000;
   border-bottom: 2px solid #3ce3e8;
+  border-top: 2px solid #3ce3e8;
+}
+
+.dropdown-arrow,
+.dropdown-arrow2 {
+  position: absolute;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  top: -7px;
+  left: 10px;
+}
+
+.dropdown-arrow {
+  border-bottom: 7px solid #3ce3e8;
+  z-index: 1;
+}
+
+.dropdown-arrow2 {
+  border-bottom: 7px solid #05315a;
+  top: -5px;
+  z-index: 3;
 }
 
 .catalogue-option {

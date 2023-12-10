@@ -98,6 +98,8 @@ function Header() {
                   isDropdownShown ? "show" : "hide"
                 }`}
               >
+                <div className="dropdown-arrow" />
+                <div className="dropdown-arrow2" />
                 <li className="catalogue-option">
                   <NavLink to="/catalogue?page=1" end>
                     Каталог аниме

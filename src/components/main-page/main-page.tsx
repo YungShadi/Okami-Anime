@@ -33,7 +33,6 @@ function MainPage() {
                     titleClass="season-title"
                     titleData={title}
                     key={title.id}
-                    onClickHandle={() => console.log(1)}
                   />
                 ))
             ) : (
@@ -55,7 +54,6 @@ function MainPage() {
                   titleClass="recently-added"
                   titleData={title}
                   key={title.id}
-                  onClickHandle={() => console.log(1)}
                 />
               ))
             ) : (
