@@ -42,7 +42,7 @@ function Header() {
 
   useEffect(() => {
     window.addEventListener("scroll", onScrollHandle);
-    
+
     return () => window.removeEventListener("scroll", onScrollHandle);
   }, []);
 
@@ -133,7 +133,7 @@ function Header() {
             </Link>
           ) : (
             <div className="aunth-buttons">
-              <NavLink to="sign-up">Зарагестрироваться</NavLink>
+              <NavLink to="sign-up">Зарегестрироваться</NavLink>
               <NavLink to="sign-in">Войти</NavLink>
             </div>
           )}

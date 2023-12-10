@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { UserDto } from "../../types/userDto";
 // import { useAuth } from "../../hooks/useAuth";
 import DeafaultPic from "../img/Аватар.png";
+import DefaultBack from "../img/wp5325503-1045900026.png";
 
 function ProfilePage() {
   const username =
@@ -15,9 +16,9 @@ function ProfilePage() {
   const navigate = useNavigate();
   // const { logout } = useAuth();
 
-  const role = useSelector(
-    (state: { auth: UserDto }) => state?.auth.authorities,
-  );
+  // const role = useSelector(
+  //   (state: { auth: UserDto }) => state?.auth.authorities,
+  // );
 
   useEffect(() => {
     if (location.pathname === "/profile" || location.pathname === "/profile/") {
@@ -31,24 +32,20 @@ function ProfilePage() {
 
   return (
     <div className="profile">
-      <div className="profile-info">
-        <div className="profile-background" />
-        <img src={DeafaultPic} alt="profile" className="profile-picture" />
-        <p>{username}</p>
-        <button type="button">Редактировать профиль</button>
-        <span>На сайте с 14.08.2008</span>
-        <span>Роль: {role}</span>
-        <div className="horisontal-devider" />
-        <div className="profile-stats">
-          <div className="profile-list">
-            <span>Списки:</span>
-            Просмотренные, понравились и тп
-          </div>
-          <div className="profile-history">
-            Последние просмотренные:
-            <div className="">some titile</div>
-          </div>
+      <div className="profile-head">
+        <img
+          src={DefaultBack}
+          alt="background"
+          className="profile-head-background"
+        />
+        <div className="prof-pic-wrap">
+          <img src={DeafaultPic} alt="profile pic" className="profile-pic" />
         </div>
+      </div>
+      <div className="profile-info">
+        <span className="prfoile-displayed-name">Loh</span>
+        <span className="profile-name">loh123</span>
+        <span className="profile-desc">Я лох, так бывает, кто-то лох.</span>
       </div>
     </div>
   );

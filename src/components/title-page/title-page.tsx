@@ -11,7 +11,6 @@ import { useLocation /* {useParams} */ } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTitles } from "../../hooks/useTitles";
 import { TitleDto } from "../../types/titleDto";
-import SkeletonTitlePage from "./skeletonTitlePage";
 import Metadata from "../Metadata";
 
 import "./title-page.css";
@@ -23,7 +22,6 @@ function TitlePage() {
 
   const [titleData, setTitleData] = useState<TitleDto>({} as TitleDto);
   const defferedTitle = useDeferredValue(titleData);
-  const [isThereError, setIsThereError] = useState(false);
 
   const location = useLocation();
   const linkState: TitleDto = location.state;
@@ -42,21 +40,18 @@ function TitlePage() {
         .then((result) => {
           if ("data" in result) {
             setTitleData(result.data);
-          } else {
-            setIsThereError(true);
           }
         })
         .catch((e) => {
           toast.error("Не удалось получить");
-          setIsThereError(true);
           throw new Error(e);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [titleId]);
-
-  if (isThereError) {
-    return <p>Тайтл не найден</p>;
-  }
+  useEffect(() => {
+    console.log(currentTitleStatus);
+  }, [currentTitleStatus]);
 
   if (currentTitleStatus === "fulfilled") {
     return (
@@ -69,22 +64,19 @@ function TitlePage() {
         />
         <div className="title">
           <Suspense>
-            {defferedTitle || currentTitleStatus === "fulfilled" ? (
-              <>
-                <TitleData titleData={defferedTitle} />
-                {/* player and player header */}
-                <Player playerLink={defferedTitle.link} />
-                {/* comments wraper, here post comments and comments */}
-                <CommentsWraper />
-              </>
-            ) : (
-              <SkeletonTitlePage />
-            )}
+            <>
+              <TitleData titleData={defferedTitle} />
+              {/* player and player header */}
+              <Player playerLink={defferedTitle.link} />
+              {/* comments wraper, here post comments and comments */}
+              <CommentsWraper />
+            </>
           </Suspense>
         </div>
       </>
     );
   }
+  return <p>Тайтл не найден</p>;
 }
 
 export default TitlePage;
