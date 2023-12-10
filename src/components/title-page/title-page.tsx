@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import { useLocation /* {useParams} */ } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useTitles } from "../../hooks/useTitles";
 import { TitleDto } from "../../types/titleDto";
 import SkeletonTitlePage from "./skeletonTitlePage";
@@ -45,45 +46,45 @@ function TitlePage() {
             setIsThereError(true);
           }
         })
-        .catch(() => {
+        .catch((e) => {
+          toast.error("Не удалось получить");
           setIsThereError(true);
+          throw new Error(e);
         });
     }
   }, [titleId]);
-
-  useEffect(() => {
-    console.log(currentTitleStatus);
-  }, [currentTitleStatus]);
 
   if (isThereError) {
     return <p>Тайтл не найден</p>;
   }
 
-  return (
-    <>
-      <Metadata
-        title={titleData.material_data?.title || ""}
-        description={titleData.material_data?.anime_description || ""}
-        url={currentUrl}
-        image={titleData.material_data?.poster_url || ""}
-      />
-      <div className="title">
-        <Suspense>
-          {defferedTitle || currentTitleStatus === "fulfilled" ? (
-            <>
-              <TitleData titleData={defferedTitle} />
-              {/* player and player header */}
-              <Player playerLink={defferedTitle.link} />
-              {/* comments wraper, here post comments and comments */}
-              <CommentsWraper />
-            </>
-          ) : (
-            <SkeletonTitlePage />
-          )}
-        </Suspense>
-      </div>
-    </>
-  );
+  if (currentTitleStatus === "fulfilled") {
+    return (
+      <>
+        <Metadata
+          title={titleData.material_data?.title || ""}
+          description={titleData.material_data?.anime_description || ""}
+          url={currentUrl}
+          image={titleData.material_data?.poster_url || ""}
+        />
+        <div className="title">
+          <Suspense>
+            {defferedTitle || currentTitleStatus === "fulfilled" ? (
+              <>
+                <TitleData titleData={defferedTitle} />
+                {/* player and player header */}
+                <Player playerLink={defferedTitle.link} />
+                {/* comments wraper, here post comments and comments */}
+                <CommentsWraper />
+              </>
+            ) : (
+              <SkeletonTitlePage />
+            )}
+          </Suspense>
+        </div>
+      </>
+    );
+  }
 }
 
 export default TitlePage;

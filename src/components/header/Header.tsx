@@ -35,12 +35,14 @@ function Header() {
   );
   const dispatch = useDispatch();
 
+  const onScrollHandle = () => {
+    const scrollYPos = window.scrollY;
+    setScrollIsEnough(scrollYPos);
+  };
+
   useEffect(() => {
-    const onScrollHandle = () => {
-      const scrollYPos = window.scrollY;
-      setScrollIsEnough(scrollYPos);
-    };
     window.addEventListener("scroll", onScrollHandle);
+    
     return () => window.removeEventListener("scroll", onScrollHandle);
   }, []);
 

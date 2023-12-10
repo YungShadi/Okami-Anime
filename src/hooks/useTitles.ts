@@ -25,7 +25,6 @@ export const useTitles = () => {
       const result = await getTitle(titleId);
       return result;
     } catch (error) {
-      toast.error(error.error);
       throw new Error(error);
     }
   };
