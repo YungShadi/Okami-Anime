@@ -28,11 +28,11 @@ export default function CommentsWraper() {
         return setCommentValue(`${commentValue}[s] [/s]`);
       case "orderedList":
         return setCommentValue(
-          `${commentValue}[list=1]\n[*]Элемент\n[*]Элемент\n[/list]`,
+          `${commentValue}\n[list=1]\n[*]Элемент\n[*]Элемент\n[/list]`,
         );
       case "unorderedList":
         return setCommentValue(
-          `${commentValue}[list]\n[*]Элемент\n[*]Элемент[list]`,
+          `${commentValue}\n[list]\n[*]Элемент\n[*]Элемент[list]`,
         );
       case "qoute":
         return setCommentValue(`${commentValue}\n[quote] [/quote]`);
@@ -40,7 +40,7 @@ export default function CommentsWraper() {
         return setCommentValue(`${commentValue} [spoiler] [/spoiler]`);
       case "link-img":
         return setCommentValue(
-          `${commentValue}[Image](сюда ссылку на картинку)`,
+          `${commentValue}[image]сюда ссылку на картинку[/image]`,
         );
 
       default:
@@ -56,7 +56,9 @@ export default function CommentsWraper() {
         {/* styles for comment */}
         <div
           className="comments-styles"
-          onClick={(e) => handleTextStyle(e.target.alt)}
+          onClick={(e: React.MouseEvent<HTMLImageElement, MouseEvent>) =>
+            handleTextStyle((e.target as HTMLImageElement).alt)
+          }
         >
           <img src={Bold} alt="bold" className="style" title="Жирный" />
           <img src={Italic} alt="italic" className="style" title="Курсив" />

@@ -134,7 +134,7 @@ function CataloguePage() {
               titleClass="catalogue-page-title"
               titleData={title}
               key={title.id}
-              onClickHandle={() => console.log(1)}
+              _onClickHandle={() => console.log(1)}
             />
           ))
         ) : (
@@ -145,7 +145,7 @@ function CataloguePage() {
                   titleClass="catalogue-page-title"
                   titleData={title}
                   key={title.id}
-                  onClickHandle={() => console.log(1)}
+                  _onClickHandle={() => console.log(1)}
                 />
               ))}
             {Array.from({ length: 18 }, (_, index) => (
