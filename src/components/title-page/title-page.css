@@ -540,7 +540,7 @@ button {
 .comment-content .comment-text img {
   max-width: 400px;
   min-height: 400px;
-  display: inline-block;
+  display: block;
 }
 .comment-content .comment-text button {
   display: inline-block;
