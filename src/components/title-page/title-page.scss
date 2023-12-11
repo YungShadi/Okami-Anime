@@ -504,6 +504,39 @@ button {
     font-size: 16px;
     max-height: 80px;
     overflow: hidden;
+    .spoiler {
+      background-color: #377cbd;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+      padding: 2px;
+    }
+    .spoiler.visible {
+      cursor: auto;
+    }
+    ul,
+    ol {
+      margin-left: 20px;
+    }
+    blockquote {
+      border-left: 4px solid #377cbd;
+      padding-left: 10px;
+    }
+    img {
+      max-width: 400px;
+      min-height: 400px;
+      display: inline-block;
+    }
+    button {
+      display: inline-block;
+    }
+  }
+  .comment-text.hide {
+    mask-image: linear-gradient(
+      to bottom,
+      #000 calc(100% - 2rem),
+      rgba(0, 0, 0, 0)
+    );
   }
   .comment-text.show-full {
     max-height: fit-content;

@@ -19,24 +19,28 @@ export default function CommentsWraper() {
   const handleTextStyle = (style: string) => {
     switch (style) {
       case "bold":
-        return setCommentValue(`${commentValue}* *`);
+        return setCommentValue(`${commentValue}[b] [/b]`);
       case "italic":
-        return setCommentValue(`${commentValue}_ _`);
+        return setCommentValue(`${commentValue}[i] [/i]`);
       case "underline":
-        return setCommentValue(`${commentValue}__ __`);
+        return setCommentValue(`${commentValue}[u] [/u]`);
       case "linethrough":
-        return setCommentValue(`${commentValue}** **`);
+        return setCommentValue(`${commentValue}[s] [/s]`);
       case "orderedList":
-        return setCommentValue(`${commentValue}\n1.Элемент\n2.Элемент`);
+        return setCommentValue(
+          `${commentValue}[list=1]\n[*]Элемент\n[*]Элемент\n[/list]`,
+        );
       case "unorderedList":
-        return setCommentValue(`${commentValue}\n*Элемент\n*Элемент`);
+        return setCommentValue(
+          `${commentValue}[list]\n[*]Элемент\n[*]Элемент[list]`,
+        );
       case "qoute":
-        return setCommentValue(`${commentValue}\n>Цитата`);
+        return setCommentValue(`${commentValue}\n[quote] [/quote]`);
       case "spoiler":
-        return setCommentValue(`${commentValue} ~s Спойлер s~`);
+        return setCommentValue(`${commentValue} [spoiler] [/spoiler]`);
       case "link-img":
         return setCommentValue(
-          `${commentValue}![Image](сюда ссылку на картинку)`,
+          `${commentValue}[Image](сюда ссылку на картинку)`,
         );
 
       default:
@@ -100,7 +104,7 @@ export default function CommentsWraper() {
           value={commentValue}
           onChange={(e) => setCommentValue(e.target.value)}
         />
-        <Link to="markdown">Markdown подсказка</Link>
+        <Link to="markdown">bbcode подсказка</Link>
       </div>
       <button className="comment-send" type="button">
         Отправить комментарий

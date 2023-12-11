@@ -53,7 +53,7 @@ function TitlePage() {
     console.log(currentTitleStatus);
   }, [currentTitleStatus]);
 
-  if (currentTitleStatus === "fulfilled") {
+  if (currentTitleStatus === "fulfilled" || linkState) {
     return (
       <>
         <Metadata

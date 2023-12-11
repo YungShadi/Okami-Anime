@@ -70,8 +70,6 @@ function CataloguePage() {
     }
 
     handleGetTitles(page, search, isLoadMore).then((res) => {
-      console.log(page, "catalogue");
-
       setTotalElements(res.data.totalElements);
       if (isLoadMore) {
         setIsLoadMoreAction(false);
@@ -89,7 +87,7 @@ function CataloguePage() {
   const handleSearch = (search: string) => {
     if (isTitlesFetching) return;
     const trimmedSearch = search.trim();
-    if (trimmedSearch.length < 1) {
+    if (trimmedSearch.length <= 0) {
       setSearchTitle("Каталог аниме");
       handleGetTitles(0, "", false).then((res) => {
         setTotalElements(res.data.totalElements);
@@ -109,8 +107,8 @@ function CataloguePage() {
     if (!currentPage) {
       navigate(`${location.pathname}?page=1`);
     }
-    document.title = "Каталог";
     if (initialSearch) {
+      console.log(initialSearch);
       setSearchInput(initialSearch);
       handleSearch(initialSearch);
       setSearchTitle(`Поиск по запросу: ${initialSearch}`);
@@ -167,6 +165,7 @@ function CataloguePage() {
   useEffect(() => {
     if (searchInput.length === 0 && initialSearch) handleSearch("");
   }, [searchInput]);
+
   return (
     <>
       <Metadata

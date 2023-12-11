@@ -519,6 +519,36 @@ button {
   max-height: 80px;
   overflow: hidden;
 }
+.comment-content .comment-text .spoiler {
+  background-color: #377cbd;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  padding: 2px;
+}
+.comment-content .comment-text .spoiler.visible {
+  cursor: auto;
+}
+.comment-content .comment-text ul,
+.comment-content .comment-text ol {
+  margin-left: 20px;
+}
+.comment-content .comment-text blockquote {
+  border-left: 4px solid #377cbd;
+  padding-left: 10px;
+}
+.comment-content .comment-text img {
+  max-width: 400px;
+  min-height: 400px;
+  display: inline-block;
+}
+.comment-content .comment-text button {
+  display: inline-block;
+}
+.comment-content .comment-text.hide {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), rgba(0, 0, 0, 0));
+          mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), rgba(0, 0, 0, 0));
+}
 .comment-content .comment-text.show-full {
   max-height: -moz-fit-content;
   max-height: fit-content;
