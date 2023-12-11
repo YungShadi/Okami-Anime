@@ -84,34 +84,32 @@ function CataloguePage() {
     if (pathname === "/catalogue/announcement") setSearchTitle("Анонсы");
   };
 
-  const handleSearch = (search: string) => {
+  const handleSearch = async (search: string) => {
     if (isTitlesFetching) return;
     const trimmedSearch = search.trim();
-    if (trimmedSearch.length <= 0) {
+    if (trimmedSearch.length === 0) {
       setSearchTitle("Каталог аниме");
       handleGetTitles(0, "", false).then((res) => {
         setTotalElements(res.data.totalElements);
-        navigate(`/catalogue?page=1`);
       });
     } else {
       setSearchTitle(`Поиск по запросу: ${trimmedSearch}`);
       handleGetTitles(0, trimmedSearch, false).then((res) => {
         setTotalElements(res.data.totalElements);
-        navigate(`/catalogue?page=1&search=${trimmedSearch}`);
+        setSearchTitle(`Поиск по запросу: ${initialSearch}`);
       });
     }
   };
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
+    document.title = "Каталог";
     if (!currentPage) {
       navigate(`${location.pathname}?page=1`);
     }
     if (initialSearch) {
-      console.log(initialSearch);
       setSearchInput(initialSearch);
       handleSearch(initialSearch);
-      setSearchTitle(`Поиск по запросу: ${initialSearch}`);
     }
   }, []);
 
@@ -165,7 +163,6 @@ function CataloguePage() {
   useEffect(() => {
     if (searchInput.length === 0 && initialSearch) handleSearch("");
   }, [searchInput]);
-
   return (
     <>
       <Metadata
