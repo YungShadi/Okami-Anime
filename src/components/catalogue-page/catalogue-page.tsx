@@ -16,9 +16,9 @@ import FiltersWrapper from "./Filter/FiltersWrapper";
 import Pagination from "./Pagination/Pagination";
 import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
+import Metadata from "../Metadata";
 
 import "./catalogue-page.css";
-import Metadata from "../Metadata";
 
 function CataloguePage() {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function CataloguePage() {
   const [searchTitle, setSearchTitle] = useState("Каталог аниме");
 
   const pageParams = new URLSearchParams(location.search);
-  const currentPage = pageParams.get("page") ?? 1;
+  const currentPage = pageParams.get("page");
   const initialSearch = pageParams.get("search");
   const yearFrom = pageParams.get("from");
   const yearTo = pageParams.get("to");
@@ -56,6 +56,9 @@ function CataloguePage() {
 
   if (searchState) {
     dispatch(toggleSearchAction(false));
+  }
+  if (!currentPage) {
+    navigate(`${location.pathname}?page=1`);
   }
 
   const handlePageChangeCatalogue = (
@@ -68,14 +71,15 @@ function CataloguePage() {
     } else {
       window.scrollTo(0, 0);
     }
-
-    handleGetTitles(page, search, isLoadMore).then((res) => {
-      setTotalElements(res.data.totalElements);
-      if (isLoadMore) {
-        setIsLoadMoreAction(false);
-        setPrevTitles([...prevTitles, ...res.data.content]);
-      }
-    });
+    if (search) {
+      handleGetTitles(page, search, isLoadMore).then((res) => {
+        setTotalElements(res.data.totalElements);
+        if (isLoadMore) {
+          setIsLoadMoreAction(false);
+          setPrevTitles([...prevTitles, ...res.data.content]);
+        }
+      });
+    }
   };
 
   const handleSearchTitle = () => {
@@ -87,29 +91,25 @@ function CataloguePage() {
   const handleSearch = async (search: string) => {
     if (isTitlesFetching) return;
     const trimmedSearch = search.trim();
-    if (trimmedSearch.length === 0) {
-      setSearchTitle("Каталог аниме");
-      handleGetTitles(0, "", false).then((res) => {
-        setTotalElements(res.data.totalElements);
-      });
-    } else {
-      setSearchTitle(`Поиск по запросу: ${trimmedSearch}`);
-      handleGetTitles(0, trimmedSearch, false).then((res) => {
-        setTotalElements(res.data.totalElements);
-        setSearchTitle(`Поиск по запросу: ${initialSearch}`);
-      });
-    }
+    handleGetTitles(0, trimmedSearch ?? "", false).then((res) => {
+      setTotalElements(res.data.totalElements);
+      if (trimmedSearch) {
+        setSearchTitle(`Поиск по запросу: ${trimmedSearch}`);
+      } else if (!trimmedSearch) {
+        setSearchTitle("Катало аниме");
+      }
+      navigate(`/catalogue?page=1&search=${trimmedSearch}`);
+    });
   };
 
   // eslint-disable-next-line arrow-body-style
   useEffect(() => {
-    document.title = "Каталог";
-    if (!currentPage) {
-      navigate(`${location.pathname}?page=1`);
-    }
     if (initialSearch) {
       setSearchInput(initialSearch);
-      handleSearch(initialSearch);
+      handleGetTitles(0, initialSearch, false).then((res) => {
+        setTotalElements(res.data.totalElements);
+        setSearchTitle(`Поиск по запросу: ${initialSearch}`);
+      });
     }
   }, []);
 
@@ -160,9 +160,7 @@ function CataloguePage() {
       </div>
     );
   }
-  useEffect(() => {
-    if (searchInput.length === 0 && initialSearch) handleSearch("");
-  }, [searchInput]);
+
   return (
     <>
       <Metadata

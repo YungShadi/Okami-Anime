@@ -20,6 +20,7 @@ function Header() {
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const [randomLink, setRandomLink] = useState("");
   const [isDropdownShown, setIsDropDownShown] = useState(false);
+  const [isUpClicked, setIsUpClicked] = useState(false);
 
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username,
@@ -38,6 +39,9 @@ function Header() {
   const onScrollHandle = () => {
     const scrollYPos = window.scrollY;
     setScrollIsEnough(scrollYPos);
+    setTimeout(() => {
+      setIsUpClicked(false);
+    }, 400);
   };
 
   useEffect(() => {
@@ -50,6 +54,13 @@ function Header() {
     setRandomLink(
       "etot-glupyy-svin-ne-ponimaet-mechtu-devochkizayki?serial-54507",
     );
+  };
+
+  const handleTopScroll = () => {
+    setIsUpClicked(true);
+    setTimeout(() => {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    }, 100);
   };
 
   return (
@@ -144,12 +155,13 @@ function Header() {
       )}
       {scrollIsEnough > 90 &&
         !mobileView &&
+        // TODO сделать анимацию исчезновения
         createPortal(
           <div className="up-button-wrap">
             <button
-              className="up-button"
+              className={`up-button ${isUpClicked ? "anim" : ""}`}
               type="button"
-              onClick={() => window.scrollTo({ behavior: "smooth", top: 0 })}
+              onClick={handleTopScroll}
             >
               <img src={ArrowUp} alt="arrow-up" className="up-button-arrow" />
             </button>

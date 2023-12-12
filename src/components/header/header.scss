@@ -331,6 +331,10 @@
   width: 30px;
   height: 30px;
 }
+.up-button.anim {
+  animation-name: disappear-button;
+  animation-duration: 0.6s;
+}
 
 @media (max-width: 1100px) {
   .header-mobile-button {
@@ -433,5 +437,15 @@
   100% {
     opacity: 1;
     scale: 1;
+  }
+}
+@keyframes disappear-button {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0;
   }
 }
