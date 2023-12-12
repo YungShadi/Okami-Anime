@@ -20,7 +20,7 @@ function Header() {
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
   const [randomLink, setRandomLink] = useState("");
   const [isDropdownShown, setIsDropDownShown] = useState(false);
-  const [isUpClicked, setIsUpClicked] = useState(false);
+  const [isUpButtonVisible, setIsUpButtonVisible] = useState(false);
 
   const username = useSelector(
     (state: { auth: UserDto }) => state?.auth.username,
@@ -39,16 +39,14 @@ function Header() {
   const onScrollHandle = () => {
     const scrollYPos = window.scrollY;
     setScrollIsEnough(scrollYPos);
-    setTimeout(() => {
-      setIsUpClicked(false);
-    }, 400);
+    if (scrollYPos < 90) setIsUpButtonVisible(false);
+    else setIsUpButtonVisible(true);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", onScrollHandle);
-
     return () => window.removeEventListener("scroll", onScrollHandle);
-  }, []);
+  }, [scrollIsEnough]);
 
   const randomTitleHandle = () => {
     setRandomLink(
@@ -57,7 +55,6 @@ function Header() {
   };
 
   const handleTopScroll = () => {
-    setIsUpClicked(true);
     setTimeout(() => {
       window.scrollTo({ behavior: "smooth", top: 0 });
     }, 100);
@@ -153,13 +150,12 @@ function Header() {
       {searchState && mobileView && (
         <input className="mobile-header-search" placeholder="Поиск" />
       )}
-      {scrollIsEnough > 90 &&
-        !mobileView &&
+      {!mobileView &&
         // TODO сделать анимацию исчезновения
         createPortal(
           <div className="up-button-wrap">
             <button
-              className={`up-button ${isUpClicked ? "anim" : ""}`}
+              className={`up-button ${isUpButtonVisible ? "" : "anim"}`}
               type="button"
               onClick={handleTopScroll}
             >

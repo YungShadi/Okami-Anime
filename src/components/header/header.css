@@ -353,6 +353,8 @@
 .up-button.anim {
   animation-name: disappear-button;
   animation-duration: 0.6s;
+  opacity: 0;
+  scale: 0;
 }
 
 @media (max-width: 1100px) {
