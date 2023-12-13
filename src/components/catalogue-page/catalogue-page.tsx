@@ -111,6 +111,10 @@ function CataloguePage() {
         setSearchTitle(`Поиск по запросу: ${initialSearch}`);
       });
     }
+    handleGetTitles(0, "", false).then((res) => {
+      setTotalElements(res.data.totalElements);
+      setSearchTitle(`Каталог аниме`);
+    });
   }, []);
 
   useEffect(() => {
