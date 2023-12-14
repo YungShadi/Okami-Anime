@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import React, { useState } from "react";
-import paraser, { Tag, getContent } from "bbcode-to-react";
+import paraser, { Tag } from "bbcode-to-react";
 import DefaultProfPicture from "../../img/Аватар.png";
 import Spoiler from "./spoiler";
 
@@ -36,6 +36,7 @@ export default function Comment() {
   }
   class ImageTag extends Tag {
     toReact() {
+      // eslint-disable-next-line react/no-this-in-sfc
       return <img src={this.getContent(true)} alt="some-img-from-internet" />;
     }
   }

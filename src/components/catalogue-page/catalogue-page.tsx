@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
@@ -43,7 +43,8 @@ function CataloguePage() {
   const [prevTitles, setPrevTitles] = useState<TitleDto[]>([]);
   const [totalElements, setTotalElements] = useState(18);
   const [isLoadMoreAction, setIsLoadMoreAction] = useState(true);
-  const [searchTitle, setSearchTitle] = useState("Каталог аниме");
+  const [searchTitle, setSearchTitle] = useState("");
+  const [isInitialQuerySend, setIsInitalQerySent] = useState(false);
 
   const pageParams = new URLSearchParams(location.search);
   const currentPage = pageParams.get("page");
@@ -71,7 +72,7 @@ function CataloguePage() {
     } else {
       window.scrollTo(0, 0);
     }
-    if (search) {
+    if (isInitialQuerySend) {
       handleGetTitles(page, search, isLoadMore).then((res) => {
         setTotalElements(res.data.totalElements);
         if (isLoadMore) {
@@ -86,6 +87,7 @@ function CataloguePage() {
     if (pathname === "/catalogue/ongoing") setSearchTitle(`Онгоинги`);
     if (pathname === "/catalogue/top") setSearchTitle("Топ 100 тайтлов");
     if (pathname === "/catalogue/announcement") setSearchTitle("Анонсы");
+    if (pathname === "/catalogue") setSearchTitle("Каталог аниме");
   };
 
   const handleSearch = async (search: string) => {
@@ -109,15 +111,20 @@ function CataloguePage() {
       handleGetTitles(0, initialSearch, false).then((res) => {
         setTotalElements(res.data.totalElements);
         setSearchTitle(`Поиск по запросу: ${initialSearch}`);
+        setIsInitalQerySent(true);
+      });
+    } else {
+      handleGetTitles(0, "", false).then((res) => {
+        setTotalElements(res.data.totalElements);
+        setIsInitalQerySent(true);
       });
     }
-    handleGetTitles(0, "", false).then((res) => {
-      setTotalElements(res.data.totalElements);
-      setSearchTitle(`Каталог аниме`);
-    });
   }, []);
-
   useEffect(() => {
+    if (!searchInput && isInitialQuerySend) handleSearch("");
+  }, [searchInput]);
+
+  useLayoutEffect(() => {
     handleSearchTitle();
   }, [location.pathname]);
 

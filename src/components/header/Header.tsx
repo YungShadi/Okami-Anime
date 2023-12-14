@@ -133,7 +133,6 @@ function Header() {
               </ul>
             </div>
           </div>
-          {/* user display depending on localStorage(maybe there is another way) */}
           {isAuthenticated ? (
             <Link className="header-profile" to={`profile/${username}`}>
               <span className="profile-name">{username}</span>
@@ -151,7 +150,6 @@ function Header() {
         <input className="mobile-header-search" placeholder="Поиск" />
       )}
       {!mobileView &&
-        // TODO сделать анимацию исчезновения
         createPortal(
           <div className="up-button-wrap">
             <button
