@@ -62,15 +62,17 @@ export default function Search() {
       | React.KeyboardEvent<HTMLDivElement>
       | React.FocusEvent<HTMLDivElement, Element>,
   ) => {
-    navigate(
-      `/catalogue?page=1${searchInput ? `&search=${searchInput}` : ""}`,
-      {
-        state: searchResult,
-      },
-    );
-    setSearchInput("");
-    handleSearchBlur(e as React.FocusEvent<HTMLDivElement, Element>);
-    setSearchResult([]);
+    if (searchInput) {
+      navigate(
+        `/catalogue?page=1${searchInput ? `&search=${searchInput}` : ""}`,
+        {
+          state: searchResult,
+        },
+      );
+      setSearchInput("");
+      handleSearchBlur(e as React.FocusEvent<HTMLDivElement, Element>);
+      setSearchResult([]);
+    }
   };
 
   const onAnimeClickHandle = (e: React.FocusEvent<HTMLDivElement, Element>) => {
@@ -144,7 +146,7 @@ export default function Search() {
                     titleClass="search-result-title"
                     titleData={title}
                     key={title.id}
-                    onClickHandle={onAnimeClickHandle}
+                    _onClickHandle={onAnimeClickHandle}
                   />
                 ))}
                 <button

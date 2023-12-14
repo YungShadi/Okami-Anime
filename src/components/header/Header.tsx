@@ -11,7 +11,7 @@ import ArrowUp from "../img/up-arrow-svgrepo-com.svg";
 import Logo from "../img/icom.svg";
 import DefaultIcon from "../img/user.svg";
 
-import "./header.css";
+import "./header.scss";
 
 // header, navigation, user
 function Header() {

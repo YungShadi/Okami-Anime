@@ -97,10 +97,11 @@ function CataloguePage() {
       setTotalElements(res.data.totalElements);
       if (trimmedSearch) {
         setSearchTitle(`Поиск по запросу: ${trimmedSearch}`);
+        navigate(`/catalogue?page=1&search=${trimmedSearch}`);
       } else if (!trimmedSearch) {
         setSearchTitle("Катало аниме");
+        navigate(`/catalogue?page=1`);
       }
-      navigate(`/catalogue?page=1&search=${trimmedSearch}`);
     });
   };
 
@@ -114,10 +115,12 @@ function CataloguePage() {
         setIsInitalQerySent(true);
       });
     } else {
-      handleGetTitles(0, "", false).then((res) => {
-        setTotalElements(res.data.totalElements);
-        setIsInitalQerySent(true);
-      });
+      handleGetTitles(currentPage ? Number(currentPage) : 0, "", false).then(
+        (res) => {
+          setTotalElements(res.data.totalElements);
+          setIsInitalQerySent(true);
+        },
+      );
     }
   }, []);
   useEffect(() => {
