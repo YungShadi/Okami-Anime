@@ -115,4 +115,9 @@
   .recetly-added-title {
     margin-left: 15px;
   }
+}
+@media (max-width: 1100px) {
+  .main {
+    width: auto;
+  }
 }/*# sourceMappingURL=main-page.css.map */

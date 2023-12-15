@@ -25,8 +25,8 @@ function FilterWrapper({
   yearTo,
 }: {
   searchInput: string;
-  yearFrom: number;
-  yearTo: number;
+  yearFrom: string | null;
+  yearTo: string | null;
 }) {
   const location = useLocation();
   const filterStateMobile = useSelector(

@@ -366,18 +366,24 @@
 }
 
 @media (max-width: 1100px) {
+  .wraper-wrapera {
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    z-index: 10000;
+    top: 100px;
+  }
   body .filters-wraper {
-    position: absolute;
+    animation-name: filter-appear;
+    animation-duration: 0.5s;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1000000;
   }
   body .filters-wraper.closed {
     display: none;
   }
   body .filters-wraper.open {
-    display: block;
-    position: fixed;
-    top: 10vh;
-    left: 15vw;
-    z-index: 1000000;
     background-color: rgb(6, 75, 140);
     color: white;
     font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
@@ -434,5 +440,15 @@
     top: 0;
     z-index: 100000;
     opacity: 0.7;
+  }
+}
+@keyframes filter-appear {
+  from {
+    opacity: 0;
+    transform: translatey(0px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }/*# sourceMappingURL=catalogue-page.css.map */
