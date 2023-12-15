@@ -394,11 +394,6 @@
   .catalogue-page .catalogue-search {
     width: 90vw;
   }
-  .catalogue-page .title-main {
-    width: 90%;
-    height: -moz-fit-content;
-    height: fit-content;
-  }
   .catalogue-page .search-and-titles {
     width: 90vw;
   }
@@ -409,10 +404,14 @@
     height: fit-content;
     min-height: -moz-fit-content;
     min-height: fit-content;
-    padding: 5px;
     align-items: center;
     min-height: 90vh;
     min-width: 90vw;
+    padding: 10px;
+  }
+  .catalogue-page .titles-wraper .catalogue-page-title {
+    width: 100%;
+    margin-bottom: 10px;
   }
   .catalogue-page .input-title {
     display: block;
@@ -440,6 +439,16 @@
     top: 0;
     z-index: 100000;
     opacity: 0.7;
+  }
+  .catalogue-page-title .title-poster-wraper {
+    min-width: 100px;
+  }
+  .catalogue-page-title .poster {
+    width: 100px;
+    height: 150px;
+  }
+  .catalogue-page-title .title-name-tags {
+    width: 100%;
   }
 }
 @keyframes filter-appear {
