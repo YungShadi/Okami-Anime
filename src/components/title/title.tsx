@@ -5,7 +5,7 @@ import DefaultPoster from "../img/poster.png";
 import { TitleDto } from "../../types/titleDto";
 import { FilterArrayElement } from "../../types/filterDto";
 
-import "./title.css";
+import "./title.scss";
 
 type TitleType = {
   titleClass: string;

@@ -5,7 +5,7 @@ import Metadata from "../Metadata";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 import Reklama from "../img/Безымянный.png";
 
-import "./main-page.css";
+import "./main-page.scss";
 import { useGetTitlesQuery } from "../../redux/service/anime/titles.api";
 
 function MainPage() {

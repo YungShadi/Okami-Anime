@@ -6,7 +6,7 @@ import Layout from "./components/layout/layout";
 // import { MobileDto } from "./types/mobileDto";
 import { isMobileViewAction } from "./redux/mobileSlcie";
 
-import "./App.css";
+import "./App.scss";
 
 const MainPage = lazy(() => import("./components/main-page/main-page"));
 const TitlePage = lazy(() => import("./components/title-page/title-page"));

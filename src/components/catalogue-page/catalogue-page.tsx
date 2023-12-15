@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useLayoutEffect, useState } from "react";
@@ -18,7 +20,7 @@ import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 import Metadata from "../Metadata";
 
-import "./catalogue-page.css";
+import "./catalogue-page.scss";
 
 function CataloguePage() {
   const dispatch = useDispatch();
@@ -186,11 +188,17 @@ function CataloguePage() {
         {mobileView ? (
           filterStateMobile ? (
             createPortal(
-              <FiltersWrapper
-                searchInput={searchInput}
-                yearFrom={yearFrom}
-                yearTo={yearTo}
-              />,
+              <div className="wraper-wrapera">
+                <FiltersWrapper
+                  searchInput={searchInput}
+                  yearFrom={yearFrom}
+                  yearTo={yearTo}
+                />
+                <div
+                  className="background"
+                  onClick={() => dispatch(toggleFilterAction(false))}
+                />
+              </div>,
               document.body,
             )
           ) : (

@@ -17,9 +17,17 @@ import {
 } from "../../../redux/filterSlice";
 import { MobileDto } from "../../../types/mobileDto";
 import CloseCross from "../../img/close-cross.svg";
-import "../catalogue-page.css";
+import "../catalogue-page.scss";
 
-function FilterWrapper({ searchInput, yearFrom, yearTo }) {
+function FilterWrapper({
+  searchInput,
+  yearFrom,
+  yearTo,
+}: {
+  searchInput: string;
+  yearFrom: number;
+  yearTo: number;
+}) {
   const location = useLocation();
   const filterStateMobile = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isFilterOpened,
@@ -94,7 +102,7 @@ function FilterWrapper({ searchInput, yearFrom, yearTo }) {
     }
     navigate(link);
   };
-  
+
   useEffect(() => {
     if (activeTagsLink[0]) {
       dispatch(handleLinkActiveTags(activeTagsLink[0].split(",")));
@@ -114,121 +122,113 @@ function FilterWrapper({ searchInput, yearFrom, yearTo }) {
   }, []);
 
   return (
-    <>
-      <aside
-        className={`filters-wraper  ${filterStateMobile ? "open" : "closed"}`}
-      >
-        <div className="filter-header">
-          <h3>Фильтр аниме</h3>
-          {mobileView && (
-            <button
-              type="button"
-              className="close-mobile-filter"
-              onClick={() => {
-                dispatch(toggleFilterAction(false));
-              }}
-            >
-              <img src={CloseCross} alt="close" />
-            </button>
-          )}
-        </div>
-        <div className="filter-slider-wraper">
-          <div className="slider-line" />
-          <ReactSlider
-            className="filter-slider"
-            thumbClassName="slider-thumb"
-            trackClassName="slider-track"
-            defaultValue={yearFrom && yearTo ? [yearFrom, yearTo] : yearsFilter}
-            renderThumb={(props, state) => (
-              <div {...props}>
-                <span className="thumb-content">{state.valueNow}</span>
-              </div>
-            )}
-            min={1977}
-            max={2023}
-            ariaValuetext=""
-            onChange={(years) => setYearsFilter(years)}
-          />
-          <div className="slider-pips">
-            <div className="pip-horisontal big" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal big" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal big" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal big" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal" />
-            <div className="pip-horisontal big" />
-          </div>
-        </div>
-        <div className="filters">
-          <Filter
-            filterName="Жанры"
-            filterArray={tagArray}
-            filterValue="genre"
-            filterDesc="Выберите жанры"
-            filterState={tagFilterExpand}
-            filterZIndex={500}
-            filterSearch
-            filterStateSet={setTagFilterExpand}
-            filterHeight={300}
-          />
-          <Filter
-            filterName="Типы"
-            filterArray={typeArray}
-            filterValue="type"
-            filterDesc="Выберите тип"
-            filterState={typeFilterExpand}
-            filterZIndex={400}
-            filterSearch={false}
-            filterStateSet={setTypeFilterExpand}
-            filterHeight={200}
-          />
-          <Filter
-            filterName="Статус"
-            filterArray={statusArray}
-            filterValue="status"
-            filterDesc="Выберите статус"
-            filterState={statusFilterExpand}
-            filterZIndex={300}
-            filterSearch={false}
-            filterStateSet={setStatusFilterExpand}
-            filterHeight={100}
-          />
-        </div>
-        <div className="filter-button-wraper">
+    <aside
+      className={`filters-wraper  ${filterStateMobile ? "open" : "closed"}`}
+    >
+      <div className="filter-header">
+        <h3>Фильтр аниме</h3>
+        {mobileView && (
           <button
-            className="filter-button"
             type="button"
-            onClick={() => createSearch()}
+            className="close-mobile-filter"
+            onClick={() => {
+              dispatch(toggleFilterAction(false));
+            }}
           >
-            Искать
+            <img src={CloseCross} alt="close" />
           </button>
-        </div>
-      </aside>
-      {mobileView && (
-        <div
-          className="background"
-          onClick={() => dispatch(toggleFilterAction(false))}
+        )}
+      </div>
+      <div className="filter-slider-wraper">
+        <div className="slider-line" />
+        <ReactSlider
+          className="filter-slider"
+          thumbClassName="slider-thumb"
+          trackClassName="slider-track"
+          defaultValue={yearFrom && yearTo ? [yearFrom, yearTo] : yearsFilter}
+          renderThumb={(props, state) => (
+            <div {...props}>
+              <span className="thumb-content">{state.valueNow}</span>
+            </div>
+          )}
+          min={1977}
+          max={2023}
+          ariaValuetext=""
+          onChange={(years) => setYearsFilter(years)}
         />
-      )}
-    </>
+        <div className="slider-pips">
+          <div className="pip-horisontal big" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal big" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal big" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal big" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal" />
+          <div className="pip-horisontal big" />
+        </div>
+      </div>
+      <div className="filters">
+        <Filter
+          filterName="Жанры"
+          filterArray={tagArray}
+          filterValue="genre"
+          filterDesc="Выберите жанры"
+          filterState={tagFilterExpand}
+          filterZIndex={500}
+          filterSearch
+          filterStateSet={setTagFilterExpand}
+          filterHeight={300}
+        />
+        <Filter
+          filterName="Типы"
+          filterArray={typeArray}
+          filterValue="type"
+          filterDesc="Выберите тип"
+          filterState={typeFilterExpand}
+          filterZIndex={400}
+          filterSearch={false}
+          filterStateSet={setTypeFilterExpand}
+          filterHeight={200}
+        />
+        <Filter
+          filterName="Статус"
+          filterArray={statusArray}
+          filterValue="status"
+          filterDesc="Выберите статус"
+          filterState={statusFilterExpand}
+          filterZIndex={300}
+          filterSearch={false}
+          filterStateSet={setStatusFilterExpand}
+          filterHeight={100}
+        />
+      </div>
+      <div className="filter-button-wraper">
+        <button
+          className="filter-button"
+          type="button"
+          onClick={() => createSearch()}
+        >
+          Искать
+        </button>
+      </div>
+    </aside>
   );
 }
 
