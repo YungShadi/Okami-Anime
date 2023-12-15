@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import ReactSlider from "react-slider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toggleFilterAction } from "../../../redux/mobileSlcie";
+import { MobileDto } from "../../../types/mobileDto";
+import { FilterDto, FilterArrayElement } from "../../../types/filterDto";
 import Filter from "./Filter";
 import {
   handleLinkActiveTags,
@@ -15,8 +17,8 @@ import {
   handleLinkExcludedTypes,
   handleLinkStatus,
 } from "../../../redux/filterSlice";
-import { MobileDto } from "../../../types/mobileDto";
 import CloseCross from "../../img/close-cross.svg";
+
 import "../catalogue-page.scss";
 
 function FilterWrapper({
@@ -35,14 +37,30 @@ function FilterWrapper({
   const mobileView = useSelector(
     (state: { mobile: MobileDto }) => state.mobile.isMobileView,
   );
-  const tagArray = useSelector((state) => state.filter.tagArray);
-  const typeArray = useSelector((state) => state.filter.typeArray);
-  const statusArray = useSelector((state) => state.filter.statusArray);
-  const activeTags = useSelector((state) => state.filter.activeTags);
-  const activeTypes = useSelector((state) => state.filter.activeTypes);
-  const activeStatus = useSelector((state) => state.filter.activeStatus);
-  const excludedTags = useSelector((state) => state.filter.excludedTags);
-  const excludedTypes = useSelector((state) => state.filter.excludedTypes);
+  const tagArray = useSelector(
+    (state: { filter: FilterDto }) => state.filter.tagArray,
+  );
+  const typeArray = useSelector(
+    (state: { filter: FilterDto }) => state.filter.typeArray,
+  );
+  const statusArray = useSelector(
+    (state: { filter: FilterDto }) => state.filter.statusArray,
+  );
+  const activeTags = useSelector(
+    (state: { filter: FilterDto }) => state.filter.activeTags,
+  );
+  const activeTypes = useSelector(
+    (state: { filter: FilterDto }) => state.filter.activeTypes,
+  );
+  const activeStatus = useSelector(
+    (state: { filter: FilterDto }) => state.filter.activeStatus,
+  );
+  const excludedTags = useSelector(
+    (state: { filter: FilterDto }) => state.filter.excludedTags,
+  );
+  const excludedTypes = useSelector(
+    (state: { filter: FilterDto }) => state.filter.excludedTypes,
+  );
 
   const pageParams = new URLSearchParams(location.search);
 
@@ -60,8 +78,13 @@ function FilterWrapper({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const applyThings = (value: string, array: string[], link: string) => {
+  const applyThings = (
+    value: string,
+    array: FilterArrayElement[],
+    link: string,
+  ) => {
     link += `${value}=`;
+    // eslint-disable-next-line array-callback-return
     array.map((thing, i, arr) => {
       if (i + 1 === arr.length) {
         link += `${thing}`;
@@ -145,7 +168,11 @@ function FilterWrapper({
           className="filter-slider"
           thumbClassName="slider-thumb"
           trackClassName="slider-track"
-          defaultValue={yearFrom && yearTo ? [yearFrom, yearTo] : yearsFilter}
+          defaultValue={
+            yearFrom && yearTo
+              ? [Number(yearFrom), Number(yearTo)]
+              : yearsFilter
+          }
           renderThumb={(props, state) => (
             <div {...props}>
               <span className="thumb-content">{state.valueNow}</span>
