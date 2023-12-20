@@ -16,40 +16,74 @@
 }
 .profile-head {
   height: 180px;
+  margin-bottom: 50px;
 }
 .profile-settings {
   background: none;
   border: none;
   width: 30px;
   height: 30px;
+  margin-left: auto;
+  display: block;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+
   img {
     width: 30px;
     height: 30px;
   }
+}
+.profile-settings:hover {
+  rotate: 30deg;
 }
 .profile-head-background {
   width: 40vw;
   height: 150px;
   object-fit: cover;
 }
-.prof-pic-wrap {
+.profile-pic {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   border: 1px solid $base-light-blue;
-  overflow: hidden;
-  position: relative;
-  bottom: 80px;
-  left: 10px;
-}
-.profile-pic {
-  margin-left: 0;
-  width: 100px;
-  height: 100px;
-  object-fit: fill;
+  position: absolute;
+  top: 230px;
 }
 .profile-main {
   padding: 10px;
   display: grid;
   grid-template-columns: 200px 1.5fr 1fr;
+}
+@media (max-width: 1100px) {
+  .profile {
+    min-width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .profile-head-background {
+      width: 100%;
+      height: 150px;
+    }
+    .profile-pic {
+      position: absolute;
+    }
+  }
+  .profile-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+    div {
+      width: 100%;
+    }
+  }
 }

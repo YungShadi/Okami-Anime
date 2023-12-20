@@ -55,6 +55,7 @@ function App() {
   // [x] popout errors
   // [x] Feedback animation and lazy load
   // [x] mobile menu
+  // [TODO] мобильные стили
 
   return (
     <Routes>

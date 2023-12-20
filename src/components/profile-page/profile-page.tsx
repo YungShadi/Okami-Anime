@@ -40,12 +40,10 @@ function ProfilePage() {
           alt="background"
           className="profile-head-background"
         />
-        <div className="prof-pic-wrap">
-          <img src={DeafaultPic} alt="profile pic" className="profile-pic" />
-          <button type="button" className="profile-settings">
-            <img src={Settings} alt="settings" />
-          </button>
-        </div>
+        <img src={DeafaultPic} alt="profile pic" className="profile-pic" />
+        <button type="button" className="profile-settings">
+          <img src={Settings} alt="settings" />
+        </button>
       </div>
       <div className="profile-main">
         <div className="profile-user-info">
