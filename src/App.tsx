@@ -23,19 +23,6 @@ const PersonalAgreementPage = lazy(
 
 function App() {
   const dispatch = useDispatch();
-  // const menuState = useSelector(
-  //   (state: { mobile: MobileDto }) => state.mobile.isMenuOpened,
-  // );
-
-  // useEffect(() => {
-  //   if (menuState) {
-  //     document.body.style.overflow = "hidden";
-  //     // document.body.style.opacity = "0.8";
-  //   } else {
-  //     document.body.style.overflow = "";
-  //     // document.body.style.opacity = "";
-  //   }
-  // }, [menuState]);
 
   useEffect(() => {
     if (window.screen.width <= 600) {

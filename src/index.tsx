@@ -11,7 +11,7 @@ const root = createRoot(document.getElementById("root") as HTMLBodyElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter forceRefresh>
+      <BrowserRouter>
         <ScrollToTop />
         <App />
       </BrowserRouter>
