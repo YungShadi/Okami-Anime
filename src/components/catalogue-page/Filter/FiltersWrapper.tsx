@@ -2,14 +2,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactSlider from "react-slider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toggleFilterAction } from "../../../redux/mobileSlcie";
 import { MobileDto } from "../../../types/mobileDto";
 import { FilterDto, FilterArrayElement } from "../../../types/filterDto";
-import Filter from "./Filter";
+import { Filter } from "./Filter";
 import {
   handleLinkActiveTags,
   handleLinkExcludedTags,
@@ -21,7 +21,7 @@ import CloseCross from "../../img/close-cross.svg";
 
 import "../catalogue-page.scss";
 
-function FilterWrapper({
+function FilterWrapperComponent({
   searchInput,
   yearFrom,
   yearTo,
@@ -259,4 +259,5 @@ function FilterWrapper({
   );
 }
 
-export default FilterWrapper;
+// eslint-disable-next-line import/prefer-default-export
+export const FiltersWrapper = memo(FilterWrapperComponent);

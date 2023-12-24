@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-case-declarations */
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   handleTags,
@@ -24,7 +24,7 @@ type FilterType = {
   filterStateSet: React.Dispatch<React.SetStateAction<boolean>>;
   filterHeight: number;
 };
-function Filter({
+function FilterComponent({
   filterName,
   filterArray,
   filterValue,
@@ -223,4 +223,5 @@ function Filter({
   );
 }
 
-export default Filter;
+// eslint-disable-next-line import/prefer-default-export
+export const Filter = memo(FilterComponent);

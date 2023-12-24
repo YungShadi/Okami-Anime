@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -20,33 +21,35 @@ export const useTitles = () => {
     },
   ] = useLazyGetTitlesQuery();
 
-  const handleGetCurrentTitle = async (titleId: string) => {
-    try {
-      const result = await getTitle(titleId);
-      return result;
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
-
-  const handleGetTitles = async (
-    page: number,
-    searchValue?: string,
-    isLoadMore?: boolean,
-  ) => {
-    try {
-      const result = await getTiles({ searchValue, page });
-      if (isLoadMore) {
-        dispatch(expandTitlesAction(result.data.content));
+  const handleGetCurrentTitle = useCallback(
+    async (titleId: string) => {
+      try {
+        const result = await getTitle(titleId);
         return result;
+      } catch (error) {
+        throw new Error(error);
       }
-      dispatch(setTitlesAction(result.data.content));
-      return result;
-    } catch (error) {
-      toast.error("Не удалось получить данные");
-      throw new Error(error);
-    }
-  };
+    },
+    [getTitle],
+  );
+
+  const handleGetTitles = useCallback(
+    async (page: number, searchValue?: string, isLoadMore?: boolean) => {
+      try {
+        const result = await getTiles({ searchValue, page });
+        if (isLoadMore) {
+          dispatch(expandTitlesAction(result.data.content));
+          return result;
+        }
+        dispatch(setTitlesAction(result.data.content));
+        return result;
+      } catch (error) {
+        toast.error("Не удалось получить данные");
+        throw new Error(error);
+      }
+    },
+    [getTiles],
+  );
 
   return {
     handleGetCurrentTitle,

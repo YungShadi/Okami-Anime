@@ -54,7 +54,7 @@ function SignupPage() {
   return (
     <div className="signup">
       <form className="signup-form form" onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="form-title">Зарегесртируйтесь</h2>
+        <h2 className="form-title">Зарегестрируйтесь</h2>
         <div className="input-wrapper">
           <h3 className="form-input-title">Имя пользователя</h3>
           <input
@@ -83,6 +83,9 @@ function SignupPage() {
               pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
             })}
           />
+          {errors.email?.type === "required" && (
+            <p className="error-message-input">Почта обязательна</p>
+          )}
         </div>
         <div className="input-wrapper">
           <h3 className="form-input-title">Пароль</h3>

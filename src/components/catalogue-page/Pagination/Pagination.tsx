@@ -1,13 +1,13 @@
 /* eslint-disable no-return-assign */
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { memo, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { usePagination } from "../../../hooks/usePagination";
 import { usePaginationRange } from "../../../hooks/usePaginationRange";
 import { PaginationDto } from "../../../types/paginationDto";
 
 import "./Pagination.css";
 
-export default function Pagination({
+function PaginationComponent({
   totalCount,
   pageSize,
   siblingCount,
@@ -41,6 +41,13 @@ export default function Pagination({
   const includedTypes = pageParams.get("active_types");
   const excludedTypes = pageParams.get("excluded_types");
   const status = pageParams.get("status");
+  const pageSearch = pageParams.get("page");
+  const navigate = useNavigate();
+
+  if (Number(pageSearch) > pages) {
+    // eslint-disable-next-line no-restricted-globals
+    navigate(`${location.pathname}?page=1`);
+  }
 
   const createLink = (action: string, page?: number): string => {
     let link = "";
@@ -154,3 +161,5 @@ export default function Pagination({
     </div>
   );
 }
+// eslint-disable-next-line import/prefer-default-export
+export const Pagination = memo(PaginationComponent);

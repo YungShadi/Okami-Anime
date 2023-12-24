@@ -2,7 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
@@ -14,8 +19,8 @@ import {
 } from "../../redux/mobileSlcie";
 import { useTitles } from "../../hooks/useTitles";
 import Search from "../img/search.svg";
-import FiltersWrapper from "./Filter/FiltersWrapper";
-import Pagination from "./Pagination/Pagination";
+import { FiltersWrapper } from "./Filter/FiltersWrapper";
+import { Pagination } from "./Pagination/Pagination";
 import Title from "../title";
 import SkeletonTitle from "../SkeletonTitle/SkeletonTitle";
 import Metadata from "../Metadata";
@@ -64,26 +69,32 @@ function CataloguePage() {
     navigate(`${location.pathname}?page=1`);
   }
 
-  const handlePageChangeCatalogue = (
-    page: number,
-    search: string | undefined,
-    isLoadMore?: boolean,
-  ) => {
-    if (isLoadMore) {
-      setIsLoadMoreAction(true);
-    } else {
-      window.scrollTo(0, 0);
-    }
-    if (isInitialQuerySend) {
-      handleGetTitles(page, search, isLoadMore).then((res) => {
-        setTotalElements(res.data.totalElements);
-        if (isLoadMore) {
-          setIsLoadMoreAction(false);
-          setPrevTitles([...prevTitles, ...res.data.content]);
-        }
-      });
-    }
-  };
+  const handlePageChangeCatalogue = useCallback(
+    (page: number, search: string | undefined, isLoadMore?: boolean) => {
+      if (isLoadMore) {
+        setIsLoadMoreAction(true);
+      } else {
+        window.scrollTo(0, 0);
+      }
+      if (isInitialQuerySend) {
+        handleGetTitles(page, search, isLoadMore).then((res) => {
+          setTotalElements(res.data.totalElements);
+          if (isLoadMore) {
+            setIsLoadMoreAction(false);
+            setPrevTitles([...prevTitles, ...res.data.content]);
+          }
+        });
+      }
+    },
+    [
+      handleGetTitles,
+      setTotalElements,
+      setIsLoadMoreAction,
+      isLoadMoreAction,
+      prevTitles,
+      isInitialQuerySend,
+    ],
+  );
 
   const handleSearchTitle = () => {
     if (pathname === "/catalogue/ongoing") setSearchTitle(`Онгоинги`);
@@ -94,9 +105,12 @@ function CataloguePage() {
 
   const handleSearch = async (search: string) => {
     if (isTitlesFetching) return;
+
     const trimmedSearch = search.trim();
+
     handleGetTitles(0, trimmedSearch ?? "", false).then((res) => {
       setTotalElements(res.data.totalElements);
+
       if (trimmedSearch) {
         setSearchTitle(`Поиск по запросу: ${trimmedSearch}`);
         navigate(`/catalogue?page=1&search=${trimmedSearch}`);

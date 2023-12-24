@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useDebounce from "../../../hooks/useDebounce";
@@ -56,30 +56,34 @@ export default function Search() {
       setIsSearchShown(false);
     }
   };
-  const onClickHandle = (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLDivElement>
-      | React.FocusEvent<HTMLDivElement, Element>,
-  ) => {
-    if (searchInput) {
-      navigate(
-        `/catalogue?page=1${searchInput ? `&search=${searchInput}` : ""}`,
-        {
-          state: searchResult,
-        },
-      );
-      setSearchInput("");
-      handleSearchBlur(e as React.FocusEvent<HTMLDivElement, Element>);
-      setSearchResult([]);
-    }
-  };
+  const onClickHandle = useCallback(
+    (
+      e:
+        | React.MouseEvent<HTMLButtonElement, MouseEvent>
+        | React.KeyboardEvent<HTMLDivElement>
+        | React.FocusEvent<HTMLDivElement, Element>,
+    ) => {
+      if (searchInput) {
+        navigate(
+          `/catalogue?page=1${searchInput ? `&search=${searchInput}` : ""}`,
+          {
+            state: searchResult,
+          },
+        );
+        setSearchInput("");
+        handleSearchBlur(e as React.FocusEvent<HTMLDivElement, Element>);
+        setSearchResult([]);
+      }
+    },
+    [navigate, searchInput, searchResult],
+  );
 
-  const onAnimeClickHandle = (e: React.FocusEvent<HTMLDivElement, Element>) => {
+  const onAnimeClickHandle = useCallback((e: React.FocusEvent<HTMLDivElement, Element>) => {
     setSearchInput("");
     handleSearchBlur(e);
     setSearchResult([]);
-  };
+  }, [])
+
   return (
     <>
       {location.pathname === "/catalogue" ? (

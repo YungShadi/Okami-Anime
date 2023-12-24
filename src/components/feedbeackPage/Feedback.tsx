@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFeedbeackAction } from "../../redux/feedbackSlice";
 import { FeedbackDto } from "../../types/feedbackDto";
 
-import "./Feedback.css";
+import "./Feedback.scss";
 
 export default function Feedback() {
   const dispatch = useDispatch();
