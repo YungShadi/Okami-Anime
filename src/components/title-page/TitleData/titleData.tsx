@@ -15,7 +15,7 @@ interface OptionTitle {
   img: React.JSX.Element;
 }
 
-export default function TitleData({ titleData }: { titleData: TitleDto }) {
+function TitleDataComponent({ titleData }: { titleData: TitleDto }) {
   const titleTags = titleData.material_data?.anime_genres;
   // const titleEpisodes = titleData.last_episode;
   // const titleName = titleData.material_data?.title;
@@ -452,3 +452,5 @@ export default function TitleData({ titleData }: { titleData: TitleDto }) {
     </div>
   );
 }
+// eslint-disable-next-line import/prefer-default-export
+export const TitleData = React.memo(TitleDataComponent);

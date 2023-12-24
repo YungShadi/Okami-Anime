@@ -4,7 +4,7 @@ import paraser, { Tag } from "bbcode-to-react";
 import DefaultProfPicture from "../../img/Аватар.png";
 import Spoiler from "./spoiler";
 
-export default function Comment() {
+function CommentComponent() {
   const [showFullComment, setShowFullComment] = useState(false);
   const commentText = `[b]Lorem ipsum dolor[/b] sit amet [i]consectetur adipisicing[/i] elit. [s]Explicabo, maxime impedit![/s] Maiores, laudantium. [u]Nulla[/u] id quas hic illum quod cupiditate voluptates veniam similique magni animi voluptatum autem consequatur, accusantium soluta.
   [spoiler]Только сумасшедший ничего не боится. Воин знает, что такое страх, он чувствует его внутри себя, он осознает страх лучше, чем любой из смертных. И это делает нас сильными, — то, что мы победили страх, преодолели его не однажды — много раз! — пока процесс не стал инстинктивным. Но независимо от того, сколько сражений у вас позади и сколько побед вы одержали, ваш страх никогда не оставит вас полностью. Учитесь жить со страхом. Учитесь справляться с вашими страхами. Но никогда не забывайте, что есть вещи в этой Вселенной, с которыми даже вы не сможете примириться и жить; отвращение, настолько ужасное, что оно разрушит вашу плоть и иссушит глаза. Против таких вещей нельзя бороться, и попытка противостоять им будет лишь бесполезной утратой собственной жизни. В таких ситуациях помните ваши клятвы в служении Императору, и помните также, что вы служите Ему лучше всего живыми, а не жертвующими собственные жизни на алтарь тщетной славы…[/spoiler]
@@ -122,3 +122,5 @@ export default function Comment() {
     </>
   );
 }
+// eslint-disable-next-line import/prefer-default-export
+export const Comment = React.memo(CommentComponent);

@@ -2,7 +2,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Comment from "./comment";
+import { Comment } from "./comment";
+
 import Bold from "../../img/ant-design_bold-outlined.svg";
 import Italic from "../../img/ant-design_italic-outlined.svg";
 import Underline from "../../img/ant-design_underline-outlined.svg";
@@ -13,7 +14,7 @@ import Spolier from "../../img/spoiler_n6na0nz67dhu.svg";
 import Image from "../../img/imageIcon.svg";
 import Qoute from "../../img/qouteIcon.svg";
 
-export default function CommentsWraper() {
+function CommentsWraperComponent() {
   const [commentValue, setCommentValue] = useState("");
   // TODO как реализовать стилизацию комментариев? скорее всего надо самомоу написать че-то типо bbcode
   const handleTextStyle = (style: string) => {
@@ -121,3 +122,5 @@ export default function CommentsWraper() {
     </div>
   );
 }
+// eslint-disable-next-line import/prefer-default-export
+export const CommentsWraper = React.memo(CommentsWraperComponent);

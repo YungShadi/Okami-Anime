@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Player({ playerLink }: { playerLink: string }) {
+function PlayerComponent({ playerLink }: { playerLink: string }) {
   return (
     <div className="player-wraper">
       <div className="title-header">
@@ -24,3 +24,5 @@ export default function Player({ playerLink }: { playerLink: string }) {
     </div>
   );
 }
+// eslint-disable-next-line import/prefer-default-export
+export const Player = React.memo(PlayerComponent);
