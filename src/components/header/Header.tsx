@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPortal } from "react-dom";
-import Search from "./search/Search";
+import { Search } from "./search/Search";
 import { UserDto } from "../../types/userDto";
 import { MobileDto } from "../../types/mobileDto";
 import { useAuth } from "../../hooks/useAuth";
@@ -14,7 +14,7 @@ import DefaultIcon from "../img/user.svg";
 import "./header.scss";
 
 // header, navigation, user
-function Header() {
+function HeaderComponent() {
   const { isAuthenticated } = useAuth();
   const headerRef = useRef(null);
   const [scrollIsEnough, setScrollIsEnough] = useState(0);
@@ -165,4 +165,6 @@ function Header() {
     </>
   );
 }
-export default Header;
+
+// eslint-disable-next-line import/prefer-default-export
+export const Header = React.memo(HeaderComponent);

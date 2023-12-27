@@ -10,7 +10,7 @@ import Title from "../../title";
 import Lupa from "../../img/search.svg";
 import search from "../../img/search-frame.svg";
 
-export default function Search() {
+function SearchComponent() {
   const [searchInput, setSearchInput] = useState("");
   const [isShearchShown, setIsSearchShown] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
@@ -78,11 +78,14 @@ export default function Search() {
     [navigate, searchInput, searchResult],
   );
 
-  const onAnimeClickHandle = useCallback((e: React.FocusEvent<HTMLDivElement, Element>) => {
-    setSearchInput("");
-    handleSearchBlur(e);
-    setSearchResult([]);
-  }, [])
+  const onAnimeClickHandle = useCallback(
+    (e: React.FocusEvent<HTMLDivElement, Element>) => {
+      setSearchInput("");
+      handleSearchBlur(e);
+      setSearchResult([]);
+    },
+    [],
+  );
 
   return (
     <>
@@ -180,3 +183,6 @@ export default function Search() {
     </>
   );
 }
+
+// eslint-disable-next-line import/prefer-default-export
+export const Search = React.memo(SearchComponent);

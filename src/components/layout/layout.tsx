@@ -4,9 +4,9 @@ import { ToastContainer } from "react-toastify";
 import { Outlet } from "react-router-dom";
 import { FeedbackDto } from "../../types/feedbackDto";
 import { MobileDto } from "../../types/mobileDto";
+import Header from "../header";
 import Feedback from "../feedbeackPage/Feedback";
 import FeedbackButton from "../feedbeackPage/FeedbackButton";
-import Header from "../header";
 import Loading from "./Loading";
 import Footer from "../footer";
 

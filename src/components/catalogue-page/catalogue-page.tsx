@@ -52,15 +52,15 @@ function CataloguePage() {
   const [isLoadMoreAction, setIsLoadMoreAction] = useState(true);
   const [searchTitle, setSearchTitle] = useState("");
   const [isInitialQuerySend, setIsInitalQerySent] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const pageParams = new URLSearchParams(location.search);
-  const currentPage = pageParams.get("page");
   const initialSearch = pageParams.get("search");
+  const currentPage = pageParams.get("page");
   const yearFrom = pageParams.get("from");
   const yearTo = pageParams.get("to");
 
   const { titlesLoadStatus, handleGetTitles, isTitlesFetching } = useTitles();
-  const [searchInput, setSearchInput] = useState("");
 
   if (searchState) {
     dispatch(toggleSearchAction(false));
@@ -162,7 +162,6 @@ function CataloguePage() {
               titleClass="catalogue-page-title"
               titleData={title}
               key={title.id}
-              _onClickHandle={() => console.log(1)}
             />
           ))
         ) : (
@@ -173,7 +172,6 @@ function CataloguePage() {
                   titleClass="catalogue-page-title"
                   titleData={title}
                   key={title.id}
-                  _onClickHandle={() => console.log(1)}
                 />
               ))}
             {Array.from({ length: 18 }, (_, index) => (

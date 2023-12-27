@@ -9,12 +9,12 @@ import App from "./App";
 const root = createRoot(document.getElementById("root") as HTMLBodyElement);
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <ScrollToTop />
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 );
