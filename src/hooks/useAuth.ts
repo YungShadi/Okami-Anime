@@ -30,23 +30,13 @@ export const useAuth = () => {
   const [logout] = useLogoutMutation();
   const [regestration] = useRegisterUserMutation();
   const [isAuthenticated, setIsAuthenticated] = useState(jwtToken);
-  // const [userRole, setUserRole] = useState(currentUser?.role || null);
+  const [userRole, setUserRole] = useState(currentUser?.role || null);
 
-  // useEffect(() => {
-  //   if (!isCurrentUserLoading) {
-  //     setUserRole(currentUser?.role || null);
-
-  //     if (jwtToken) {
-  //       setIsAuthenticated(true);
-  //       if (currentUser && currentUser.role) {
-  //       }
-  //     }
-  //   }
-  // }, [currentUser, isCurrentUserLoading, jwtToken]);
   useEffect(() => {
     if (!isCurrentUserLoading && currentUser) {
       setIsAuthenticated(true);
       dispatch(currentUserAction(currentUser));
+      setUserRole(currentUser?.role || null);
     } else {
       setIsAuthenticated(jwtToken);
       dispatch(logoutAction());
@@ -110,7 +100,7 @@ export const useAuth = () => {
         Cookies.remove("access_jwt_token");
         Cookies.remove("refresh_jwt_token");
         setIsAuthenticated(false);
-        // setUserRole(null);
+        setUserRole(null);
         navigate("/");
       })
       .catch((error) => {
@@ -121,11 +111,11 @@ export const useAuth = () => {
 
   return {
     isAuthenticated,
-    // userRole,
+    userRole,
     isCurrentUserLoading,
+    currentUser,
     login: handleLogin,
     logout: handleLogout,
     regestration: handleReg,
-    currentUser,
   };
 };

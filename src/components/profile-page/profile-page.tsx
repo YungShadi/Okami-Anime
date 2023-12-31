@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserDto } from "../../types/userDto";
-// import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import DeafaultPic from "../img/Аватар.png";
 import DefaultBack from "../img/wp5325503-1045900026.png";
 import Settings from "../img/settings.svg";
@@ -16,11 +16,8 @@ function ProfilePage() {
   const location = useLocation();
 
   const navigate = useNavigate();
-  // const { logout } = useAuth();
-
-  // const role = useSelector(
-  //   (state: { auth: UserDto }) => state?.auth.authorities,
-  // );
+  const { userRole, currentUser } = useAuth();
+  console.log(userRole, currentUser);
 
   useEffect(() => {
     if (location.pathname === "/profile" || location.pathname === "/profile/") {
